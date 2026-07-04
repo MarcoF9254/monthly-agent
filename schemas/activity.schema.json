@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/activity.schema.json",
+  "title": "Elderly Centre Monthly Programme Activity",
+  "description": "Structured activity record extracted from an elderly centre monthly programme document.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "activity_id",
+    "activity_title",
+    "category",
+    "description",
+    "dates",
+    "time",
+    "venue",
+    "target_participants",
+    "fee",
+    "quota",
+    "registration_method",
+    "registration_period",
+    "staff_in_charge",
+    "notes",
+    "source_reference",
+    "uncertain_fields",
+    "qa_status"
+  ],
+  "properties": {
+    "activity_id": {
+      "type": "string",
+      "description": "Stable identifier for the extracted activity within the monthly programme."
+    },
+    "activity_title": {
+      "type": "string",
+      "description": "Activity name as shown in the source document."
+    },
+    "category": {
+      "type": "string",
+      "description": "Activity category, such as talk, class, workshop, outing, service, notice, or other source-supported grouping."
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief source-supported description of the activity."
+    },
+    "dates": {
+      "type": "array",
+      "description": "One or more dates or date ranges for the activity.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "date_text"
+        ],
+        "properties": {
+          "date_text": {
+            "type": "string",
+            "description": "Original date wording from the source."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Normalized start date in YYYY-MM-DD format when clearly known."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Normalized end date in YYYY-MM-DD format when clearly known."
+          },
+          "recurrence": {
+            "type": "string",
+            "description": "Source-supported recurrence details, if any."
+          }
+        }
+      }
+    },
+    "time": {
+      "type": "string",
+      "description": "Activity time as shown in the source document."
+    },
+    "venue": {
+      "type": "string",
+      "description": "Activity location or venue."
+    },
+    "target_participants": {
+      "type": "string",
+      "description": "Participant group, eligibility, or audience."
+    },
+    "fee": {
+      "type": "array",
+      "description": "One or more fee entries, supporting different participant types or fee categories.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fee_type",
+          "amount_text"
+        ],
+        "properties": {
+          "fee_type": {
+            "type": "string",
+            "description": "Fee category, such as member, non-member, material fee, deposit, or general."
+          },
+          "amount_text": {
+            "type": "string",
+            "description": "Original fee amount wording from the source."
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code or symbol when clear from the source."
+          },
+          "amount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Normalized numeric amount when clearly known."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Fee conditions or source-supported notes."
+          }
+        }
+      }
+    },
+    "quota": {
+      "type": "string",
+      "description": "Quota, capacity, or enrolment limit."
+    },
+    "registration_method": {
+      "type": "string",
+      "description": "How participants register or enrol."
+    },
+    "registration_period": {
+      "type": "string",
+      "description": "Registration date, deadline, or period."
+    },
+    "staff_in_charge": {
+      "type": "string",
+      "description": "Staff member, team, or organizer responsible for the activity."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Special requirements, reminders, remarks, or other source-supported details."
+    },
+    "source_reference": {
+      "type": "string",
+      "description": "Page number, section heading, table row, or nearby text used to trace the record to the source."
+    },
+    "uncertain_fields": {
+      "type": "array",
+      "description": "Field names that are missing, unclear, or require human review.",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "qa_status": {
+      "type": "string",
+      "description": "Current QA state for the extracted record.",
+      "enum": [
+        "pending",
+        "approved",
+        "needs_review",
+        "rejected"
+      ]
+    }
+  }
+}
+
