@@ -1,0 +1,176 @@
+﻿[
+  {
+    "activity_id": "sample-2026-04-001",
+    "activity_title": "護心有法健康講座",
+    "category": "健康講座",
+    "description": "由註冊護士講解血壓、膽固醇及日常護心飲食。",
+    "dates": [
+      {
+        "date_text": "2026年4月8日（三）",
+        "start_date": "2026-04-08",
+        "end_date": "2026-04-08"
+      }
+    ],
+    "time": "上午10:30至11:30",
+    "venue": "中心活動室一",
+    "target_participants": "中心會員及區內長者",
+    "fee": [
+      {
+        "fee_type": "一般",
+        "amount_text": "免費",
+        "amount": 0,
+        "notes": "免費"
+      }
+    ],
+    "quota": "30人",
+    "registration_method": "親臨中心櫃位報名",
+    "registration_period": "2026年3月25日起，額滿即止",
+    "staff_in_charge": "陳姑娘",
+    "notes": "由註冊護士講解血壓、膽固醇及日常護心飲食。請攜帶會員證。活動如有更改，以中心公布為準。",
+    "source_reference": "健康講座，護心有法健康講座",
+    "uncertain_fields": [],
+    "qa_status": "pending"
+  },
+  {
+    "activity_id": "sample-2026-04-002",
+    "activity_title": "輕鬆伸展運動班",
+    "category": "運動班",
+    "description": "參加者請穿著舒適服裝及運動鞋。",
+    "dates": [
+      {
+        "date_text": "2026年4月9、16、23、30日（逢星期四，共4堂）",
+        "start_date": "2026-04-09",
+        "end_date": "2026-04-30",
+        "recurrence": "逢星期四，共4堂"
+      }
+    ],
+    "time": "下午2:30至3:30",
+    "venue": "中心禮堂",
+    "target_participants": "能自行參與輕量運動之中心會員",
+    "fee": [
+      {
+        "fee_type": "會員",
+        "amount_text": "會員每位$80（4堂）",
+        "currency": "$",
+        "amount": 80,
+        "notes": "4堂"
+      }
+    ],
+    "quota": "16人",
+    "registration_method": "親臨中心櫃位報名",
+    "registration_period": "2026年3月26日起，額滿即止",
+    "staff_in_charge": "李先生",
+    "notes": "參加者請穿著舒適服裝及運動鞋。請攜帶會員證。活動如有更改，以中心公布為準。",
+    "source_reference": "運動班，輕鬆伸展運動班",
+    "uncertain_fields": [],
+    "qa_status": "pending"
+  },
+  {
+    "activity_id": "sample-2026-04-003",
+    "activity_title": "母親節花藝工作坊",
+    "category": "手作活動",
+    "description": "每位參加者可完成一份鮮花作品。",
+    "dates": [
+      {
+        "date_text": "2026年4月18日（六）",
+        "start_date": "2026-04-18",
+        "end_date": "2026-04-18"
+      }
+    ],
+    "time": "上午10:00至中午12:00",
+    "venue": "中心活動室二",
+    "target_participants": "會員及非會員均可參加",
+    "fee": [
+      {
+        "fee_type": "會員",
+        "amount_text": "會員$60",
+        "currency": "$",
+        "amount": 60,
+        "notes": "已包括材料"
+      },
+      {
+        "fee_type": "非會員",
+        "amount_text": "非會員$90",
+        "currency": "$",
+        "amount": 90,
+        "notes": "已包括材料"
+      }
+    ],
+    "quota": "20人",
+    "registration_method": "親臨中心櫃位報名",
+    "registration_period": "2026年4月1日至4月12日",
+    "staff_in_charge": "陳姑娘",
+    "notes": "每位參加者可完成一份鮮花作品。請攜帶會員證。活動如有更改，以中心公布為準。",
+    "source_reference": "手作活動，母親節花藝工作坊",
+    "uncertain_fields": [],
+    "qa_status": "pending"
+  },
+  {
+    "activity_id": "sample-2026-04-004",
+    "activity_title": "春日茶聚同樂日",
+    "category": "聚會活動",
+    "description": "包括茶點分享及小遊戲。",
+    "dates": [
+      {
+        "date_text": "2026年4月22日（三）",
+        "start_date": "2026-04-22",
+        "end_date": "2026-04-22"
+      }
+    ],
+    "time": "下午3:00至4:30",
+    "venue": "中心活動室一",
+    "target_participants": "中心會員",
+    "fee": [
+      {
+        "fee_type": "一般",
+        "amount_text": "暫定$25，實際收費待中心公布",
+        "currency": "$",
+        "amount": null,
+        "notes": "費用未確定，需待中心公布"
+      }
+    ],
+    "quota": "24人",
+    "registration_method": "請向中心職員查詢",
+    "registration_period": "通訊未列明報名日期",
+    "staff_in_charge": "李先生",
+    "notes": "包括茶點分享及小遊戲。費用及報名安排需再確認。請攜帶會員證。活動如有更改，以中心公布為準。",
+    "source_reference": "聚會活動，春日茶聚同樂日",
+    "uncertain_fields": [
+      "fee",
+      "registration_period"
+    ],
+    "qa_status": "pending"
+  },
+  {
+    "activity_id": "sample-2026-04-005",
+    "activity_title": "智能手機問答站",
+    "category": "中心服務及提示",
+    "description": "義工協助解答手機使用問題，例如WhatsApp、安心出行替代應用設定及相片整理。",
+    "dates": [
+      {
+        "date_text": "2026年4月15日（三）",
+        "start_date": "2026-04-15",
+        "end_date": "2026-04-15"
+      }
+    ],
+    "time": "上午9:30至11:30",
+    "venue": "中心接待處旁",
+    "target_participants": "中心會員",
+    "fee": [
+      {
+        "fee_type": "一般",
+        "amount_text": "免費",
+        "amount": 0,
+        "notes": "免費"
+      }
+    ],
+    "quota": "即場輪候",
+    "registration_method": "毋須報名，即場參與",
+    "registration_period": "毋須報名",
+    "staff_in_charge": "陳姑娘",
+    "notes": "義工協助解答手機使用問題，例如WhatsApp、安心出行替代應用設定及相片整理。活動如有更改，以中心公布為準。",
+    "source_reference": "中心服務及提示，智能手機問答站",
+    "uncertain_fields": [],
+    "qa_status": "pending"
+  }
+]
