@@ -3,11 +3,15 @@ import json
 import sys
 from pathlib import Path
 
+from jsonschema import exceptions
 from jsonschema import validators
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT_DIR / "schemas" / "activity.schema.json"
+SCHEMA_RECOMMENDATION = (
+    "Fix the JSON structure so the record validates against schemas/activity.schema.json."
+)
 
 
 def configure_stdout() -> None:
@@ -20,6 +24,10 @@ def configure_stdout() -> None:
 def load_json(path: Path):
     with path.open("r", encoding="utf-8") as handle:
         return json.loads(handle.read().lstrip("\ufeff"))
+
+
+def print_error(message: str) -> None:
+    print(f"ERROR: {message}", file=sys.stderr)
 
 
 def format_path(error_path) -> str:
@@ -36,6 +44,18 @@ def format_path(error_path) -> str:
     return rendered
 
 
+def top_level_field(path: str) -> str:
+    if path == "<record>":
+        return "<record>"
+
+    bracket_index = path.find("[")
+    dot_index = path.find(".")
+    indexes = [index for index in (bracket_index, dot_index) if index != -1]
+    if not indexes:
+        return path
+    return path[: min(indexes)]
+
+
 def main() -> int:
     configure_stdout()
 
@@ -46,16 +66,55 @@ def main() -> int:
     args = parser.parse_args()
 
     input_path = Path(args.input_json)
-    schema = load_json(SCHEMA_PATH)
-    data = load_json(input_path)
+
+    try:
+        schema = load_json(SCHEMA_PATH)
+    except FileNotFoundError:
+        print_error(f"Schema file not found: {SCHEMA_PATH}")
+        return 2
+    except PermissionError:
+        print_error(f"Schema file is not readable: {SCHEMA_PATH}")
+        return 2
+    except json.JSONDecodeError as error:
+        print_error(
+            f"Invalid JSON in schema file {SCHEMA_PATH}: "
+            f"{error.msg} at line {error.lineno}, column {error.colno}"
+        )
+        return 2
+    except OSError as error:
+        print_error(f"Could not read schema file {SCHEMA_PATH}: {error}")
+        return 2
+
+    try:
+        data = load_json(input_path)
+    except FileNotFoundError:
+        print_error(f"Input file not found: {input_path}")
+        return 2
+    except PermissionError:
+        print_error(f"Input file is not readable: {input_path}")
+        return 2
+    except json.JSONDecodeError as error:
+        print_error(
+            f"Invalid JSON in input file {input_path}: "
+            f"{error.msg} at line {error.lineno}, column {error.colno}"
+        )
+        return 2
+    except OSError as error:
+        print_error(f"Could not read input file {input_path}: {error}")
+        return 2
 
     if not isinstance(data, list):
         print("FAIL")
         print(f"{input_path}: expected a JSON array of activity records.")
         return 1
 
-    validator_class = validators.validator_for(schema)
-    validator_class.check_schema(schema)
+    try:
+        validator_class = validators.validator_for(schema)
+        validator_class.check_schema(schema)
+    except exceptions.SchemaError as error:
+        print_error(f"Invalid schema in {SCHEMA_PATH}: {error.message}")
+        return 2
+
     validator = validator_class(schema)
 
     failures = []
@@ -67,12 +126,17 @@ def main() -> int:
         )
 
         for error in errors:
+            path = format_path(error.path)
             failures.append(
                 {
                     "index": index,
                     "activity_id": activity_id,
-                    "path": format_path(error.path),
+                    "rule_id": "SCHEMA",
+                    "field": top_level_field(path),
+                    "path": path,
+                    "severity": "critical",
                     "message": error.message,
+                    "recommendation": SCHEMA_RECOMMENDATION,
                 }
             )
 
@@ -85,8 +149,13 @@ def main() -> int:
         print(
             f"Record {failure['index']} "
             f"(activity_id: {failure['activity_id']}), "
-            f"path: {failure['path']}: {failure['message']}"
+            f"rule_id: {failure['rule_id']}, "
+            f"field: {failure['field']}, "
+            f"path: {failure['path']}, "
+            f"severity: {failure['severity']}"
         )
+        print(f"Message: {failure['message']}")
+        print(f"Recommendation: {failure['recommendation']}")
     return 1
 
 

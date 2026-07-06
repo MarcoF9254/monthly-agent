@@ -14,19 +14,25 @@ These checks help catch records that are structurally valid but unsafe, incomple
 
 ## Output
 
-Business rule validation should produce:
+Business rule validation should follow the shared pass/fail output contract in `docs/output-contracts.md`.
 
-- Pass: no business rule issues found.
-- Warning: issue exists but may be acceptable if clearly marked for QA or Human Review.
-- Fail: issue should be corrected or reviewed before downstream use.
+The current validator status enum is:
+
+- `pass`: no business rule findings were produced.
+- `fail`: one or more business rule findings were produced.
+
+Any finding causes `FAIL`, regardless of severity. Warning-only behavior is not implemented yet and is reserved for future workflow support.
 
 Each finding should include:
 
-- The affected activity identifier.
-- The affected field.
-- The rule that was triggered.
-- Severity or impact level.
-- A short explanation for QA or Human Review.
+- `index`
+- `activity_id`, using `"<missing>"` if the activity ID is missing
+- `rule_id`
+- `field`
+- `path`
+- `severity`
+- `message`
+- `recommendation`
 
 ## Rules
 
