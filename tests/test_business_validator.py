@@ -434,6 +434,21 @@ def test_cli_returns_0_on_br002_free_fee_pass(tmp_path):
     assert result.stdout.strip() == "PASS"
 
 
+def test_cli_returns_1_on_br003_registration_period_failure(tmp_path):
+    record = sample_record()
+    record["registration_period"] = "通訊未列明報名日期"
+    record["uncertain_fields"] = []
+    path = write_records(tmp_path, [record])
+
+    result = run_validator(path)
+
+    assert result.returncode == 1
+    assert "FAIL" in result.stdout
+    assert "BR-003" in result.stdout
+    assert "registration_period" in result.stdout
+    assert "Registration period does not provide actionable registration timing." in result.stdout
+
+
 def test_cli_returns_1_on_br001_failure(tmp_path):
     record = sample_record()
     record["venue"] = ""

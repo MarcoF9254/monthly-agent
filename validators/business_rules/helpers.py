@@ -33,6 +33,14 @@ ENGLISH_FREE_INDICATOR_VALUES = {
 
 
 
+def matches_closed_list(value, chinese_values: set[str], english_values: set[str]) -> bool:
+    if not isinstance(value, str):
+        return False
+
+    normalized = value.strip()
+    return normalized in chinese_values or normalized.lower() in english_values
+
+
 def is_placeholder(value) -> bool:
     if not isinstance(value, str):
         return False
@@ -59,11 +67,8 @@ def is_uncertain(field_name: str, uncertain_fields) -> bool:
 
 
 def is_free_indicator(value) -> bool:
-    if not isinstance(value, str):
-        return False
-
-    normalized = value.strip()
-    return (
-        normalized in CHINESE_FREE_INDICATOR_VALUES
-        or normalized.lower() in ENGLISH_FREE_INDICATOR_VALUES
+    return matches_closed_list(
+        value,
+        CHINESE_FREE_INDICATOR_VALUES,
+        ENGLISH_FREE_INDICATOR_VALUES,
     )

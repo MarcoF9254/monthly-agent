@@ -1,4 +1,8 @@
-from validators.business_rules.helpers import is_meaningful_string, is_uncertain
+from validators.business_rules.helpers import (
+    is_meaningful_string,
+    is_uncertain,
+    matches_closed_list,
+)
 
 
 RULE_ID = "BR-003"
@@ -39,20 +43,8 @@ def _activity_id(record) -> str:
     return "<missing>"
 
 
-def _matches_closed_list(
-    value,
-    chinese_values: set[str],
-    english_values: set[str],
-) -> bool:
-    if not isinstance(value, str):
-        return False
-
-    normalized = value.strip()
-    return normalized in chinese_values or normalized.lower() in english_values
-
-
 def _is_no_registration_indicator(value) -> bool:
-    return _matches_closed_list(
+    return matches_closed_list(
         value,
         CHINESE_NO_REGISTRATION_INDICATORS,
         ENGLISH_NO_REGISTRATION_INDICATORS,
@@ -60,7 +52,7 @@ def _is_no_registration_indicator(value) -> bool:
 
 
 def _is_non_actionable_indicator(value) -> bool:
-    return _matches_closed_list(
+    return matches_closed_list(
         value,
         CHINESE_NON_ACTIONABLE_INDICATORS,
         ENGLISH_NON_ACTIONABLE_INDICATORS,
