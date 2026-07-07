@@ -33,7 +33,7 @@ The validator must not infer registration periods from activity dates, registrat
 
 A record passes BR-003 when one of the following is true:
 
-- `registration_period` contains source-supported registration timing.
+- `registration_period` contains a meaningful, non-placeholder value that is not in the Recognized Non-Actionable Indicators list.
 - `registration_period` contains a recognized no-registration indicator.
 - `registration_period` is missing, empty, placeholder-like, or non-actionable, and `uncertain_fields` includes `"registration_period"`.
 
@@ -53,6 +53,7 @@ The following examples communicate actionable registration timing and should pas
 - `"全年接受報名"`
 - `"每月首個工作天開始報名"`
 - `"活動前一星期截止"`
+- `"電話報名，6月3日起接受報名"`
 
 ## Recognized No-Registration Indicators
 
@@ -72,28 +73,44 @@ Matching rules for no-registration indicators:
 - English matching is case-insensitive.
 - Chinese matching is exact after trimming.
 - Do not use broad substring matching.
+- Exact matching is used for now, even when the indicator appears inside a longer sentence.
+- Longer sentences such as `"本活動毋須報名，敬請留意"` should not be treated as recognized no-registration indicators unless this specification is later updated to allow contains matching.
+- If the sentence is otherwise meaningful and not in the Recognized Non-Actionable Indicators list, it may still pass as actionable registration information under BR-003.
 
-## Fail Condition
+## Recognized Non-Actionable Indicators
 
-A record fails BR-003 when `registration_period` is missing, empty, placeholder-like, unclear, or non-actionable, and `uncertain_fields` does not include `"registration_period"`.
+The following values are recognized as describing registration method, enquiry instructions, missing timing, or pending status only — not actionable registration timing.
 
-The following examples are unclear or non-actionable for BR-003 unless `registration_period` is marked uncertain:
+A `registration_period` matching one of these values does not satisfy the Pass Condition and must be listed in `uncertain_fields` unless a separate source-supported timing statement is also present.
 
+- `"電話報名"`
+- `"親臨中心報名"`
 - `"請向中心職員查詢"`
 - `"詳情請致電中心"`
 - `"報名日期待定"`
 - `"稍後公布"`
 - `"通訊未列明報名日期"`
-- `"親臨中心報名"`
-- `"電話報名"`
+
+Matching rules for non-actionable indicators:
+
+- Trim surrounding whitespace before comparison.
+- English matching is case-insensitive.
+- Chinese matching is exact after trimming.
+- Do not use broad substring matching.
+
+Values not listed above, not placeholders, and not recognized as no-registration indicators are treated as actionable registration timing.
+
+## Fail Condition
+
+A record fails BR-003 when `registration_period` is missing, empty, placeholder-like, unclear, or non-actionable, and `uncertain_fields` does not include `"registration_period"`.
 
 `"親臨中心報名"` and `"電話報名"` describe registration method only. They do not communicate registration timing and must not pass BR-003 by themselves.
 
-## Interaction With BR-001
+## Overlapping Findings
 
 BR-001 checks whether `registration_period` is meaningful or listed in `uncertain_fields`.
 
-BR-003 checks whether the value actually communicates registration timing or a recognized no-registration exemption.
+BR-003 checks whether the value is actionable, recognized as no-registration, or explicitly uncertain.
 
 Both rules may emit findings for the same record. For example, an empty `registration_period` with no uncertainty flag may fail BR-001 because the field is not meaningful and fail BR-003 because no registration timing is provided.
 
@@ -131,11 +148,21 @@ High. Registration timing affects whether participants can join an activity.
 }
 ```
 
-## Example Fail: Enquiry Text Only
+## Example Pass: Method With Timing
 
 ```json
 {
   "activity_id": "ACT-004",
+  "registration_period": "電話報名，6月3日起接受報名",
+  "uncertain_fields": []
+}
+```
+
+## Example Fail: Enquiry Text Only
+
+```json
+{
+  "activity_id": "ACT-005",
   "registration_period": "請向中心職員查詢",
   "uncertain_fields": []
 }
@@ -145,8 +172,18 @@ High. Registration timing affects whether participants can join an activity.
 
 ```json
 {
-  "activity_id": "ACT-005",
+  "activity_id": "ACT-006",
   "registration_period": "電話報名",
+  "uncertain_fields": []
+}
+```
+
+## Example Fail: Missing Timing Statement
+
+```json
+{
+  "activity_id": "ACT-007",
+  "registration_period": "通訊未列明報名日期",
   "uncertain_fields": []
 }
 ```
@@ -155,6 +192,6 @@ High. Registration timing affects whether participants can join an activity.
 
 Reviewers should compare `registration_period` against the source document and confirm whether it states when registration opens, closes, remains available, or is not required.
 
-If the source only states a registration method, contact instruction, or vague enquiry note, mark `registration_period` as uncertain unless a separate source-supported registration timing statement is present.
+If the source only states a registration method, contact instruction, missing-date note, or pending-status note that appears in the Recognized Non-Actionable Indicators list, mark `registration_period` as uncertain unless a separate source-supported registration timing statement is present.
 
 If the source does not list registration timing, do not infer it from the activity date, the registration method, previous newsletters, or centre practice. Leave the value unresolved and include `"registration_period"` in `uncertain_fields` for human review.
