@@ -5,6 +5,7 @@ from pathlib import Path
 
 from validators.business_rules.br001_required_fields import check as check_br001
 from validators.business_rules.br002_fee_uncertainty import check as check_br002
+from validators.business_rules.br003_registration_period import check as check_br003
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -39,6 +40,10 @@ def findings_for(record: dict) -> list[dict]:
 
 def br002_findings_for(record: dict) -> list[dict]:
     return check_br002(record, index=4)
+
+
+def br003_findings_for(record: dict) -> list[dict]:
+    return check_br003(record, index=5)
 
 
 def fields(findings: list[dict]) -> set[str]:
@@ -314,6 +319,98 @@ def test_br002_english_free_indicators_are_case_insensitive():
         record["uncertain_fields"] = []
 
         assert br002_findings_for(record) == []
+
+
+def test_br003_actionable_registration_timing_passes():
+    for registration_period in [
+        "6月3日上午9時開始報名",
+        "6月3日至6月10日",
+        "截止報名日期：6月10日",
+        "即日起接受報名",
+        "即日起至額滿",
+        "額滿即止",
+        "長期接受報名",
+        "全年接受報名",
+        "每月首個工作天開始報名",
+        "活動前一星期截止",
+        "電話報名，6月3日起接受報名",
+    ]:
+        record = sample_record()
+        record["registration_period"] = registration_period
+        record["uncertain_fields"] = []
+
+        assert br003_findings_for(record) == []
+
+
+def test_br003_no_registration_indicators_pass_with_exact_matching():
+    for registration_period in [
+        "毋須報名",
+        "無須報名",
+        "不用報名",
+        "免報名",
+        "無需登記",
+        "no registration required",
+        " Registration Not Required ",
+    ]:
+        record = sample_record()
+        record["registration_period"] = registration_period
+        record["uncertain_fields"] = []
+
+        assert br003_findings_for(record) == []
+
+
+def test_br003_non_actionable_registration_period_fails_unless_uncertain():
+    for registration_period in [
+        "電話報名",
+        "親臨中心報名",
+        "請向中心職員查詢",
+        "詳情請致電中心",
+        "報名日期待定",
+        "稍後公布",
+        "通訊未列明報名日期",
+    ]:
+        record = sample_record()
+        record["registration_period"] = registration_period
+        record["uncertain_fields"] = []
+
+        findings = br003_findings_for(record)
+
+        assert len(findings) == 1
+        assert findings[0]["index"] == 5
+        assert findings[0]["activity_id"] == record["activity_id"]
+        assert findings[0]["rule_id"] == "BR-003"
+        assert findings[0]["field"] == "registration_period"
+        assert findings[0]["path"] == "registration_period"
+        assert findings[0]["severity"] == "high"
+
+        record["uncertain_fields"] = ["registration_period"]
+        assert br003_findings_for(record) == []
+
+
+def test_br003_missing_empty_or_placeholder_registration_period_fails_unless_uncertain():
+    missing_record = sample_record()
+    missing_record.pop("registration_period")
+    missing_record["uncertain_fields"] = []
+
+    assert fields(br003_findings_for(missing_record)) == {"registration_period"}
+
+    for registration_period in ["", "   ", "待定", "TBC"]:
+        record = sample_record()
+        record["registration_period"] = registration_period
+        record["uncertain_fields"] = []
+
+        assert fields(br003_findings_for(record)) == {"registration_period"}
+
+        record["uncertain_fields"] = [" registration_period "]
+        assert br003_findings_for(record) == []
+
+
+def test_br003_partial_no_registration_indicator_is_not_special_case():
+    record = sample_record()
+    record["registration_period"] = "本活動毋須報名，敬請留意"
+    record["uncertain_fields"] = []
+
+    assert br003_findings_for(record) == []
 
 
 def test_cli_returns_0_on_pass(tmp_path):
