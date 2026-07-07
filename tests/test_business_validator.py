@@ -232,6 +232,18 @@ def test_br002_amount_null_with_pending_fee_fails():
     assert findings[0]["severity"] == "high"
 
 
+def test_br002_partial_free_indicator_match_does_not_pass():
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": None, "amount_text": "本月活動費用全免喎"}]
+    record["uncertain_fields"] = []
+
+    findings = br002_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["rule_id"] == "BR-002"
+    assert findings[0]["field"] == "fee[].amount"
+    assert findings[0]["path"] == "fee[0].amount"
+
 def test_br002_amount_present_with_meaningful_amount_text_passes():
     record = sample_record()
     record["fee"] = [{"fee_type": "一般", "amount": 15, "amount_text": "$15"}]
