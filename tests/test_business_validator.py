@@ -3,7 +3,8 @@ import subprocess
 import sys
 from pathlib import Path
 
-from validators.business_rules.br001_required_fields import check
+from validators.business_rules.br001_required_fields import check as check_br001
+from validators.business_rules.br002_fee_uncertainty import check as check_br002
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -33,7 +34,11 @@ def write_records(tmp_path: Path, records: list[dict]) -> Path:
 
 
 def findings_for(record: dict) -> list[dict]:
-    return check(record, index=3)
+    return check_br001(record, index=3)
+
+
+def br002_findings_for(record: dict) -> list[dict]:
+    return check_br002(record, index=4)
 
 
 def fields(findings: list[dict]) -> set[str]:
@@ -195,8 +200,124 @@ def test_uncertain_fields_ignore_non_string_values_without_crashing():
     assert fields(findings_for(record)) == {"venue"}
 
 
+def test_br002_amount_null_with_free_indicator_passes():
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": None, "amount_text": "免費"}]
+    record["uncertain_fields"] = []
+
+    assert br002_findings_for(record) == []
+
+
+def test_br002_amount_null_with_uncertain_fee_passes():
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": None, "amount_text": "請向中心查詢"}]
+    record["uncertain_fields"] = ["fee"]
+
+    assert br002_findings_for(record) == []
+
+
+def test_br002_amount_null_with_pending_fee_fails():
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": None, "amount_text": "費用待定"}]
+    record["uncertain_fields"] = []
+
+    findings = br002_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["index"] == 4
+    assert findings[0]["activity_id"] == record["activity_id"]
+    assert findings[0]["rule_id"] == "BR-002"
+    assert findings[0]["field"] == "fee[].amount"
+    assert findings[0]["path"] == "fee[0].amount"
+    assert findings[0]["severity"] == "high"
+
+
+def test_br002_amount_present_with_meaningful_amount_text_passes():
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": 15, "amount_text": "$15"}]
+    record["uncertain_fields"] = []
+
+    assert br002_findings_for(record) == []
+
+
+def test_br002_amount_present_with_free_text_passes_as_meaningful_source_text():
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": 15, "amount_text": " 免費 "}]
+    record["uncertain_fields"] = []
+
+    assert br002_findings_for(record) == []
+
+def test_br002_amount_present_with_empty_amount_text_fails():
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": 15, "amount_text": ""}]
+    record["uncertain_fields"] = []
+
+    findings = br002_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["field"] == "fee[].amount_text"
+    assert findings[0]["path"] == "fee[0].amount_text"
+
+
+def test_br002_amount_present_with_placeholder_amount_text_fails():
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": 15, "amount_text": "TBC"}]
+    record["uncertain_fields"] = []
+
+    findings = br002_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["path"] == "fee[0].amount_text"
+
+
+def test_br002_multiple_fee_items_validate_independently():
+    record = sample_record()
+    record["fee"] = [
+        {"fee_type": "會員", "amount": 20, "amount_text": "$20"},
+        {"fee_type": "非會員", "amount": None, "amount_text": ""},
+    ]
+    record["uncertain_fields"] = []
+
+    findings = br002_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["path"] == "fee[1].amount"
+
+
+def test_br002_whitespace_handling_for_free_and_meaningful_text():
+    record = sample_record()
+    record["fee"] = [
+        {"fee_type": "一般", "amount": None, "amount_text": " 免費 "},
+        {"fee_type": "材料", "amount": 15, "amount_text": " $15 "},
+    ]
+    record["uncertain_fields"] = []
+
+    assert br002_findings_for(record) == []
+
+
+def test_br002_english_free_indicators_are_case_insensitive():
+    for amount_text in ["free", "Free of charge", " NO CHARGE "]:
+        record = sample_record()
+        record["fee"] = [{"fee_type": "一般", "amount": None, "amount_text": amount_text}]
+        record["uncertain_fields"] = []
+
+        assert br002_findings_for(record) == []
+
+
 def test_cli_returns_0_on_pass(tmp_path):
     path = write_records(tmp_path, [sample_record()])
+
+    result = run_validator(path)
+
+    assert result.returncode == 0
+    assert result.stdout.strip() == "PASS"
+
+
+def test_cli_returns_0_on_br002_free_fee_pass(tmp_path):
+    record = sample_record()
+    record["fee"] = [{"fee_type": "一般", "amount": None, "amount_text": "Free of charge"}]
+    record["uncertain_fields"] = []
+    path = write_records(tmp_path, [record])
 
     result = run_validator(path)
 
