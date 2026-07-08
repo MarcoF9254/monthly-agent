@@ -62,11 +62,13 @@ This document should reference existing architecture and decision records rather
 
 6. Implementation follows architecture.
 
-7. Every accepted policy must be traceable to repository evidence, or be explicitly marked as pending.
+7. Every accepted policy must be traceable to repository evidence, or be explicitly marked as pending. Evidence supports correctness; authority approves adoption.
 
-Evidence supports correctness. Authority approves adoption.
+8. Format acceptance does not determine source authority.
 
 Evidence demonstrating that a phenomenon exists does not itself authorize adoption. Authority decisions still follow Principle 4.
+
+Accepted input formats describe extractor capability only. They do not determine which source is authoritative.
 
 ## Evidence Hierarchy
 
@@ -111,7 +113,7 @@ Authority decisions override evidence sufficiency.
 A proposal may have complete evidence while still remaining:
 
 ```text
-DECISION PENDING
+DECISION PENDING — Requires Human Approval
 ```
 
 until approved.
@@ -122,7 +124,7 @@ Pending decisions must always contain:
 
 - options
 - trade-offs
-- recommendation
+- one recommendation
 
 Pending decisions must use this label:
 
