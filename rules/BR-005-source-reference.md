@@ -40,6 +40,16 @@ BR-005 v1 keeps anchors limited to values that can be validated from a single re
 
 `activity_title` and `category` are used only as exact structural anchors. BR-005 may check whether the exact non-empty `activity_title` or exact non-empty `category` appears in `source_reference`.
 
+## Exact Anchor Matching
+
+BR-005 may tokenize `source_reference` before exact anchor comparison.
+
+Tokenization is deterministic and uses a fixed delimiter set. The fixed delimiter set must include comma `,`, Chinese comma `，`, semicolon `;`, Chinese semicolon `；`, pipe `|`, fullwidth pipe `｜`, and newline.
+
+An `activity_title` or `category` anchor passes only when the whole `source_reference` equals the anchor, or one token equals the anchor exactly after trimming whitespace.
+
+This is not substring, fuzzy, semantic, synonym, translation, or NLP matching.
+
 BR-005 must not infer that a paraphrase, translation, abbreviation, synonym, nearby topic, or partial fuzzy match is equivalent to `activity_title` or `category`.
 
 ## Pass Condition
