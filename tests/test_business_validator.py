@@ -7,6 +7,7 @@ from validators.business_rules.br001_required_fields import check as check_br001
 from validators.business_rules.br002_fee_uncertainty import check as check_br002
 from validators.business_rules.br003_registration_period import check as check_br003
 from validators.business_rules.br004_qa_status import check as check_br004
+from validators.business_rules.br005_source_reference import check as check_br005
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -49,6 +50,10 @@ def br003_findings_for(record: dict) -> list[dict]:
 
 def br004_findings_for(record: dict) -> list[dict]:
     return check_br004(record, index=6)
+
+
+def br005_findings_for(record: dict) -> list[dict]:
+    return check_br005(record, index=7)
 
 
 def fields(findings: list[dict]) -> set[str]:
@@ -509,6 +514,122 @@ def test_br004_does_not_emit_duplicate_findings():
     assert findings[0]["field"] == "uncertain_fields"
 
 
+def test_br005_exact_activity_title_anchor_passes():
+    record = sample_record()
+    record["activity_title"] = "Tai Chi Class"
+    record["category"] = "Exercise"
+    record["source_reference"] = "Activity title: Tai Chi Class"
+    record["uncertain_fields"] = []
+
+    assert br005_findings_for(record) == []
+
+
+def test_br005_exact_category_anchor_passes():
+    record = sample_record()
+    record["activity_title"] = "Tai Chi Class"
+    record["category"] = "Health Talks"
+    record["source_reference"] = "Category: Health Talks"
+    record["uncertain_fields"] = []
+
+    assert br005_findings_for(record) == []
+
+
+def test_br005_structured_locator_anchors_pass():
+    passing_references = [
+        "monthly programme, page 2, row 5",
+        "table A row 3",
+        "item number 7",
+        "activity number 12",
+    ]
+
+    for source_reference in passing_references:
+        record = sample_record()
+        record["activity_title"] = "Tai Chi Class"
+        record["category"] = "Exercise"
+        record["source_reference"] = source_reference
+        record["uncertain_fields"] = []
+
+        assert br005_findings_for(record) == []
+
+
+def test_br005_missing_empty_or_placeholder_source_reference_is_left_to_br001():
+    missing_record = sample_record()
+    missing_record.pop("source_reference")
+
+    assert br005_findings_for(missing_record) == []
+
+    for source_reference in ["", "   ", "TBC", "N/A", "-"]:
+        record = sample_record()
+        record["source_reference"] = source_reference
+        record["uncertain_fields"] = []
+
+        assert br005_findings_for(record) == []
+
+
+def test_br005_uncertain_source_reference_suppresses_finding():
+    record = sample_record()
+    record["source_reference"] = "monthly programme"
+    record["uncertain_fields"] = [" source_reference "]
+
+    assert br005_findings_for(record) == []
+
+
+def test_br005_generic_source_reference_fails():
+    record = sample_record()
+    record["activity_title"] = "Tai Chi Class"
+    record["category"] = "Exercise"
+    record["source_reference"] = "monthly programme"
+    record["uncertain_fields"] = []
+
+    findings = br005_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["index"] == 7
+    assert findings[0]["activity_id"] == record["activity_id"]
+    assert findings[0]["rule_id"] == "BR-005"
+    assert findings[0]["field"] == "source_reference"
+    assert findings[0]["path"] == "source_reference"
+    assert findings[0]["severity"] == "medium"
+    assert set(findings[0]) == {
+        "index",
+        "activity_id",
+        "rule_id",
+        "field",
+        "path",
+        "severity",
+        "message",
+        "recommendation",
+    }
+
+
+def test_br005_bare_page_or_section_only_references_fail():
+    for source_reference in ["monthly programme, page 2", "Health section"]:
+        record = sample_record()
+        record["activity_title"] = "Tai Chi Class"
+        record["category"] = "Exercise"
+        record["source_reference"] = source_reference
+        record["uncertain_fields"] = []
+
+        findings = br005_findings_for(record)
+
+        assert len(findings) == 1
+        assert findings[0]["field"] == "source_reference"
+        assert findings[0]["path"] == "source_reference"
+
+
+def test_br005_partial_activity_title_does_not_pass():
+    record = sample_record()
+    record["activity_title"] = "Tai Chi Class"
+    record["category"] = "Exercise"
+    record["source_reference"] = "Tai Chi"
+    record["uncertain_fields"] = []
+
+    findings = br005_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["rule_id"] == "BR-005"
+
+
 def test_cli_returns_0_on_pass(tmp_path):
     path = write_records(tmp_path, [sample_record()])
 
@@ -556,6 +677,22 @@ def test_cli_returns_1_on_br004_qa_status_failure(tmp_path):
     assert "FAIL" in result.stdout
     assert "BR-004" in result.stdout
     assert "qa_status" in result.stdout
+
+
+def test_cli_returns_1_on_br005_source_reference_failure(tmp_path):
+    record = sample_record()
+    record["activity_title"] = "Tai Chi Class"
+    record["category"] = "Exercise"
+    record["source_reference"] = "monthly programme"
+    record["uncertain_fields"] = []
+    path = write_records(tmp_path, [record])
+
+    result = run_validator(path)
+
+    assert result.returncode == 1
+    assert "FAIL" in result.stdout
+    assert "BR-005" in result.stdout
+    assert "source_reference" in result.stdout
 
 
 def test_cli_returns_1_on_br001_failure(tmp_path):

@@ -3,6 +3,7 @@
     br002_fee_uncertainty,
     br003_registration_period,
     br004_qa_status,
+    br005_source_reference,
 )
 
 
@@ -11,4 +12,5 @@ RULES = [
     br002_fee_uncertainty,
     br003_registration_period,
     br004_qa_status,
+    br005_source_reference,
 ]
