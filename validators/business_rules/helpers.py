@@ -72,3 +72,31 @@ def is_free_indicator(value) -> bool:
         CHINESE_FREE_INDICATOR_VALUES,
         ENGLISH_FREE_INDICATOR_VALUES,
     )
+
+
+def activity_id_for(record) -> str:
+    if isinstance(record, dict):
+        return record.get("activity_id", "<missing>")
+    return "<missing>"
+
+
+def finding(
+    record,
+    index: int,
+    rule_id: str,
+    field: str,
+    path: str,
+    severity: str,
+    message: str,
+    recommendation: str,
+) -> dict:
+    return {
+        "index": index,
+        "activity_id": activity_id_for(record),
+        "rule_id": rule_id,
+        "field": field,
+        "path": path,
+        "severity": severity,
+        "message": message,
+        "recommendation": recommendation,
+    }

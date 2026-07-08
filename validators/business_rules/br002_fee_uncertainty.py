@@ -1,4 +1,5 @@
 ﻿from validators.business_rules.helpers import (
+    finding,
     is_free_indicator,
     is_meaningful_string,
     is_uncertain,
@@ -12,23 +13,17 @@ RECOMMENDATION = (
 )
 
 
-def _activity_id(record) -> str:
-    if isinstance(record, dict):
-        return record.get("activity_id", "<missing>")
-    return "<missing>"
-
-
 def _finding(record, index: int, field: str, path: str, message: str) -> dict:
-    return {
-        "index": index,
-        "activity_id": _activity_id(record),
-        "rule_id": RULE_ID,
-        "field": field,
-        "path": path,
-        "severity": "high",
-        "message": message,
-        "recommendation": RECOMMENDATION,
-    }
+    return finding(
+        record,
+        index,
+        RULE_ID,
+        field,
+        path,
+        "high",
+        message,
+        RECOMMENDATION,
+    )
 
 
 def _amount_for(item):

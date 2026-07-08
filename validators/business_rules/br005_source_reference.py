@@ -1,6 +1,6 @@
 import re
 
-from validators.business_rules.helpers import is_meaningful_string, is_uncertain
+from validators.business_rules.helpers import finding, is_meaningful_string, is_uncertain
 
 
 RULE_ID = "BR-005"
@@ -23,23 +23,17 @@ ACTIVITY_NUMBER_PATTERN = re.compile(
 )
 
 
-def _activity_id(record) -> str:
-    if isinstance(record, dict):
-        return record.get("activity_id", "<missing>")
-    return "<missing>"
-
-
 def _finding(record, index: int) -> dict:
-    return {
-        "index": index,
-        "activity_id": _activity_id(record),
-        "rule_id": RULE_ID,
-        "field": "source_reference",
-        "path": "source_reference",
-        "severity": "medium",
-        "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
-        "recommendation": RECOMMENDATION,
-    }
+    return finding(
+        record,
+        index,
+        RULE_ID,
+        "source_reference",
+        "source_reference",
+        "medium",
+        "Source reference has no BR-005 v1 deterministic traceability anchor.",
+        RECOMMENDATION,
+    )
 
 
 def _source_reference_segments(source_reference: str) -> list[str]:

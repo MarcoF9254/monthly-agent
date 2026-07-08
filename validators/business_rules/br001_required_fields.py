@@ -1,4 +1,4 @@
-﻿from validators.business_rules.helpers import is_meaningful_string, is_uncertain
+﻿from validators.business_rules.helpers import finding, is_meaningful_string, is_uncertain
 
 
 RULE_ID = "BR-001"
@@ -33,12 +33,6 @@ REQUIRED_FIELDS = [
 ]
 
 
-def _activity_id(record) -> str:
-    if isinstance(record, dict):
-        return record.get("activity_id", "<missing>")
-    return "<missing>"
-
-
 def _severity(field: str) -> str:
     if field in HIGH_SEVERITY_FIELDS:
         return "high"
@@ -46,16 +40,16 @@ def _severity(field: str) -> str:
 
 
 def _finding(record, index: int, field: str, path: str) -> dict:
-    return {
-        "index": index,
-        "activity_id": _activity_id(record),
-        "rule_id": RULE_ID,
-        "field": field,
-        "path": path,
-        "severity": _severity(field),
-        "message": f"Required field '{field}' is missing, empty, or not meaningful.",
-        "recommendation": RECOMMENDATION,
-    }
+    return finding(
+        record,
+        index,
+        RULE_ID,
+        field,
+        path,
+        _severity(field),
+        f"Required field '{field}' is missing, empty, or not meaningful.",
+        RECOMMENDATION,
+    )
 
 
 def _dates_path(value) -> str:

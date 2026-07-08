@@ -1,14 +1,10 @@
+from validators.business_rules.helpers import finding
+
 RULE_ID = "BR-004"
 RECOMMENDATION = (
     "Reset premature status to pending during pre-QA validation. Do not approve "
     "records until QA or Human Review has completed."
 )
-
-
-def _activity_id(record) -> str:
-    if isinstance(record, dict):
-        return record.get("activity_id", "<missing>")
-    return "<missing>"
 
 
 def _has_uncertainty(record: dict) -> bool:
@@ -24,16 +20,16 @@ def _finding(
     severity: str,
     message: str,
 ) -> dict:
-    return {
-        "index": index,
-        "activity_id": _activity_id(record),
-        "rule_id": RULE_ID,
-        "field": field,
-        "path": path,
-        "severity": severity,
-        "message": message,
-        "recommendation": RECOMMENDATION,
-    }
+    return finding(
+        record,
+        index,
+        RULE_ID,
+        field,
+        path,
+        severity,
+        message,
+        RECOMMENDATION,
+    )
 
 
 def check(record, index: int = 0) -> list:

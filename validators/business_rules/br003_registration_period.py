@@ -1,4 +1,5 @@
 from validators.business_rules.helpers import (
+    finding,
     is_meaningful_string,
     is_uncertain,
     matches_closed_list,
@@ -37,12 +38,6 @@ CHINESE_NON_ACTIONABLE_INDICATORS = {
 ENGLISH_NON_ACTIONABLE_INDICATORS: set[str] = set()
 
 
-def _activity_id(record) -> str:
-    if isinstance(record, dict):
-        return record.get("activity_id", "<missing>")
-    return "<missing>"
-
-
 def _is_no_registration_indicator(value) -> bool:
     return matches_closed_list(
         value,
@@ -60,16 +55,16 @@ def _is_non_actionable_indicator(value) -> bool:
 
 
 def _finding(record, index: int) -> dict:
-    return {
-        "index": index,
-        "activity_id": _activity_id(record),
-        "rule_id": RULE_ID,
-        "field": "registration_period",
-        "path": "registration_period",
-        "severity": "high",
-        "message": "Registration period does not provide actionable registration timing.",
-        "recommendation": RECOMMENDATION,
-    }
+    return finding(
+        record,
+        index,
+        RULE_ID,
+        "registration_period",
+        "registration_period",
+        "high",
+        "Registration period does not provide actionable registration timing.",
+        RECOMMENDATION,
+    )
 
 
 def check(record, index: int = 0) -> list:
