@@ -1,28 +1,58 @@
-# Decision Log
+# Architecture Decision Records
 
-## Activity ID Format
+This file records lightweight architecture decisions for `monthly-agent`. It preserves project decisions that affect future implementation, validation, and agent handoff work.
 
-Decision: Use plain string IDs such as `2026-04-001` or `sample-2026-04-001`.
+## ADR-001: Activity ID Format
+
+Status: Accepted
+
+### Context
+
+Activity records need stable identifiers for validation output, QA review, and downstream newsletter workflows. Human-facing programme documents may use circled numbers or visual labels, but those are not reliable system identifiers.
+
+### Decision
+
+Use plain string IDs such as `2026-04-001` or `sample-2026-04-001`.
 
 Do not use circled numbers as system identifiers.
 
-Reason: Circled numbers are useful for newsletter display but poor as stable system primary keys.
+### Consequences
 
-## Validation Exit Codes
+Plain string IDs are easier to compare, serialize, validate, and reference in findings. Circled numbers may still be used for display if needed, but not as primary keys.
 
-Decision:
+## ADR-002: Validation Exit Codes
+
+Status: Accepted
+
+### Context
+
+Automation needs to distinguish records that fail validation from tools that fail to run.
+
+### Decision
+
+Use these validator exit codes:
 
 - `0` = PASS
 - `1` = validation failure
 - `2` = tool execution error
 
-Reason: Future runners must distinguish record validation failures from tool or runtime failures.
+### Consequences
 
-## Severity Defaults
+Future runners can reliably separate record validation failures from invalid input, unreadable files, malformed JSON, missing schemas, or runtime errors.
 
-Decision:
+## ADR-003: Severity Defaults
+
+Status: Accepted
+
+### Context
+
+Schema validation and business validation represent different types of problems and should not default to the same severity model.
+
+### Decision
 
 - Schema validation findings use severity `critical`.
 - Business validation findings use severity defined by BR rule files.
 
-Reason: Structural schema errors should stop downstream processing.
+### Consequences
+
+Structural schema errors should stop downstream processing. Business-rule severity remains tied to each rule's participant-facing risk and workflow impact.

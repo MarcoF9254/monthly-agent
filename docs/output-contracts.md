@@ -49,6 +49,8 @@ Business findings should use rule IDs from `rules/`, such as `BR-001`.
 
 ## 5. Finding Object Fields
 
+Label: Finding Contract v1
+
 When a validator emits structured findings, each finding should use these fields:
 
 - `index`: zero-based record index in the input array.

@@ -18,7 +18,7 @@ BR-001 through BR-005 have completed specification, implementation, tests, revie
 
 ## Current Milestone
 
-Milestone 3 — Business Rule Engine
+Milestone 3.5A — Documentation Hardening
 
 ## Business Rule Status
 
@@ -29,7 +29,7 @@ Milestone 3 — Business Rule Engine
 | BR-003 Registration Period | Spec, implementation, tests, and review completed |
 | BR-004 QA Status | Spec, implementation, tests, and review completed |
 | BR-005 Source Reference | Spec, implementation, tests, and review completed |
-| BR-006 Per-Session Date Completeness | Draft / not started; local untracked file exists |
+| BR-006 Per-Session Date Completeness | Draft / paused; local untracked file exists |
 
 ## Git State
 
@@ -53,11 +53,11 @@ These notes may be stale. Verify the local working tree with `git status --short
 
 ## Current Workflow Stage
 
-Business rule specification and implementation cycle. The next work item is BR-006 specification review and next rule planning.
+Documentation hardening before BR-006 resumes. BR-006 remains paused until its draft specification is reviewed and scoped.
 
 ## Current Task
 
-Review BR-006 Per-Session Date Completeness draft.
+Complete Milestone 3.5A documentation hardening.
 
 ## Known Technical Debt
 
