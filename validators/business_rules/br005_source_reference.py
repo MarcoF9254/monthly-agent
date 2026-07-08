@@ -45,7 +45,7 @@ def _finding(record, index: int) -> dict:
 def _source_reference_segments(source_reference: str) -> list[str]:
     return [
         segment.strip()
-        for segment in re.split(r"[,，;；|\n]", source_reference)
+        for segment in re.split(r"[,，;；|｜\n]", source_reference)
         if segment.strip()
     ]
 

@@ -552,6 +552,16 @@ def test_br005_structured_locator_anchors_pass():
         assert br005_findings_for(record) == []
 
 
+def test_br005_fullwidth_pipe_delimited_exact_anchor_passes():
+    record = sample_record()
+    record["category"] = "健康講座"
+    record["activity_title"] = "護心有法健康講座"
+    record["source_reference"] = "健康講座｜護心有法健康講座"
+    record["uncertain_fields"] = []
+
+    assert br005_findings_for(record) == []
+
+
 def test_br005_missing_empty_or_placeholder_source_reference_is_left_to_br001():
     missing_record = sample_record()
     missing_record.pop("source_reference")
