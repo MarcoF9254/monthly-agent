@@ -6,11 +6,15 @@ BR-005
 
 ## Rule Name
 
-Extracted records must include traceable source references.
+Source reference must be structurally traceable.
 
 ## Purpose
 
-Ensure QA and Human Review can trace each extracted record back to the original monthly programme source.
+Ensure QA and Human Review can trace each extracted record back to the original monthly programme source using deterministic source-reference structure.
+
+BR-005 is a structural and deterministic traceability validation rule. It checks whether a non-empty `source_reference` contains record-specific traceability evidence that can be evaluated without interpreting source-document meaning.
+
+BR-005 must not use semantic, NLP, fuzzy, or judgement-based checks for whether a reference is "specific enough", "too vague", similar to the activity, or likely to identify the correct activity.
 
 ## Applies to Fields
 
@@ -18,26 +22,87 @@ Ensure QA and Human Review can trace each extracted record back to the original 
 - `activity_title`
 - `category`
 
+## Validation Scope
+
+BR-005 applies only when `source_reference` is non-empty.
+
+Empty, missing, placeholder, or non-meaningful `source_reference` values are covered by BR-001 and must not be re-checked by BR-005.
+
+BR-005 does not confirm that the referenced source text truly matches the extracted activity. That comparison belongs to QA or Human Review.
+
+## Deterministic Traceability Inputs
+
+At least one of the following deterministic traceability anchors should be present in `source_reference`:
+
+- A page, section, table, row, item, or activity-number locator.
+- The exact `activity_title` value from the record.
+- The exact `category` value from the record.
+- Quoted or copied source text that is record-specific.
+
+`activity_title` and `category` are used only as exact structural anchors. BR-005 may check whether the exact non-empty `activity_title` or exact non-empty `category` appears in `source_reference`.
+
+BR-005 must not infer that a paraphrase, translation, abbreviation, synonym, nearby topic, or partial fuzzy match is equivalent to `activity_title` or `category`.
+
 ## Pass Condition
 
-`source_reference` is present and specific enough to locate the activity in the source, such as a page number, section heading, table row, activity title, or nearby source text.
+A record passes when non-empty `source_reference` contains at least one deterministic traceability anchor listed above.
 
 ## Fail Condition
 
-`source_reference` is empty, generic, or too vague to support QA tracing.
+A record fails when non-empty `source_reference` contains no deterministic traceability anchor and is only a generic document-level reference.
+
+Examples of generic document-level references include values such as `"monthly programme"`, `"programme leaflet"`, `"source document"`, or `"newsletter"` when no page, section, row, title, category, or copied source text is included.
 
 ## Severity
 
-Medium by default. High if the missing source reference prevents verification of participant-facing details.
+Medium by default.
+
+High only if the non-empty but structurally untraceable `source_reference` prevents verification of participant-facing details and no other deterministic source locator is available.
+
+## Finding Field Guidance
+
+Findings always report `field: "source_reference"` and `path: "source_reference"`.
+
+Do not report BR-005 findings against `activity_title` or `category`. Those fields are used only as optional exact-match anchors for evaluating `source_reference`.
 
 ## Example Pass
 
-`source_reference` is `"手作活動，母親節花藝工作坊"`.
+`source_reference` is `"Page 3, table row 5"`.
+
+`source_reference` is `"Activity title: Tai Chi Class"` and `activity_title` is `"Tai Chi Class"`.
+
+`source_reference` is `"Category: Health Talks"` and `category` is `"Health Talks"`.
+
+`source_reference` is `"Copied source text: Tai Chi Class, Mondays 10:00am"`.
 
 ## Example Fail
 
-`source_reference` is `"monthly programme"` or an empty string.
+`source_reference` is `"monthly programme"`.
+
+`source_reference` is `"programme leaflet"`.
+
+`source_reference` is `"source document"`.
+
+`source_reference` is `"newsletter"`.
+
+These fail only when the value is non-empty and contains no deterministic locator, exact `activity_title`, exact `category`, or copied record-specific source text.
+
+## Boundary Examples
+
+`source_reference: "monthly programme, page 2, row 5"` passes because it includes page and row locators.
+
+`source_reference: "monthly programme, page 2"` passes only when page 2 contains a single relevant activity; otherwise it should include an additional row, item, title, category, or copied source-text anchor.
+
+`source_reference: "monthly programme"` fails because it is only a generic document-level reference.
+
+`source_reference: "Tai Chi"` does not pass as an `activity_title` anchor for `activity_title: "Tai Chi Class"` because partial or fuzzy title matching is outside BR-005 scope.
+
+`source_reference: "Tai Chi Class"` passes as an exact `activity_title` anchor for `activity_title: "Tai Chi Class"`.
+
+An empty `source_reference` is not a BR-005 failure. It is handled by BR-001.
 
 ## Human Review Guidance
 
-Locate the activity in the original source and update `source_reference` with enough detail for another reviewer to find it quickly. If the record cannot be traced to the source, treat it as unsupported.
+If BR-005 fires, update `source_reference` with deterministic traceability information such as page, section, table row, item number, exact activity title, exact category, or copied source text.
+
+If the record cannot be traced to the source, treat it as unsupported during QA or Human Review.
