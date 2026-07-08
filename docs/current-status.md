@@ -14,7 +14,7 @@ The project supports an agent workflow for elderly centre monthly programme docu
 
 The project is in active development and currently focused on the business rule engine.
 
-BR-001 through BR-004 have completed specification, implementation, tests, review, and commit. BR-005 needs another specification patch before implementation. BR-006 exists only as a local untracked draft and must not be modified unless explicitly requested.
+BR-001 through BR-004 have completed specification, implementation, tests, review, and commit. BR-005 has an accepted specification after the round 2 patch and is ready for implementation. BR-006 exists only as a local untracked draft and must not be modified unless explicitly requested.
 
 ## Current Milestone
 
@@ -28,35 +28,36 @@ Milestone 3 — Business Rule Engine
 | BR-002 Fee Uncertainty | Spec, implementation, tests, and review completed |
 | BR-003 Registration Period | Spec, implementation, tests, and review completed |
 | BR-004 QA Status | Spec, implementation, tests, and review completed |
-| BR-005 Source Reference | Specification patch committed; spec patch round 2 required before implementation |
+| BR-005 Source Reference | Specification accepted after round 2 patch; implementation not started |
 | BR-006 Per-Session Date Completeness | Draft / not started; local untracked file exists |
 
-## Latest GitHub Commit
+## Git State
 
-Latest known GitHub commit: `e47bd105`
+The latest commit hash is intentionally not tracked in this file because it can become stale after any local commit, push, or branch change.
 
-This value is a handoff note. Codex must verify local Git state separately before local work.
+Future agents must verify Git state locally before work:
+
+```powershell
+git rev-parse --short HEAD
+git status --short
+```
 
 ## Local Working Tree Notes
 
-Known current local untracked files:
+Last-known local untracked files:
 
 - `docs/roadmap.md`
 - `rules/BR-006-per-session-date-completeness.md`
 
-Do not modify these files unless explicitly instructed. Local working tree status must be verified separately by Codex before starting any local work.
+These notes may be stale. Verify the local working tree with `git status --short` before starting work. Do not modify these files unless explicitly instructed.
 
 ## Current Workflow Stage
 
-Business rule specification and implementation cycle. The next work item is still specification-only for BR-005; implementation should wait until the revised BR-005 spec is accepted.
+Business rule specification and implementation cycle. The next work item is implementation-only for BR-005 using the accepted source-reference specification.
 
 ## Current Task
 
-Patch BR-005 specification round 2:
-
-1. Remove copied source text as an independent anchor.
-2. Remove page uniqueness requirement.
-3. Keep BR-005 compatible with per-record validators.
+Implement BR-005 Source Reference rule.
 
 ## Known Technical Debt
 
@@ -75,8 +76,7 @@ Patch BR-005 specification round 2:
 
 ## Next Planned Milestones
 
-1. Complete BR-005 specification patch round 2.
-2. Review and commit the revised BR-005 spec.
-3. Implement BR-005 with focused tests after spec approval.
-4. Review BR-006 draft and decide scope before implementation.
-5. Continue expanding the business rule engine toward downstream QA and newsletter workflows.
+1. Implement BR-005 with focused tests.
+2. Review and commit the BR-005 implementation.
+3. Review BR-006 draft and decide scope before implementation.
+4. Continue expanding the business rule engine toward downstream QA and newsletter workflows.
