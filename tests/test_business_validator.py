@@ -6,6 +6,7 @@ from pathlib import Path
 from validators.business_rules.br001_required_fields import check as check_br001
 from validators.business_rules.br002_fee_uncertainty import check as check_br002
 from validators.business_rules.br003_registration_period import check as check_br003
+from validators.business_rules.br004_qa_status import check as check_br004
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -44,6 +45,10 @@ def br002_findings_for(record: dict) -> list[dict]:
 
 def br003_findings_for(record: dict) -> list[dict]:
     return check_br003(record, index=5)
+
+
+def br004_findings_for(record: dict) -> list[dict]:
+    return check_br004(record, index=6)
 
 
 def fields(findings: list[dict]) -> set[str]:
@@ -413,6 +418,97 @@ def test_br003_partial_no_registration_indicator_is_not_special_case():
     assert br003_findings_for(record) == []
 
 
+def test_br004_pending_with_empty_uncertain_fields_passes():
+    record = sample_record()
+    record["qa_status"] = "pending"
+    record["uncertain_fields"] = []
+
+    assert br004_findings_for(record) == []
+
+
+def test_br004_pending_with_non_empty_uncertain_fields_passes():
+    record = sample_record()
+    record["qa_status"] = "pending"
+    record["uncertain_fields"] = ["fee"]
+
+    assert br004_findings_for(record) == []
+
+
+def test_br004_approved_with_empty_uncertain_fields_fails_on_qa_status():
+    record = sample_record()
+    record["qa_status"] = "approved"
+    record["uncertain_fields"] = []
+
+    findings = br004_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["index"] == 6
+    assert findings[0]["activity_id"] == record["activity_id"]
+    assert findings[0]["rule_id"] == "BR-004"
+    assert findings[0]["field"] == "qa_status"
+    assert findings[0]["path"] == "qa_status"
+    assert findings[0]["severity"] == "high"
+    assert set(findings[0]) == {
+        "index",
+        "activity_id",
+        "rule_id",
+        "field",
+        "path",
+        "severity",
+        "message",
+        "recommendation",
+    }
+
+
+def test_br004_approved_with_non_empty_uncertain_fields_fails_on_uncertainty():
+    record = sample_record()
+    record["qa_status"] = "approved"
+    record["uncertain_fields"] = ["registration_period"]
+
+    findings = br004_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["rule_id"] == "BR-004"
+    assert findings[0]["field"] == "uncertain_fields"
+    assert findings[0]["path"] == "uncertain_fields"
+    assert findings[0]["severity"] == "high"
+
+
+def test_br004_needs_review_fails_on_qa_status():
+    record = sample_record()
+    record["qa_status"] = "needs_review"
+
+    findings = br004_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["field"] == "qa_status"
+    assert findings[0]["path"] == "qa_status"
+    assert findings[0]["severity"] == "medium"
+
+
+def test_br004_rejected_fails_on_qa_status():
+    record = sample_record()
+    record["qa_status"] = "rejected"
+
+    findings = br004_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["field"] == "qa_status"
+    assert findings[0]["path"] == "qa_status"
+    assert findings[0]["severity"] == "medium"
+
+
+def test_br004_does_not_emit_duplicate_findings():
+    record = sample_record()
+    record["qa_status"] = "approved"
+    record["uncertain_fields"] = ["fee"]
+
+    findings = br004_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["field"] == "uncertain_fields"
+
+
 def test_cli_returns_0_on_pass(tmp_path):
     path = write_records(tmp_path, [sample_record()])
 
@@ -447,6 +543,19 @@ def test_cli_returns_1_on_br003_registration_period_failure(tmp_path):
     assert "BR-003" in result.stdout
     assert "registration_period" in result.stdout
     assert "Registration period does not provide actionable registration timing." in result.stdout
+
+
+def test_cli_returns_1_on_br004_qa_status_failure(tmp_path):
+    record = sample_record()
+    record["qa_status"] = "approved"
+    path = write_records(tmp_path, [record])
+
+    result = run_validator(path)
+
+    assert result.returncode == 1
+    assert "FAIL" in result.stdout
+    assert "BR-004" in result.stdout
+    assert "qa_status" in result.stdout
 
 
 def test_cli_returns_1_on_br001_failure(tmp_path):
