@@ -14,7 +14,7 @@ The project supports an agent workflow for elderly centre monthly programme docu
 
 The project is in active development and currently focused on the business rule engine.
 
-BR-001 through BR-004 have completed specification, implementation, tests, review, and commit. BR-005 has an accepted specification after the round 2 patch and is ready for implementation. BR-006 exists only as a local untracked draft and must not be modified unless explicitly requested.
+BR-001 through BR-005 have completed specification, implementation, tests, review, and commit. BR-006 exists only as a local untracked draft and must not be modified unless explicitly requested.
 
 ## Current Milestone
 
@@ -28,7 +28,7 @@ Milestone 3 — Business Rule Engine
 | BR-002 Fee Uncertainty | Spec, implementation, tests, and review completed |
 | BR-003 Registration Period | Spec, implementation, tests, and review completed |
 | BR-004 QA Status | Spec, implementation, tests, and review completed |
-| BR-005 Source Reference | Specification accepted after round 2 patch; implementation not started |
+| BR-005 Source Reference | Spec, implementation, tests, and review completed |
 | BR-006 Per-Session Date Completeness | Draft / not started; local untracked file exists |
 
 ## Git State
@@ -53,11 +53,11 @@ These notes may be stale. Verify the local working tree with `git status --short
 
 ## Current Workflow Stage
 
-Business rule specification and implementation cycle. The next work item is implementation-only for BR-005 using the accepted source-reference specification.
+Business rule specification and implementation cycle. The next work item is BR-006 specification review and next rule planning.
 
 ## Current Task
 
-Implement BR-005 Source Reference rule.
+Review BR-006 Per-Session Date Completeness draft.
 
 ## Known Technical Debt
 
@@ -76,7 +76,7 @@ Implement BR-005 Source Reference rule.
 
 ## Next Planned Milestones
 
-1. Implement BR-005 with focused tests.
-2. Review and commit the BR-005 implementation.
-3. Review BR-006 draft and decide scope before implementation.
-4. Continue expanding the business rule engine toward downstream QA and newsletter workflows.
+1. Review BR-006 draft and decide scope.
+2. Patch BR-006 specification if required.
+3. Implement BR-006 after specification approval.
+4. Continue toward QA Engine milestone.
