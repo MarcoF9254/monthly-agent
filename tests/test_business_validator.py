@@ -8,6 +8,7 @@ from validators.business_rules.br002_fee_uncertainty import check as check_br002
 from validators.business_rules.br003_registration_period import check as check_br003
 from validators.business_rules.br004_qa_status import check as check_br004
 from validators.business_rules.br005_source_reference import check as check_br005
+from validators.business_rules.br006_per_session_date_completeness import check as check_br006
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -54,6 +55,10 @@ def br004_findings_for(record: dict) -> list[dict]:
 
 def br005_findings_for(record: dict) -> list[dict]:
     return check_br005(record, index=7)
+
+
+def br006_findings_for(record: dict) -> list[dict]:
+    return check_br006(record, index=8)
 
 
 def fields(findings: list[dict]) -> set[str]:
@@ -144,17 +149,134 @@ def test_dates_empty_fails_unless_dates_is_uncertain():
     assert findings_for(record) == []
 
 
-def test_date_item_with_empty_date_text_fails_unless_dates_is_uncertain():
+def test_date_item_with_empty_date_text_is_not_br001_per_entry_finding():
     record = sample_record()
     record["dates"] = [{"date_text": ""}]
+    record["uncertain_fields"] = []
 
-    findings = findings_for(record)
-
-    assert fields(findings) == {"dates"}
-    assert findings[0]["path"] == "dates[].date_text"
-
-    record["uncertain_fields"] = ["dates"]
     assert findings_for(record) == []
+
+
+def test_br006_all_date_text_meaningful_passes():
+    record = sample_record()
+    record["dates"] = [
+        {"date_text": "2026-04-08"},
+        {"date_text": "next Wednesday"},
+    ]
+    record["uncertain_fields"] = []
+
+    assert br006_findings_for(record) == []
+
+
+def test_br006_exact_indexed_uncertain_marker_passes():
+    record = sample_record()
+    record["dates"] = [
+        {"date_text": "2026-04-08"},
+        {"date_text": ""},
+    ]
+    record["uncertain_fields"] = ["dates[1].date_text"]
+
+    assert br006_findings_for(record) == []
+
+
+def test_br006_blank_date_text_without_exact_marker_fails():
+    record = sample_record()
+    record["dates"] = [
+        {"date_text": "2026-04-08"},
+        {"date_text": ""},
+    ]
+    record["uncertain_fields"] = []
+
+    findings = br006_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["index"] == 8
+    assert findings[0]["activity_id"] == record["activity_id"]
+    assert findings[0]["rule_id"] == "BR-006"
+    assert findings[0]["field"] == "dates"
+    assert findings[0]["path"] == "dates[1].date_text"
+    assert findings[0]["severity"] == "high"
+    assert findings[0]["message"] == "Session date is missing for dates[1].date_text."
+    assert findings[0]["recommendation"] == (
+        "Fill in the session date from source evidence or mark the exact per-session "
+        "date field as uncertain for QA / Human Review."
+    )
+    assert set(findings[0]) == {
+        "index",
+        "activity_id",
+        "rule_id",
+        "field",
+        "path",
+        "severity",
+        "message",
+        "recommendation",
+    }
+
+
+def test_br006_top_level_dates_uncertainty_does_not_suppress_per_entry_finding():
+    record = sample_record()
+    record["dates"] = [
+        {"date_text": "2026-04-08"},
+        {"date_text": ""},
+    ]
+    record["uncertain_fields"] = ["dates"]
+
+    findings = br006_findings_for(record)
+
+    assert len(findings) == 1
+    assert findings[0]["path"] == "dates[1].date_text"
+
+
+def test_br006_placeholder_date_text_values_fail():
+    for placeholder in ["待定", "未定", "TBC", "unknown"]:
+        record = sample_record()
+        record["dates"] = [{"date_text": placeholder}]
+        record["uncertain_fields"] = []
+
+        findings = br006_findings_for(record)
+
+        assert len(findings) == 1
+        assert findings[0]["rule_id"] == "BR-006"
+        assert findings[0]["field"] == "dates"
+        assert findings[0]["path"] == "dates[0].date_text"
+        assert findings[0]["severity"] == "high"
+
+
+def test_br006_emits_one_finding_per_failing_date_entry():
+    record = sample_record()
+    record["dates"] = [
+        {"date_text": ""},
+        {"date_text": "2026-04-08"},
+        {"date_text": "TBC"},
+        {},
+    ]
+    record["uncertain_fields"] = []
+
+    findings = br006_findings_for(record)
+
+    assert [finding["path"] for finding in findings] == [
+        "dates[0].date_text",
+        "dates[2].date_text",
+        "dates[3].date_text",
+    ]
+
+
+def test_br006_missing_or_empty_dates_is_left_to_br001_or_schema():
+    missing_record = sample_record()
+    missing_record.pop("dates")
+    assert br006_findings_for(missing_record) == []
+
+    empty_record = sample_record()
+    empty_record["dates"] = []
+    assert br006_findings_for(empty_record) == []
+
+
+def test_br006_unparseable_but_meaningful_date_text_passes():
+    record = sample_record()
+    record["dates"] = [{"date_text": "next Wednesday"}]
+    record["uncertain_fields"] = []
+
+    assert br006_findings_for(record) == []
 
 
 def test_source_reference_missing_or_empty_fails_medium_unless_uncertain():
@@ -716,6 +838,24 @@ def test_cli_returns_1_on_br001_failure(tmp_path):
     assert "FAIL" in result.stdout
     assert "BR-001" in result.stdout
     assert "venue" in result.stdout
+
+
+def test_cli_returns_1_on_br006_date_text_failure(tmp_path):
+    record = sample_record()
+    record["dates"] = [
+        {"date_text": "2026-04-08"},
+        {"date_text": ""},
+    ]
+    record["uncertain_fields"] = []
+    path = write_records(tmp_path, [record])
+
+    result = run_validator(path)
+
+    assert result.returncode == 1
+    assert "FAIL" in result.stdout
+    assert "BR-006" in result.stdout
+    assert "dates[1].date_text" in result.stdout
+    assert "Session date is missing for dates[1].date_text." in result.stdout
 
 
 def test_cli_returns_2_on_invalid_json(tmp_path):
