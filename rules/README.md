@@ -17,6 +17,12 @@ The rules are intended for future use by:
 - `BR-004-qa-status.md` - QA status must reflect the current workflow stage.
 - `BR-005-source-reference.md` - extracted records must include traceable source references.
 
+## Draft / Held Rules
+
+- `BR-006-per-session-date-completeness.md` - per-session date completeness.
+  - Status: Draft specification
+  - Implementation: Held pending approval of per-array-element uncertainty semantics
+
 ## Usage
 
 Use these rules after schema validation. A record can be valid JSON and still fail business rule validation if it is incomplete, misleading, or not ready for QA or newsletter use.
