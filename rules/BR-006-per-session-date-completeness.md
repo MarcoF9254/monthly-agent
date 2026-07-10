@@ -22,7 +22,7 @@ Applies to:
 
 - `dates`
 - `dates[].date_text`
-- `uncertain_fields` only if an approved uncertainty mechanism supports exact per-entry uncertainty marking
+- `uncertain_fields`
 
 Out of scope:
 
@@ -40,38 +40,62 @@ Out of scope:
 
 BR-006 must not infer, repair, normalize, copy, or auto-fill dates.
 
+## Uncertainty Granularity
+
+BR-006 uses indexed uncertainty markers only.
+
+The exact marker for a missing or unclear per-session date is:
+
+`dates[i].date_text`
+
+where `i` is the concrete zero-based index of the affected `dates[]` entry.
+
+A top-level marker such as `dates` does not satisfy BR-006 for an individual missing or unclear `dates[i].date_text`.
+
+This follows ADR-006.
+
 ## Validation Scope
 
-BR-001 owns field-level required-field validation for `dates`.
+BR-001 owns field-level validation for the `dates` field, such as missing `dates`, invalid field shape, or empty `dates[]`.
 
-BR-006 owns per-entry completeness validation within `dates[]`.
+BR-006 owns per-entry completeness validation for `dates[i].date_text` within `dates[]`.
 
 BR-006 does not replace BR-001.
+
+When BR-006 is implemented and activated, BR-001 should not emit duplicate per-entry `dates[].date_text` findings for the same issue.
+
+Any BR-001 implementation cleanup should happen together with BR-006 implementation and tests, not in this spec-alignment change.
 
 ## Pass Condition
 
 A record passes BR-006 when every `dates[]` entry satisfies one of the following:
 
 1. `dates[i].date_text` is meaningful.
-2. The exact per-session date field is explicitly marked as uncertain using an approved uncertainty mechanism.
+2. The exact per-session date field is explicitly marked as uncertain using the ADR-006 indexed marker `dates[i].date_text`.
 
-`date_text` is meaningful when it is a string containing at least one non-whitespace character after trimming.
+`date_text` is meaningful only when it is a meaningful string under the repository's existing meaningful-string convention, including trimming surrounding whitespace and excluding placeholder, pending, or unknown values such as `待定`, `未定`, `TBC`, or `unknown`.
+
+Do not introduce fuzzy date parsing. Do not validate calendar correctness, weekday consistency, or date format normalization.
 
 ## Fail Condition
 
-A record fails BR-006 when any `dates[]` entry has missing or blank `date_text` and that exact per-session date field is not explicitly marked uncertain using an approved uncertainty mechanism.
+A record fails BR-006 when any `dates[]` entry has missing or non-meaningful `date_text` and that exact per-session date field is not explicitly marked uncertain using the ADR-006 indexed marker `dates[i].date_text`.
 
 Emit one finding per failing `dates[]` entry.
 
 Do not fail merely because the date is not parseable, not normalized, calendar-invalid, or inconsistent with weekday text; those are out of scope unless covered by another approved rule.
 
+A top-level `uncertain_fields` marker such as `dates` must not suppress a BR-006 finding for a specific missing or non-meaningful `dates[i].date_text`.
+
 ## Overlapping Findings
 
-If a record is missing the entire `dates` field, BR-001 or schema validation owns that finding.
+If a record is missing the entire `dates` field, has invalid `dates` field shape, or has empty `dates[]`, BR-001 or schema validation owns that finding.
 
 BR-006 applies only when `dates[]` exists and contains one or more entries.
 
-If both BR-001 and BR-006 could report related date issues, validators should preserve the more specific BR-006 finding for per-entry missing `date_text` and preserve BR-001 for field-level missing or uncertain required fields.
+If both BR-001 and BR-006 could report related date issues, validators should preserve the more specific BR-006 finding for per-entry missing or non-meaningful `date_text` and preserve BR-001 for field-level missing or uncertain required fields.
+
+When BR-006 is implemented and activated, BR-001 should not emit duplicate per-entry `dates[].date_text` findings for the same issue. Any BR-001 implementation cleanup should happen together with BR-006 implementation and tests, not in this spec-alignment change.
 
 ## Severity
 
@@ -96,11 +120,11 @@ Recommended message:
 
 Recommended recommendation:
 
-`Fill in the session date from source evidence or mark the exact per-session date field as uncertain for QA / Human Review once an approved uncertainty mechanism exists.`
+`Fill in the session date from source evidence or mark the exact per-session date field as uncertain for QA / Human Review using the ADR-006 indexed marker.`
 
 ## Example Pass
 
-Example Pass A: every `dates[]` entry has non-blank `date_text`.
+Example Pass A: every `dates[]` entry has meaningful `date_text`.
 
 ```json
 {
@@ -117,9 +141,9 @@ Example Pass A: every `dates[]` entry has non-blank `date_text`.
 }
 ```
 
-Example Pass B: a per-session `date_text` is blank, but the exact field is explicitly marked uncertain using an approved per-entry uncertainty mechanism.
+Example Pass B: a per-session `date_text` is blank, but the exact field is explicitly marked uncertain using the ADR-006 indexed marker.
 
-This example is dependent on the pending uncertainty-path decision. The repository currently defines `uncertain_fields` as field names and does not yet approve indexed paths such as `dates[1].date_text`.
+ADR-006 approves exact deterministic indexed paths such as `dates[1].date_text` for rules that explicitly require per-element uncertainty marking.
 
 ```json
 {
@@ -162,22 +186,40 @@ Expected finding:
 - `path`: `dates[1].date_text`
 - `severity`: `high`
 
+A top-level uncertainty marker does not suppress BR-006 for the specific missing entry:
+
+```json
+{
+  "activity_id": "ACT-006-FAIL-B",
+  "dates": [
+    {
+      "date_text": "2026-07-03"
+    },
+    {
+      "date_text": ""
+    }
+  ],
+  "uncertain_fields": ["dates"]
+}
+```
+
+Expected finding:
+
+- `rule_id`: `BR-006`
+- `field`: `dates`
+- `path`: `dates[1].date_text`
+- `severity`: `high`
+
 ## Human Review Guidance
 
-Human Review should resolve whether the missing per-session date should be filled from source evidence, left uncertain, or corrected upstream.
+Human Review should resolve whether the missing per-session date should be filled from source evidence, left uncertain using the ADR-006 indexed marker, or corrected upstream.
 
 Human Review must not be replaced by BR-006. BR-006 only reports deterministic missing per-session date entries.
 
-## Pending Decision
+## Implementation Status
 
-```text
-DECISION PENDING — Requires Human Approval
-```
+Uncertainty semantics for BR-006 are resolved by ADR-006.
 
-The repository currently defines `uncertain_fields` as field names, and existing precedent marks top-level fields such as `registration_period`.
+Implementation remains pending.
 
-BR-006 requires exact per-session uncertainty marking, such as an indexed path like `dates[i].date_text`, but that path format and per-array-element granularity are not yet approved.
-
-BR-006 must not be implemented until the uncertainty path format and per-array-element uncertainty semantics are approved.
-
-This pending decision is about more than string formatting; it affects whether `uncertain_fields` may represent exact nested array-element fields rather than only top-level field names.
+BR-006 is not active until validator implementation, focused tests, and active rule registration are completed.

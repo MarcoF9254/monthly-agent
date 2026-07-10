@@ -20,8 +20,8 @@ The rules are intended for future use by:
 ## Draft / Held Rules
 
 - `BR-006-per-session-date-completeness.md` - per-session date completeness.
-  - Status: Draft specification
-  - Implementation: Held pending approval of per-array-element uncertainty semantics
+  - Status: Specification alignment pending / semantics resolved by ADR-006
+  - Implementation: Pending validator implementation, tests, and active rule registration
 
 ## Usage
 
