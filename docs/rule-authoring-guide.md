@@ -68,6 +68,32 @@ These sections appear in some rule specs and should be added only when the same 
 | `## Finding Field Guidance` | BR-004, BR-005 | The rule has more than one possible fail scenario with different `field`/`path` assignments, or the rule reads fields that must never appear in findings. |
 | `## Boundary Examples` | BR-005 | Pass/Fail Condition alone leaves genuine edge cases ambiguous. Boundary Examples should resolve those edges explicitly. |
 | `## Valid <X> Timing Examples` | BR-003 | The pass space is large and varied enough that a single Example Pass section would not give enough implementation guidance. |
+| `## Pending Decision` | BR-006 | The rule specification is blocked by an unresolved architecture, schema, output-contract, or business-authority decision. Do not use it for ordinary TODOs, implementation notes, discussion notes, or speculative ideas. |
+
+### Pending Decision Sections
+
+Use `## Pending Decision` only when a rule specification is blocked by an unresolved architecture, schema, output-contract, or business-authority decision.
+
+Do not use it for ordinary TODOs, implementation notes, discussion notes, or speculative ideas.
+
+The section must include:
+
+- the exact canonical label from `docs/governance.md`:
+
+```text
+DECISION PENDING — Requires Human Approval
+```
+
+- a clear statement of the unresolved decision
+- why the rule cannot be implemented until the decision is approved
+- what existing contract or boundary would be affected
+- confirmation that implementation is held until approval
+
+A pending decision inside a rule spec does not make the decision approved.
+
+It must not be treated as an accepted ADR.
+
+If the decision is later approved, the accepted architecture decision should be recorded in `docs/decisions.md` where appropriate.
 
 ## Closed-List Matching Rules
 
