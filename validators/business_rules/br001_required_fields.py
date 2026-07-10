@@ -53,9 +53,7 @@ def _finding(record, index: int, field: str, path: str) -> dict:
 
 
 def _dates_path(value) -> str:
-    if not isinstance(value, list) or not value:
-        return "dates"
-    return "dates[].date_text"
+    return "dates"
 
 
 def _fee_path(value) -> str:
@@ -65,12 +63,7 @@ def _fee_path(value) -> str:
 
 
 def _has_meaningful_date(value) -> bool:
-    if not isinstance(value, list) or not value:
-        return False
-    return any(
-        isinstance(item, dict) and is_meaningful_string(item.get("date_text"))
-        for item in value
-    )
+    return isinstance(value, list) and bool(value)
 
 
 def _has_meaningful_fee(value) -> bool:

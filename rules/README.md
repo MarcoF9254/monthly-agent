@@ -16,12 +16,7 @@ The rules are intended for future use by:
 - `BR-003-registration-period.md` - missing or unclear registration periods must be flagged.
 - `BR-004-qa-status.md` - QA status must reflect the current workflow stage.
 - `BR-005-source-reference.md` - extracted records must include traceable source references.
-
-## Draft / Held Rules
-
-- `BR-006-per-session-date-completeness.md` - per-session date completeness.
-  - Status: Specification alignment pending / semantics resolved by ADR-006
-  - Implementation: Pending validator implementation, tests, and active rule registration
+- `BR-006-per-session-date-completeness.md` - per-session date completeness checks every `dates[]` entry.
 
 ## Usage
 
