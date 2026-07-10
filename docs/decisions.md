@@ -56,3 +56,55 @@ Schema validation and business validation represent different types of problems 
 ### Consequences
 
 Structural schema errors should stop downstream processing. Business-rule severity remains tied to each rule's participant-facing risk and workflow impact.
+
+## ADR-006: Indexed Uncertainty Paths
+
+Status: Accepted
+
+### Context
+
+`uncertain_fields` currently records fields that are missing, unclear, or require human review. Existing active rules use top-level uncertainty markers, and BR-002's top-level `"fee"` convention remains valid within BR-002.
+
+BR-006 requires per-element uncertainty marking for individual `dates[]` entries, but implementation was held until the uncertainty path semantics were approved.
+
+### Decision
+
+`uncertain_fields` may contain exact deterministic indexed paths only for rules that explicitly require per-element uncertainty marking.
+
+Approved path shape:
+
+```text
+<field>[<zero-based-index>].<subfield>
+```
+
+Initial approved examples:
+
+- `dates[0].date_text`
+- `dates[1].date_text`
+
+Explicitly not approved:
+
+- wildcards
+- empty index notation
+- ranges
+- JSONPath syntax
+- unknown-index placeholders
+- regex paths
+- fuzzy paths
+- semantic paths
+
+This decision is prospective.
+
+Existing active rules do not need to migrate.
+
+BR-002's top-level `"fee"` convention remains valid within BR-002.
+
+This decision does not approve source authority or activity classification.
+
+This decision does not implement BR-006 by itself. BR-006 implementation still requires contract updates and implementation work.
+
+### Consequences
+
+Rules that use `uncertain_fields` must explicitly declare whether they accept top-level markers, indexed markers, or both with precedence rules.
+
+Indexed uncertainty paths reuse a narrow deterministic path vocabulary already used by validation findings, but `uncertain_fields` must not be treated as full JSONPath or as a fuzzy or semantic path language.

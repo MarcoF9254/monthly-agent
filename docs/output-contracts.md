@@ -47,7 +47,34 @@ Expected output:
 
 Business findings should use rule IDs from `rules/`, such as `BR-001`.
 
-## 5. Finding Object Fields
+## 5. Uncertain Fields Semantics
+
+`uncertain_fields` remains an array of strings.
+
+A string may be either:
+
+- a top-level field name, such as `fee` or `registration_period`
+- an approved deterministic indexed path, such as `dates[1].date_text`
+
+Indexed paths are allowed only when an accepted rule specification explicitly requires per-element uncertainty marking.
+
+Approved indexed path shape:
+
+```text
+<field>[<zero-based-index>].<subfield>
+```
+
+Top-level markers remain valid for rules that define top-level uncertainty behavior.
+
+Do not treat `uncertain_fields` as full JSONPath.
+
+Do not support wildcards, ranges, regex, fuzzy paths, or semantic paths.
+
+This is documentation semantics only; no structural `schemas/activity.schema.json` change is required because `uncertain_fields.items` is already `type: string`.
+
+Finding `path` may use detailed indexed paths. `uncertain_fields` may reuse the same narrow path vocabulary only where approved.
+
+## 6. Finding Object Fields
 
 Label: Finding Contract v1
 
@@ -64,7 +91,7 @@ When a validator emits structured findings, each finding should use these fields
 
 If the error path is the record root, use `field: "<record>"` and `path: "<record>"`.
 
-## 6. Pass / Fail Behavior
+## 7. Pass / Fail Behavior
 
 The current validator status enum is:
 
@@ -77,19 +104,19 @@ Validation fails when one or more findings are produced, regardless of severity.
 
 Warning-only mode is not implemented yet. It may be added in the future if a workflow explicitly supports warnings that do not fail validation.
 
-## 7. Exit Code Behavior
+## 8. Exit Code Behavior
 
 - Exit code `0`: validation passed.
 - Exit code `1`: validation failed.
 - Exit code `2`: validator could not run because of invalid arguments, unreadable files, invalid JSON, missing schema, or other tool execution errors.
 
-## 8. Example PASS Output
+## 9. Example PASS Output
 
 ```text
 PASS
 ```
 
-## 9. Example FAIL Output
+## 10. Example FAIL Output
 
 ```text
 FAIL
