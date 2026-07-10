@@ -54,6 +54,26 @@ BR-003 uses this pattern because registration timing must not be inferred from `
 
 Guidance for BR-006 and later: use Form A by default. Use Form B only when the rule's correctness depends on explicitly excluding related fields the validator must not use for inference. Do not invent a third form.
 
+## Uncertainty Granularity
+
+Any future rule that touches `uncertain_fields` must declare its uncertainty granularity.
+
+The rule must specify whether it accepts:
+
+- top-level uncertainty markers only
+- indexed uncertainty markers only
+- both top-level and indexed markers
+
+If both are accepted, the rule must state precedence or interpretation.
+
+Rules must not silently introduce new uncertainty path semantics.
+
+Indexed uncertainty requires an accepted decision or an existing approved convention.
+
+BR-002 remains a valid example of top-level uncertainty for array fields.
+
+BR-006 is the first approved candidate for indexed per-element uncertainty, but implementation remains separate from approval.
+
 ## Conditional Sections
 
 These sections appear in some rule specs and should be added only when the same underlying need exists. Do not add them by default or for symmetry with another rule.
