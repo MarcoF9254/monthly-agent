@@ -65,7 +65,9 @@ Do not create empty approval artifacts merely to fill the directory layout. `run
 
 ## Artifact Commit Policy
 
-Run artifacts under `data/runs/<run_id>/` are commit-eligible so a completed run can be reviewed and audited in repository history. Whether a particular run is committed remains an explicit review decision; D1 does not require automatic commits.
+Run artifacts under `data/runs/<run_id>/` are commit-eligible and are intended to be committed as durable evidence when a run is used for review, audit, vertical-slice evidence, or activation decisions. Any run cited as project evidence must have its required artifacts committed to the repository.
+
+D1 does not require automatic commits for local experiments.
 
 The only path-level non-commit exception is `data/runs/*/source/originals/*`. Original source documents may contain sensitive or unsuitable binary material and must not be committed. A `.gitkeep` file may be committed at `data/runs/<run_id>/source/originals/.gitkeep` to retain the directory.
 
@@ -113,7 +115,7 @@ Record-level findings must not be promoted to run-level failures merely because 
 
 - Extraction owns the initial record creation. New records use `qa_status: "pending"`, and extraction adds `uncertain_fields` markers for source information that is missing, unclear, or ambiguous.
 - Schema Validation and Business Rule Validation are read-only. They report findings and never mutate `qa_status`, `uncertain_fields`, or participant-facing fields.
-- GPT QA may update `qa_status` and `uncertain_fields` when the update is supported by recorded source evidence. It must not clear uncertainty or approve a record without support.
+- GPT QA is recommendation-only. It may recommend updates to `qa_status`, `uncertain_fields`, activity fields, or `source_reference`, and must record every proposed update in `qa/qa_review_notes.md`. A proposed update requires Human Review or an approved correction workflow before it becomes record state. GPT QA must not directly approve records or silently clear uncertainty.
 - Human Review owns decisions for escalated ambiguity or conflict and may update `qa_status`, `uncertain_fields`, and corrected record fields when its decision cites source evidence.
 - Approval / Run Closure selects and summarizes records; it does not silently repair or reclassify them.
 
