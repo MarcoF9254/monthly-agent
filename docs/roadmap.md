@@ -2,9 +2,9 @@
 
 ## Current Focus
 
-Milestone 3.6F - BR-006 activation hold
+Milestone 3.7 / D1 — Pipeline Run Contract
 
-This milestone holds BR-006 runtime activation while preserving its implementation and direct unit coverage.
+This milestone defines the auditable per-run artifact, stage, ownership, failure-boundary, and closure contract without implementing a runner.
 
 ## Completed Milestones
 
@@ -28,13 +28,15 @@ This milestone holds BR-006 runtime activation while preserving its implementati
 - BR-003 Registration Period completed.
 - BR-004 QA Status completed.
 - BR-005 Source Reference completed.
+- Milestone 3.6F BR-006 Activation Hold completed; implementation and direct unit coverage are retained while runtime activation remains held.
 
 ## Active Milestone
 
-### Milestone 3.6F - BR-006 Activation Hold
+### Milestone 3.7 / D1 — Pipeline Run Contract
 
-- Keep BR-006 out of the active runtime registry.
-- Require vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before activation.
+- Define the required `data/runs/<run_id>/` artifact layout and commit policy.
+- Define pipeline stages, failure boundaries, mutation ownership, record status mapping, run outcomes, and conditional approval artifacts.
+- Preserve forward compatibility for D2 without defining machine-readable findings JSON or implementing a runner.
 
 ## Paused / Backlog
 
@@ -43,6 +45,12 @@ This milestone holds BR-006 runtime activation while preserving its implementati
 Implemented, activation held. Requires vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before runtime activation.
 
 ## Planned Milestones
+
+### Delivery Naming Map
+
+- D1 = Milestone 3.7 — Pipeline Run Contract
+- D2 = future Machine-readable Findings Contract
+- D3 = future Indexed Marker Syntax Validation
 
 ### Milestone 3.5B - BR-006 Specification Review
 
@@ -59,6 +67,13 @@ Status: Completed — BR-006 was implemented with focused direct unit coverage.
 - Implement BR-006 only after specification approval.
 - Add focused validator tests.
 - Run full regression tests.
+
+### Milestone 3.6F - BR-006 Activation Hold
+
+Status: Completed — BR-006 remains implemented with direct unit coverage but is not included in the active runtime registry.
+
+- Runtime activation remains held.
+- Activation still requires real vertical-slice evidence, D3 indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ### Milestone 4 - QA Engine
 
