@@ -3,6 +3,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
+from validators.business_rules import RULES
 from validators.business_rules.br001_required_fields import check as check_br001
 from validators.business_rules.br002_fee_uncertainty import check as check_br002
 from validators.business_rules.br003_registration_period import check as check_br003
@@ -14,6 +17,16 @@ from validators.business_rules.br006_per_session_date_completeness import check 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 VALIDATOR = ROOT_DIR / "tools" / "validate_business_rules.py"
 SAMPLE_OUTPUT = ROOT_DIR / "examples" / "sample-output.json"
+
+
+def test_active_rule_registry_contains_exact_ordered_rule_ids():
+    assert [rule.RULE_ID for rule in RULES] == [
+        "BR-001",
+        "BR-002",
+        "BR-003",
+        "BR-004",
+        "BR-005",
+    ]
 
 
 def run_validator(path: Path) -> subprocess.CompletedProcess[str]:
@@ -840,6 +853,7 @@ def test_cli_returns_1_on_br001_failure(tmp_path):
     assert "venue" in result.stdout
 
 
+@pytest.mark.skip(reason="BR-006 activation held")
 def test_cli_returns_1_on_br006_date_text_failure(tmp_path):
     record = sample_record()
     record["dates"] = [
@@ -867,4 +881,3 @@ def test_cli_returns_2_on_invalid_json(tmp_path):
     assert result.returncode == 2
     assert result.stdout == ""
     assert "Invalid JSON" in result.stderr
-
