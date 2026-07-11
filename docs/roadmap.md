@@ -2,9 +2,9 @@
 
 ## Current Focus
 
-Milestone 3.7 / D1 — Pipeline Run Contract
+Milestone 3.8 / D2A — Machine-readable Validation Findings Contract
 
-This milestone defines the auditable per-run artifact, stage, ownership, failure-boundary, and closure contract without implementing a runner.
+This contract-only milestone defines future machine-readable schema and business validation findings artifacts without implementing JSON output or changing validators.
 
 ## Completed Milestones
 
@@ -30,13 +30,17 @@ This milestone defines the auditable per-run artifact, stage, ownership, failure
 - BR-005 Source Reference completed.
 - Milestone 3.6F BR-006 Activation Hold completed; implementation and direct unit coverage are retained while runtime activation remains held.
 
-## Active Milestone
-
 ### Milestone 3.7 / D1 — Pipeline Run Contract
 
-- Define the required `data/runs/<run_id>/` artifact layout and commit policy.
-- Define pipeline stages, failure boundaries, mutation ownership, record status mapping, run outcomes, and conditional approval artifacts.
-- Preserve forward compatibility for D2 without defining machine-readable findings JSON or implementing a runner.
+Status: Completed and merged — the auditable per-run artifact, stage, ownership, failure-boundary, and closure contract is defined.
+
+## Active Milestone
+
+### Milestone 3.8 / D2A — Machine-readable Validation Findings Contract
+
+- Define the future `schema_findings.json` and `business_findings.json` artifact contracts.
+- Define status semantics, error taxonomy, the run-level `fail` / `message` exception, and non-retroactive requiredness.
+- Do not implement JSON output or change validators.
 
 ## Paused / Backlog
 
@@ -48,9 +52,10 @@ Implemented, activation held. Requires vertical-slice evidence, indexed marker s
 
 ### Delivery Naming Map
 
-- D1 = Milestone 3.7 — Pipeline Run Contract
-- D2 = future Machine-readable Findings Contract
-- D3 = future Indexed Marker Syntax Validation
+- D1 = Milestone 3.7 — Pipeline Run Contract (completed and merged)
+- D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
+- D2B = future implementation, only after separate approval
+- D3 = future Indexed Marker Syntax Validation (pending clarification)
 
 ### Milestone 3.5B - BR-006 Specification Review
 
