@@ -12,13 +12,13 @@ The project supports an agent workflow for elderly centre monthly programme docu
 
 ## Project Health
 
-The project is in active development and currently focused on defining an auditable pipeline run contract.
+The project is in active development and currently focused on defining the D2A machine-readable validation findings contract.
 
 BR-001 through BR-005 are implemented, tested, and active in the runtime registry. BR-006 is implemented with direct unit coverage, but it is not registered or runtime active.
 
 ## Current Milestone
 
-Milestone 3.7 / D1 — Pipeline Run Contract
+Milestone 3.8 / D2A — Machine-readable Validation Findings Contract
 
 ## Business Rule Status
 
@@ -44,11 +44,13 @@ git status --short
 
 ## Current Workflow Stage
 
-Milestone 3.6F is completed. BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
+Milestone 3.7 / D1 Pipeline Run Contract is completed and merged. D2A is contract-only and defines future machine-readable schema and business validation findings artifacts without implementing JSON output or changing validator behavior.
+
+BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ## Current Task
 
-Define D1, the Milestone 3.7 Pipeline Run Contract, without implementing a runner or changing runtime behavior.
+Define D2A, the Machine-readable Validation Findings Contract, without implementing JSON output or changing validator behavior.
 
 ## Known Technical Debt
 
@@ -69,13 +71,15 @@ Define D1, the Milestone 3.7 Pipeline Run Contract, without implementing a runne
 
 Naming map:
 
-- D1 = Milestone 3.7 — Pipeline Run Contract
-- D2 = future Machine-readable Findings Contract
-- D3 = future Indexed Marker Syntax Validation
+- D1 = Milestone 3.7 — Pipeline Run Contract (completed and merged)
+- D2 = Machine-readable Validation Findings delivery track
+  - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
+  - D2B = future implementation, only after separate approval
+- D3 = future Indexed Marker Syntax Validation (pending clarification)
 
 Next steps:
 
-1. Complete D1 documentation and review.
-2. Define D2 without changing D1 artifact boundaries.
-3. Define and implement D3 before or together with any separately approved BR-006 activation.
+1. Complete D2A contract review.
+2. Begin D2B implementation only after separate approval.
+3. Keep D3 / indexed marker syntax validation pending clarification and require it as applicable before or together with any separately approved BR-006 activation.
 4. Gather real vertical-slice evidence and obtain explicit owner approval before BR-006 runtime activation.
