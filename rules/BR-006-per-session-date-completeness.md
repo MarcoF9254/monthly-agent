@@ -220,6 +220,8 @@ Human Review must not be replaced by BR-006. BR-006 only reports deterministic m
 
 Uncertainty semantics for BR-006 are resolved by ADR-006.
 
-Implementation remains pending.
+The validator implementation and focused direct unit tests are complete.
 
-BR-006 is not active until validator implementation, focused tests, and active rule registration are completed.
+Runtime activation is held. BR-006 is not included in the active business-rule registry.
+
+Future activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
