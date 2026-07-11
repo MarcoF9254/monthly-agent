@@ -12,13 +12,13 @@ The project supports an agent workflow for elderly centre monthly programme docu
 
 ## Project Health
 
-The project is in active development and currently focused on the business rule engine.
+The project is in active development and currently focused on defining an auditable pipeline run contract.
 
 BR-001 through BR-005 are implemented, tested, and active in the runtime registry. BR-006 is implemented with direct unit coverage, but it is not registered or runtime active.
 
 ## Current Milestone
 
-Milestone 3.6F — BR-006 activation hold
+Milestone 3.7 / D1 — Pipeline Run Contract
 
 ## Business Rule Status
 
@@ -44,11 +44,11 @@ git status --short
 
 ## Current Workflow Stage
 
-BR-006 implementation is retained while runtime activation is held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
+Milestone 3.6F is completed. BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ## Current Task
 
-Hold BR-006 runtime activation while preserving its implementation and direct unit coverage.
+Define D1, the Milestone 3.7 Pipeline Run Contract, without implementing a runner or changing runtime behavior.
 
 ## Known Technical Debt
 
@@ -67,7 +67,15 @@ Hold BR-006 runtime activation while preserving its implementation and direct un
 
 ## Next Planned Milestones
 
-1. Gather real vertical-slice evidence for BR-006.
-2. Put indexed marker syntax validation in place.
-3. Obtain explicit owner approval before BR-006 runtime activation.
-4. Continue toward QA Engine milestone.
+Naming map:
+
+- D1 = Milestone 3.7 — Pipeline Run Contract
+- D2 = future Machine-readable Findings Contract
+- D3 = future Indexed Marker Syntax Validation
+
+Next steps:
+
+1. Complete D1 documentation and review.
+2. Define D2 without changing D1 artifact boundaries.
+3. Define and implement D3 before or together with any separately approved BR-006 activation.
+4. Gather real vertical-slice evidence and obtain explicit owner approval before BR-006 runtime activation.
