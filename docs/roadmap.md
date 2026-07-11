@@ -2,9 +2,9 @@
 
 ## Current Focus
 
-Milestone 3.5A - Documentation Hardening
+Milestone 3.6F - BR-006 activation hold
 
-This milestone hardens project handoff documentation before returning to business-rule expansion.
+This milestone holds BR-006 runtime activation while preserving its implementation and direct unit coverage.
 
 ## Completed Milestones
 
@@ -31,29 +31,30 @@ This milestone hardens project handoff documentation before returning to busines
 
 ## Active Milestone
 
-### Milestone 3.5A - Documentation Hardening
+### Milestone 3.6F - BR-006 Activation Hold
 
-- Create architecture handoff documentation.
-- Convert decisions into lightweight ADR format.
-- Add rule authoring guidance.
-- Label Finding Contract v1.
-- Refresh current project status.
+- Keep BR-006 out of the active runtime registry.
+- Require vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before activation.
 
 ## Paused / Backlog
 
 ### BR-006 Per-Session Date Completeness
 
-BR-006 remains paused. Review the draft specification and decide scope before implementation.
+Implemented, activation held. Requires vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before runtime activation.
 
 ## Planned Milestones
 
 ### Milestone 3.5B - BR-006 Specification Review
+
+Status: Completed — the BR-006 specification was reviewed and aligned before implementation.
 
 - Review BR-006 draft.
 - Patch the specification if required.
 - Confirm whether the rule is per-record, per-session, or batch scoped.
 
 ### Milestone 3.6 - BR-006 Implementation
+
+Status: Completed — BR-006 was implemented with focused direct unit coverage.
 
 - Implement BR-006 only after specification approval.
 - Add focused validator tests.
