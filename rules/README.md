@@ -16,7 +16,7 @@ The rules are intended for future use by:
 - `BR-003-registration-period.md` - missing or unclear registration periods must be flagged.
 - `BR-004-qa-status.md` - QA status must reflect the current workflow stage.
 - `BR-005-source-reference.md` - extracted records must include traceable source references.
-- `BR-006-per-session-date-completeness.md` - per-session date completeness checks every `dates[]` entry.
+- `BR-006-per-session-date-completeness.md` - implemented, activation held; the validator exists but is not registered or runtime active. Future activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ## Usage
 

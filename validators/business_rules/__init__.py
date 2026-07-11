@@ -4,7 +4,6 @@
     br003_registration_period,
     br004_qa_status,
     br005_source_reference,
-    br006_per_session_date_completeness,
 )
 
 
@@ -14,5 +13,4 @@ RULES = [
     br003_registration_period,
     br004_qa_status,
     br005_source_reference,
-    br006_per_session_date_completeness,
 ]

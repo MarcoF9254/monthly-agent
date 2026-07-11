@@ -1,6 +1,6 @@
 # Current Project Status
 
-Last Updated: 2026-07-08
+Last Updated: 2026-07-11
 Repository: monthly-agent
 Default Branch: main
 
@@ -14,11 +14,11 @@ The project supports an agent workflow for elderly centre monthly programme docu
 
 The project is in active development and currently focused on the business rule engine.
 
-BR-001 through BR-005 have completed specification, implementation, tests, review, and commit. BR-006 exists only as a local untracked draft and must not be modified unless explicitly requested.
+BR-001 through BR-005 are implemented, tested, and active in the runtime registry. BR-006 is implemented with direct unit coverage, but it is not registered or runtime active.
 
 ## Current Milestone
 
-Milestone 3.5A — Documentation Hardening
+Milestone 3.6F — BR-006 activation hold
 
 ## Business Rule Status
 
@@ -29,7 +29,7 @@ Milestone 3.5A — Documentation Hardening
 | BR-003 Registration Period | Spec, implementation, tests, and review completed |
 | BR-004 QA Status | Spec, implementation, tests, and review completed |
 | BR-005 Source Reference | Spec, implementation, tests, and review completed |
-| BR-006 Per-Session Date Completeness | Draft / paused; local untracked file exists |
+| BR-006 Per-Session Date Completeness | Implemented with direct unit tests; activation held and not in the runtime registry |
 
 ## Git State
 
@@ -42,29 +42,20 @@ git rev-parse --short HEAD
 git status --short
 ```
 
-## Local Working Tree Notes
-
-Last-known local untracked files:
-
-- `docs/roadmap.md`
-- `rules/BR-006-per-session-date-completeness.md`
-
-These notes may be stale. Verify the local working tree with `git status --short` before starting work. Do not modify these files unless explicitly instructed.
-
 ## Current Workflow Stage
 
-Documentation hardening before BR-006 resumes. BR-006 remains paused until its draft specification is reviewed and scoped.
+BR-006 implementation is retained while runtime activation is held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ## Current Task
 
-Complete Milestone 3.5A documentation hardening.
+Hold BR-006 runtime activation while preserving its implementation and direct unit coverage.
 
 ## Known Technical Debt
 
 - Some existing files include encoding-sensitive Chinese text; use UTF-8 aware reads and writes.
 - Business rule specs and implementations must stay aligned before adding validators.
 - BR-005 must remain deterministic and avoid semantic, NLP, or fuzzy judgement.
-- BR-006 is not ready for implementation.
+- BR-006 runtime activation remains held pending vertical-slice evidence, indexed marker syntax validation, and owner approval.
 
 ## Architecture Principles
 
@@ -76,7 +67,7 @@ Complete Milestone 3.5A documentation hardening.
 
 ## Next Planned Milestones
 
-1. Review BR-006 draft and decide scope.
-2. Patch BR-006 specification if required.
-3. Implement BR-006 after specification approval.
+1. Gather real vertical-slice evidence for BR-006.
+2. Put indexed marker syntax validation in place.
+3. Obtain explicit owner approval before BR-006 runtime activation.
 4. Continue toward QA Engine milestone.
