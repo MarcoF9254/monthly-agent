@@ -2,9 +2,9 @@
 
 ## Current Focus
 
-Milestone 3.8 / D2A — Machine-readable Validation Findings Contract
+Milestone 3.9 / D2B — Machine-readable Validation Findings Emission
 
-This contract-only milestone defines future machine-readable schema and business validation findings artifacts without implementing JSON output or changing validators.
+Draft PR #10 implements optional machine-readable schema and business validation findings artifacts and is pending review and acceptance. It preserves existing `PASS` / `FAIL` text structure and exit code semantics while consistently rendering missing, `None`, or empty `activity_id` values as `"<missing>"` under Finding Contract v1.
 
 ## Completed Milestones
 
@@ -42,6 +42,17 @@ Status: Completed and merged — the auditable per-run artifact, stage, ownershi
 - Define status semantics, error taxonomy, the run-level `fail` / `message` exception, and non-retroactive requiredness.
 - Do not implement JSON output or change validators.
 
+Status: Completed and merged — D2A remains the contract-only design baseline.
+
+### Milestone 3.9 / D2B — Machine-readable Validation Findings Emission
+
+Status: Implemented in draft PR #10; pending review and acceptance.
+
+- Add optional `--run-id` and `--json-output` arguments to both existing validators.
+- Emit Validation Findings JSON Contract v1 pass, fail, and error artifacts.
+- Preserve existing `PASS` / `FAIL` text structure, validation precedence, and exit code semantics, with Finding Contract v1 normalization of unavailable `activity_id` values to `"<missing>"`.
+- Keep invalid arguments pre-artifact and keep BR-006 inactive.
+
 ## Paused / Backlog
 
 ### BR-006 Per-Session Date Completeness
@@ -54,7 +65,7 @@ Implemented, activation held. Requires vertical-slice evidence, indexed marker s
 
 - D1 = Milestone 3.7 — Pipeline Run Contract (completed and merged)
 - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
-- D2B = future implementation, only after separate approval
+- D2B = Milestone 3.9 — additive validator JSON artifact emission
 - D3 = future Indexed Marker Syntax Validation (pending clarification)
 
 ### Milestone 3.5B - BR-006 Specification Review

@@ -1,6 +1,6 @@
 # Current Project Status
 
-Last Updated: 2026-07-11
+Last Updated: 2026-07-12
 Repository: monthly-agent
 Default Branch: main
 
@@ -12,13 +12,13 @@ The project supports an agent workflow for elderly centre monthly programme docu
 
 ## Project Health
 
-The project is in active development and currently focused on defining the D2A machine-readable validation findings contract.
+The project is in active development and currently focused on D2B machine-readable validation findings emission.
 
 BR-001 through BR-005 are implemented, tested, and active in the runtime registry. BR-006 is implemented with direct unit coverage, but it is not registered or runtime active.
 
 ## Current Milestone
 
-Milestone 3.8 / D2A — Machine-readable Validation Findings Contract
+Milestone 3.9 / D2B — Machine-readable Validation Findings Emission
 
 ## Business Rule Status
 
@@ -44,13 +44,13 @@ git status --short
 
 ## Current Workflow Stage
 
-Milestone 3.7 / D1 Pipeline Run Contract is completed and merged. D2A is contract-only and defines future machine-readable schema and business validation findings artifacts without implementing JSON output or changing validator behavior.
+Milestone 3.7 / D1 Pipeline Run Contract is completed and merged. D2A is contract-only. D2B is implemented in draft PR #10 and is pending review and acceptance. It preserves existing `PASS` / `FAIL` text structure, validation ordering, and exit code semantics while consistently rendering missing, `None`, or empty `activity_id` values as `"<missing>"` under Finding Contract v1.
 
 BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ## Current Task
 
-Define D2A, the Machine-readable Validation Findings Contract, without implementing JSON output or changing validator behavior.
+Review and accept draft PR #10 for D2B additive `schema_findings.json` and `business_findings.json` emission.
 
 ## Known Technical Debt
 
@@ -74,12 +74,11 @@ Naming map:
 - D1 = Milestone 3.7 — Pipeline Run Contract (completed and merged)
 - D2 = Machine-readable Validation Findings delivery track
   - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
-  - D2B = future implementation, only after separate approval
+  - D2B = Milestone 3.9 — additive validator JSON artifact emission (implemented in draft PR #10; pending review and acceptance)
 - D3 = future Indexed Marker Syntax Validation (pending clarification)
 
 Next steps:
 
-1. Complete D2A contract review.
-2. Begin D2B implementation only after separate approval.
-3. Keep D3 / indexed marker syntax validation pending clarification and require it as applicable before or together with any separately approved BR-006 activation.
-4. Gather real vertical-slice evidence and obtain explicit owner approval before BR-006 runtime activation.
+1. Review and accept the D2B validator JSON emission implementation.
+2. Keep D3 / indexed marker syntax validation pending clarification and require it as applicable before or together with any separately approved BR-006 activation.
+3. Gather real vertical-slice evidence and obtain explicit owner approval before BR-006 runtime activation.

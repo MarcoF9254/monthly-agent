@@ -55,6 +55,19 @@ The layout shows every recognized path, but approval artifacts are conditional. 
 - `human-review/human_review_decisions.md`
 - `run_summary.md`
 
+### Prospective D2B-required Validation Artifacts
+
+The baseline required-artifact list above remains unchanged. After D2B implementation
+is accepted for a validator, later committed D1 evidence runs that include that
+validator stage must also include its machine-readable findings artifact:
+
+- `validation/schema_findings.json` for the schema validator
+- `validation/business_findings.json` for the business validator
+
+This requirement is prospective, not retroactive. Runs committed before the
+corresponding D2B implementation PR was merged are not made non-compliant by the
+absence of that JSON artifact. The existing text validation artifacts remain required.
+
 Approval artifacts are required only when applicable:
 
 - `approval/approved_records.json` for `approved` or `partially_approved` runs
@@ -152,7 +165,7 @@ For a `blocked` run, `approval/blocked_records.md` and `approval/blocked_run_sum
 
 ## Forward Compatibility
 
-D1 reserves stable stage directories and artifact boundaries so D2 can later define a machine-readable Findings Contract without reorganizing existing runs. D1 does not define the D2 JSON filename, schema, fields, or serialization rules. Existing `.txt` validation artifacts remain required until a later accepted contract explicitly changes them.
+D1 reserves stable stage directories and artifact boundaries for the D2 machine-readable Findings Contract without reorganizing existing runs. D2A defines the JSON contract, and D2B adds validator emission prospectively. Existing `.txt` validation artifacts remain required.
 
 ## Scope Guardrails
 
