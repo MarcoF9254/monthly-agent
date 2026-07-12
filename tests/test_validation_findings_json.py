@@ -43,7 +43,7 @@ def finding(**overrides):
     return value
 
 
-@pytest.mark.parametrize("run_id", ["2026-07-r01", "2026-12-r99"])
+@pytest.mark.parametrize("run_id", ["2026-07-r01", "2026-12-r99", "2026-07-r100"])
 def test_run_id_accepts_d1_format(run_id):
     assert valid_run_id(run_id)
 
@@ -72,6 +72,25 @@ def test_artifact_contract_top_level_fields_and_conditionals(tool, status):
 def test_contract_rejects_fail_without_findings_or_message():
     with pytest.raises(ValueError, match="message"):
         build_validation_artifact(tool="schema_validator", run_id=RUN_ID, status="fail", source_artifact="x", findings=[])
+
+
+def test_contract_accepts_d2a_invalid_arguments_error_artifact():
+    artifact = {
+        "contract_version": "validation-findings-v1",
+        "tool": "schema_validator",
+        "run_id": RUN_ID,
+        "status": "error",
+        "generated_at": "2026-07-12T08:30:00Z",
+        "source_artifact": "input.json",
+        "findings": [],
+        "error": {
+            "type": "invalid_arguments",
+            "target": "arguments",
+            "message": "Invalid validator invocation.",
+        },
+    }
+
+    validate_validation_artifact(artifact)
 
 
 def test_finding_contract_rejects_masking_defaults_and_finding_id():

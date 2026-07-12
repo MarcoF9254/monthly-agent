@@ -9,13 +9,14 @@ TOOLS = {"schema_validator", "business_validator"}
 STATUSES = {"pass", "fail", "error"}
 SEVERITIES = {"critical", "high", "medium", "low"}
 ERROR_TYPES = {
+    "invalid_arguments",
     "file_not_found",
     "unreadable_file",
     "invalid_json",
     "invalid_schema",
     "execution_error",
 }
-ERROR_TARGETS = {"input", "schema", "runtime"}
+ERROR_TARGETS = {"arguments", "input", "schema", "runtime"}
 FINDING_FIELDS = {
     "index",
     "activity_id",
@@ -26,7 +27,7 @@ FINDING_FIELDS = {
     "message",
     "recommendation",
 }
-RUN_ID_PATTERN = re.compile(r"^\d{4}-(?:0[1-9]|1[0-2])-r(?:0[1-9]|[1-9]\d)$")
+RUN_ID_PATTERN = re.compile(r"^\d{4}-(?:0[1-9]|1[0-2])-r(?:0[1-9]|[1-9]\d+)$")
 
 
 def valid_run_id(run_id: str) -> bool:
