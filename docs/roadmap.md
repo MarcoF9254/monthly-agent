@@ -2,9 +2,9 @@
 
 ## Current Focus
 
-Milestone 3.8 / D2A — Machine-readable Validation Findings Contract
+Milestone 3.9 / D2B — Machine-readable Validation Findings Emission
 
-This contract-only milestone defines future machine-readable schema and business validation findings artifacts without implementing JSON output or changing validators.
+This milestone adds optional machine-readable schema and business validation findings artifacts without replacing text output or changing exit codes.
 
 ## Completed Milestones
 
@@ -42,6 +42,15 @@ Status: Completed and merged — the auditable per-run artifact, stage, ownershi
 - Define status semantics, error taxonomy, the run-level `fail` / `message` exception, and non-retroactive requiredness.
 - Do not implement JSON output or change validators.
 
+Status: Completed and merged — D2A remains the contract-only design baseline.
+
+### Milestone 3.9 / D2B — Machine-readable Validation Findings Emission
+
+- Add optional `--run-id` and `--json-output` arguments to both existing validators.
+- Emit Validation Findings JSON Contract v1 pass, fail, and error artifacts.
+- Preserve existing text output, validation precedence, and exit codes.
+- Keep invalid arguments pre-artifact and keep BR-006 inactive.
+
 ## Paused / Backlog
 
 ### BR-006 Per-Session Date Completeness
@@ -54,7 +63,7 @@ Implemented, activation held. Requires vertical-slice evidence, indexed marker s
 
 - D1 = Milestone 3.7 — Pipeline Run Contract (completed and merged)
 - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
-- D2B = future implementation, only after separate approval
+- D2B = Milestone 3.9 — additive validator JSON artifact emission (current implementation)
 - D3 = future Indexed Marker Syntax Validation (pending clarification)
 
 ### Milestone 3.5B - BR-006 Specification Review

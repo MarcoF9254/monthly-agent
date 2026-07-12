@@ -359,9 +359,9 @@ Once D2B is implemented for a validator, a successful validation must still prod
 
 ### D2B Implementation Notes
 
-Before implementing D2B, review validator normalization behavior. The business validator currently normalizes missing finding fields into default values. D2B must decide whether machine-readable JSON should preserve that behavior or reject incomplete findings instead of silently masking them.
+D2B rejects incomplete or malformed business findings at the JSON boundary instead of silently masking them with normalization defaults. An invariant failure produces an `execution_error` runtime artifact when a valid artifact invocation is available.
 
-`invalid_arguments` and `execution_error` may require additional implementation work beyond serializing existing handled exceptions. Current argparse failures and unexpected runtime exceptions may not pass through the existing validator error-handling paths.
+Invalid arguments are handled before artifact emission: print a human-readable error to stderr, exit `2`, and write no JSON artifact. A contract-compliant artifact cannot be emitted without a valid `run_id`.
 
 ### D2A Scope Guardrails
 

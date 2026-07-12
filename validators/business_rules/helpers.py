@@ -76,7 +76,9 @@ def is_free_indicator(value) -> bool:
 
 def activity_id_for(record) -> str:
     if isinstance(record, dict):
-        return record.get("activity_id", "<missing>")
+        activity_id = record.get("activity_id")
+        if isinstance(activity_id, str) and activity_id:
+            return activity_id
     return "<missing>"
 
 
