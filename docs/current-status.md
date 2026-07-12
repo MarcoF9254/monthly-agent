@@ -44,13 +44,13 @@ git status --short
 
 ## Current Workflow Stage
 
-Milestone 3.7 / D1 Pipeline Run Contract is completed and merged. D2A is contract-only. D2B implements additive JSON artifact emission for the schema and business validators while preserving their text output, ordering, and exit codes.
+Milestone 3.7 / D1 Pipeline Run Contract is completed and merged. D2A is contract-only. D2B is implemented in draft PR #10 and is pending review and acceptance. It preserves existing `PASS` / `FAIL` text structure, validation ordering, and exit code semantics while consistently rendering missing, `None`, or empty `activity_id` values as `"<missing>"` under Finding Contract v1.
 
 BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ## Current Task
 
-Implement D2B additive `schema_findings.json` and `business_findings.json` emission for the existing validators.
+Review and accept draft PR #10 for D2B additive `schema_findings.json` and `business_findings.json` emission.
 
 ## Known Technical Debt
 
@@ -74,7 +74,7 @@ Naming map:
 - D1 = Milestone 3.7 — Pipeline Run Contract (completed and merged)
 - D2 = Machine-readable Validation Findings delivery track
   - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
-  - D2B = Milestone 3.9 — additive validator JSON artifact emission (implemented in the current PR)
+  - D2B = Milestone 3.9 — additive validator JSON artifact emission (implemented in draft PR #10; pending review and acceptance)
 - D3 = future Indexed Marker Syntax Validation (pending clarification)
 
 Next steps:

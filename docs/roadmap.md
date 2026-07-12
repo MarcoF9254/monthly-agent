@@ -4,7 +4,7 @@
 
 Milestone 3.9 / D2B — Machine-readable Validation Findings Emission
 
-This milestone adds optional machine-readable schema and business validation findings artifacts without replacing text output or changing exit codes.
+Draft PR #10 implements optional machine-readable schema and business validation findings artifacts and is pending review and acceptance. It preserves existing `PASS` / `FAIL` text structure and exit code semantics while consistently rendering missing, `None`, or empty `activity_id` values as `"<missing>"` under Finding Contract v1.
 
 ## Completed Milestones
 
@@ -46,9 +46,11 @@ Status: Completed and merged — D2A remains the contract-only design baseline.
 
 ### Milestone 3.9 / D2B — Machine-readable Validation Findings Emission
 
+Status: Implemented in draft PR #10; pending review and acceptance.
+
 - Add optional `--run-id` and `--json-output` arguments to both existing validators.
 - Emit Validation Findings JSON Contract v1 pass, fail, and error artifacts.
-- Preserve existing text output, validation precedence, and exit codes.
+- Preserve existing `PASS` / `FAIL` text structure, validation precedence, and exit code semantics, with Finding Contract v1 normalization of unavailable `activity_id` values to `"<missing>"`.
 - Keep invalid arguments pre-artifact and keep BR-006 inactive.
 
 ## Paused / Backlog
