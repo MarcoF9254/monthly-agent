@@ -1,0 +1,31 @@
+﻿FAIL
+Record 1 (activity_id: 2026-06-r01-002), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 14 (activity_id: 2026-06-r01-015), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 20 (activity_id: 2026-06-r01-021), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 24 (activity_id: 2026-06-r01-025), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 26 (activity_id: 2026-06-r01-027), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 27 (activity_id: 2026-06-r01-028), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 28 (activity_id: 2026-06-r01-029), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 29 (activity_id: 2026-06-r01-030), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 30 (activity_id: 2026-06-r01-031), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
+Record 31 (activity_id: 2026-06-r01-032), rule_id: BR-005, field: source_reference, path: source_reference, severity: medium
+Message: Source reference has no BR-005 v1 deterministic traceability anchor.
+Recommendation: Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category.
