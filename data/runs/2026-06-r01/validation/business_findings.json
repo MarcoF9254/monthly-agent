@@ -1,0 +1,110 @@
+{
+  "contract_version": "validation-findings-v1",
+  "tool": "business_validator",
+  "run_id": "2026-06-r01",
+  "status": "fail",
+  "generated_at": "2026-07-13T02:59:06Z",
+  "source_artifact": "data/runs/2026-06-r01/extraction/extracted_activity_records.json",
+  "findings": [
+    {
+      "index": 1,
+      "activity_id": "2026-06-r01-002",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 14,
+      "activity_id": "2026-06-r01-015",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 20,
+      "activity_id": "2026-06-r01-021",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 24,
+      "activity_id": "2026-06-r01-025",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 26,
+      "activity_id": "2026-06-r01-027",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 27,
+      "activity_id": "2026-06-r01-028",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 28,
+      "activity_id": "2026-06-r01-029",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 29,
+      "activity_id": "2026-06-r01-030",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 30,
+      "activity_id": "2026-06-r01-031",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    },
+    {
+      "index": 31,
+      "activity_id": "2026-06-r01-032",
+      "rule_id": "BR-005",
+      "field": "source_reference",
+      "path": "source_reference",
+      "severity": "medium",
+      "message": "Source reference has no BR-005 v1 deterministic traceability anchor.",
+      "recommendation": "Update source_reference with deterministic traceability information such as page + row, table + row, item number, activity number, exact activity title, or exact category."
+    }
+  ]
+}
