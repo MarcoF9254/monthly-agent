@@ -16,8 +16,8 @@ This is an interim D1 summary. No final D1 run outcome has been assigned.
 
 ## Temporary Rendering Environment
 
-- Virtual environment: `C:\Users\ChunHinFong\AppData\Local\Temp\monthly-agent-pdf-render-venv`
-- Render directory: `C:\Users\ChunHinFong\AppData\Local\Temp\monthly-agent-2026-06-r01-pages`
+- Virtual environment: `%TEMP%\monthly-agent-pdf-render-venv`
+- Render directory: `%TEMP%\monthly-agent-2026-06-r01-pages`
 - Python: 3.14.6
 - pip: 26.1.2
 - PyMuPDF: 1.26.3
@@ -98,7 +98,7 @@ python -c "import json, sys; from pathlib import Path; from tools.validation_fin
 - Human Review decisions approved: 4 (HR-001-B, amended HR-002, HR-003-A, HR-004-B).
 - Unresolved Human Review decisions: 0.
 - The HR-002 owner-decision matrix is present at `human-review/hr002_calendar_inclusion_matrix.md`; its 13 approved additions remain unimplemented and `2026-06-r02` has not been created.
-- HR-003 corrections are authorized as future traceability-metadata corrections but remain unapplied pending the owner correction-strategy decision.
+- HR-003 corrections are authorized as future traceability-metadata corrections but remain unapplied. The recommendation-only r02 strategy is at `docs/run-strategies/2026-06-r02-correction-strategy.md`; implementation has not started.
 - GPT QA approved records: 0; QA remained recommendation-only.
 - No proposed correction was applied to the validated extraction.
 

@@ -5,6 +5,7 @@
 - Programme month: `2026-06`
 - Strategy status: `IMPLEMENTATION NOT AUTHORIZED`
 - Current r01 status: `PENDING HUMAN REVIEW / OWNER CLOSURE`
+- Document scope: repository-level planning artifact; not part of the immutable r01 run-evidence tree.
 
 This document plans a replacement evidence run. It does not create `2026-06-r02`, mutate any record, execute a validator, create an approval artifact, or assign a final D1 outcome.
 
