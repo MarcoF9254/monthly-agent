@@ -115,6 +115,6 @@ python -c "import json, sys; from pathlib import Path; from tools.validation_fin
 - This run does not activate BR-006.
 - D3 remains unresolved.
 - No pipeline runner or FormatChecker was implemented.
-- The run has not been committed, pushed, published, or submitted as a pull request.
+- This run is submitted in PR #12 as a pending r01 evidence baseline for auditability only. It remains unclosed, has no approval artifact, and has no final D1 outcome.
 - Owner Human Review and final closure remain pending.
 
