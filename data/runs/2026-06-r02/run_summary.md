@@ -82,7 +82,7 @@ All in-memory mutation assertions passed before the first r02 write. After the i
 - D3 remains unresolved.
 - No pipeline runner or FormatChecker was implemented.
 - r01 was not modified.
-- r02 has not been committed, pushed, published, or submitted in a pull request.
+- r02 was committed and submitted in draft PR #13 as a non-closure-ready evidence baseline. This publication does not approve any record, assign a final D1 outcome, authorize r03 implementation, or authorize downstream use.
 
 ## 2026-07-14 evidence-status addendum — HR-005
 
