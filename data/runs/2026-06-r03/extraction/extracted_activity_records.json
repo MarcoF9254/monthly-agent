@@ -1,0 +1,1748 @@
+[
+  {
+    "activity_id": "2026-06-r01-001",
+    "activity_title": "2026至2027年度會員續會/入會",
+    "category": "notice",
+    "description": "會員續會及本區60歲或以上長者入會。",
+    "dates": [
+      {
+        "date_text": "4月1日起",
+        "start_date": "2026-04-01",
+        "recurrence": "逢星期一至五"
+      }
+    ],
+    "time": "上午9時至11時及下午2時至4時",
+    "venue": "中心",
+    "target_participants": "續會會員；本區60歲或以上之長者",
+    "fee": [
+      {
+        "fee_type": "年費",
+        "amount_text": "港幣21元正",
+        "currency": "HKD",
+        "amount": 21,
+        "notes": "續會或入會"
+      }
+    ],
+    "quota": "",
+    "registration_method": "親臨中心辦理；續會帶會員證，入會帶身份證及證件相",
+    "registration_period": "4月1日起",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.1，2026至2027年度會員續會/入會",
+    "uncertain_fields": [
+      "quota",
+      "staff_in_charge"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-002",
+    "activity_title": "中心例會",
+    "category": "meeting",
+    "description": "中心例會分兩個時段舉行。",
+    "dates": [
+      {
+        "date_text": "6月23日（星期二）",
+        "start_date": "2026-06-23"
+      }
+    ],
+    "time": "第一場上午9時至9時30分；第二場上午9時30分至10時",
+    "venue": "中心活動室",
+    "target_participants": "有興趣的會員",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.1 最新消息；PDF p.10 6月份例會日期及時間，中心例會",
+    "uncertain_fields": [
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-003",
+    "activity_title": "量血壓獎勵計劃-「健康齊打卡」簡介會",
+    "category": "talk",
+    "description": "介紹量血壓獎勵計劃及教授彈力橡筋帶操。",
+    "dates": [
+      {
+        "date_text": "2026年6月1日（星期一）",
+        "start_date": "2026-06-01"
+      }
+    ],
+    "time": "下午2時正至3時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員或金齡貴族",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "20人",
+    "registration_method": "親臨中心；名額有限，先到先得",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "陳瑜超先生",
+    "notes": "",
+    "source_reference": "PDF p.2 特別活動專欄，項目1",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-004",
+    "activity_title": "“爸”氣“粽”動員",
+    "category": "event",
+    "description": "透過攤位遊戲與會員歡度端午節和父親節。",
+    "dates": [
+      {
+        "date_text": "2026年6月16日（星期二）",
+        "start_date": "2026-06-16"
+      }
+    ],
+    "time": "上午9時至9時30分（第一場）；上午9時30分至10時（第二場）；上午10時至10時30分（第三場）；下午2時至2時30分（第四場）；下午2時30分至3時（第五場）",
+    "venue": "本中心活動室",
+    "target_participants": "中心會員或金齡貴族",
+    "fee": [
+      {
+        "fee_type": "活動費",
+        "amount_text": "$10",
+        "currency": "HKD",
+        "amount": 10,
+        "notes": ""
+      }
+    ],
+    "quota": "25人/場",
+    "registration_method": "親身到中心入籤；每位會員只可參加一場",
+    "registration_period": "2026年5月26日下午2時至5月30日中午12時",
+    "staff_in_charge": "侯麗敏姑娘",
+    "notes": "參加者獲端午節小禮物及糭；男參加者可額外獲父親節禮物。",
+    "source_reference": "PDF p.2 特別活動專欄，項目2-6",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-005",
+    "activity_title": "心血管測試",
+    "category": "service",
+    "description": "透過心血管測試機檢測潛在患上血管疾病的風險。",
+    "dates": [
+      {
+        "date_text": "2026年6月10日（星期三）",
+        "start_date": "2026-06-10"
+      }
+    ],
+    "time": "上午9時正至11時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員或金齡貴族",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "25人",
+    "registration_method": "活動抽籤",
+    "registration_period": "2026年5月26日下午2時至5月30日中午12時",
+    "staff_in_charge": "方晉軒先生",
+    "notes": "由倍力康協辦",
+    "source_reference": "PDF p.3 抽籤活動，項目7",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-006",
+    "activity_title": "美食茶餐廳",
+    "category": "event",
+    "description": "享用豉油皇豬肉碎炒烏冬及中式茶。",
+    "dates": [
+      {
+        "date_text": "2026年6月10日（星期三）",
+        "start_date": "2026-06-10"
+      }
+    ],
+    "time": "下午3時正至4時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員或金齡貴族",
+    "fee": [
+      {
+        "fee_type": "活動費",
+        "amount_text": "$10",
+        "currency": "HKD",
+        "amount": 10,
+        "notes": ""
+      }
+    ],
+    "quota": "10人（堂食）",
+    "registration_method": "活動抽籤",
+    "registration_period": "2026年5月26日下午2時至5月30日中午12時",
+    "staff_in_charge": "李鳳薇姑娘",
+    "notes": "由美食兵團協助",
+    "source_reference": "PDF p.3 抽籤活動，項目8",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-007",
+    "activity_title": "魔力橋訓練班",
+    "category": "class",
+    "description": "學習魔力橋的規則及玩法。",
+    "dates": [
+      {
+        "date_text": "2026年6月3、17、24日（星期三）",
+        "start_date": "2026-06-03",
+        "end_date": "2026-06-24",
+        "recurrence": "共三節"
+      }
+    ],
+    "time": "上午10時正至11時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員或金齡貴族",
+    "fee": [
+      {
+        "fee_type": "課程費",
+        "amount_text": "$30",
+        "currency": "HKD",
+        "amount": 30,
+        "notes": ""
+      }
+    ],
+    "quota": "6人",
+    "registration_method": "活動抽籤",
+    "registration_period": "2026年5月26日下午2時至5月30日中午12時",
+    "staff_in_charge": "陳瑜超先生",
+    "notes": "必須出席三節；完成後可參加逢星期六的魔力橋練習場。",
+    "source_reference": "PDF p.3 抽籤活動，項目9",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-008",
+    "activity_title": "評估患骨質疏鬆的風險",
+    "category": "service",
+    "description": "運用儀器評估患上骨質疏鬆症的風險。",
+    "dates": [
+      {
+        "date_text": "2026年6月17日（星期三）",
+        "start_date": "2026-06-17"
+      }
+    ],
+    "time": "上午9時正至11時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員及金齡貴族",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "30人",
+    "registration_method": "活動抽籤",
+    "registration_period": "2026年5月26日下午2時至5月30日中午12時",
+    "staff_in_charge": "方晉軒先生",
+    "notes": "由美國雅培協辦",
+    "source_reference": "PDF p.3 抽籤活動，項目10",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-009",
+    "activity_title": "美甲初體驗",
+    "category": "workshop",
+    "description": "體驗DIY美甲。",
+    "dates": [
+      {
+        "date_text": "2026年6月26日（星期五）",
+        "start_date": "2026-06-26"
+      }
+    ],
+    "time": "下午2時正至4時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員或金齡貴族",
+    "fee": [
+      {
+        "fee_type": "活動費",
+        "amount_text": "$50",
+        "currency": "HKD",
+        "amount": 50,
+        "notes": ""
+      }
+    ],
+    "quota": "10人",
+    "registration_method": "活動抽籤",
+    "registration_period": "2026年5月26日下午2時至5月30日中午12時",
+    "staff_in_charge": "嚴瑞麗姑娘",
+    "notes": "",
+    "source_reference": "PDF p.3 抽籤活動，項目11",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-010",
+    "activity_title": "長者健體計劃",
+    "category": "class",
+    "description": "由合資格教練指導長者健體運動。",
+    "dates": [
+      {
+        "date_text": "2026年6月3日（星期三）",
+        "start_date": "2026-06-03"
+      }
+    ],
+    "time": "下午2時正至4時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員/金齡貴族",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "15人",
+    "registration_method": "活動報名",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "李鳳薇姑娘",
+    "notes": "須填寫健康聲明書並自行評估體能；穿輕便運動衣鞋；東區康樂事務辦事處協辦。",
+    "source_reference": "PDF p.4 中心活動，項目12",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-011",
+    "activity_title": "6月魔力橋練習場",
+    "category": "class",
+    "description": "練習魔力橋玩法。",
+    "dates": [
+      {
+        "date_text": "2026年6月6、13、20及27日（逢星期六，共4場）",
+        "start_date": "2026-06-06",
+        "end_date": "2026-06-27",
+        "recurrence": "逢星期六，共4場"
+      }
+    ],
+    "time": "上午9時30分至10時30分",
+    "venue": "中心活動室",
+    "target_participants": "中心會員（曾參加魔力橋班學員優先）",
+    "fee": [
+      {
+        "fee_type": "活動費",
+        "amount_text": "$10",
+        "currency": "HKD",
+        "amount": 10,
+        "notes": ""
+      }
+    ],
+    "quota": "20人",
+    "registration_method": "活動報名",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "陳美玲主任",
+    "notes": "",
+    "source_reference": "PDF p.4 中心活動，項目13",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-012",
+    "activity_title": "耆樂齊歡唱",
+    "category": "event",
+    "description": "唱歌、舒解壓力及拓展社交。",
+    "dates": [
+      {
+        "date_text": "2026年6月9日（星期二）",
+        "start_date": "2026-06-09"
+      }
+    ],
+    "time": "下午2時正至3時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員或金齡貴族",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "40人",
+    "registration_method": "活動報名；提交自選歌曲名稱",
+    "registration_period": "5月27日至6月5日之前",
+    "staff_in_charge": "羅婉瑩姑娘",
+    "notes": "",
+    "source_reference": "PDF p.4 中心活動，項目14",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-013",
+    "activity_title": "爸爸的杯墊",
+    "category": "workshop",
+    "description": "創作父親節主題杯墊。",
+    "dates": [
+      {
+        "date_text": "2026年6月18日（星期四）",
+        "start_date": "2026-06-18"
+      }
+    ],
+    "time": "下午2時正至3時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員/金齡貴族",
+    "fee": [
+      {
+        "fee_type": "活動費",
+        "amount_text": "$10",
+        "currency": "HKD",
+        "amount": 10,
+        "notes": ""
+      }
+    ],
+    "quota": "8人",
+    "registration_method": "活動報名",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "陶靄淇姑娘",
+    "notes": "",
+    "source_reference": "PDF p.4 中心活動，項目15",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-014",
+    "activity_title": "芬蘭木柱之旅",
+    "category": "workshop",
+    "description": "認識芬蘭木柱規則和玩法。",
+    "dates": [
+      {
+        "date_text": "2026年6月30日（星期二）",
+        "start_date": "2026-06-30"
+      }
+    ],
+    "time": "下午2時至3時（第一場）；下午3時至4時（第二場）",
+    "venue": "中心活動室",
+    "target_participants": "中心會員/金齡貴族",
+    "fee": [
+      {
+        "fee_type": "活動費",
+        "amount_text": "$10",
+        "currency": "HKD",
+        "amount": 10,
+        "notes": ""
+      }
+    ],
+    "quota": "8人/節",
+    "registration_method": "活動報名",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "陳瑜超先生",
+    "notes": "",
+    "source_reference": "PDF p.4 中心活動，項目16-17",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-015",
+    "activity_title": "魔力橋學習場",
+    "category": "class",
+    "description": "練習魔力橋的規則及玩法。",
+    "dates": [
+      {
+        "date_text": "2026年6月25日（星期四）",
+        "start_date": "2026-06-25"
+      }
+    ],
+    "time": "上午9時正至10時正",
+    "venue": "中心活動室",
+    "target_participants": "完成魔力橋訓練班之參加者",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "6人",
+    "registration_method": "名額有限，先到先得",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "陳瑜超先生",
+    "notes": "",
+    "source_reference": "PDF p.4，魔力橋學習場",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-016",
+    "activity_title": "全身高效爆汗運動操",
+    "category": "class",
+    "description": "配合音樂進行HIIT高強度間歇性全身訓練。",
+    "dates": [
+      {
+        "date_text": "2026年6月2、9、30日及7月7、14日（逢星期二，共5節）",
+        "start_date": "2026-06-02",
+        "end_date": "2026-07-14",
+        "recurrence": "逢星期二，共5節"
+      }
+    ],
+    "time": "上午11時正至12時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員及金齡貴族",
+    "fee": [
+      {
+        "fee_type": "課程費",
+        "amount_text": "$50",
+        "currency": "HKD",
+        "amount": 50,
+        "notes": ""
+      }
+    ],
+    "quota": "10人",
+    "registration_method": "名額有限，先到先得",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "侯麗敏姑娘",
+    "notes": "須穿運動衣鞋；需站立並自行評估體能。",
+    "source_reference": "PDF p.5 健康活力專區，項目18",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-017",
+    "activity_title": "收身健美操",
+    "category": "class",
+    "description": "使用簡單器材強化肌肉。",
+    "dates": [
+      {
+        "date_text": "2026年6月24日（星期三）",
+        "start_date": "2026-06-24"
+      }
+    ],
+    "time": "上午9時正至10時正",
+    "venue": "中心活動室",
+    "target_participants": "中心會員及金齡貴族",
+    "fee": [
+      {
+        "fee_type": "活動費",
+        "amount_text": "$10",
+        "currency": "HKD",
+        "amount": 10,
+        "notes": ""
+      }
+    ],
+    "quota": "10人",
+    "registration_method": "名額有限，先到先得",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "侯麗敏姑娘",
+    "notes": "需備良好站立能力。",
+    "source_reference": "PDF p.5 健康活力專區，項目19",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-018",
+    "activity_title": "數碼諮詢站",
+    "category": "service",
+    "description": "一對一解決手機疑難。",
+    "dates": [
+      {
+        "date_text": "2026年6月5、12、26日（逢星期五）",
+        "start_date": "2026-06-05",
+        "end_date": "2026-06-26",
+        "recurrence": "逢星期五"
+      }
+    ],
+    "time": "下午3時30分至4時；下午4時至4時30分",
+    "venue": "中心活動室",
+    "target_participants": "中心會員/金齡貴族（首次參加優先）",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "6人",
+    "registration_method": "名額有限，先到先得；每位會員只可參加一節",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "方晉軒先生",
+    "notes": "每節30分鐘。",
+    "source_reference": "PDF p.5 科技新知，項目20",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-019",
+    "activity_title": "DIY國風手袋",
+    "category": "workshop",
+    "description": "製作國風手袋及訓練手眼協調。",
+    "dates": [
+      {
+        "date_text": "2026年6月25日（星期四）",
+        "start_date": "2026-06-25"
+      }
+    ],
+    "time": "下午2時正至3時正",
+    "venue": "中心活動室",
+    "target_participants": "中心獨居會員",
+    "fee": [
+      {
+        "fee_type": "活動費",
+        "amount_text": "$20（包括材料）",
+        "currency": "HKD",
+        "amount": 20,
+        "notes": "包括材料"
+      }
+    ],
+    "quota": "8人",
+    "registration_method": "名額有限，先到先得",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "陶靄淇姑娘",
+    "notes": "",
+    "source_reference": "PDF p.5 單身貴族專區，項目21",
+    "uncertain_fields": [],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-020",
+    "activity_title": "怡景怡情空氣草",
+    "category": "workshop",
+    "description": "設計空氣草微景觀，幫助照顧者舒緩壓力。",
+    "dates": [
+      {
+        "date_text": "2026年6月12日（星期五）",
+        "start_date": "2026-06-12"
+      }
+    ],
+    "time": "下午2時30分至4時正",
+    "venue": "中心活動室",
+    "target_participants": "社區照顧者",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "10人",
+    "registration_method": "名額有限，先到先得；首次參加優先",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "李鳳薇姑娘",
+    "notes": "",
+    "source_reference": "PDF p.5，項目22",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-021",
+    "activity_title": "減壓充電樹遊戲",
+    "category": "event",
+    "description": "辨識照顧壓力及學習減壓方法。",
+    "dates": [
+      {
+        "date_text": "2026年6月1日（星期一）至12日（星期五）",
+        "start_date": "2026-06-01",
+        "end_date": "2026-06-12"
+      }
+    ],
+    "time": "上午9時至11時／下午2時至4時",
+    "venue": "本中心大堂",
+    "target_participants": "護老家族成員",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "30人",
+    "registration_method": "在「樹」掛上減壓回應卡",
+    "registration_period": "2026年6月1日至12日",
+    "staff_in_charge": "李鳳薇姑娘",
+    "notes": "每位成員只可參與一次；禮物有限送完即止。",
+    "source_reference": "PDF p.6 護老家族大本營，減壓充電樹遊戲",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-022",
+    "activity_title": "初夏浮游花瓶",
+    "category": "workshop",
+    "description": "創作浮游花玻璃瓶。",
+    "dates": [
+      {
+        "date_text": "2026年6月2日（星期二）",
+        "start_date": "2026-06-02"
+      }
+    ],
+    "time": "下午2時正至3時正",
+    "venue": "中心活動室",
+    "target_participants": "護老家族成員",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "8人",
+    "registration_method": "名額有限，先到先得",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "李鳳薇姑娘",
+    "notes": "",
+    "source_reference": "PDF p.6，項目23",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-023",
+    "activity_title": "慢性腰膝疼痛支援小組",
+    "category": "support_group",
+    "description": "掌握腰膝退化性關節炎的治療調適技巧及保健運動。",
+    "dates": [
+      {
+        "date_text": "2026年6月8、15、22、29日，7月6、13、20、27日及8月17、24日（逢星期一，共10節）",
+        "start_date": "2026-06-08",
+        "end_date": "2026-08-24",
+        "recurrence": "逢星期一，共10節"
+      }
+    ],
+    "time": "上午10時正至11時正",
+    "venue": "中心活動室",
+    "target_participants": "伴樂一族成員",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "8人",
+    "registration_method": "名額有限，先到先得",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "嚴瑞麗姑娘",
+    "notes": "不需要使用助行架；沒有嚴重活動障礙；衛生署協辦。",
+    "source_reference": "PDF p.6 伴樂一族專區，項目24",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-024",
+    "activity_title": "舒緩疲勞足浴鹽（伴樂篇）",
+    "category": "workshop",
+    "description": "利用廚餘、草本植物和天然精油製作浴鹽。",
+    "dates": [
+      {
+        "date_text": "2026年6月11日（星期四）",
+        "start_date": "2026-06-11"
+      }
+    ],
+    "time": "下午3時正至4時正",
+    "venue": "中心活動室",
+    "target_participants": "伴樂一族成員",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "15人",
+    "registration_method": "名額有限，先到先得",
+    "registration_period": "5月26日（星期二）下午2時正起",
+    "staff_in_charge": "嚴瑞麗姑娘",
+    "notes": "由綠在東區協辦。",
+    "source_reference": "PDF p.6 伴樂一族專區，項目25",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-025",
+    "activity_title": "『認知無障礙社區』知多D有獎問答",
+    "category": "event",
+    "description": "閱讀認知無障礙社區資訊並回答問題。",
+    "dates": [
+      {
+        "date_text": "2026年6月15日（星期一）至6月26日（星期五）",
+        "start_date": "2026-06-15",
+        "end_date": "2026-06-26"
+      }
+    ],
+    "time": "上午9時正至11時正／下午2時正至4時正",
+    "venue": "中心",
+    "target_participants": "中心會員/金齡貴族/社區人士",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "100人",
+    "registration_method": "親身到中心填寫工作紙",
+    "registration_period": "2026年6月15日至26日",
+    "staff_in_charge": "侯麗敏姑娘",
+    "notes": "每人只可參與一次；禮物送完即止。",
+    "source_reference": "PDF p.8 腦友天地，『認知無障礙社區』知多D有獎問答",
+    "uncertain_fields": [
+      "fee"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-026",
+    "activity_title": "關愛兵團聚會",
+    "category": "meeting",
+    "description": "義工互相認識、分享心聲及來年工作安排。",
+    "dates": [
+      {
+        "date_text": "2026年6月12日（星期五）",
+        "start_date": "2026-06-12"
+      }
+    ],
+    "time": "上午9時正至10時正",
+    "venue": "中心活動室",
+    "target_participants": "關愛兵團成員",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "陳瑜超先生",
+    "notes": "",
+    "source_reference": "PDF p.8 義工專欄，項目26",
+    "uncertain_fields": [
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-027",
+    "activity_title": "『運動、認知和營養訓練班』後測",
+    "category": "assessment",
+    "description": "訓練班完結後的半年體能測試。",
+    "dates": [
+      {
+        "date_text": "2026年6月1日（星期一）",
+        "start_date": "2026-06-01"
+      }
+    ],
+    "time": "下午3時正",
+    "venue": "中心活動室",
+    "target_participants": "『運動、認知和營養訓練班』參加者",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "侯麗敏姑娘",
+    "notes": "",
+    "source_reference": "PDF p.8 溫馨提示，『運動、認知和營養訓練班』後測",
+    "uncertain_fields": [
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-028",
+    "activity_title": "織福兵團",
+    "category": "volunteer_service",
+    "description": "編織冷帽及頸巾給有需要的長者。",
+    "dates": [
+      {
+        "date_text": "6月4及18日（星期四）",
+        "start_date": "2026-06-04",
+        "end_date": "2026-06-18"
+      }
+    ],
+    "time": "上午10時正",
+    "venue": "中心活動室",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "費用",
+        "amount_text": "/",
+        "currency": "",
+        "amount": null,
+        "notes": "來源以斜線表示"
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "嚴瑞麗姑娘",
+    "notes": "",
+    "source_reference": "PDF p.9 義工團體集會及服務時間，織福兵團",
+    "uncertain_fields": [
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-029",
+    "activity_title": "量血壓服務",
+    "category": "service",
+    "description": "提供免費量血壓服務。",
+    "dates": [
+      {
+        "date_text": "6月6、13、20及27日（星期六）",
+        "start_date": "2026-06-06",
+        "end_date": "2026-06-27",
+        "recurrence": "星期六"
+      }
+    ],
+    "time": "上午9時正",
+    "venue": "中心活動室",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "服務費",
+        "amount_text": "免費",
+        "currency": "HKD",
+        "amount": 0,
+        "notes": "由健康兵團協助"
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "陳瑜超先生",
+    "notes": "",
+    "source_reference": "PDF p.9 義工團體集會及服務時間，量血壓服務",
+    "uncertain_fields": [
+      "target_participants",
+      "quota",
+      "registration_method",
+      "registration_period"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-030",
+    "activity_title": "眼明手快",
+    "category": "event",
+    "description": "賓果遊戲及贏取獎品。",
+    "dates": [
+      {
+        "date_text": "6月11及25日（星期四）",
+        "start_date": "2026-06-11",
+        "end_date": "2026-06-25"
+      }
+    ],
+    "time": "上午10時正",
+    "venue": "中心活動室",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "每張",
+        "amount_text": "每張$4",
+        "currency": "HKD",
+        "amount": 4,
+        "notes": "由智醒兵團協助"
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "陶靄淇姑娘",
+    "notes": "",
+    "source_reference": "PDF p.9 義工團體集會及服務時間，眼明手快",
+    "uncertain_fields": [
+      "target_participants",
+      "quota",
+      "registration_method",
+      "registration_period"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-031",
+    "activity_title": "銀鈴健樂團",
+    "category": "class",
+    "description": "練習椅子舞。",
+    "dates": [
+      {
+        "date_text": "6月12日（星期五）",
+        "start_date": "2026-06-12"
+      }
+    ],
+    "time": "下午3時正",
+    "venue": "中心活動室",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "費用",
+        "amount_text": "/",
+        "currency": "",
+        "amount": null,
+        "notes": "來源以斜線表示"
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "羅婉瑩姑娘、侯麗敏姑娘",
+    "notes": "",
+    "source_reference": "PDF p.9 義工團體集會及服務時間，銀鈴健樂團",
+    "uncertain_fields": [
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r01-032",
+    "activity_title": "義工會",
+    "category": "meeting",
+    "description": "討論義工團體情況。",
+    "dates": [
+      {
+        "date_text": "6月18日（星期四）",
+        "start_date": "2026-06-18"
+      }
+    ],
+    "time": "下午3時正",
+    "venue": "中心活動室",
+    "target_participants": "義工",
+    "fee": [
+      {
+        "fee_type": "費用",
+        "amount_text": "/",
+        "currency": "",
+        "amount": null,
+        "notes": "來源以斜線表示"
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "陳美玲主任",
+    "notes": "",
+    "source_reference": "PDF p.9 義工團體集會及服務時間，義工會",
+    "uncertain_fields": [
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period"
+    ],
+    "qa_status": "approved"
+  },
+  {
+    "activity_id": "2026-06-r02-033",
+    "activity_title": "毛巾操A班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月1日",
+        "start_date": "2026-06-01"
+      },
+      {
+        "date_text": "6月8日",
+        "start_date": "2026-06-08"
+      },
+      {
+        "date_text": "6月15日",
+        "start_date": "2026-06-15"
+      },
+      {
+        "date_text": "6月22日",
+        "start_date": "2026-06-22"
+      },
+      {
+        "date_text": "6月29日",
+        "start_date": "2026-06-29"
+      }
+    ],
+    "time": "上午9時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，毛巾操A班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-034",
+    "activity_title": "毛巾操B班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月4日",
+        "start_date": "2026-06-04"
+      },
+      {
+        "date_text": "6月11日",
+        "start_date": "2026-06-11"
+      },
+      {
+        "date_text": "6月18日",
+        "start_date": "2026-06-18"
+      }
+    ],
+    "time": "上午9時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，毛巾操B班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-035",
+    "activity_title": "活力舞 初班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月2日",
+        "start_date": "2026-06-02"
+      },
+      {
+        "date_text": "6月9日",
+        "start_date": "2026-06-09"
+      },
+      {
+        "date_text": "6月30日",
+        "start_date": "2026-06-30"
+      }
+    ],
+    "time": "上午9時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，活力舞 初班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-036",
+    "activity_title": "活力舞 中班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月2日",
+        "start_date": "2026-06-02"
+      },
+      {
+        "date_text": "6月9日",
+        "start_date": "2026-06-09"
+      },
+      {
+        "date_text": "6月30日",
+        "start_date": "2026-06-30"
+      }
+    ],
+    "time": "上午10時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，活力舞 中班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-037",
+    "activity_title": "健康活力運動A班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月8日",
+        "start_date": "2026-06-08"
+      },
+      {
+        "date_text": "6月15日",
+        "start_date": "2026-06-15"
+      },
+      {
+        "date_text": "6月22日",
+        "start_date": "2026-06-22"
+      },
+      {
+        "date_text": "6月29日",
+        "start_date": "2026-06-29"
+      }
+    ],
+    "time": "下午2時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，健康活力運動A班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-038",
+    "activity_title": "健康活力運動B班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月17日",
+        "start_date": "2026-06-17"
+      },
+      {
+        "date_text": "6月24日",
+        "start_date": "2026-06-24"
+      }
+    ],
+    "time": "下午3時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，健康活力運動B班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-039",
+    "activity_title": "健腦活腦小組",
+    "category": "group",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月4日",
+        "start_date": "2026-06-04"
+      },
+      {
+        "date_text": "6月11日",
+        "start_date": "2026-06-11"
+      },
+      {
+        "date_text": "6月18日",
+        "start_date": "2026-06-18"
+      },
+      {
+        "date_text": "6月25日",
+        "start_date": "2026-06-25"
+      }
+    ],
+    "time": "下午2時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，健腦活腦小組",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-040",
+    "activity_title": "長者普通話班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月4日",
+        "start_date": "2026-06-04"
+      },
+      {
+        "date_text": "6月11日",
+        "start_date": "2026-06-11"
+      }
+    ],
+    "time": "下午2時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，長者普通話班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-041",
+    "activity_title": "長者英語會話班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月5日",
+        "start_date": "2026-06-05"
+      },
+      {
+        "date_text": "6月12日",
+        "start_date": "2026-06-12"
+      }
+    ],
+    "time": "下午2時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，長者英語會話班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-042",
+    "activity_title": "英文軟筆書法班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月5日",
+        "start_date": "2026-06-05"
+      },
+      {
+        "date_text": "6月26日",
+        "start_date": "2026-06-26"
+      }
+    ],
+    "time": "下午2時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，英文軟筆書法班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-043",
+    "activity_title": "集體舞 中班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月5日",
+        "start_date": "2026-06-05"
+      },
+      {
+        "date_text": "6月12日",
+        "start_date": "2026-06-12"
+      },
+      {
+        "date_text": "6月26日",
+        "start_date": "2026-06-26"
+      }
+    ],
+    "time": "上午10時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，集體舞 中班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-044",
+    "activity_title": "啞鈴運動班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月10日",
+        "start_date": "2026-06-10"
+      },
+      {
+        "date_text": "6月17日",
+        "start_date": "2026-06-17"
+      },
+      {
+        "date_text": "6月24日",
+        "start_date": "2026-06-24"
+      }
+    ],
+    "time": "下午2時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，啞鈴運動班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  },
+  {
+    "activity_id": "2026-06-r02-045",
+    "activity_title": "彈力橡筋操班",
+    "category": "class",
+    "description": "",
+    "dates": [
+      {
+        "date_text": "6月5日",
+        "start_date": "2026-06-05"
+      },
+      {
+        "date_text": "6月26日",
+        "start_date": "2026-06-26"
+      }
+    ],
+    "time": "上午9時正",
+    "venue": "",
+    "target_participants": "",
+    "fee": [
+      {
+        "fee_type": "",
+        "amount_text": "",
+        "currency": "",
+        "amount": null,
+        "notes": ""
+      }
+    ],
+    "quota": "",
+    "registration_method": "",
+    "registration_period": "",
+    "staff_in_charge": "",
+    "notes": "",
+    "source_reference": "PDF p.10 六月一覽表，彈力橡筋操班",
+    "uncertain_fields": [
+      "description",
+      "venue",
+      "target_participants",
+      "fee",
+      "quota",
+      "registration_method",
+      "registration_period",
+      "staff_in_charge"
+    ],
+    "qa_status": "needs_review"
+  }
+]
