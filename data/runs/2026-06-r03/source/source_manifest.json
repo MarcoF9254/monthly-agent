@@ -1,0 +1,33 @@
+{
+  "manifest_type": "D1 traceability manifest",
+  "run_id": "2026-06-r03",
+  "programme_month": "2026-06",
+  "authoritative_source": {
+    "repository_relative_path": "examples/architecture-review/2026-06/final/2026.6月月刊fin2.pdf",
+    "filename": "2026.6月月刊fin2.pdf",
+    "sha256": "7DC41C29D5F492E32FF57122066E4753075EF369A4DD01E7EDAC4D14E8751C48",
+    "file_size_bytes": 1766478,
+    "role": "sole authoritative final publication"
+  },
+  "replacement_lineage": {
+    "initial_evidence_run": "2026-06-r01",
+    "direct_parent_run": "2026-06-r02",
+    "parent_status": "non-closure-ready replacement evidence",
+    "authority": "Owner-approved HR-005 Page-10 Venue Scope",
+    "strategy_path": "docs/run-strategies/2026-06-r03-correction-strategy.md",
+    "authorized_changes": "For records 2026-06-r02-033 through 2026-06-r02-045 only: replace the prior venue value with an empty string and add venue to uncertain_fields exactly once."
+  },
+  "r02_identities": {
+    "committed_git_lf_sha256": "88F32202E7C16AA000ADEE6440C29555E1D1F148E8A80657BE0944FEC999666F",
+    "historical_windows_crlf_validator_execution_sha256": "57511548C647CE1ADB8F1AC9BE62B111CC9F8D79DB6585F05762817D9D3DAE0F",
+    "semantic_json_equality": true
+  },
+  "explicit_exclusions": [
+    "examples/architecture-review/2026-06/excel/6月一覽表n1.xlsm",
+    "examples/architecture-review/2026-06/drafts/*",
+    "examples/architecture-review/2026-06/drafts/6月份月刊blank form.docx",
+    "ZIP files and any non-authoritative source"
+  ],
+  "original_copy_status": "No source original was copied into the run directory.",
+  "status_at_manifest_creation": "PENDING HUMAN REVIEW / OWNER CLOSURE"
+}

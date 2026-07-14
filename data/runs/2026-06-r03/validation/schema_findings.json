@@ -1,0 +1,9 @@
+{
+  "contract_version": "validation-findings-v1",
+  "tool": "schema_validator",
+  "run_id": "2026-06-r03",
+  "status": "pass",
+  "generated_at": "2026-07-14T08:07:59Z",
+  "source_artifact": "data/runs/2026-06-r03/extraction/extracted_activity_records.json",
+  "findings": []
+}
