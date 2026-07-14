@@ -1,0 +1,27 @@
+{
+  "manifest_type": "D1 traceability manifest",
+  "run_id": "2026-06-r02",
+  "programme_month": "2026-06",
+  "authoritative_source": {
+    "repository_relative_path": "examples/architecture-review/2026-06/final/2026.6月月刊fin2.pdf",
+    "filename": "2026.6月月刊fin2.pdf",
+    "sha256": "7DC41C29D5F492E32FF57122066E4753075EF369A4DD01E7EDAC4D14E8751C48",
+    "file_size_bytes": 1766478,
+    "role": "sole authoritative final publication"
+  },
+  "replacement_lineage": {
+    "immutable_baseline_run": "2026-06-r01",
+    "baseline_merge_commit": "b0b5f4bb94b8bfac84e89fa1bf79965e883fbfe3",
+    "strategy_path": "docs/run-strategies/2026-06-r02-correction-strategy.md",
+    "approved_changes": "Ten HR-003 source_reference-only corrections and thirteen HR-002 page-10 calendar-only additions."
+  },
+  "explicit_exclusions": [
+    "examples/architecture-review/2026-06/excel/6月一覽表n1.xlsm",
+    "examples/architecture-review/2026-06/drafts/*",
+    "examples/architecture-review/2026-06/drafts/6月份月刊blank form.docx",
+    "ZIP files and any non-authoritative source"
+  ],
+  "authority_scope": "Source authority applies only to 2026-06-r01 and this directly derived replacement run 2026-06-r02.",
+  "original_copy_status": "No source original was copied into the run directory.",
+  "contract_note": "This is a minimal D1 traceability manifest, not a new global manifest contract."
+}
