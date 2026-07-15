@@ -86,4 +86,4 @@ The QA workflow is done when:
 - Incorrect, unsupported, unclear, or misleading fields have QA findings with severity levels.
 - Records are marked approved only when key fields are source-supported.
 - Unresolved issues are clearly routed to Human Review.
-- The reviewed output is ready for correction, approval, or downstream newsletter use according to `qa_status`.
+- The reviewed output is ready for correction or record approval according to `qa_status`. Downstream use additionally requires applicable consumer policy and scoped eligibility.

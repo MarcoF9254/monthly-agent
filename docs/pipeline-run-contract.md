@@ -139,21 +139,23 @@ Every mutation after extraction must remain traceable through `qa/qa_review_note
 `qa_status` remains anchored to the enum in `schemas/activity.schema.json`:
 
 - `pending`: the record is newly extracted or has not completed the required QA review.
-- `approved`: key fields are source-supported and no unresolved issue prevents downstream use.
-- `needs_review`: source ambiguity, conflict, missing evidence, or another unresolved issue requires Human Review.
+- `approved`: record review is complete, key fields are source-supported, and no unresolved record-level issue prevents approval. It grants no universal downstream permission.
+- `needs_review`: source ambiguity, conflict, missing evidence, or another unresolved record-review issue requires Human Review. It does not necessarily mean every fact is inaccurate. Consumer-specific completeness is evaluated separately and does not itself determine `qa_status`.
 - `rejected`: the record must not proceed because review determined it is unsupported, out of scope, duplicated without a valid retained instance, or otherwise unsuitable for approval.
 
-These values describe record workflow state. They are not run outcomes.
+These values describe record review state. They are neither run outcomes nor consumer eligibility decisions. Empty, missing, uncertain, or unmatched values must not acquire affirmative meaning.
 
 Human Review decision concepts are separate from the schema enum. Decisions such as correcting a value, accepting source evidence, retaining an uncertainty, treating entries as duplicates, or declining an activity are recorded as review decisions first; the reviewer then maps the resulting record state to one of the four allowed `qa_status` values. Decision labels must not be written into `qa_status`.
 
 ## Run Outcomes
 
-- `approved`: all records included for downstream use have `qa_status: "approved"`, no records remain blocked, and no unresolved run-level issue remains.
+- `approved`: all records in the run approval set have `qa_status: "approved"`, no records remain blocked from record approval, and no unresolved run-level issue remains.
 - `partially_approved`: at least one record is approved and at least one record is withheld because it is `needs_review`, `rejected`, or otherwise unresolved.
 - `blocked`: no reliable approval set can be released, or an unresolved run-level issue prevents approval closure.
 
 Run outcomes do not extend the `qa_status` enum and must be recorded in `run_summary.md`.
+
+Run outcomes describe evidence-review closure only. `approval/approved_records.json` is a record-review approval set, not a universal consumer payload. Consumer use requires separate scoped eligibility and its projection contract.
 
 ## Approval Artifact Coexistence
 
@@ -164,6 +166,8 @@ For a `partially_approved` run, `approval/approved_records.json` and `approval/b
 For a `blocked` run, `approval/blocked_records.md` and `approval/blocked_run_summary.md` are present. `approval/approved_records.json` is absent because a blocked run releases no approval set.
 
 ## Forward Compatibility
+
+These prospective clarifications do not alter historical artifacts. Closed R03 records `2026-06-r02-033` through `2026-06-r02-045` remain `needs_review` and outside `approved_records.json`.
 
 D1 reserves stable stage directories and artifact boundaries for the D2 machine-readable Findings Contract without reorganizing existing runs. D2A defines the JSON contract, and D2B adds validator emission prospectively. Existing `.txt` validation artifacts remain required.
 

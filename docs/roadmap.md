@@ -2,7 +2,7 @@
 
 ## Current Focus
 
-Post-D2B status and separately approved next-step planning
+Scoped Downstream Eligibility Stage 1 architecture accepted; implementation not authorized
 
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
@@ -55,6 +55,10 @@ Status: Completed and merged in PR #10.
 
 ## Paused / Backlog
 
+### Scoped Downstream Eligibility Implementation
+
+Option D and ADR-007 are accepted architecture. Builder and consumer-validator implementation, runtime artifacts, migration, and activation remain pending separate authorization.
+
 ### BR-006 Per-Session Date Completeness
 
 Implemented, activation held. Requires vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before runtime activation.
@@ -100,5 +104,6 @@ Status: Completed — BR-006 remains implemented with direct unit coverage but i
 ### Milestone 5 - Newsletter Generation
 
 - Use approved records only.
+- Require consumer-scoped owner eligibility; record approval alone is not permission.
 - Preserve participant-facing practical details.
 - Avoid publishing unresolved uncertainty.
