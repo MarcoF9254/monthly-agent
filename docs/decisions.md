@@ -108,3 +108,34 @@ This decision does not implement BR-006 by itself. BR-006 implementation still r
 Rules that use `uncertain_fields` must explicitly declare whether they accept top-level markers, indexed markers, or both with precedence rules.
 
 Indexed uncertainty paths reuse a narrow deterministic path vocabulary already used by validation findings, but `uncertain_fields` must not be treated as full JSONPath or as a fuzzy or semantic path language.
+
+## ADR-007: Scoped Downstream Eligibility
+
+Status: Accepted
+
+### Context
+
+`qa_status` describes record review state and does not grant universal downstream permission. Different consumers may safely use different source-supported field subsets, while closed run evidence must remain immutable.
+
+The Architecture Owner reviewed four options: eligibility in the activity schema; eligibility in an approval or authority artifact alone; projection alone; and policy plus scoped approval plus generated projection. An authority artifact alone does not define deterministic least-data delivery or projection provenance. A projection alone cannot grant or prove owner authority. Embedding eligibility in the activity schema couples mutable consumer policy to evidence.
+
+### Decision
+
+The Architecture Owner explicitly accepted Option D: separate closed evidence, owner authority, consumer policy, generated projection, and projection provenance.
+
+- Eligibility decisions are immutable, append-only, consumer-scoped authority artifacts outside `data/runs/`.
+- Only a verifiable accepted owner decision for an exact `run_id`, `activity_id`, and `consumer_id` can grant its exact `allowed_fields`; everything else fails closed.
+- Supersession or revocation creates a new decision artifact and never overwrites history.
+- Consumer projections are deterministic, field-allowlisted, reproducible artifacts outside `data/runs/`, with separately bound provenance.
+- Decisions do not transfer between consumers or mutate `qa_status`, closed evidence, or approval artifacts.
+- Future authority artifacts belong under `data/consumer-eligibility/<consumer_id>/`; future projections and provenance belong under `data/projections/<consumer_id>/`.
+
+This decision accepts architecture only. It does not implement or activate either draft contract, issue an eligibility decision, generate a projection, authorize migration, change existing consumer behavior, or activate downstream use.
+
+### Consequences
+
+Future implementation requires an immutable decision lifecycle, verifiable owner authority, deterministic decision-chain resolution, consumer-specific validation, strict field allowlists, RFC 8785 payload canonicalization, payload hashes, stable projection identity, and provenance binding.
+
+Missing, malformed, unverifiable, unmatched, duplicated, cyclic, cross-scope, revoked, or otherwise broken authority fails closed. Missing or mismatched projection/provenance binding also fails closed.
+
+Existing closed runs remain unchanged. In particular, R03 remains `partially_approved`: 32 records are approved, 13 records remain `needs_review`, and no eligibility decision or downstream activation is created by this ADR.

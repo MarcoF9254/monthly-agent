@@ -60,7 +60,7 @@ Newsletter generation should use approved records only. Record approval is neces
 
 Downstream use separates closed evidence, explicit owner authority, consumer policy, and a deterministic field-allowlisted projection with separately bound provenance. Eligibility decisions are immutable and append-only; supersession creates a new artifact. Projections are reproducible artifacts with explicit identity and provenance. Both live outside immutable `data/runs/` trees, reference evidence by `run_id` and `activity_id`, fail closed when authority or binding is missing or invalid, and never transfer between consumers.
 
-Stage 1 documents this direction only. It does not activate a consumer, implement a builder or validator, or change the activity schema.
+Stage 1 establishes accepted architecture only. It does not activate a consumer, implement a builder or validator, or change the activity schema.
 
 ## Data Flow
 

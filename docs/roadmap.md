@@ -2,7 +2,7 @@
 
 ## Current Focus
 
-Scoped Downstream Eligibility Stage 1 architecture drafting
+Scoped Downstream Eligibility Stage 1 architecture accepted; implementation not authorized
 
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
@@ -57,7 +57,7 @@ Status: Completed and merged in PR #10.
 
 ### Scoped Downstream Eligibility Implementation
 
-Architecture documentation only is authorized. Final acceptance, builder and consumer-validator implementation, runtime artifacts, and activation remain pending separate authorization.
+Option D and ADR-007 are accepted architecture. Builder and consumer-validator implementation, runtime artifacts, migration, and activation remain pending separate authorization.
 
 ### BR-006 Per-Session Date Completeness
 

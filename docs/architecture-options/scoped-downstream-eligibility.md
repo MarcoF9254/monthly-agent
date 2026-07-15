@@ -1,6 +1,6 @@
 # Scoped Downstream Eligibility — Architecture Options
 
-Status: Draft for independent review. Option D is owner-authorized for drafting only, not finally accepted or activated.
+Status: Architecture accepted. The Architecture Owner explicitly accepted Option D and ADR-007. Implementation and activation are not authorized.
 
 ## Owner-reviewed Options
 
@@ -28,4 +28,4 @@ Use a consumer policy contract, an immutable owner decision scoped to one eviden
 
 ## Recommendation
 
-Option D. Missing, unmatched, unverifiable, duplicated, cyclic, cross-scope, or otherwise broken authority fails closed. Final architecture acceptance and all implementation or activation require later explicit Architecture Owner approval.
+Option D was explicitly accepted by the Architecture Owner. Missing, unmatched, unverifiable, duplicated, cyclic, cross-scope, or otherwise broken authority fails closed. Acceptance does not implement contracts, issue eligibility, generate projections, authorize migration, or activate downstream use.

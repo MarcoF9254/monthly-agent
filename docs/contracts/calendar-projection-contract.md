@@ -1,6 +1,6 @@
 # Calendar Projection Contract Draft
 
-Status: not implemented or active
+Status: architecture contract specified; not implemented or runtime-active
 
 Contract version: `calendar-projection/v1-draft`
 
@@ -28,7 +28,7 @@ Every projection has a stable `projection_id` deterministically derived from `co
 - `consumer_id`
 - projection contract and builder versions
 - generation time
-- source evidence locator or `source_reference`
+- `source_evidence_locator`, populated from the closed evidence record's `source_reference`
 
 `payload_sha256` is computed over the exact UTF-8 bytes produced by the JSON Canonicalization Scheme in RFC 8785. Object keys are sorted as that scheme requires, array order is preserved, and insignificant whitespace is absent. The payload bytes used by the renderer must be exactly those canonical bytes.
 

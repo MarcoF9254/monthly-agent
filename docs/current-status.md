@@ -18,7 +18,7 @@ BR-001 through BR-005 are implemented, tested, and active in the runtime registr
 
 ## Current Milestone
 
-Scoped Downstream Eligibility Stage 1 is authorized for architecture drafting only. Option D is the drafting direction; final acceptance, implementation, and activation remain pending.
+Scoped Downstream Eligibility Stage 1 architecture is accepted. The Architecture Owner explicitly accepted Option D and ADR-007. No implementation milestone is active; contracts, runtime behavior, migration, eligibility issuance, projection generation, and downstream activation remain unimplemented and unauthorized.
 
 Milestone 3.9 / D2B — Machine-readable Validation Findings Emission (completed and merged in PR #10)
 
@@ -46,15 +46,15 @@ git status --short
 
 ## Current Workflow Stage
 
+Closed R03 baseline: 45 records total; 32 approved; 13 `needs_review`; final D1 outcome `partially_approved`; downstream not activated. The 13 withheld calendar-only records remain outside `approved_records.json` and have no consumer eligibility decision.
+
 Milestone 3.7 / D1 Pipeline Run Contract, D2A, and D2B are completed and merged. D2B implements Validation Findings JSON emission while preserving existing `PASS` / `FAIL` text structure, validation ordering, and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
 BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ## Current Task
 
-Document the separation of record review, owner authority, consumer policy, and generated projection. No runtime implementation is authorized.
-
-No implementation milestone is currently active. D3 clarification or vertical-slice evidence planning remains subject to separate owner approval.
+The scoped downstream eligibility architecture milestone is accepted. No active implementation milestone exists, and no runtime implementation or downstream activation is authorized. D3 remains unresolved and subject to separate owner approval.
 
 ## Known Technical Debt
 

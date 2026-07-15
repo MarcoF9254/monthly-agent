@@ -1,6 +1,6 @@
 # Scoped Consumer Eligibility Contract Draft
 
-Status: not implemented or active
+Status: architecture contract specified; not implemented or runtime-active
 
 Contract version: `scoped-consumer-eligibility/v1-draft`
 
