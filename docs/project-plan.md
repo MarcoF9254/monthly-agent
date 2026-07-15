@@ -20,7 +20,7 @@ The first version focuses on:
 3. Save structured extraction results to `data/output/`.
 4. Use `prompts/qa-check-monthly-info.md` to check completeness and accuracy.
 5. Resolve flagged issues.
-6. Mark approved records for newsletter generation.
+6. Mark record review state independently from consumer-specific newsletter authorization.
 
 ## Data Quality Priorities
 

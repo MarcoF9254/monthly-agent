@@ -1,6 +1,6 @@
 # Current Project Status
 
-Last Updated: 2026-07-12
+Last Updated: 2026-07-15
 Repository: monthly-agent
 Default Branch: main
 
@@ -17,6 +17,8 @@ The project has completed D2B machine-readable validation findings emission. Fur
 BR-001 through BR-005 are implemented, tested, and active in the runtime registry. BR-006 is implemented with direct unit coverage, but it is not registered or runtime active.
 
 ## Current Milestone
+
+Scoped Downstream Eligibility Stage 1 is authorized for architecture drafting only. Option D is the drafting direction; final acceptance, implementation, and activation remain pending.
 
 Milestone 3.9 / D2B — Machine-readable Validation Findings Emission (completed and merged in PR #10)
 
@@ -49,6 +51,8 @@ Milestone 3.7 / D1 Pipeline Run Contract, D2A, and D2B are completed and merged.
 BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
 
 ## Current Task
+
+Document the separation of record review, owner authority, consumer policy, and generated projection. No runtime implementation is authorized.
 
 No implementation milestone is currently active. D3 clarification or vertical-slice evidence planning remains subject to separate owner approval.
 
