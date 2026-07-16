@@ -3,13 +3,16 @@ from pathlib import Path
 
 import pytest
 
-from tools.oar_verifier.bundle import Scenario
+from tools.oar_verifier.authority import verify_anchor_snapshot
+from tools.oar_verifier.bundle import FICTIONAL_SCOPE, Scenario
+from tools.oar_verifier.canonical import sha256
 from tools.oar_verifier.errors import VerificationFailure
 from tools.oar_verifier.lifecycle import (
     _business_subjects,
     _outcome_from_subjects,
     _resolve_authority_tips,
 )
+import tools.oar_verifier.limits as limits
 
 
 SCOPE = {
@@ -89,3 +92,107 @@ def test_business_subject_supersession_cycle_fails_closed(monkeypatch):
     with pytest.raises(VerificationFailure) as captured:
         _business_subjects(scenario, {"a": {}, "b": {}})
     assert captured.value.result.rule_id == "OAR-AL-003"
+
+
+def _assert_depth_boundary(monkeypatch, traversal):
+    monkeypatch.setattr(limits, "MAX_LIFECYCLE_DEPTH", 2)
+    traversal()
+
+    monkeypatch.setattr(limits, "MAX_LIFECYCLE_DEPTH", 1)
+    with pytest.raises(VerificationFailure) as captured:
+        traversal()
+    result = captured.value.result
+    assert not result.success
+    assert result.classification == "resource_rejection"
+    assert result.rule_id == "PROTO-RESOURCE-LIFECYCLE-DEPTH"
+    assert result.rejection_stage == "resource-admission"
+
+
+def test_snapshot_lineage_depth_boundary_and_plus_one_use_actual_traversal(monkeypatch):
+    root = {
+        "contract_version": "authority-registry-snapshot/0.2.0-draft",
+        "registry_id": "registry-1",
+        "snapshot_id": "snapshot-1",
+        "scope": FICTIONAL_SCOPE,
+        "supersedes_snapshot_id": None,
+        "supersedes_snapshot_artifact_sha256": None,
+    }
+    middle = {
+        **root,
+        "snapshot_id": "snapshot-2",
+        "supersedes_snapshot_id": "snapshot-1",
+        "supersedes_snapshot_artifact_sha256": sha256(root),
+    }
+    current = {
+        **root,
+        "snapshot_id": "snapshot-3",
+        "supersedes_snapshot_id": "snapshot-2",
+        "supersedes_snapshot_artifact_sha256": sha256(middle),
+    }
+    digest = sha256(current)
+    scenario = Scenario(
+        Path("."),
+        Path("."),
+        {
+            "authorized_tip_id": "snapshot-3",
+            "expected_snapshot_artifact_sha256": digest,
+            "registry_id": "registry-1",
+            "scope": FICTIONAL_SCOPE,
+        },
+        Path("."),
+        {
+            "snapshot_id": "snapshot-3",
+            "snapshot_artifact_sha256": digest,
+            "registry_id": "registry-1",
+            "scope": FICTIONAL_SCOPE,
+        },
+        {"root": root, "middle": middle, "current": current},
+        [],
+    )
+    _assert_depth_boundary(monkeypatch, lambda: verify_anchor_snapshot(scenario))
+
+
+def test_authority_supersession_depth_boundary_and_plus_one_use_actual_traversal(monkeypatch):
+    first = {
+        "authority_id": "a",
+        "subject_id": "subject",
+        "authority_purpose": "run-metadata-binding",
+        "scope": SCOPE,
+        "supersedes_authority_id": None,
+        "supersedes_authority_artifact_sha256": None,
+    }
+    second = {
+        **first,
+        "authority_id": "b",
+        "supersedes_authority_id": "a",
+        "supersedes_authority_artifact_sha256": sha256(first),
+    }
+    third = {
+        **first,
+        "authority_id": "c",
+        "supersedes_authority_id": "b",
+        "supersedes_authority_artifact_sha256": sha256(second),
+    }
+    scenario = _scenario({"a": first, "b": second, "c": third})
+    entries = [
+        {"authority_id": authority_id, "authority_status": "accepted"}
+        for authority_id in ("a", "b", "c")
+    ]
+    _assert_depth_boundary(monkeypatch, lambda: _resolve_authority_tips(scenario, entries, set()))
+
+
+def test_business_subject_depth_boundary_and_plus_one_use_actual_traversal(monkeypatch):
+    first = {"subject_id": "a", "supersedes_subject_id": None, "supersedes_subject_sha256": None}
+    second = {
+        "subject_id": "b",
+        "supersedes_subject_id": "a",
+        "supersedes_subject_sha256": sha256(first),
+    }
+    third = {
+        "subject_id": "c",
+        "supersedes_subject_id": "b",
+        "supersedes_subject_sha256": sha256(second),
+    }
+    scenario = _scenario({"a": first, "b": second, "c": third})
+    tips = {subject_id: {} for subject_id in ("a", "b", "c")}
+    _assert_depth_boundary(monkeypatch, lambda: _business_subjects(scenario, tips))
