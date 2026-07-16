@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from tools.oar_verifier.lifecycle import LIFECYCLE_STAGES
-from tools.oar_verifier.verifier import _trace_for_tests, verify
+from tools.oar_verifier.verifier import _verify_with_trace, verify
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,21 +39,22 @@ def test_pre_revocation_outcome():
 
 
 def test_post_revocation_outcome_and_actual_trace():
-    result = run_scenario("post-revocation")
+    scenario = FIXTURES / "post-revocation"
+    result, trace = _verify_with_trace(
+        ROOT, scenario, scenario / "resolution-bundle-root.json", scenario / "trust-anchor.json"
+    )
     assert result.success
     assert result.outcome["selected_activity_ids"] == []
     assert result.outcome["monthly_selection_effective"] is False
-    trace = _trace_for_tests()
     assert trace == LIFECYCLE_STAGES
     assert trace.index("authorized-revocation-resolution") < trace.index("authority-supersession-resolution")
 
 
 def test_repeated_execution_is_deterministic():
     first = run_scenario("post-revocation")
-    first_trace = _trace_for_tests()
     second = run_scenario("post-revocation")
     assert second == first
-    assert _trace_for_tests() == first_trace
+    assert first.classification == second.classification == "success"
 
 
 def test_public_api_has_no_lifecycle_configuration():
@@ -90,4 +91,5 @@ def test_cli_executes_with_separately_supplied_anchor():
     assert result.returncode == 0
     payload = json.loads(result.stdout)
     assert payload["success"] is True
+    assert payload["classification"] == "success"
     assert payload["outcome"]["selected_activity_ids"] == ["example-activity-2099-01-001"]

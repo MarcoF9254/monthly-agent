@@ -3,6 +3,7 @@ from typing import Any
 from .bundle import Scenario
 from .canonical import sha256
 from .errors import reject
+from .limits import enforce_lifecycle_depth
 
 LIFECYCLE_STAGES = (
     "authorized-revocation-resolution",
@@ -27,9 +28,17 @@ def _resolve_authority_tips(scenario: Scenario, entries: list[dict[str, Any]], r
         if envelope:
             active[envelope["authority_id"]] = envelope
     authority_ids = set(active)
-    for envelope in active.values():
-        predecessor = envelope["supersedes_authority_id"]
-        if predecessor is not None:
+    for authority_id in sorted(active):
+        seen = set()
+        envelope = active[authority_id]
+        depth = 0
+        while envelope["supersedes_authority_id"] is not None:
+            if envelope["authority_id"] in seen:
+                reject("OAR-AL-002", "Authority lifecycle resolver", "authority-lifecycle", "Cyclic authority supersession.")
+            seen.add(envelope["authority_id"])
+            depth += 1
+            enforce_lifecycle_depth(depth)
+            predecessor = envelope["supersedes_authority_id"]
             if predecessor not in authority_ids:
                 reject("OAR-AL-002", "Authority lifecycle resolver", "authority-lifecycle", "Broken authority supersession.")
             previous = active[predecessor]
@@ -37,6 +46,7 @@ def _resolve_authority_tips(scenario: Scenario, entries: list[dict[str, Any]], r
                 reject("OAR-AL-002", "Authority lifecycle resolver", "authority-lifecycle", "Authority predecessor digest differs.")
             if previous["authority_purpose"] != envelope["authority_purpose"] or previous["scope"] != envelope["scope"]:
                 reject("OAR-AL-002", "Authority lifecycle resolver", "authority-lifecycle", "Cross-purpose or cross-scope supersession.")
+            envelope = previous
     superseded = {e["supersedes_authority_id"] for e in active.values() if e["supersedes_authority_id"]}
     tips = {}
     for envelope in active.values():
@@ -78,38 +88,78 @@ def _business_subjects(scenario: Scenario, tips: dict[str, dict[str, Any]]) -> l
     subjects = [scenario.by_subject_id(subject_id) for subject_id in tips]
     subjects = [subject for subject in subjects if subject is not None]
     by_id = {subject["subject_id"]: subject for subject in subjects}
-    for subject in subjects:
-        predecessor = subject.get("supersedes_subject_id")
-        if predecessor in authority_ids:
-            reject("OAR-AL-003", "Authority lifecycle resolver", "business-subject-lifecycle", "Business supersession names an authority identity.")
-        if predecessor is not None:
+    for subject_id in sorted(by_id):
+        seen = set()
+        subject = by_id[subject_id]
+        depth = 0
+        while subject.get("supersedes_subject_id") is not None:
+            if subject["subject_id"] in seen:
+                reject("OAR-AL-003", "Authority lifecycle resolver", "business-subject-lifecycle", "Cyclic business-subject supersession.")
+            seen.add(subject["subject_id"])
+            depth += 1
+            enforce_lifecycle_depth(depth)
+            predecessor = subject["supersedes_subject_id"]
+            if predecessor in authority_ids:
+                reject("OAR-AL-003", "Authority lifecycle resolver", "business-subject-lifecycle", "Business supersession names an authority identity.")
             previous = by_id.get(predecessor)
             if previous is None or sha256(previous) != subject["supersedes_subject_sha256"]:
                 reject("OAR-AL-003", "Authority lifecycle resolver", "business-subject-lifecycle", "Broken business-subject supersession.")
+            subject = previous
     superseded = {s.get("supersedes_subject_id") for s in subjects if s.get("supersedes_subject_id")}
     return [subject for subject in subjects if subject["subject_id"] not in superseded]
 
 
-def resolve(scenario: Scenario, entries: list[dict[str, Any]], observe) -> dict[str, Any]:
-    validate_lifecycle_stage_order(LIFECYCLE_STAGES)
-    observe(LIFECYCLE_STAGES[0])
-    revoked = _revocations(scenario, entries)
-    observe(LIFECYCLE_STAGES[1])
-    observe(LIFECYCLE_STAGES[2])
-    tips = _resolve_authority_tips(scenario, entries, revoked)
-    observe(LIFECYCLE_STAGES[3])
-    subjects = _business_subjects(scenario, tips)
-    run = next((s for s in subjects if s["contract_version"] == "run-metadata-binding-subject/0.2.0-draft"), None)
-    if run is None:
-        reject("PROTO-OUTCOME-001", "Run-metadata validator", "outcome-resolution", "No effective run metadata.")
-    eligibility = {
-        s["activity_id"]: s["decision"]
-        for s in subjects if s["contract_version"] == "calendar-eligibility-subject/0.3.0-draft"
-    }
-    selection = next(
-        (s for s in subjects if s["contract_version"] == "calendar-monthly-selection-subject/0.3.0-draft"),
-        None,
+def _group_by_business_key(
+    subjects: list[dict[str, Any]],
+    contract_version: str,
+    fields: tuple[str, ...],
+    rule_id: str,
+    component: str,
+) -> dict[tuple[Any, ...], dict[str, Any]]:
+    groups: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
+    for subject in subjects:
+        if subject["contract_version"] == contract_version:
+            key = tuple(subject[field] for field in fields)
+            groups.setdefault(key, []).append(subject)
+    if any(len(candidates) > 1 for candidates in groups.values()):
+        reject(rule_id, component, "business-key-resolution", "Multiple effective subjects share one business key.")
+    return {key: candidates[0] for key, candidates in groups.items()}
+
+
+def _outcome_from_subjects(subjects: list[dict[str, Any]]) -> dict[str, Any]:
+    runs = _group_by_business_key(
+        subjects,
+        "run-metadata-binding-subject/0.2.0-draft",
+        ("run_id", "consumer_id", "programme_month"),
+        "PROTO-AMBIGUOUS-RUN-METADATA",
+        "Run-metadata validator",
     )
+    selections = _group_by_business_key(
+        subjects,
+        "calendar-monthly-selection-subject/0.3.0-draft",
+        ("run_id", "consumer_id", "programme_month"),
+        "PROTO-AMBIGUOUS-MONTHLY-SELECTION",
+        "Authority lifecycle resolver",
+    )
+    eligibility_subjects = _group_by_business_key(
+        subjects,
+        "calendar-eligibility-subject/0.3.0-draft",
+        ("run_id", "consumer_id", "activity_id"),
+        "PROTO-AMBIGUOUS-CALENDAR-ELIGIBILITY",
+        "Authority lifecycle resolver",
+    )
+    if not runs:
+        reject("PROTO-OUTCOME-001", "Run-metadata validator", "outcome-resolution", "No effective run metadata.")
+    if len(runs) != 1:
+        reject("PROTO-AMBIGUOUS-RUN-METADATA", "Run-metadata validator", "business-key-resolution", "Multiple effective run-metadata keys.")
+    run = next(iter(runs.values()))
+    if len(selections) > 1:
+        reject("PROTO-AMBIGUOUS-MONTHLY-SELECTION", "Authority lifecycle resolver", "business-key-resolution", "Multiple effective monthly-selection keys.")
+    selection = next(iter(selections.values()), None)
+    eligibility = {
+        subject["activity_id"]: subject["decision"]
+        for _key, subject in sorted(eligibility_subjects.items())
+    }
     selected = [] if selection is None else selection["selected_activity_ids"]
     if any(eligibility.get(activity_id) != "eligible" for activity_id in selected):
         reject("PROTO-OUTCOME-002", "Authority lifecycle resolver", "outcome-resolution", "Selection contains an ineligible activity.")
@@ -125,3 +175,15 @@ def resolve(scenario: Scenario, entries: list[dict[str, Any]], observe) -> dict[
         ),
         "monthly_selection_effective": selection is not None,
     }
+
+
+def resolve(scenario: Scenario, entries: list[dict[str, Any]], observe) -> dict[str, Any]:
+    validate_lifecycle_stage_order(LIFECYCLE_STAGES)
+    observe(LIFECYCLE_STAGES[0])
+    revoked = _revocations(scenario, entries)
+    observe(LIFECYCLE_STAGES[1])
+    observe(LIFECYCLE_STAGES[2])
+    tips = _resolve_authority_tips(scenario, entries, revoked)
+    observe(LIFECYCLE_STAGES[3])
+    subjects = _business_subjects(scenario, tips)
+    return _outcome_from_subjects(subjects)

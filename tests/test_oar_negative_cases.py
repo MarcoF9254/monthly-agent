@@ -26,6 +26,7 @@ def test_exact_negative_first_failure(case, tmp_path):
         result = verify(ROOT, target, bundle, anchor)
         classification = "ordinary-verifier first-failure"
     assert not result.success
+    assert result.classification == "semantic_rejection"
     assert result.rule_id == case["expected_rule_id"]
     assert result.primary_component == case["expected_primary_component"]
     assert result.rejection_stage == case["expected_rejection_stage"]
