@@ -3,6 +3,7 @@ from typing import Any
 from .bundle import FICTIONAL_SCOPE, Scenario
 from .canonical import sha256
 from .errors import reject
+from .limits import enforce_lifecycle_depth
 
 
 ORDINARY_SUBJECT_VERSIONS = {
@@ -51,10 +52,13 @@ def verify_anchor_snapshot(scenario: Scenario) -> dict[str, Any]:
     by_id = {snapshot["snapshot_id"]: snapshot for snapshot in snapshots}
     seen = set()
     node = current
+    depth = 0
     while node["supersedes_snapshot_id"] is not None:
         if node["snapshot_id"] in seen:
             reject("BAI-LC-005", "Lifecycle resolver", "snapshot-lineage", "Cyclic snapshot lineage.")
         seen.add(node["snapshot_id"])
+        depth += 1
+        enforce_lifecycle_depth(depth)
         predecessor = by_id.get(node["supersedes_snapshot_id"])
         if predecessor is None or sha256(predecessor) != node["supersedes_snapshot_artifact_sha256"]:
             reject("BAI-LC-005", "Lifecycle resolver", "snapshot-lineage", "Broken snapshot predecessor.")

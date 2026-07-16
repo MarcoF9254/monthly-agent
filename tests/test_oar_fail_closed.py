@@ -46,6 +46,7 @@ def test_non_fictional_scope_rejected(tmp_path):
     (target / "trust-anchor.json").write_text(json.dumps(anchor), encoding="utf-8")
     result = verify(ROOT, target, target / "resolution-bundle-root.json", target / "trust-anchor.json")
     assert result.rule_id == "PROTO-SCOPE-001"
+    assert result.classification == "semantic_rejection"
 
 
 def test_path_traversal_rejected(tmp_path):

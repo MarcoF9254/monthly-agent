@@ -25,6 +25,7 @@ def main(argv=None) -> int:
     )
     print(json.dumps({
         "success": result.success,
+        "classification": result.classification,
         "rule_id": result.rule_id,
         "primary_component": result.primary_component,
         "rejection_stage": result.rejection_stage,

@@ -5,12 +5,6 @@ from .bundle import load_scenario
 from .errors import VerificationFailure, VerificationResult
 from .lifecycle import resolve
 
-_LAST_TRACE: tuple[str, ...] = ()
-
-
-def _trace_for_tests() -> tuple[str, ...]:
-    return _LAST_TRACE
-
 
 def verify(
     repository_root: Path,
@@ -18,17 +12,23 @@ def verify(
     bundle_root_path: Path,
     trust_anchor_path: Path,
 ) -> VerificationResult:
-    global _LAST_TRACE
+    result, _trace = _verify_with_trace(repository_root, scenario_root, bundle_root_path, trust_anchor_path)
+    return result
+
+
+def _verify_with_trace(
+    repository_root: Path,
+    scenario_root: Path,
+    bundle_root_path: Path,
+    trust_anchor_path: Path,
+) -> tuple[VerificationResult, tuple[str, ...]]:
     trace: list[str] = []
-    _LAST_TRACE = ()
     try:
         scenario = load_scenario(repository_root, scenario_root, bundle_root_path, trust_anchor_path)
         snapshot = verify_anchor_snapshot(scenario)
         verify_publication_bootstrap(scenario, snapshot)
         entries = verify_ordinary_membership(scenario, snapshot)
         outcome = resolve(scenario, entries, trace.append)
-        _LAST_TRACE = tuple(trace)
-        return VerificationResult(True, None, None, None, "Fictional authority scenario verified.", outcome)
+        return VerificationResult(True, "success", None, None, None, "Fictional authority scenario verified.", outcome), tuple(trace)
     except VerificationFailure as failure:
-        _LAST_TRACE = tuple(trace)
-        return failure.result
+        return failure.result, tuple(trace)

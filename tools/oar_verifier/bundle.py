@@ -4,6 +4,12 @@ from typing import Any
 
 from .canonical import identity_sha256, load_json, sha256
 from .errors import reject
+from .limits import (
+    enforce_file_bytes,
+    enforce_inventory_count,
+    enforce_snapshot_entries,
+    enforce_total_bytes,
+)
 from .schema_validation import SchemaSet
 
 
@@ -65,6 +71,12 @@ def load_scenario(
     if not trust_anchor_path.exists():
         reject("BAI-TA-001", "Operational caller", "production-admission", "External trust anchor is missing.")
     anchor_path = trust_anchor_path.resolve(strict=True)
+    bundle_bytes = bundle_path.stat().st_size
+    anchor_bytes = anchor_path.stat().st_size
+    enforce_file_bytes(bundle_bytes)
+    enforce_file_bytes(anchor_bytes)
+    admitted_bytes = bundle_bytes + anchor_bytes
+    enforce_total_bytes(admitted_bytes)
     for supplied in (bundle_path, anchor_path):
         try:
             supplied.relative_to(root)
@@ -81,6 +93,7 @@ def load_scenario(
     _exact_scope(anchor.get("scope"))
 
     inventory = bundle["artifact_inventory"]
+    enforce_inventory_count(len(inventory))
     logical = {}
     physical = set()
     for item in inventory:
@@ -108,7 +121,13 @@ def load_scenario(
         except ValueError:
             reject("PROTO-FS-003", "Bundle verifier", "filesystem-admission", "Resolved artifact escapes scenario root.")
         resolved_declared.add(resolved)
+        artifact_bytes = resolved.stat().st_size
+        enforce_file_bytes(artifact_bytes)
+        admitted_bytes += artifact_bytes
+        enforce_total_bytes(admitted_bytes)
         artifact = load_json(resolved)
+        if artifact.get("contract_version") == "authority-registry-snapshot/0.2.0-draft":
+            enforce_snapshot_entries(len(artifact.get("entries", [])))
         schemas.validate(artifact, "bundle-artifact", item["artifact_type"])
         artifacts[item["artifact_path"]] = artifact
 
