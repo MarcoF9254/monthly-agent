@@ -2,7 +2,7 @@
 
 ## Current Focus
 
-Scoped Downstream Eligibility Stage 1 architecture accepted; implementation not authorized
+Calendar-Only Vertical Slice contract drafting and revision under `OD-CAL-ARCH-001`, `OD-CAL-ARCH-002`, and contract-only clarification `OD-CAL-ARCH-003`; implementation not authorized
 
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
@@ -58,6 +58,18 @@ Status: Completed and merged in PR #10.
 ### Scoped Downstream Eligibility Implementation
 
 Option D and ADR-007 are accepted architecture. Builder and consumer-validator implementation, runtime artifacts, migration, and activation remain pending separate authorization.
+
+### Calendar-Only Vertical Slice Contracts
+
+Status: contract drafting and revision authorized. Direction: per-activity canonical projections plus a monthly manifest bound exactly to a separate externally authorized monthly selection.
+
+- Draft eligibility, authority registry, monthly selection, projection, and manifest schemas at `0.x`.
+- Keep exact-field eligibility permission separate from monthly publication inclusion.
+- Require external revocation verification and complete selection-to-manifest and manifest-to-projection binding.
+- Require typed non-transferable authority purposes and exact canonical authorization-subject digest binding.
+- Design fictional positive and negative fixtures without creating R03 artifacts.
+- Require implementation validation, independent review, and owner acceptance before runtime activation.
+- Preserve blockers for authority/revocation schemas and verifiers, bounded resolver input, deterministic registry publication, and authoritative run/month binding.
 
 ### BR-006 Per-Session Date Completeness
 

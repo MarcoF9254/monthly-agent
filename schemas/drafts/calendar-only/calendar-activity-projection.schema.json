@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/calendar-only/calendar-activity-projection.schema.json",
+  "title": "Calendar Per-Activity Canonical Projection Draft 0.1",
+  "description": "Draft, non-active projection envelope. Only the payload property is supplied to the renderer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "projection_id",
+    "consumer_id",
+    "evidence",
+    "eligibility_decision_ids",
+    "payload_sha256",
+    "source_evidence_locator",
+    "payload"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "calendar-projection/0.1.0-draft"
+    },
+    "projection_id": {
+      "type": "string",
+      "pattern": "^calproj_sha256_[0-9a-f]{64}$"
+    },
+    "consumer_id": {
+      "const": "calendar-renderer"
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "activity_id"
+      ],
+      "properties": {
+        "run_id": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-r[0-9]{2}$"
+        },
+        "activity_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "eligibility_decision_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_evidence_locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "activity_id",
+        "title",
+        "dates",
+        "time"
+      ],
+      "properties": {
+        "activity_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dates": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "date_text"
+            ],
+            "properties": {
+              "date_text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "start_date": {
+                "type": "string",
+                "format": "date"
+              },
+              "end_date": {
+                "type": "string",
+                "format": "date"
+              },
+              "recurrence": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "time": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

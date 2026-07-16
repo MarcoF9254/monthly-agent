@@ -1,6 +1,6 @@
 # Current Project Status
 
-Last Updated: 2026-07-15
+Last Updated: 2026-07-16
 Repository: monthly-agent
 Default Branch: main
 
@@ -54,7 +54,7 @@ BR-006 implementation and direct unit coverage are retained while runtime activa
 
 ## Current Task
 
-The scoped downstream eligibility architecture milestone is accepted. No active implementation milestone exists, and no runtime implementation or downstream activation is authorized. D3 remains unresolved and subject to separate owner approval.
+The scoped downstream eligibility architecture is accepted. `OD-CAL-ARCH-001` governs contract drafting, `OD-CAL-ARCH-002` governs selection and binding revision, and `OD-CAL-ARCH-003` accepts typed authority purpose and exact subject binding as contract clarification only. No implementation milestone is active; executable schemas remain unaccepted draft `0.x`; no authority, eligibility, selection, projection, manifest, migration, or activation artifact exists. The remaining blockers are owner-authority and revocation schemas/verifiers, bounded authoritative resolver input, deterministic registry identity/publication, machine-readable run/month binding, implementation validation, independent review, and explicit owner schema/implementation acceptance. R03 remains `partially_approved` with 32 approved and 13 `needs_review`; downstream is not activated. BR-006 remains inactive and D3 remains unresolved.
 
 ## Known Technical Debt
 

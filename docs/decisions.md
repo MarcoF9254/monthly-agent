@@ -139,3 +139,11 @@ Future implementation requires an immutable decision lifecycle, verifiable owner
 Missing, malformed, unverifiable, unmatched, duplicated, cyclic, cross-scope, revoked, or otherwise broken authority fails closed. Missing or mismatched projection/provenance binding also fails closed.
 
 Existing closed runs remain unchanged. In particular, R03 remains `partially_approved`: 32 records are approved, 13 records remain `needs_review`, and no eligibility decision or downstream activation is created by this ADR.
+
+`OD-CAL-ARCH-001` subsequently approved the calendar-only implementation architecture direction for contract drafting: per-activity canonical projections plus a monthly manifest.
+
+`OD-CAL-ARCH-002` approved a contract revision that separates exact-field calendar eligibility from externally authorized monthly publication selection. The manifest must bind exactly the effective selection to valid eligible projections, including selection identity and canonical content hash. It also requires external evidence for registry revocation, exact calendar source-field grants, complete projection revalidation, and explicit authorized-empty selection semantics.
+
+These owner decisions accept architecture direction only. They do not accept or activate draft executable schemas, start implementation, issue authority, eligibility, or selection decisions, generate projections or manifests, migrate a consumer, or activate downstream use.
+
+`OD-CAL-ARCH-003` is accepted as contract clarification only. It requires typed, non-transferable purposes `calendar-eligibility`, `calendar-monthly-selection`, and `calendar-authority-revocation`; exact equality of expected, registry, and external-artifact purpose; and external binding to the digest of the exact canonical authorization subject. Selection and eligibility subjects exclude authority-reference metadata, while revocation binds the original authority identifier, digest, purpose, and exact scope. This does not accept an executable schema, verifier, implementation, or activation.
