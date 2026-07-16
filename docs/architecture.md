@@ -2,7 +2,9 @@
 
 ## Owner authority resolution
 
-OAR uses a generic authority envelope over separately hashed purpose-specific subjects. Ordinary authority derives from membership in one externally anchored closed-world snapshot. Registry publication is a non-self-authorizing bootstrap exception whose trust reduces to the owner-controlled trust-anchor delivery channel. Revocation precedes authority supersession; business-subject supersession is independent. This architecture is inactive.
+The Bounded Calendar Authority Chain v0 is architecture-frozen. OAR uses a generic authority envelope over separately hashed purpose-specific subjects. Ordinary authority derives from membership in one externally anchored closed-world snapshot. Registry publication is a non-self-authorizing bootstrap exception whose production trust ultimately reduces to an owner-controlled trust-anchor delivery channel. Revocation precedes authority supersession; business-subject supersession is independent.
+
+PR #18 accepted the contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. PR #19 accepted a fictional year-2099 offline verifier that executes the frozen chain with a caller-supplied fictional trust anchor. That fixture input is not operational trust-anchor delivery. The prototype is executable evidence, not production authority resolution or schema activation.
 
 ## Purpose
 
@@ -68,7 +70,7 @@ Stage 1 establishes accepted architecture only. It does not activate a consumer,
 
 For the calendar-only vertical slice, `OD-CAL-ARCH-001` approves per-activity canonical projections plus a monthly manifest. `OD-CAL-ARCH-002` adds a separately authorized monthly selection decision. `OD-CAL-ARCH-003` clarifies contracts only: authority purposes are typed and non-transferable, and external authority binds the digest of the exact canonical authorization subject. Eligibility grants exact-field permission, selection records publication intent, projections carry validated per-activity payloads, and the manifest binds the complete effective selection artifact to valid projections. Executable schemas remain draft `0.x` and unaccepted; no resolver, builder, renderer, validator, authority, eligibility, selection, projection, manifest, migration, or activation exists.
 
-Gate 2 bounded authority input follows `OD-BAI-ARCH-001`, accepted with owner changes: production authority resolution requires one externally supplied trust anchor plus one self-contained verified resolution bundle. The anchor identifies the authorized immutable registry-snapshot tip and expected complete artifact digest. Internal hashes prove integrity but not current authorization; rollback detection depends on the external anchor. `OD-BAI-CONTRACT-001` authorizes inactive contract drafting only. No executable schema, resolver, bundle builder, authority issuance, publication, migration, or activation is accepted or implemented.
+Historically, Gate 2 bounded authority input followed `OD-BAI-ARCH-001`, accepted with owner changes: production authority resolution requires one externally supplied trust anchor plus one self-contained verified resolution bundle. The anchor identifies the authorized immutable registry-snapshot tip and expected complete artifact digest. Internal hashes prove integrity but not current authorization; rollback detection depends on the external anchor. The later fictional verifier implements this chain only for approved year-2099 fixtures. No executable schema activation, real authority issuance, real publication, migration, downstream activation, or operational trust-anchor delivery is accepted or implemented.
 
 `registry_id` is the logical registry identity. `snapshot_id` is one immutable published version identity. The existing external authority registry is not the Gate 2 authorized closed-world registry publication snapshot, and Gate 2 does not activate or replace the existing calendar-only draft.
 
