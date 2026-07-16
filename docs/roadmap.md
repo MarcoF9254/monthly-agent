@@ -2,11 +2,11 @@
 
 ## OAR closure
 
-The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed and merged the accepted OAR contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. PR #19 completed and merged the independently reviewed fictional year-2099 offline verifier prototype. Production operation and activation remain outside both merges.
+The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed and merged the accepted OAR contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. PR #19 completed and merged the independently reviewed fictional year-2099 offline verifier prototype. PR #21 completed Phase 1A deterministic verifier core hardening. Production operation and activation remain outside all three merges.
 
 ## Current Focus
 
-No next milestone is selected. OAR contract drafting and the fictional verifier prototype are complete; production authority resolution is not authorized.
+No next implementation milestone is selected. OAR contract drafting, the fictional verifier prototype, and Phase 1A are complete; production authority resolution is not authorized.
 
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
@@ -17,7 +17,18 @@ D2B is completed and merged in PR #10. Validation Findings JSON emission is impl
 - PR #18 accepted and merged the OAR contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures.
 - PR #19 accepted and merged the fictional offline verifier for the exact year-2099 scope.
 - The prototype verifies RFC 8785/SHA-256 identity, a separately supplied trust anchor, publication bootstrap, ordinary membership, subject/envelope binding, revocation-first lifecycle resolution, business-subject supersession, deterministic outcomes, two positive scenarios, and twenty negative first-failure cases.
-- Merge validation baseline: 147 passed, one pre-existing unrelated skip.
+- Historical PR #19 merge validation baseline: 147 passed, one pre-existing unrelated skip.
+
+### Phase 1A - Deterministic Verifier Core Hardening
+
+- PR #21 completed and merged at `2026-07-16T12:29:34Z` as `bf5063c2cdcb8d3cf915c5405dfb7fed26648683`.
+- Replaced module-global trace state with invocation-local internal/test-only tracing while keeping public verifier and CLI output trace-free.
+- Added fixed resource ceilings, distinct `resource_rejection`, fail-closed effective business-key ambiguity, and lifecycle cycle/depth protection.
+- Preserved both positive fictional outcomes, all twenty negative first-failure expectations, and OAR-N15 as construction-invariant only.
+- Final validation: 172 passed, one pre-existing unrelated skip; Ubuntu and Windows passed on Python 3.11 and 3.12.
+- Independent review: `APPROVE WITH NON-BLOCKING NOTES`; zero blocking findings, zero major findings, and P1A-F01 genuinely resolved.
+- P21-F01 and P21-F02 remain accepted non-blocking notes concerning a pre-stable positional result field and the defensive depth ceiling. Neither is a production blocker or architecture reopening.
+- Scope remains fictional year-2099 only; no schema, authority, production operation, or downstream activation was accepted.
 
 ### Milestone 1 - Foundation
 
@@ -90,8 +101,15 @@ Status: contract package and fictional executable verification completed. Draft 
 - Bind a logical `registry_id` to immutable published `snapshot_id` versions without treating them as synonyms.
 - Use separate `calendar-registry-publication` authority and a non-circular subject-to-artifact digest construction.
 - Define closed-world snapshot lifecycle, rollback detection, deterministic inventory, run/month equality, and single-primary enforcement ownership.
-- Keep real run metadata authority, real trust-anchor delivery, real authority/revocation issuance, registry publication, production hardening, and owner activation acceptance blocked.
-- Replace the prototype-only module-global lifecycle trace before concurrent or production use.
+- Keep real run metadata authority, real trust-anchor delivery, real authority/revocation issuance, registry publication, remaining production hardening, and owner activation acceptance blocked.
+
+### Deferred OAR hardening
+
+Phase 1B — Dependency and Interface Reproducibility: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes dependency locking, runtime/dev dependency separation, Python version declaration, reproducible installation, package metadata, a console entry point, safer keyword-only result construction, and a versioned result/interface contract.
+
+Phase 2 — Secure Filesystem Admission: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes TOCTOU remediation, immutable or staged input acquisition, descriptor-based safe reads where appropriate, symlink and intermediate-directory policy, secure trust-anchor filesystem custody, and filesystem race/mutation testing.
+
+Neither deferred phase is designed or active, and their ordering is not approved. The next implementation milestone remains undecided.
 
 ### BR-006 Per-Session Date Completeness
 

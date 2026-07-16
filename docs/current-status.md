@@ -1,8 +1,10 @@
 # Current Project Status
 
-## OAR contracts and fictional verifier
+## OAR Phase 1A closure
 
-The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 merged the accepted OAR contracts, inactive Draft 0.x schemas, and fictional authority and revocation fixtures. PR #19 merged the independently reviewed fictional year-2099 offline verifier prototype. The prototype is executable fictional evidence only; it is not a production authority resolver or an activation of any draft schema.
+The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 merged the accepted OAR contracts, inactive Draft 0.x schemas, and fictional authority and revocation fixtures. PR #19 merged the independently reviewed fictional year-2099 offline verifier prototype. PR #21 merged Phase 1A deterministic verifier core hardening at `2026-07-16T12:29:34Z` as merge commit `bf5063c2cdcb8d3cf915c5405dfb7fed26648683`. Its first parent is `7ee1650ba099234b21c6c94025d0ba6fa8486fd8`, and reviewed head `77d6554ada8f432ecc743b9c8115cc9d31d1a416` is its second parent. Phase 1A is closed.
+
+The final suite was 172 passed with one pre-existing unrelated skip. All four Ubuntu/Windows and Python 3.11/3.12 CI jobs passed. Independent review concluded `APPROVE WITH NON-BLOCKING NOTES`, with zero blocking and zero major findings; P1A-F01 was genuinely resolved.
 
 Last Updated: 2026-07-16
 Repository: monthly-agent
@@ -22,7 +24,7 @@ BR-001 through BR-005 are implemented, tested, and active in the runtime registr
 
 ## Current Milestone
 
-Scoped Downstream Eligibility Stage 1 architecture is accepted. The Architecture Owner explicitly accepted Option D and ADR-007. The fictional OAR verifier prototype is complete, but production authority resolution, migration, eligibility issuance, projection generation, manifest generation, and downstream activation remain unimplemented and unauthorized.
+Scoped Downstream Eligibility Stage 1 architecture is accepted. The Architecture Owner explicitly accepted Option D and ADR-007. The fictional OAR verifier prototype and Phase 1A deterministic core hardening are complete, but production authority resolution, migration, eligibility issuance, projection generation, manifest generation, and downstream activation remain unimplemented and unauthorized.
 
 Milestone 3.9 / D2B — Machine-readable Validation Findings Emission (completed and merged in PR #10)
 
@@ -58,7 +60,9 @@ BR-006 implementation and direct unit coverage are retained while runtime activa
 
 ## Current Task
 
-No next milestone has been selected. The current factual baseline is the completed fictional OAR chain: the offline verifier checks RFC 8785/SHA-256 bindings, a separately supplied trust anchor, the non-self-authorizing publication bootstrap, ordinary closed-world membership, exact subject/envelope binding, authorized revocation before authority supersession, independent business-subject supersession, and deterministic fictional run metadata, eligibility, and selection outcomes. It executes two positive scenarios and twenty negative first-failure cases. The merge validation baseline was 147 passed with one pre-existing unrelated skip.
+No next implementation milestone has been selected. The current factual baseline is the completed fictional OAR chain plus closed Phase 1A hardening: the offline verifier checks RFC 8785/SHA-256 bindings, a separately supplied trust anchor, the non-self-authorizing publication bootstrap, ordinary closed-world membership, exact subject/envelope binding, authorized revocation before authority supersession, independent business-subject supersession, and deterministic fictional run metadata, eligibility, and selection outcomes. It executes two positive scenarios and preserves all twenty negative first-failure expectations.
+
+Module-global `_LAST_TRACE` was removed. Trace is invocation-local and available only through a private test helper; public verification and CLI output remain trace-free. Success, `semantic_rejection`, and `resource_rejection` are distinguishable. Multiple effective business-key candidates fail closed, and snapshot, authority, and business-subject lifecycle traversal has cycle and depth protection. Fixed artifact-nonconfigurable ceilings cover 64 inventory artifacts, 256 KiB per JSON file, 2 MiB total admitted JSON, 256 snapshot entries, and depth 64. The depth ceiling is defensive and does not evidence an accepted 64-link scenario; resource checks do not solve TOCTOU.
 
 This closure does not provide real trust-anchor delivery, real registry publication, real run metadata authority, authority or revocation issuance, R03 eligibility or selection, projection or manifest activation, calendar downstream activation, BR-006 activation, D3 resolution, or published-output recall. All OAR schemas remain inactive Draft 0.x artifacts.
 
@@ -68,7 +72,9 @@ This closure does not provide real trust-anchor delivery, real registry publicat
 - Business rule specs and implementations must stay aligned before adding validators.
 - BR-005 must remain deterministic and avoid semantic, NLP, or fuzzy judgement.
 - BR-006 runtime activation remains held pending vertical-slice evidence, indexed marker syntax validation, and owner approval.
-- The fictional verifier module-global lifecycle trace supports test introspection only and is not concurrency-safe. It does not affect authority outcomes, is acceptable for this prototype, and must be removed or redesigned before concurrent or production use.
+- P21-F01 is accepted non-blocking debt: `VerificationResult.classification` is the second positional dataclass field in a pre-stable interface. Phase 1B may evaluate keyword-only construction and a versioned result interface if it becomes an external contract.
+- P21-F02 is accepted non-blocking debt: lifecycle depth 64 is a defensive secondary ceiling constrained by inventory and multi-artifact chain structure. Enforcement is independently tested at all three traversal locations; no accepted 64-link scenario is claimed.
+- Phase 1B dependency/interface reproducibility and Phase 2 secure filesystem admission remain deferred, inactive, and subject to separate owner approval.
 
 ## Architecture Principles
 
@@ -94,3 +100,4 @@ Next steps:
 2. Keep D3 / indexed marker syntax validation pending clarification; do not begin implementation without separate approval.
 3. Plan real vertical-slice evidence only with separate owner approval.
 4. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
+5. Keep Phase 1B and Phase 2 deferred and inactive until separately authorized; their ordering is not selected.

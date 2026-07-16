@@ -2,9 +2,9 @@
 
 ## OAR closure status
 
-The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 accepted and merged the OAR contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. PR #19 accepted and merged the fictional year-2099 offline authority verifier prototype.
+The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 accepted and merged the OAR contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. PR #19 accepted and merged the fictional year-2099 offline authority verifier prototype. PR #21 completed Phase 1A deterministic verifier core hardening without activating any contract or schema.
 
-The prototype verifies RFC 8785/SHA-256 bindings, a separately supplied fictional trust anchor, the non-self-authorizing registry-publication bootstrap, ordinary closed-world membership, exact subject/envelope binding, authorized revocation before authority supersession, independent business-subject supersession, deterministic fictional outcomes, two positive scenarios, and twenty negative first-failure cases. Its merge validation baseline was 147 passed with one pre-existing unrelated skip.
+The prototype verifies RFC 8785/SHA-256 bindings, a separately supplied fictional trust anchor, the non-self-authorizing registry-publication bootstrap, ordinary closed-world membership, exact subject/envelope binding, authorized revocation before authority supersession, independent business-subject supersession, deterministic fictional outcomes, two positive scenarios, and twenty negative first-failure cases. PR #19 historically merged at 147 passed with one pre-existing unrelated skip. The current Phase 1A validation baseline is 172 passed with that same unrelated skip, plus passing Ubuntu and Windows CI on Python 3.11 and 3.12.
 
 The verifier is executable fictional evidence only. It is not production-ready, does not activate any Draft 0.x schema, and does not implement operational trust-anchor delivery, real registry publication, or real authority issuance.
 
@@ -70,6 +70,7 @@ Accepted fictional scenarios:
 Fictional-only offline verifier:
 
 - `tools/oar_verifier/`
+- `tools/oar_verifier/limits.py`
 - `tools/verify_fictional_authority.py`
 
 Verifier tests:
@@ -78,6 +79,12 @@ Verifier tests:
 - `tests/test_oar_positive_scenarios.py`
 - `tests/test_oar_negative_cases.py`
 - `tests/test_oar_fail_closed.py`
+- `tests/test_oar_concurrency.py`
+- `tests/test_oar_lifecycle_invariants.py`
+- `tests/test_oar_resource_limits.py`
+- `.github/workflows/tests.yml`
+
+Phase 1A removed module-global trace state, added invocation-local internal test tracing, deterministic fixed resource ceilings, distinct `resource_rejection` classification, fail-closed business-key ambiguity handling, and cycle/depth protection. These implementation safeguards remain fictional-only and do not activate an inactive contract or Draft 0.x schema.
 
 ## Historical Gate 2 context
 

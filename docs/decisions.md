@@ -13,6 +13,12 @@ Resolved rulings cover structural reason identifiers, predecessor evidence, omis
 
 `OD-OAR-PROTOTYPE-N15-001` classifies OAR-N15 as a construction-invariant test of one shared immutable revocation-first stage order. It is not runtime input or verifier configuration. Prototype acceptance supplies executable fictional evidence only; it grants no production authority, schema activation, real trust-anchor delivery, real registry publication, real authority or revocation issuance, R03 decision, downstream activation, or authority for a future milestone.
 
+The Architecture Owner accepted and merged PR #21 as fictional-only Phase 1A deterministic verifier core hardening. Accepted decisions are: trace remains internal/test-only and invocation-local; ordinary lifecycle order is fixed; resource exhaustion is a distinct `resource_rejection`; multiple effective candidates for the complete run-metadata, monthly-selection, or eligibility business key fail closed; and CI covers Ubuntu and Windows on Python 3.11 and 3.12. Programming defects are not ordinary verification rejections, and rule, component, and stage identifiers are not yet a stable public compatibility contract.
+
+Phase 1A acceptance does not activate schemas or production authority. Dependency locking, package metadata, installation reproducibility, safer or versioned result interfaces, and related interface work are deferred to an inactive, separately authorized Phase 1B. TOCTOU remediation and secure filesystem admission are deferred to an inactive, separately authorized Phase 2. No ordering between those deferred milestones or next implementation milestone is accepted.
+
+Independent review of PR #21 concluded `APPROVE WITH NON-BLOCKING NOTES`, with zero blocking and zero major findings. P1A-F01 was genuinely resolved. P21-F01 accepts the positional placement of `VerificationResult.classification` only for the current pre-stable interface; P21-F02 accepts depth 64 as a defensive secondary ceiling whose enforcement is tested without claiming an accepted 64-link scenario. Neither note reopens architecture or requires a PR #21 correction.
+
 This file records lightweight architecture decisions for `monthly-agent`. It preserves project decisions that affect future implementation, validation, and agent handoff work.
 
 ## ADR-001: Activity ID Format

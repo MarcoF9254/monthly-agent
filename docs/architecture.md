@@ -6,6 +6,10 @@ The Bounded Calendar Authority Chain v0 is architecture-frozen. OAR uses a gener
 
 PR #18 accepted the contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. PR #19 accepted a fictional year-2099 offline verifier that executes the frozen chain with a caller-supplied fictional trust anchor. That fixture input is not operational trust-anchor delivery. The prototype is executable evidence, not production authority resolution or schema activation.
 
+PR #21 completed Phase 1A deterministic core hardening for that fictional verifier. Verification state and the internal test trace are invocation-local; public `verify()` results and CLI output remain trace-free, and ordinary lifecycle order remains fixed and non-configurable. Multiple effective run-metadata, monthly-selection, or eligibility subjects for one complete business key fail closed. Admission and snapshot, authority, and business-subject lifecycle traversal are deterministically resource-bounded, with semantic and resource rejection distinguished.
+
+The fixed ceilings are 64 inventory artifacts, 256 KiB per admitted JSON file, 2 MiB total admitted JSON, 256 snapshot entries, and lifecycle/supersession depth 64. The depth ceiling is defensive and independently enforced; it does not prove that an accepted 64-link scenario exists. These checks do not solve TOCTOU or provide secure filesystem admission. Phase 1A remains fictional-only and adds no production trust-anchor delivery, authority operation, schema activation, or new architecture layer.
+
 ## Purpose
 
 `monthly-agent` turns elderly centre monthly programme source documents into structured activity records that can be validated, reviewed, and reused for monthly newsletter generation.
