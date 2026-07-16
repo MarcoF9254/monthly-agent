@@ -1,5 +1,14 @@
 # Architecture Decision Records
 
+## OAR owner decisions
+
+- `OD-OAR-ARCH-001`: approved with scope rulings.
+- `OD-OAR-DESIGN-001`: approved.
+- `OD-OAR-CONTRACT-001`: approved.
+- `OD-OAR-CONTRACT-AUTHOR-001`: inactive contract drafting only.
+
+Resolved rulings cover structural reason identifiers, predecessor evidence, omission of audit/source references, trust-anchor transition for publication revocation, and downstream provenance deferral.
+
 This file records lightweight architecture decisions for `monthly-agent`. It preserves project decisions that affect future implementation, validation, and agent handoff work.
 
 ## ADR-001: Activity ID Format

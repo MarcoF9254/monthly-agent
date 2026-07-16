@@ -1,0 +1,83 @@
+{
+  "contract_version": "resolution-bundle-root/0.2.0-draft",
+  "input_mode": "verified-resolution-bundle",
+  "scope": {
+    "run_id": "fictional-run-2099-01-oar",
+    "consumer_id": "calendar-renderer",
+    "programme_month": "2099-01",
+    "registry_purpose": "calendar-authority-resolution"
+  },
+  "registry_id": "example-oar-registry",
+  "snapshot_id": "example-snapshot-pre-v1",
+  "snapshot_artifact_sha256": "43c5d4512613ce7000608c84ea1febf5dfc7bc6901eb2a5dcff7a17c5a30ac7e",
+  "builder_version": "example-oar-builder/pre",
+  "artifact_inventory": [
+    {
+      "artifact_type": "authority-envelope",
+      "logical_id": "example-eligibility-authority-001",
+      "artifact_path": "eligibility-authority-envelope-001.json",
+      "artifact_sha256": "6cfc28345d0899c66dbb5f9a84937268dc7f9d76445100622a0857e6b79f628d"
+    },
+    {
+      "artifact_type": "authority-envelope",
+      "logical_id": "example-eligibility-authority-002",
+      "artifact_path": "eligibility-authority-envelope-002.json",
+      "artifact_sha256": "1c8bdd95296ef87af1339be51e6350ee71b9d493e1128dcb5ce0ec6c024a9de8"
+    },
+    {
+      "artifact_type": "authority-envelope",
+      "logical_id": "example-run-metadata-authority-001",
+      "artifact_path": "run-metadata-authority-envelope.json",
+      "artifact_sha256": "eb28fbe4507df12f60829e7dc18103a63d5fc3c093f7e35bc34b16d0efa29005"
+    },
+    {
+      "artifact_type": "authority-envelope",
+      "logical_id": "example-selection-authority-001",
+      "artifact_path": "monthly-selection-authority-envelope.json",
+      "artifact_sha256": "3f2707d759f07340f43c68d99fdccc752f45a0a7d16c3ffede3f9a4f08769758"
+    },
+    {
+      "artifact_type": "calendar-eligibility-subject",
+      "logical_id": "example-eligibility-subject-001",
+      "artifact_path": "eligibility-subject-001.json",
+      "artifact_sha256": "bd38f2f33fec7f679e527a67a319dfd36bf5bb7f6fdf92b8c768da1e50c73fea"
+    },
+    {
+      "artifact_type": "calendar-eligibility-subject",
+      "logical_id": "example-eligibility-subject-002",
+      "artifact_path": "eligibility-subject-002.json",
+      "artifact_sha256": "72e27124e9c27fd82ad41cd3aa4f33cbd001d66ad99196b23c5299803e887ac3"
+    },
+    {
+      "artifact_type": "calendar-monthly-selection-subject",
+      "logical_id": "example-selection-subject-001",
+      "artifact_path": "monthly-selection-subject.json",
+      "artifact_sha256": "c6b5db9c488767c9d3a5835b6f2642f28d898e1f67bba2272b9455b85af879e6"
+    },
+    {
+      "artifact_type": "registry-publication-envelope",
+      "logical_id": "example-publication-authority-pre",
+      "artifact_path": "registry-publication-envelope.json",
+      "artifact_sha256": "2ac50944d502cd649189e402fbc55a3b2551db244f03d429291880341b30e290"
+    },
+    {
+      "artifact_type": "registry-publication-subject",
+      "logical_id": "example-publication-subject-pre",
+      "artifact_path": "registry-publication-subject.json",
+      "artifact_sha256": "9c4ce3cbdb53b1b082d4331cab75413272fc58bce01bd8610c6eba5e88a6e060"
+    },
+    {
+      "artifact_type": "registry-snapshot",
+      "logical_id": "example-snapshot-pre-v1",
+      "artifact_path": "registry-snapshot.json",
+      "artifact_sha256": "43c5d4512613ce7000608c84ea1febf5dfc7bc6901eb2a5dcff7a17c5a30ac7e"
+    },
+    {
+      "artifact_type": "run-metadata-binding-subject",
+      "logical_id": "example-run-metadata-subject-001",
+      "artifact_path": "run-metadata-binding-subject.json",
+      "artifact_sha256": "1dc5580afeac99d42250e1c9eec4b1ca228f3f5ffce5b9b49c8023ab2b98663a"
+    }
+  ],
+  "bundle_id": "bundle_sha256_c679ff1c97f0e45414c15d287b8d9dfe23fbe0b2b505cbaec765592dfc2ebaad"
+}

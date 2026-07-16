@@ -1,0 +1,17 @@
+{
+  "contract_version": "authority-envelope/0.1.0-draft",
+  "authority_id": "example-eligibility-authority-002",
+  "authority_version": 1,
+  "supersedes_authority_id": null,
+  "supersedes_authority_artifact_sha256": null,
+  "authority_purpose": "calendar-eligibility",
+  "subject_type": "calendar-eligibility",
+  "subject_id": "example-eligibility-subject-002",
+  "subject_sha256": "72e27124e9c27fd82ad41cd3aa4f33cbd001d66ad99196b23c5299803e887ac3",
+  "scope": {
+    "run_id": "fictional-run-2099-01-oar",
+    "consumer_id": "calendar-renderer",
+    "activity_id": "example-activity-2099-01-002"
+  },
+  "authorized_at": "2099-01-02T09:00:00Z"
+}

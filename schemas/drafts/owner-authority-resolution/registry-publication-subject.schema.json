@@ -1,25 +1,22 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.local/monthly-agent/schemas/drafts/bounded-authority-input/authority-registry-snapshot.schema.json",
-  "title": "Authorized Closed-World Registry Snapshot Draft 0.2",
-  "description": "Inactive snapshot with ordinary authority membership and separate non-self-authorizing publication bootstrap bindings.",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/owner-authority-resolution/registry-publication-subject.schema.json",
+  "title": "Registry Publication Subject Draft 0.1",
+  "description": "Inactive standalone canonical snapshot-core subject for the non-self-authorizing publication bootstrap.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract_version", "registry_id", "snapshot_id", "snapshot_version", "supersedes_snapshot_id", "supersedes_snapshot_artifact_sha256", "scope", "entries", "publication_subject_id", "publication_subject_sha256", "publication_authority_id", "publication_authority_artifact_sha256", "published_at"],
+  "required": ["contract_version", "subject_id", "snapshot_contract_version", "registry_id", "snapshot_id", "snapshot_version", "supersedes_snapshot_id", "supersedes_snapshot_artifact_sha256", "scope", "entries"],
   "properties": {
-    "contract_version": {"const": "authority-registry-snapshot/0.2.0-draft"},
+    "contract_version": {"const": "registry-publication-subject/0.1.0-draft"},
+    "subject_id": {"type": "string", "minLength": 1},
+    "snapshot_contract_version": {"const": "authority-registry-snapshot/0.2.0-draft"},
     "registry_id": {"type": "string", "minLength": 1},
     "snapshot_id": {"type": "string", "minLength": 1},
     "snapshot_version": {"type": "integer", "minimum": 1},
     "supersedes_snapshot_id": {"type": ["string", "null"]},
     "supersedes_snapshot_artifact_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
     "scope": {"$ref": "#/$defs/scope"},
-    "entries": {"type": "array", "items": {"$ref": "#/$defs/entry"}},
-    "publication_subject_id": {"type": "string", "minLength": 1},
-    "publication_subject_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "publication_authority_id": {"type": "string", "minLength": 1},
-    "publication_authority_artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "published_at": {"type": "string", "format": "date-time"}
+    "entries": {"type": "array", "items": {"$ref": "#/$defs/entry"}}
   },
   "$defs": {
     "scope": {"type": "object", "additionalProperties": false, "required": ["run_id", "consumer_id", "programme_month", "registry_purpose"], "properties": {"run_id": {"type": "string", "minLength": 1}, "consumer_id": {"const": "calendar-renderer"}, "programme_month": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"}, "registry_purpose": {"const": "calendar-authority-resolution"}}},

@@ -1,10 +1,10 @@
 {
   "contract_version": "bounded-authority-trust-anchor/0.1.0-draft",
-  "authorized_tip_id": "example-snapshot-2099-01-v1",
-  "expected_snapshot_artifact_sha256": "05b9044123d36e33514b71500b86a5e533b82516d50936ec44ee34c8ebf2b1be",
-  "registry_id": "example-calendar-registry",
+  "authorized_tip_id": "example-snapshot-post-v2",
+  "expected_snapshot_artifact_sha256": "fa4f8268574fa2f80dece2602cb299fd37a51f5d83ef4a979b72696660d7bd9f",
+  "registry_id": "example-oar-registry",
   "scope": {
-    "run_id": "2099-01-r99",
+    "run_id": "fictional-run-2099-01-oar",
     "consumer_id": "calendar-renderer",
     "programme_month": "2099-01",
     "registry_purpose": "calendar-authority-resolution"

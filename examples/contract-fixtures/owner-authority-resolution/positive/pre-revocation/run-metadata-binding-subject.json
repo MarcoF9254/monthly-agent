@@ -1,0 +1,10 @@
+{
+  "contract_version": "run-metadata-binding-subject/0.2.0-draft",
+  "subject_id": "example-run-metadata-subject-001",
+  "subject_version": 1,
+  "supersedes_subject_id": null,
+  "supersedes_subject_sha256": null,
+  "run_id": "fictional-run-2099-01-oar",
+  "programme_month": "2099-01",
+  "consumer_id": "calendar-renderer"
+}

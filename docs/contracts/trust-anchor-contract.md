@@ -1,5 +1,9 @@
 # External Trust Anchor Contract Draft
 
+## OAR Trust Boundary
+
+The owner-controlled delivery channel is the ultimate Phase 1 trust boundary. The anchor pins the complete snapshot artifact digest; authority is not inferred from an internal publication envelope. Digital signatures and independent authentication are out of scope.
+
 Status: `bounded-authority-trust-anchor/0.1.0-draft`; inactive, unimplemented, and not accepted as executable
 
 Schema: `schemas/drafts/bounded-authority-input/trust-anchor.schema.json`

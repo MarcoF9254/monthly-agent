@@ -1,0 +1,63 @@
+{
+  "contract_version": "registry-publication-subject/0.1.0-draft",
+  "subject_id": "example-publication-subject-post",
+  "snapshot_contract_version": "authority-registry-snapshot/0.2.0-draft",
+  "registry_id": "example-oar-registry",
+  "snapshot_id": "example-snapshot-post-v2",
+  "snapshot_version": 2,
+  "supersedes_snapshot_id": "example-snapshot-pre-v1",
+  "supersedes_snapshot_artifact_sha256": "43c5d4512613ce7000608c84ea1febf5dfc7bc6901eb2a5dcff7a17c5a30ac7e",
+  "scope": {
+    "run_id": "fictional-run-2099-01-oar",
+    "consumer_id": "calendar-renderer",
+    "programme_month": "2099-01",
+    "registry_purpose": "calendar-authority-resolution"
+  },
+  "entries": [
+    {
+      "subject_type": "calendar-authority-revocation",
+      "subject_id": "example-selection-revocation-subject-001",
+      "subject_sha256": "a0bd09e890da7a8a8e4fe47c707e1ea1dfaf7b133fc3bc2f940505366192433a",
+      "authority_id": "example-revocation-authority-001",
+      "authority_purpose": "calendar-authority-revocation",
+      "authority_artifact_sha256": "d2a0a6648baa0fc70d617f1f248defd1897cf51459852b116306d3e1ab9928b9",
+      "authority_status": "accepted"
+    },
+    {
+      "subject_type": "calendar-eligibility",
+      "subject_id": "example-eligibility-subject-001",
+      "subject_sha256": "bd38f2f33fec7f679e527a67a319dfd36bf5bb7f6fdf92b8c768da1e50c73fea",
+      "authority_id": "example-eligibility-authority-001",
+      "authority_purpose": "calendar-eligibility",
+      "authority_artifact_sha256": "6cfc28345d0899c66dbb5f9a84937268dc7f9d76445100622a0857e6b79f628d",
+      "authority_status": "accepted"
+    },
+    {
+      "subject_type": "calendar-eligibility",
+      "subject_id": "example-eligibility-subject-002",
+      "subject_sha256": "72e27124e9c27fd82ad41cd3aa4f33cbd001d66ad99196b23c5299803e887ac3",
+      "authority_id": "example-eligibility-authority-002",
+      "authority_purpose": "calendar-eligibility",
+      "authority_artifact_sha256": "1c8bdd95296ef87af1339be51e6350ee71b9d493e1128dcb5ce0ec6c024a9de8",
+      "authority_status": "accepted"
+    },
+    {
+      "subject_type": "calendar-monthly-selection",
+      "subject_id": "example-selection-subject-001",
+      "subject_sha256": "c6b5db9c488767c9d3a5835b6f2642f28d898e1f67bba2272b9455b85af879e6",
+      "authority_id": "example-selection-authority-001",
+      "authority_purpose": "calendar-monthly-selection",
+      "authority_artifact_sha256": "3f2707d759f07340f43c68d99fdccc752f45a0a7d16c3ffede3f9a4f08769758",
+      "authority_status": "revoked"
+    },
+    {
+      "subject_type": "run-metadata-binding",
+      "subject_id": "example-run-metadata-subject-001",
+      "subject_sha256": "1dc5580afeac99d42250e1c9eec4b1ca228f3f5ffce5b9b49c8023ab2b98663a",
+      "authority_id": "example-run-metadata-authority-001",
+      "authority_purpose": "run-metadata-binding",
+      "authority_artifact_sha256": "eb28fbe4507df12f60829e7dc18103a63d5fc3c093f7e35bc34b16d0efa29005",
+      "authority_status": "accepted"
+    }
+  ]
+}

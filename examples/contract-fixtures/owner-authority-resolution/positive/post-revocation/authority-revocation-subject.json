@@ -1,0 +1,20 @@
+{
+  "contract_version": "authority-revocation-subject/0.1.0-draft",
+  "subject_id": "example-selection-revocation-subject-001",
+  "subject_version": 1,
+  "supersedes_subject_id": null,
+  "supersedes_subject_sha256": null,
+  "target_authority_id": "example-selection-authority-001",
+  "target_authority_artifact_sha256": "3f2707d759f07340f43c68d99fdccc752f45a0a7d16c3ffede3f9a4f08769758",
+  "target_authority_purpose": "calendar-monthly-selection",
+  "target_subject_type": "calendar-monthly-selection",
+  "target_subject_id": "example-selection-subject-001",
+  "target_subject_sha256": "c6b5db9c488767c9d3a5835b6f2642f28d898e1f67bba2272b9455b85af879e6",
+  "target_scope": {
+    "run_id": "fictional-run-2099-01-oar",
+    "consumer_id": "calendar-renderer",
+    "programme_month": "2099-01",
+    "registry_purpose": "calendar-authority-resolution"
+  },
+  "reason_code": "owner.revoked-selection"
+}

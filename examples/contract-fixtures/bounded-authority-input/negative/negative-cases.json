@@ -1,346 +1,633 @@
 {
-  "contract_version": "bounded-authority-negative-corpus/0.1.0-draft",
-  "base_fixture": "../positive/valid-resolution-chain",
+  "contract_version": "oar-negative-corpus/0.2.0-draft",
+  "scenarios": {
+    "pre-revocation": "../../owner-authority-resolution/positive/pre-revocation",
+    "post-revocation": "../../owner-authority-resolution/positive/post-revocation"
+  },
   "mutation_operation_vocabulary": [
     "add_artifact",
-    "break_reference",
     "duplicate_artifact",
     "remove_artifact",
-    "remove_field",
     "reorder_array",
-    "replace_artifact_content",
-    "replace_value",
-    "reuse_authority_binding"
+    "replace_value"
   ],
+  "mutation_semantics": {
+    "operations_are_ordered": true,
+    "pointers": "RFC 6901 JSON Pointers; /- appends to an array",
+    "virtual_artifacts": "add_artifact may derive an in-memory artifact from template_artifact_path plus overrides; it creates no repository file",
+    "cascade": "When recompute_dependents is present, recompute the named RFC 8785/SHA-256 bindings in listed order. No unlisted binding changes.",
+    "bundle_repair": "remove_bundle_declaration removes the matching inventory item; rebuild_bundle recomputes physical hashes, canonical order, and bundle_id.",
+    "scenario_context": "The symbolic path $resolution-context is validation context, not a repository artifact."
+  },
   "cases": [
     {
-      "fixture_id": "BAI-N01",
-      "title": "Missing trust anchor",
-      "base_fixture": "../positive/valid-resolution-chain",
+      "fixture_id": "OAR-N01",
+      "title": "Missing external trust anchor",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
       "mutation": {
-        "operation": "remove_artifact",
-        "artifact_path": "trust-anchor.json"
-      },
-      "expected_rule_id": "BAI-TA-001",
-      "expected_primary_component": "Operational caller",
-      "expected_rejection_stage": "trust-anchor admission",
-      "expected_semantic_reason": "external trust anchor is absent"
-    },
-    {
-      "fixture_id": "BAI-N02",
-      "title": "Wrong expected snapshot digest",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "trust-anchor.json",
-        "json_pointer": "/expected_snapshot_artifact_sha256",
-        "value": "0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      "expected_rule_id": "BAI-TA-002",
-      "expected_primary_component": "Bundle verifier",
-      "expected_rejection_stage": "trust-anchor comparison",
-      "expected_semantic_reason": "expected snapshot digest differs from complete snapshot digest"
-    },
-    {
-      "fixture_id": "BAI-N03",
-      "title": "Tip pointer and digest disagreement",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "trust-anchor.json",
-        "json_pointer": "/authorized_tip_id",
-        "value": "example-snapshot-2099-01-v2"
-      },
-      "expected_rule_id": "BAI-TA-003",
-      "expected_primary_component": "Bundle verifier",
-      "expected_rejection_stage": "trust-anchor comparison",
-      "expected_semantic_reason": "authorized tip ID and expected digest identify different snapshots"
-    },
-    {
-      "fixture_id": "BAI-N04",
-      "title": "Stale internally valid snapshot",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "trust-anchor.json",
-        "json_pointer": "/authorized_tip_id",
-        "value": "example-snapshot-2099-01-v2",
-        "companion_updates": [
+        "ordered_operations": [
           {
-            "artifact_path": "trust-anchor.json",
-            "json_pointer": "/expected_snapshot_artifact_sha256",
-            "value": "2222222222222222222222222222222222222222222222222222222222222222"
+            "operation": "remove_artifact",
+            "artifact_path": "trust-anchor.json"
           }
         ]
       },
-      "expected_rule_id": "BAI-LC-001",
-      "expected_primary_component": "Lifecycle resolver",
-      "expected_rejection_stage": "snapshot lifecycle resolution",
-      "expected_semantic_reason": "bundle snapshot is not the externally anchored authorized tip"
-    },
-    {
-      "fixture_id": "BAI-N05",
-      "title": "Rollback to superseded snapshot",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "resolution-bundle-root.json",
-        "json_pointer": "/snapshot_id",
-        "value": "example-snapshot-2099-01-v0"
-      },
-      "expected_rule_id": "BAI-LC-002",
-      "expected_primary_component": "Lifecycle resolver",
-      "expected_rejection_stage": "snapshot lifecycle resolution",
-      "expected_semantic_reason": "bundle attempts rollback behind the externally anchored tip"
-    },
-    {
-      "fixture_id": "BAI-N06",
-      "title": "Two active snapshot tips",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "add_artifact",
-        "artifact_path": "resolution-bundle-root.json",
-        "json_pointer": "/artifact_inventory/-",
-        "value": {
-          "artifact_type": "registry-snapshot",
-          "logical_id": "example-snapshot-2099-01-v2",
-          "artifact_path": "registry-snapshot-v2.json",
-          "artifact_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
-        }
-      },
-      "expected_rule_id": "BAI-LC-003",
-      "expected_primary_component": "Lifecycle resolver",
-      "expected_rejection_stage": "snapshot lifecycle resolution",
-      "expected_semantic_reason": "two same-scope active snapshot tips are visible"
-    },
-    {
-      "fixture_id": "BAI-N07",
-      "title": "Missing declared artifact",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "remove_artifact",
-        "artifact_path": "eligibility-decision-002.json"
-      },
-      "expected_rule_id": "BAI-BV-001",
-      "expected_primary_component": "Bundle verifier",
-      "expected_rejection_stage": "bundle completeness",
-      "expected_semantic_reason": "declared inventory artifact is absent"
-    },
-    {
-      "fixture_id": "BAI-N08",
-      "title": "Undeclared extra artifact",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "add_artifact",
-        "artifact_path": "undeclared-extra.json",
-        "value": {
-          "fictional": "extra"
-        }
-      },
-      "expected_rule_id": "BAI-BV-002",
-      "expected_primary_component": "Bundle verifier",
-      "expected_rejection_stage": "bundle completeness",
-      "expected_semantic_reason": "physical bundle contains an undeclared artifact"
-    },
-    {
-      "fixture_id": "BAI-N09",
-      "title": "Conflicting content for one logical ID",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "duplicate_artifact",
-        "artifact_path": "resolution-bundle-root.json",
-        "json_pointer": "/artifact_inventory/1",
-        "value": {
-          "artifact_sha256": "9999999999999999999999999999999999999999999999999999999999999999"
-        }
-      },
-      "expected_rule_id": "BAI-BV-003",
-      "expected_primary_component": "Bundle verifier",
-      "expected_rejection_stage": "bundle identity validation",
-      "expected_semantic_reason": "same logical ID is associated with conflicting content"
-    },
-    {
-      "fixture_id": "BAI-N10",
-      "title": "Unauthorized registry publication",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "remove_field",
-        "artifact_path": "registry-snapshot.json",
-        "json_pointer": "/publication_authority_reference"
-      },
-      "expected_rule_id": "BAI-PA-001",
-      "expected_primary_component": "Registry publication authority verifier",
-      "expected_rejection_stage": "publication authority verification",
-      "expected_semantic_reason": "snapshot lacks externally verified publication authority"
-    },
-    {
-      "fixture_id": "BAI-N11",
-      "title": "Wrong typed publication authority purpose",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "registry-publication-authority.json",
-        "json_pointer": "/authority_purpose",
-        "value": "calendar-eligibility"
-      },
-      "expected_rule_id": "BAI-PA-002",
-      "expected_primary_component": "Registry publication authority verifier",
-      "expected_rejection_stage": "publication authority verification",
-      "expected_semantic_reason": "publication authority uses a non-transferable wrong purpose"
-    },
-    {
-      "fixture_id": "BAI-N12",
-      "title": "Cross-scope snapshot supersession",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "registry-snapshot.json",
-        "json_pointer": "/scope/programme_month",
-        "value": "2099-02"
-      },
-      "expected_rule_id": "BAI-LC-004",
-      "expected_primary_component": "Lifecycle resolver",
-      "expected_rejection_stage": "snapshot lifecycle resolution",
-      "expected_semantic_reason": "successor snapshot scope differs from its lineage scope"
-    },
-    {
-      "fixture_id": "BAI-N13",
-      "title": "Omitted revocation",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "registry-snapshot.json",
-        "json_pointer": "/entries/1/artifact_status",
-        "value": "revoked"
-      },
-      "expected_rule_id": "BAI-AS-001",
-      "expected_primary_component": "Artifact authority verifier",
-      "expected_rejection_stage": "artifact authority resolution",
-      "expected_semantic_reason": "snapshot omits a revocation required for its declared closed world"
-    },
-    {
-      "fixture_id": "BAI-N14",
-      "title": "Run and programme month mismatch",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "run-metadata.json",
-        "json_pointer": "/programme_month",
-        "value": "2099-02"
-      },
-      "expected_rule_id": "BAI-RM-001",
-      "expected_primary_component": "Run-metadata validator",
-      "expected_rejection_stage": "run metadata binding",
-      "expected_semantic_reason": "run metadata month differs from snapshot and selection"
-    },
-    {
-      "fixture_id": "BAI-N15",
-      "title": "Tampered snapshot subject with reused authority",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "registry-snapshot.json",
-        "json_pointer": "/entries/0/artifact_status",
-        "value": "revoked"
-      },
-      "expected_rule_id": "BAI-PA-003",
-      "expected_primary_component": "Registry publication authority verifier",
-      "expected_rejection_stage": "snapshot subject verification",
-      "expected_semantic_reason": "snapshot subject changed while publication authority digest was reused"
-    },
-    {
-      "fixture_id": "BAI-N16",
-      "title": "Loose files submitted to production",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "resolution-bundle-root.json",
-        "json_pointer": "/input_mode",
-        "value": "loose-files"
-      },
-      "expected_rule_id": "BAI-IN-001",
+      "expected_first_failure_layer": "production-admission",
+      "expected_rule_id": "BAI-TA-001",
       "expected_primary_component": "Operational caller",
-      "expected_rejection_stage": "production input admission",
-      "expected_semantic_reason": "loose-file input cannot produce authoritative resolution"
+      "expected_rejection_stage": "production-admission",
+      "expected_semantic_reason": "bai-ta-001",
+      "earlier_layers_remain_valid_because": "Bundle and contained artifacts are unchanged; admission fails first."
     },
     {
-      "fixture_id": "BAI-N17",
-      "title": "Unauthorized empty snapshot",
-      "base_fixture": "../positive/valid-resolution-chain",
+      "fixture_id": "OAR-N02",
+      "title": "Publication envelope used as ordinary membership",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
       "mutation": {
-        "operation": "reuse_authority_binding",
-        "artifact_path": "registry-snapshot.json",
-        "json_pointer": "/entries",
-        "value": []
-      },
-      "expected_rule_id": "BAI-RS-001",
-      "expected_primary_component": "Registry snapshot validator",
-      "expected_rejection_stage": "snapshot subject verification",
-      "expected_semantic_reason": "empty snapshot reuses authority for a non-empty subject"
-    },
-    {
-      "fixture_id": "BAI-N18",
-      "title": "Non-canonical inventory ordering",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "reorder_array",
-        "artifact_path": "resolution-bundle-root.json",
-        "json_pointer": "/artifact_inventory",
-        "value": [
-          1,
-          0,
-          2,
-          3,
-          4,
-          5
+        "ordered_operations": [
+          {
+            "operation": "add_artifact",
+            "artifact_path": "registry-snapshot.json",
+            "json_pointer": "/entries/-",
+            "value": {
+              "subject_type": "calendar-eligibility",
+              "subject_id": "example-publication-subject-pre",
+              "subject_sha256": "9c4ce3cbdb53b1b082d4331cab75413272fc58bce01bd8610c6eba5e88a6e060",
+              "authority_id": "example-publication-authority-pre",
+              "authority_purpose": "calendar-eligibility",
+              "authority_artifact_sha256": "2ac50944d502cd649189e402fbc55a3b2551db244f03d429291880341b30e290",
+              "authority_status": "accepted"
+            },
+            "recompute_dependents": [
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
         ]
       },
+      "expected_first_failure_layer": "publication-bootstrap",
+      "expected_rule_id": "OAR-BS-001",
+      "expected_primary_component": "Registry publication bootstrap verifier",
+      "expected_rejection_stage": "publication-bootstrap",
+      "expected_semantic_reason": "oar-bs-001",
+      "earlier_layers_remain_valid_because": "Inserted entry is schema-valid and enclosing digests are rebuilt; exact publication envelope ID/digest is visible in ordinary membership."
+    },
+    {
+      "fixture_id": "OAR-N03",
+      "title": "Bootstrap exception used with a non-publication purpose",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "registry-publication-envelope.json",
+            "json_pointer": "/authority_purpose",
+            "value": "calendar-eligibility"
+          },
+          {
+            "operation": "replace_value",
+            "artifact_path": "registry-publication-envelope.json",
+            "json_pointer": "/subject_type",
+            "value": "calendar-eligibility",
+            "recompute_dependents": [
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "publication-bootstrap",
+      "expected_rule_id": "OAR-BS-002",
+      "expected_primary_component": "Registry publication bootstrap verifier",
+      "expected_rejection_stage": "publication-bootstrap",
+      "expected_semantic_reason": "oar-bs-002",
+      "earlier_layers_remain_valid_because": "Purpose and type remain schema-compatible and enclosing digests are rebuilt."
+    },
+    {
+      "fixture_id": "OAR-N04",
+      "title": "Publication subject evidence missing",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "remove_artifact",
+            "artifact_path": "registry-publication-subject.json",
+            "remove_bundle_declaration": true,
+            "rebuild_bundle": true
+          }
+        ]
+      },
+      "expected_first_failure_layer": "publication-bootstrap",
+      "expected_rule_id": "OAR-BS-003",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "publication-bootstrap",
+      "expected_semantic_reason": "oar-bs-003",
+      "earlier_layers_remain_valid_because": "Physical artifact and declaration are removed together; bundle identity is rebuilt before bootstrap evidence resolution."
+    },
+    {
+      "fixture_id": "OAR-N05",
+      "title": "Publication subject digest mismatch",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "registry-snapshot.json",
+            "json_pointer": "/publication_subject_sha256",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000",
+            "recompute_dependents": [
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "publication-bootstrap",
+      "expected_rule_id": "OAR-BS-004",
+      "expected_primary_component": "Registry publication bootstrap verifier",
+      "expected_rejection_stage": "publication-bootstrap",
+      "expected_semantic_reason": "oar-bs-004",
+      "earlier_layers_remain_valid_because": "Mutated snapshot is freshly anchored; actual publication subject and envelope remain unchanged."
+    },
+    {
+      "fixture_id": "OAR-N06",
+      "title": "Publication envelope evidence missing",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "remove_artifact",
+            "artifact_path": "registry-publication-envelope.json",
+            "remove_bundle_declaration": true,
+            "rebuild_bundle": true
+          }
+        ]
+      },
+      "expected_first_failure_layer": "publication-bootstrap",
+      "expected_rule_id": "OAR-BS-003",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "publication-bootstrap",
+      "expected_semantic_reason": "oar-bs-003",
+      "earlier_layers_remain_valid_because": "Bundle completeness is rebuilt; snapshot bootstrap reference remains unresolved."
+    },
+    {
+      "fixture_id": "OAR-N07",
+      "title": "Trust anchor does not pin bundled snapshot",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "trust-anchor.json",
+            "json_pointer": "/expected_snapshot_artifact_sha256",
+            "value": "0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      },
+      "expected_first_failure_layer": "trust-anchor-binding",
+      "expected_rule_id": "OAR-BS-006",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "trust-anchor-binding",
+      "expected_semantic_reason": "oar-bs-006",
+      "earlier_layers_remain_valid_because": "Bundle and all internal bindings remain valid; only external anchor digest disagrees."
+    },
+    {
+      "fixture_id": "OAR-N08",
+      "title": "Envelope binds wrong subject digest",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "eligibility-authority-envelope-001.json",
+            "json_pointer": "/subject_sha256",
+            "value": "1111111111111111111111111111111111111111111111111111111111111111",
+            "recompute_dependents": [
+              "authority_envelope_artifact_sha256",
+              "snapshot_entries",
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "authority-subject-binding",
+      "expected_rule_id": "OAR-SB-001",
+      "expected_primary_component": "Authority subject-binding verifier",
+      "expected_rejection_stage": "authority-subject-binding",
+      "expected_semantic_reason": "oar-sb-001",
+      "earlier_layers_remain_valid_because": "Authority and enclosing bindings are rebuilt; separately stored subject retains original digest."
+    },
+    {
+      "fixture_id": "OAR-N09",
+      "title": "Subject lacks ordinary anchored authority membership",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "remove_artifact",
+            "artifact_path": "eligibility-authority-envelope-001.json",
+            "remove_bundle_declaration": true
+          },
+          {
+            "operation": "remove_artifact",
+            "artifact_path": "registry-snapshot.json",
+            "json_pointer": "/entries/0",
+            "recompute_dependents": [
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "ordinary-membership",
+      "expected_rule_id": "OAR-SB-003",
+      "expected_primary_component": "Artifact authority verifier",
+      "expected_rejection_stage": "ordinary-membership",
+      "expected_semantic_reason": "oar-sb-003",
+      "earlier_layers_remain_valid_because": "Subject remains declared; envelope and ordinary entry are removed together and all closed-world bindings are rebuilt."
+    },
+    {
+      "fixture_id": "OAR-N10",
+      "title": "Mutated subject reuses old authority binding",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "eligibility-subject-001.json",
+            "json_pointer": "/prohibited_uses/0",
+            "value": "example-mutated-use",
+            "recompute_dependents": [
+              "bundle_inventory",
+              "bundle_id"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "authority-subject-binding",
+      "expected_rule_id": "OAR-SB-002",
+      "expected_primary_component": "Authority subject-binding verifier",
+      "expected_rejection_stage": "authority-subject-binding",
+      "expected_semantic_reason": "oar-sb-002",
+      "earlier_layers_remain_valid_because": "Bundle records changed subject bytes; anchored entry and envelope retain old authorized digest."
+    },
+    {
+      "fixture_id": "OAR-N11",
+      "title": "Revocation subject has no effective authority",
+      "base_fixture": "post-revocation",
+      "source_scenario": "post-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "remove_artifact",
+            "artifact_path": "authority-revocation-envelope.json",
+            "remove_bundle_declaration": true
+          },
+          {
+            "operation": "remove_artifact",
+            "artifact_path": "registry-snapshot.json",
+            "json_pointer": "/entries/0",
+            "recompute_dependents": [
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "revocation-authorization",
+      "expected_rule_id": "OAR-RV-001",
+      "expected_primary_component": "Revocation resolver",
+      "expected_rejection_stage": "revocation-authorization",
+      "expected_semantic_reason": "oar-rv-001",
+      "earlier_layers_remain_valid_because": "Revocation subject remains observable; envelope and membership are removed consistently."
+    },
+    {
+      "fixture_id": "OAR-N12",
+      "title": "Revocation target authority absent",
+      "base_fixture": "post-revocation",
+      "source_scenario": "post-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "authority-revocation-subject.json",
+            "json_pointer": "/target_authority_id",
+            "value": "example-missing-authority",
+            "recompute_dependents": [
+              "subject_artifact_sha256",
+              "authority_envelope_artifact_sha256",
+              "snapshot_entries",
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "revocation-target-resolution",
+      "expected_rule_id": "OAR-RV-002",
+      "expected_primary_component": "Revocation resolver",
+      "expected_rejection_stage": "revocation-target-resolution",
+      "expected_semantic_reason": "oar-rv-002",
+      "earlier_layers_remain_valid_because": "Changed revocation is freshly authorized and anchored; new target ID does not exist."
+    },
+    {
+      "fixture_id": "OAR-N13",
+      "title": "Revocation target digest differs",
+      "base_fixture": "post-revocation",
+      "source_scenario": "post-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "authority-revocation-subject.json",
+            "json_pointer": "/target_authority_artifact_sha256",
+            "value": "2222222222222222222222222222222222222222222222222222222222222222",
+            "recompute_dependents": [
+              "subject_artifact_sha256",
+              "authority_envelope_artifact_sha256",
+              "snapshot_entries",
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "revocation-target-resolution",
+      "expected_rule_id": "OAR-RV-003",
+      "expected_primary_component": "Revocation resolver",
+      "expected_rejection_stage": "revocation-target-resolution",
+      "expected_semantic_reason": "oar-rv-003",
+      "earlier_layers_remain_valid_because": "Revocation and enclosing chain are rebuilt; located target digest alone differs."
+    },
+    {
+      "fixture_id": "OAR-N14",
+      "title": "Revocation target purpose differs",
+      "base_fixture": "post-revocation",
+      "source_scenario": "post-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "authority-revocation-subject.json",
+            "json_pointer": "/target_authority_purpose",
+            "value": "calendar-eligibility",
+            "recompute_dependents": [
+              "subject_artifact_sha256",
+              "authority_envelope_artifact_sha256",
+              "snapshot_entries",
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "revocation-target-resolution",
+      "expected_rule_id": "OAR-RV-004",
+      "expected_primary_component": "Revocation resolver",
+      "expected_rejection_stage": "revocation-target-resolution",
+      "expected_semantic_reason": "oar-rv-004",
+      "earlier_layers_remain_valid_because": "Revocation and enclosing chain are rebuilt; target ID/digest resolve but purpose differs."
+    },
+    {
+      "fixture_id": "OAR-N15",
+      "title": "Supersession attempted before revocation",
+      "base_fixture": "post-revocation",
+      "source_scenario": "post-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "reorder_array",
+            "artifact_path": "$resolution-context",
+            "json_pointer": "/lifecycle_order",
+            "value": [
+              "authority-supersession",
+              "revocation",
+              "business-subject-supersession"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "lifecycle-order-admission",
+      "expected_rule_id": "OAR-RV-005",
+      "expected_primary_component": "Revocation resolver",
+      "expected_rejection_stage": "lifecycle-order-admission",
+      "expected_semantic_reason": "oar-rv-005",
+      "earlier_layers_remain_valid_because": "No artifact changes; all artifact validation passes before prohibited resolver-stage order is rejected."
+    },
+    {
+      "fixture_id": "OAR-N16",
+      "title": "Revocation reason identifier empty",
+      "base_fixture": "post-revocation",
+      "source_scenario": "post-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "replace_value",
+            "artifact_path": "authority-revocation-subject.json",
+            "json_pointer": "/reason_code",
+            "value": ""
+          }
+        ]
+      },
+      "expected_first_failure_layer": "subject-schema",
+      "expected_rule_id": "OAR-RV-006",
+      "expected_primary_component": "Subject schema validator",
+      "expected_rejection_stage": "subject-schema",
+      "expected_semantic_reason": "oar-rv-006",
+      "earlier_layers_remain_valid_because": "Declared target is subject-schema validation; mutation violates only non-empty identifier syntax."
+    },
+    {
+      "fixture_id": "OAR-N17",
+      "title": "Duplicate logical ID conflicting content",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "duplicate_artifact",
+            "artifact_path": "resolution-bundle-root.json",
+            "json_pointer": "/artifact_inventory/0",
+            "overrides": {
+              "artifact_sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+            }
+          }
+        ]
+      },
+      "expected_first_failure_layer": "bundle-logical-identity",
+      "expected_rule_id": "BAI-BV-003",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "bundle-logical-identity",
+      "expected_semantic_reason": "bai-bv-003",
+      "earlier_layers_remain_valid_because": "Root remains schema-valid; logical uniqueness precedes physical hash verification."
+    },
+    {
+      "fixture_id": "OAR-N18",
+      "title": "Bundle inventory not canonically ordered",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "reorder_array",
+            "artifact_path": "resolution-bundle-root.json",
+            "json_pointer": "/artifact_inventory",
+            "value": [
+              1,
+              0,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "bundle-ordering",
       "expected_rule_id": "BAI-BV-004",
       "expected_primary_component": "Bundle verifier",
-      "expected_rejection_stage": "bundle inventory validation",
-      "expected_semantic_reason": "declared inventory is not in canonical key order"
+      "expected_rejection_stage": "bundle-ordering",
+      "expected_semantic_reason": "bai-bv-004",
+      "earlier_layers_remain_valid_because": "Complete unique inventory and hashes remain; only tuple order changes."
     },
     {
-      "fixture_id": "BAI-N19",
-      "title": "Unknown entry type",
-      "base_fixture": "../positive/valid-resolution-chain",
+      "fixture_id": "OAR-N19",
+      "title": "Business supersession names authority identity",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
       "mutation": {
-        "operation": "replace_value",
-        "artifact_path": "registry-snapshot.json",
-        "json_pointer": "/entries/0/entry_type",
-        "value": "unknown-entry"
-      },
-      "expected_rule_id": "BAI-RS-002",
-      "expected_primary_component": "Registry snapshot validator",
-      "expected_rejection_stage": "snapshot entry validation",
-      "expected_semantic_reason": "snapshot contains an unknown registry entry type"
-    },
-    {
-      "fixture_id": "BAI-N20",
-      "title": "Broken or cyclic snapshot lineage",
-      "base_fixture": "../positive/valid-resolution-chain",
-      "mutation": {
-        "operation": "break_reference",
-        "artifact_path": "registry-snapshot.json",
-        "json_pointer": "/supersedes_snapshot_id",
-        "value": "example-snapshot-2099-01-v1",
-        "companion_updates": [
+        "ordered_operations": [
           {
-            "artifact_path": "registry-snapshot.json",
-            "json_pointer": "/snapshot_version",
+            "operation": "replace_value",
+            "artifact_path": "monthly-selection-subject.json",
+            "json_pointer": "/subject_version",
             "value": 2
           },
           {
-            "artifact_path": "registry-snapshot.json",
-            "json_pointer": "/supersedes_snapshot_artifact_sha256",
-            "value": "1111111111111111111111111111111111111111111111111111111111111111"
+            "operation": "replace_value",
+            "artifact_path": "monthly-selection-subject.json",
+            "json_pointer": "/supersedes_subject_id",
+            "value": "example-selection-authority-001"
+          },
+          {
+            "operation": "replace_value",
+            "artifact_path": "monthly-selection-subject.json",
+            "json_pointer": "/supersedes_subject_sha256",
+            "value": "3f2707d759f07340f43c68d99fdccc752f45a0a7d16c3ffede3f9a4f08769758",
+            "recompute_dependents": [
+              "subject_artifact_sha256",
+              "authority_envelope_artifact_sha256",
+              "snapshot_entries",
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
           }
         ]
       },
-      "expected_rule_id": "BAI-LC-005",
-      "expected_primary_component": "Lifecycle resolver",
-      "expected_rejection_stage": "snapshot lifecycle resolution",
-      "expected_semantic_reason": "snapshot predecessor reference is self-cyclic"
+      "expected_first_failure_layer": "business-subject-lifecycle",
+      "expected_rule_id": "OAR-AL-003",
+      "expected_primary_component": "Authority lifecycle resolver",
+      "expected_rejection_stage": "business-subject-lifecycle",
+      "expected_semantic_reason": "oar-al-003",
+      "earlier_layers_remain_valid_because": "Subject remains schema-valid and all bindings are rebuilt; lifecycle identity-domain conflation remains."
+    },
+    {
+      "fixture_id": "OAR-N20",
+      "title": "Two active authority tips authorize one subject",
+      "base_fixture": "pre-revocation",
+      "source_scenario": "pre-revocation",
+      "mutation": {
+        "ordered_operations": [
+          {
+            "operation": "add_artifact",
+            "artifact_path": "alternate-selection-authority-envelope.json",
+            "template_artifact_path": "monthly-selection-authority-envelope.json",
+            "overrides": {
+              "authority_id": "example-selection-authority-tip-002",
+              "authority_version": 1,
+              "supersedes_authority_id": null,
+              "supersedes_authority_artifact_sha256": null
+            }
+          },
+          {
+            "operation": "add_artifact",
+            "artifact_path": "registry-snapshot.json",
+            "json_pointer": "/entries/-",
+            "derive_from_artifact": "alternate-selection-authority-envelope.json",
+            "entry_overrides": {
+              "authority_status": "accepted"
+            },
+            "recompute_dependents": [
+              "authority_envelope_artifact_sha256",
+              "snapshot_entries",
+              "publication_subject_sha256",
+              "publication_envelope_artifact_sha256",
+              "complete_snapshot_artifact_sha256",
+              "bundle_inventory",
+              "bundle_id",
+              "trust_anchor_snapshot_binding"
+            ]
+          }
+        ]
+      },
+      "expected_first_failure_layer": "authority-lifecycle",
+      "expected_rule_id": "OAR-AL-001",
+      "expected_primary_component": "Authority lifecycle resolver",
+      "expected_rejection_stage": "authority-lifecycle",
+      "expected_semantic_reason": "oar-al-001",
+      "earlier_layers_remain_valid_because": "Alternate envelope is derived in memory, schema-valid, declared, hash-bound, anchored, and coexists with original unsuperseded authority."
     }
   ]
 }

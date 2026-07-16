@@ -29,3 +29,15 @@ The exact scope is `run_id` + `consumer_id` + `programme_month` + `registry_purp
 Missing or conflicting anchors, missing bundles, scope disagreement, unverified bundle completeness, unknown artifact type, or any failed downstream authority/lifecycle check rejects the whole resolution request. No partial authoritative result exists.
 
 Storage location, filename, timestamp, version number, highest or only visible tip, directory order, and generation order confer no authority.
+
+## OAR Resolution
+
+OAR uses separately hashed subjects and generic authority envelopes. Ordinary authority must be exact membership in the anchored snapshot. Registry publication is the single non-self-authorizing bootstrap exception. This remains inactive.
+
+## OAR Resolution
+
+OAR uses separately hashed subjects and generic authority envelopes. Ordinary authority must be exact membership in the anchored snapshot. Registry publication is the single non-self-authorizing bootstrap exception. This remains an inactive contract package.
+
+## OAR Resolution
+
+The OAR fixtures replace the former Gate 2 prototype with separately hashed subjects and generic authority envelopes. Ordinary authority must be exact membership in the anchored snapshot. Registry publication is the single non-self-authorizing exception described by the bootstrap contract. This remains an inactive contract package, not implementation authorization.
