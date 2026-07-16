@@ -1,0 +1,13 @@
+{
+  "contract_version": "bounded-authority-trust-anchor/0.1.0-draft",
+  "authorized_tip_id": "example-snapshot-2099-01-v1",
+  "expected_snapshot_artifact_sha256": "05b9044123d36e33514b71500b86a5e533b82516d50936ec44ee34c8ebf2b1be",
+  "registry_id": "example-calendar-registry",
+  "scope": {
+    "run_id": "2099-01-r99",
+    "consumer_id": "calendar-renderer",
+    "programme_month": "2099-01",
+    "registry_purpose": "calendar-authority-resolution"
+  },
+  "trust_source": "trusted-delivery-context"
+}

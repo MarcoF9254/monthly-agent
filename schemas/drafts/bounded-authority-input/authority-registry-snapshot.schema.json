@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/bounded-authority-input/authority-registry-snapshot.schema.json",
+  "title": "Authorized Closed-World Registry Snapshot Draft 0.1",
+  "description": "Inactive, non-production immutable snapshot. Ordering, subject digest, lifecycle, external publication authority, and closed-world completeness are semantic requirements.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "registry_id", "snapshot_id", "snapshot_version", "supersedes_snapshot_id", "supersedes_snapshot_artifact_sha256", "scope", "entries", "snapshot_subject_sha256", "publication_authority_reference", "publication_authority_artifact_sha256", "published_at"],
+  "properties": {
+    "contract_version": {"const": "authority-registry-snapshot/0.1.0-draft"},
+    "registry_id": {"type": "string", "minLength": 1},
+    "snapshot_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"},
+    "snapshot_version": {"type": "integer", "minimum": 1},
+    "supersedes_snapshot_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"},
+    "supersedes_snapshot_artifact_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "entries": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/entry"}
+    },
+    "snapshot_subject_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "publication_authority_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority_id", "authority_purpose"],
+      "properties": {
+        "authority_id": {"type": "string", "minLength": 1},
+        "authority_purpose": {"const": "calendar-registry-publication"}
+      }
+    },
+    "publication_authority_artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "published_at": {"type": "string", "format": "date-time"}
+  },
+  "allOf": [{
+    "if": {"properties": {"snapshot_version": {"const": 1}}, "required": ["snapshot_version"]},
+    "then": {"properties": {"supersedes_snapshot_id": {"const": null}, "supersedes_snapshot_artifact_sha256": {"const": null}}},
+    "else": {"properties": {"supersedes_snapshot_id": {"type": "string"}, "supersedes_snapshot_artifact_sha256": {"type": "string"}}}
+  }],
+  "$defs": {
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "consumer_id", "programme_month", "registry_purpose"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "consumer_id": {"const": "calendar-renderer"},
+        "programme_month": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+        "registry_purpose": {"const": "calendar-authority-resolution"}
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entry_type", "logical_id", "artifact_sha256", "authority_purpose", "artifact_status"],
+      "properties": {
+        "entry_type": {"enum": ["eligibility-decision", "monthly-selection", "authority-revocation"]},
+        "logical_id": {"type": "string", "minLength": 1},
+        "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "authority_purpose": {"enum": ["calendar-eligibility", "calendar-monthly-selection", "calendar-authority-revocation"]},
+        "artifact_status": {"enum": ["accepted", "revoked"]}
+      }
+    }
+  }
+}
