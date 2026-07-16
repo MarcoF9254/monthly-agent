@@ -1,5 +1,39 @@
 # Architecture Decision Records
 
+## OD-REVIEW-POLICY-001: Risk-Based Independent Review Policy
+
+Status: Accepted
+
+Ratified by: Marco
+
+### Decision
+
+Adopt Option C, the Risk-Based Independent Review Policy:
+
+- every PR requires author-external independent review;
+- high-risk changes require dual independent review;
+- an author-external independent reviewer decides and records classification;
+- reviewer identity considers work-product authorship and substantive initiation, not Git metadata alone;
+- review and CI bind to the exact head, and any new commit requires re-review of that new head;
+- gated PRs require true merge commits;
+- Tier 2 review for production authority, security, destructive operations, or real-data activation is non-waivable;
+- absence of a qualified replacement reviewer stops the PR; and
+- break-glass handling is neither authorized nor defined by this decision.
+
+### Review evidence
+
+- First architecture draft: ChatGPT.
+- First independent review: Claude — YELLOW, with two required corrections.
+- F1/F2 and F3–F5 were incorporated.
+- Second independent review: Claude — GREEN WITH NON-BLOCKING NOTES.
+- Blocking findings: zero.
+- Major findings: zero.
+- The Owner selected the strict non-waivable Section 13 behavior.
+
+### Consequences
+
+The policy is prospective and does not retroactively invalidate PR #22 or earlier PRs. Its repository-publication PR is Tier 2, and future policy amendments are Tier 2. CI, review, Owner approval, and merge verification remain separate controls.
+
 ## OAR owner decisions
 
 - `OD-OAR-ARCH-001`: approved with scope rulings.

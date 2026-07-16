@@ -8,6 +8,15 @@ The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed
 
 No next implementation milestone is selected. OAR contract drafting, the fictional verifier prototype, and Phase 1A are complete; production authority resolution is not authorized.
 
+### OD-REVIEW-POLICY-001 publication
+
+Status: `RATIFIED — PUBLICATION IN REVIEW`
+
+- Governance and decision documentation only.
+- Tier 2 dual independent review is required.
+- No runtime, authority, schema, Phase 1B, or Phase 2 implementation is included.
+- Completion requires both reviewers to cover the exact reviewed head, Owner merge approval, a true merge commit, and post-merge identity and landed-scope verification.
+
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
 ## Completed Milestones
