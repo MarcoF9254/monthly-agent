@@ -1,8 +1,8 @@
 # Current Project Status
 
-## OAR drafting
+## OAR contracts and fictional verifier
 
-`OD-OAR-CONTRACT-AUTHOR-001` authorizes inactive Draft 0.x contracts and fictional fixtures only. No executable validator, resolver, builder, real authority artifact, or activation exists.
+The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 merged the accepted OAR contracts, inactive Draft 0.x schemas, and fictional authority and revocation fixtures. PR #19 merged the independently reviewed fictional year-2099 offline verifier prototype. The prototype is executable fictional evidence only; it is not a production authority resolver or an activation of any draft schema.
 
 Last Updated: 2026-07-16
 Repository: monthly-agent
@@ -22,7 +22,7 @@ BR-001 through BR-005 are implemented, tested, and active in the runtime registr
 
 ## Current Milestone
 
-Scoped Downstream Eligibility Stage 1 architecture is accepted. The Architecture Owner explicitly accepted Option D and ADR-007. No implementation milestone is active; contracts, runtime behavior, migration, eligibility issuance, projection generation, and downstream activation remain unimplemented and unauthorized.
+Scoped Downstream Eligibility Stage 1 architecture is accepted. The Architecture Owner explicitly accepted Option D and ADR-007. The fictional OAR verifier prototype is complete, but production authority resolution, migration, eligibility issuance, projection generation, manifest generation, and downstream activation remain unimplemented and unauthorized.
 
 Milestone 3.9 / D2B — Machine-readable Validation Findings Emission (completed and merged in PR #10)
 
@@ -58,9 +58,9 @@ BR-006 implementation and direct unit coverage are retained while runtime activa
 
 ## Current Task
 
-Gate 2 bounded authority input contract drafting is active under `OD-BAI-ARCH-001` (accepted with owner changes) and `OD-BAI-CONTRACT-001` (drafting approved). The direction requires one external trust anchor plus one self-contained verified bundle; rollback detection depends on the anchor. All new schemas remain inactive, unaccepted draft `0.x`. No implementation milestone is active; no real trust anchor, registry publication, run metadata authority, authority, eligibility, selection, projection, manifest, migration, or activation artifact exists. R03 remains `partially_approved`; downstream and BR-006 remain inactive, D3 remains unresolved, and approved-only newsletter behavior is unchanged.
+No next milestone has been selected. The current factual baseline is the completed fictional OAR chain: the offline verifier checks RFC 8785/SHA-256 bindings, a separately supplied trust anchor, the non-self-authorizing publication bootstrap, ordinary closed-world membership, exact subject/envelope binding, authorized revocation before authority supersession, independent business-subject supersession, and deterministic fictional run metadata, eligibility, and selection outcomes. It executes two positive scenarios and twenty negative first-failure cases. The merge validation baseline was 147 passed with one pre-existing unrelated skip.
 
-The positive fictional `valid-resolution-chain` is valid only as a Gate 2 bounded-input envelope chain. It does not prove executable end-to-end verification of the separate owner-authority artifacts referenced by eligibility or monthly selection. Owner-authority artifact schemas, fictional fixtures, and verifiers remain separately blocked and require separate owner authorization.
+This closure does not provide real trust-anchor delivery, real registry publication, real run metadata authority, authority or revocation issuance, R03 eligibility or selection, projection or manifest activation, calendar downstream activation, BR-006 activation, D3 resolution, or published-output recall. All OAR schemas remain inactive Draft 0.x artifacts.
 
 ## Known Technical Debt
 
@@ -68,6 +68,7 @@ The positive fictional `valid-resolution-chain` is valid only as a Gate 2 bounde
 - Business rule specs and implementations must stay aligned before adding validators.
 - BR-005 must remain deterministic and avoid semantic, NLP, or fuzzy judgement.
 - BR-006 runtime activation remains held pending vertical-slice evidence, indexed marker syntax validation, and owner approval.
+- The fictional verifier module-global lifecycle trace supports test introspection only and is not concurrency-safe. It does not affect authority outcomes, is acceptable for this prototype, and must be removed or redesigned before concurrent or production use.
 
 ## Architecture Principles
 
@@ -89,6 +90,7 @@ Naming map:
 
 Next steps:
 
-1. Keep D3 / indexed marker syntax validation pending clarification; do not begin implementation without separate approval.
-2. Plan real vertical-slice evidence only with separate owner approval.
-3. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
+1. Keep the next milestone undecided until a separate owner decision.
+2. Keep D3 / indexed marker syntax validation pending clarification; do not begin implementation without separate approval.
+3. Plan real vertical-slice evidence only with separate owner approval.
+4. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.

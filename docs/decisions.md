@@ -9,6 +9,10 @@
 
 Resolved rulings cover structural reason identifiers, predecessor evidence, omission of audit/source references, trust-anchor transition for publication revocation, and downstream provenance deferral.
 
+`OD-OAR-CONTRACT-ACCEPT-001` accepted and merged PR #18: the OAR contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. `OD-OAR-PROTOTYPE-ACCEPT-001` accepted and merged PR #19: the fictional year-2099 offline verifier prototype and its independently reviewed positive, negative, canonicalization, lifecycle, and fail-closed tests. The Bounded Calendar Authority Chain v0 architecture is frozen.
+
+`OD-OAR-PROTOTYPE-N15-001` classifies OAR-N15 as a construction-invariant test of one shared immutable revocation-first stage order. It is not runtime input or verifier configuration. Prototype acceptance supplies executable fictional evidence only; it grants no production authority, schema activation, real trust-anchor delivery, real registry publication, real authority or revocation issuance, R03 decision, downstream activation, or authority for a future milestone.
+
 This file records lightweight architecture decisions for `monthly-agent`. It preserves project decisions that affect future implementation, validation, and agent handoff work.
 
 ## ADR-001: Activity ID Format
