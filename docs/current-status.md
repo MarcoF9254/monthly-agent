@@ -54,7 +54,9 @@ BR-006 implementation and direct unit coverage are retained while runtime activa
 
 ## Current Task
 
-The scoped downstream eligibility architecture is accepted. `OD-CAL-ARCH-001` governs contract drafting, `OD-CAL-ARCH-002` governs selection and binding revision, and `OD-CAL-ARCH-003` accepts typed authority purpose and exact subject binding as contract clarification only. No implementation milestone is active; executable schemas remain unaccepted draft `0.x`; no authority, eligibility, selection, projection, manifest, migration, or activation artifact exists. The remaining blockers are owner-authority and revocation schemas/verifiers, bounded authoritative resolver input, deterministic registry identity/publication, machine-readable run/month binding, implementation validation, independent review, and explicit owner schema/implementation acceptance. R03 remains `partially_approved` with 32 approved and 13 `needs_review`; downstream is not activated. BR-006 remains inactive and D3 remains unresolved.
+Gate 2 bounded authority input contract drafting is active under `OD-BAI-ARCH-001` (accepted with owner changes) and `OD-BAI-CONTRACT-001` (drafting approved). The direction requires one external trust anchor plus one self-contained verified bundle; rollback detection depends on the anchor. All new schemas remain inactive, unaccepted draft `0.x`. No implementation milestone is active; no real trust anchor, registry publication, run metadata authority, authority, eligibility, selection, projection, manifest, migration, or activation artifact exists. R03 remains `partially_approved`; downstream and BR-006 remain inactive, D3 remains unresolved, and approved-only newsletter behavior is unchanged.
+
+The positive fictional `valid-resolution-chain` is valid only as a Gate 2 bounded-input envelope chain. It does not prove executable end-to-end verification of the separate owner-authority artifacts referenced by eligibility or monthly selection. Owner-authority artifact schemas, fictional fixtures, and verifiers remain separately blocked and require separate owner authorization.
 
 ## Known Technical Debt
 

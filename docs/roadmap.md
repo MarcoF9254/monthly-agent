@@ -2,7 +2,7 @@
 
 ## Current Focus
 
-Calendar-Only Vertical Slice contract drafting and revision under `OD-CAL-ARCH-001`, `OD-CAL-ARCH-002`, and contract-only clarification `OD-CAL-ARCH-003`; implementation not authorized
+Gate 2 bounded authority input inactive contract drafting under `OD-BAI-ARCH-001` and `OD-BAI-CONTRACT-001`; implementation not authorized
 
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
@@ -70,6 +70,16 @@ Status: contract drafting and revision authorized. Direction: per-activity canon
 - Design fictional positive and negative fixtures without creating R03 artifacts.
 - Require implementation validation, independent review, and owner acceptance before runtime activation.
 - Preserve blockers for authority/revocation schemas and verifiers, bounded resolver input, deterministic registry publication, and authoritative run/month binding.
+
+### Bounded Authority Input and Registry Publication
+
+Status: inactive contract package drafting authorized; executable acceptance and implementation unauthorized.
+
+- Require exactly one externally supplied trust anchor and one self-contained verified resolution bundle.
+- Bind a logical `registry_id` to immutable published `snapshot_id` versions without treating them as synonyms.
+- Use separate `calendar-registry-publication` authority and a non-circular subject-to-artifact digest construction.
+- Define closed-world snapshot lifecycle, rollback detection, deterministic inventory, run/month equality, and single-primary enforcement ownership.
+- Keep real run metadata authority, owner-authority/revocation verifiers, implementation validation, independent review, and owner activation acceptance blocked.
 
 ### BR-006 Per-Session Date Completeness
 

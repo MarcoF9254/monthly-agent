@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/bounded-authority-input/resolution-bundle-root.schema.json",
+  "title": "Verified Resolution Bundle Root Draft 0.1",
+  "description": "Inactive, non-production root for one self-contained bounded authority resolution bundle. Complete inventory and ordering are semantic requirements.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "bundle_id", "input_mode", "scope", "registry_id", "snapshot_id", "snapshot_artifact_sha256", "builder_version", "artifact_inventory"],
+  "properties": {
+    "contract_version": {"const": "resolution-bundle-root/0.1.0-draft"},
+    "bundle_id": {"type": "string", "pattern": "^bundle_sha256_[0-9a-f]{64}$"},
+    "input_mode": {"const": "verified-resolution-bundle"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "registry_id": {"type": "string", "minLength": 1},
+    "snapshot_id": {"type": "string", "minLength": 1},
+    "snapshot_artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "builder_version": {"type": "string", "minLength": 1},
+    "artifact_inventory": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/inventoryItem"}
+    }
+  },
+  "$defs": {
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "consumer_id", "programme_month", "registry_purpose"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "consumer_id": {"const": "calendar-renderer"},
+        "programme_month": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+        "registry_purpose": {"const": "calendar-authority-resolution"}
+      }
+    },
+    "inventoryItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_type", "logical_id", "artifact_path", "artifact_sha256"],
+      "properties": {
+        "artifact_type": {"enum": ["authoritative-run-metadata", "calendar-eligibility", "calendar-monthly-selection", "calendar-registry-publication", "registry-snapshot"]},
+        "logical_id": {"type": "string", "minLength": 1},
+        "artifact_path": {"type": "string", "pattern": "^[A-Za-z0-9._/-]+[.]json$"},
+        "artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

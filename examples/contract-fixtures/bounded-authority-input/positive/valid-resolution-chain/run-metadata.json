@@ -1,0 +1,9 @@
+{
+  "contract_version": "authoritative-run-metadata/0.1.0-draft",
+  "metadata_id": "example-run-metadata-2099-01",
+  "run_id": "2099-01-r99",
+  "programme_month": "2099-01",
+  "consumer_id": "calendar-renderer",
+  "binding_status": "fictional-draft-binding",
+  "source_authority": "fictional-owner-example"
+}

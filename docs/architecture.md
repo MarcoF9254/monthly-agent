@@ -64,6 +64,10 @@ Stage 1 establishes accepted architecture only. It does not activate a consumer,
 
 For the calendar-only vertical slice, `OD-CAL-ARCH-001` approves per-activity canonical projections plus a monthly manifest. `OD-CAL-ARCH-002` adds a separately authorized monthly selection decision. `OD-CAL-ARCH-003` clarifies contracts only: authority purposes are typed and non-transferable, and external authority binds the digest of the exact canonical authorization subject. Eligibility grants exact-field permission, selection records publication intent, projections carry validated per-activity payloads, and the manifest binds the complete effective selection artifact to valid projections. Executable schemas remain draft `0.x` and unaccepted; no resolver, builder, renderer, validator, authority, eligibility, selection, projection, manifest, migration, or activation exists.
 
+Gate 2 bounded authority input follows `OD-BAI-ARCH-001`, accepted with owner changes: production authority resolution requires one externally supplied trust anchor plus one self-contained verified resolution bundle. The anchor identifies the authorized immutable registry-snapshot tip and expected complete artifact digest. Internal hashes prove integrity but not current authorization; rollback detection depends on the external anchor. `OD-BAI-CONTRACT-001` authorizes inactive contract drafting only. No executable schema, resolver, bundle builder, authority issuance, publication, migration, or activation is accepted or implemented.
+
+`registry_id` is the logical registry identity. `snapshot_id` is one immutable published version identity. The existing external authority registry is not the Gate 2 authorized closed-world registry publication snapshot, and Gate 2 does not activate or replace the existing calendar-only draft.
+
 ## Data Flow
 
 - Raw inputs belong under `data/input/`.

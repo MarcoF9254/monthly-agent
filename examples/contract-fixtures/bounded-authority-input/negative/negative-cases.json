@@ -1,0 +1,346 @@
+{
+  "contract_version": "bounded-authority-negative-corpus/0.1.0-draft",
+  "base_fixture": "../positive/valid-resolution-chain",
+  "mutation_operation_vocabulary": [
+    "add_artifact",
+    "break_reference",
+    "duplicate_artifact",
+    "remove_artifact",
+    "remove_field",
+    "reorder_array",
+    "replace_artifact_content",
+    "replace_value",
+    "reuse_authority_binding"
+  ],
+  "cases": [
+    {
+      "fixture_id": "BAI-N01",
+      "title": "Missing trust anchor",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "remove_artifact",
+        "artifact_path": "trust-anchor.json"
+      },
+      "expected_rule_id": "BAI-TA-001",
+      "expected_primary_component": "Operational caller",
+      "expected_rejection_stage": "trust-anchor admission",
+      "expected_semantic_reason": "external trust anchor is absent"
+    },
+    {
+      "fixture_id": "BAI-N02",
+      "title": "Wrong expected snapshot digest",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "trust-anchor.json",
+        "json_pointer": "/expected_snapshot_artifact_sha256",
+        "value": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expected_rule_id": "BAI-TA-002",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "trust-anchor comparison",
+      "expected_semantic_reason": "expected snapshot digest differs from complete snapshot digest"
+    },
+    {
+      "fixture_id": "BAI-N03",
+      "title": "Tip pointer and digest disagreement",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "trust-anchor.json",
+        "json_pointer": "/authorized_tip_id",
+        "value": "example-snapshot-2099-01-v2"
+      },
+      "expected_rule_id": "BAI-TA-003",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "trust-anchor comparison",
+      "expected_semantic_reason": "authorized tip ID and expected digest identify different snapshots"
+    },
+    {
+      "fixture_id": "BAI-N04",
+      "title": "Stale internally valid snapshot",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "trust-anchor.json",
+        "json_pointer": "/authorized_tip_id",
+        "value": "example-snapshot-2099-01-v2",
+        "companion_updates": [
+          {
+            "artifact_path": "trust-anchor.json",
+            "json_pointer": "/expected_snapshot_artifact_sha256",
+            "value": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ]
+      },
+      "expected_rule_id": "BAI-LC-001",
+      "expected_primary_component": "Lifecycle resolver",
+      "expected_rejection_stage": "snapshot lifecycle resolution",
+      "expected_semantic_reason": "bundle snapshot is not the externally anchored authorized tip"
+    },
+    {
+      "fixture_id": "BAI-N05",
+      "title": "Rollback to superseded snapshot",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "resolution-bundle-root.json",
+        "json_pointer": "/snapshot_id",
+        "value": "example-snapshot-2099-01-v0"
+      },
+      "expected_rule_id": "BAI-LC-002",
+      "expected_primary_component": "Lifecycle resolver",
+      "expected_rejection_stage": "snapshot lifecycle resolution",
+      "expected_semantic_reason": "bundle attempts rollback behind the externally anchored tip"
+    },
+    {
+      "fixture_id": "BAI-N06",
+      "title": "Two active snapshot tips",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "add_artifact",
+        "artifact_path": "resolution-bundle-root.json",
+        "json_pointer": "/artifact_inventory/-",
+        "value": {
+          "artifact_type": "registry-snapshot",
+          "logical_id": "example-snapshot-2099-01-v2",
+          "artifact_path": "registry-snapshot-v2.json",
+          "artifact_sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      },
+      "expected_rule_id": "BAI-LC-003",
+      "expected_primary_component": "Lifecycle resolver",
+      "expected_rejection_stage": "snapshot lifecycle resolution",
+      "expected_semantic_reason": "two same-scope active snapshot tips are visible"
+    },
+    {
+      "fixture_id": "BAI-N07",
+      "title": "Missing declared artifact",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "remove_artifact",
+        "artifact_path": "eligibility-decision-002.json"
+      },
+      "expected_rule_id": "BAI-BV-001",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "bundle completeness",
+      "expected_semantic_reason": "declared inventory artifact is absent"
+    },
+    {
+      "fixture_id": "BAI-N08",
+      "title": "Undeclared extra artifact",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "add_artifact",
+        "artifact_path": "undeclared-extra.json",
+        "value": {
+          "fictional": "extra"
+        }
+      },
+      "expected_rule_id": "BAI-BV-002",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "bundle completeness",
+      "expected_semantic_reason": "physical bundle contains an undeclared artifact"
+    },
+    {
+      "fixture_id": "BAI-N09",
+      "title": "Conflicting content for one logical ID",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "duplicate_artifact",
+        "artifact_path": "resolution-bundle-root.json",
+        "json_pointer": "/artifact_inventory/1",
+        "value": {
+          "artifact_sha256": "9999999999999999999999999999999999999999999999999999999999999999"
+        }
+      },
+      "expected_rule_id": "BAI-BV-003",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "bundle identity validation",
+      "expected_semantic_reason": "same logical ID is associated with conflicting content"
+    },
+    {
+      "fixture_id": "BAI-N10",
+      "title": "Unauthorized registry publication",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "remove_field",
+        "artifact_path": "registry-snapshot.json",
+        "json_pointer": "/publication_authority_reference"
+      },
+      "expected_rule_id": "BAI-PA-001",
+      "expected_primary_component": "Registry publication authority verifier",
+      "expected_rejection_stage": "publication authority verification",
+      "expected_semantic_reason": "snapshot lacks externally verified publication authority"
+    },
+    {
+      "fixture_id": "BAI-N11",
+      "title": "Wrong typed publication authority purpose",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "registry-publication-authority.json",
+        "json_pointer": "/authority_purpose",
+        "value": "calendar-eligibility"
+      },
+      "expected_rule_id": "BAI-PA-002",
+      "expected_primary_component": "Registry publication authority verifier",
+      "expected_rejection_stage": "publication authority verification",
+      "expected_semantic_reason": "publication authority uses a non-transferable wrong purpose"
+    },
+    {
+      "fixture_id": "BAI-N12",
+      "title": "Cross-scope snapshot supersession",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "registry-snapshot.json",
+        "json_pointer": "/scope/programme_month",
+        "value": "2099-02"
+      },
+      "expected_rule_id": "BAI-LC-004",
+      "expected_primary_component": "Lifecycle resolver",
+      "expected_rejection_stage": "snapshot lifecycle resolution",
+      "expected_semantic_reason": "successor snapshot scope differs from its lineage scope"
+    },
+    {
+      "fixture_id": "BAI-N13",
+      "title": "Omitted revocation",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "registry-snapshot.json",
+        "json_pointer": "/entries/1/artifact_status",
+        "value": "revoked"
+      },
+      "expected_rule_id": "BAI-AS-001",
+      "expected_primary_component": "Artifact authority verifier",
+      "expected_rejection_stage": "artifact authority resolution",
+      "expected_semantic_reason": "snapshot omits a revocation required for its declared closed world"
+    },
+    {
+      "fixture_id": "BAI-N14",
+      "title": "Run and programme month mismatch",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "run-metadata.json",
+        "json_pointer": "/programme_month",
+        "value": "2099-02"
+      },
+      "expected_rule_id": "BAI-RM-001",
+      "expected_primary_component": "Run-metadata validator",
+      "expected_rejection_stage": "run metadata binding",
+      "expected_semantic_reason": "run metadata month differs from snapshot and selection"
+    },
+    {
+      "fixture_id": "BAI-N15",
+      "title": "Tampered snapshot subject with reused authority",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "registry-snapshot.json",
+        "json_pointer": "/entries/0/artifact_status",
+        "value": "revoked"
+      },
+      "expected_rule_id": "BAI-PA-003",
+      "expected_primary_component": "Registry publication authority verifier",
+      "expected_rejection_stage": "snapshot subject verification",
+      "expected_semantic_reason": "snapshot subject changed while publication authority digest was reused"
+    },
+    {
+      "fixture_id": "BAI-N16",
+      "title": "Loose files submitted to production",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "resolution-bundle-root.json",
+        "json_pointer": "/input_mode",
+        "value": "loose-files"
+      },
+      "expected_rule_id": "BAI-IN-001",
+      "expected_primary_component": "Operational caller",
+      "expected_rejection_stage": "production input admission",
+      "expected_semantic_reason": "loose-file input cannot produce authoritative resolution"
+    },
+    {
+      "fixture_id": "BAI-N17",
+      "title": "Unauthorized empty snapshot",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "reuse_authority_binding",
+        "artifact_path": "registry-snapshot.json",
+        "json_pointer": "/entries",
+        "value": []
+      },
+      "expected_rule_id": "BAI-RS-001",
+      "expected_primary_component": "Registry snapshot validator",
+      "expected_rejection_stage": "snapshot subject verification",
+      "expected_semantic_reason": "empty snapshot reuses authority for a non-empty subject"
+    },
+    {
+      "fixture_id": "BAI-N18",
+      "title": "Non-canonical inventory ordering",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "reorder_array",
+        "artifact_path": "resolution-bundle-root.json",
+        "json_pointer": "/artifact_inventory",
+        "value": [
+          1,
+          0,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "expected_rule_id": "BAI-BV-004",
+      "expected_primary_component": "Bundle verifier",
+      "expected_rejection_stage": "bundle inventory validation",
+      "expected_semantic_reason": "declared inventory is not in canonical key order"
+    },
+    {
+      "fixture_id": "BAI-N19",
+      "title": "Unknown entry type",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "replace_value",
+        "artifact_path": "registry-snapshot.json",
+        "json_pointer": "/entries/0/entry_type",
+        "value": "unknown-entry"
+      },
+      "expected_rule_id": "BAI-RS-002",
+      "expected_primary_component": "Registry snapshot validator",
+      "expected_rejection_stage": "snapshot entry validation",
+      "expected_semantic_reason": "snapshot contains an unknown registry entry type"
+    },
+    {
+      "fixture_id": "BAI-N20",
+      "title": "Broken or cyclic snapshot lineage",
+      "base_fixture": "../positive/valid-resolution-chain",
+      "mutation": {
+        "operation": "break_reference",
+        "artifact_path": "registry-snapshot.json",
+        "json_pointer": "/supersedes_snapshot_id",
+        "value": "example-snapshot-2099-01-v1",
+        "companion_updates": [
+          {
+            "artifact_path": "registry-snapshot.json",
+            "json_pointer": "/snapshot_version",
+            "value": 2
+          },
+          {
+            "artifact_path": "registry-snapshot.json",
+            "json_pointer": "/supersedes_snapshot_artifact_sha256",
+            "value": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        ]
+      },
+      "expected_rule_id": "BAI-LC-005",
+      "expected_primary_component": "Lifecycle resolver",
+      "expected_rejection_stage": "snapshot lifecycle resolution",
+      "expected_semantic_reason": "snapshot predecessor reference is self-cyclic"
+    }
+  ]
+}

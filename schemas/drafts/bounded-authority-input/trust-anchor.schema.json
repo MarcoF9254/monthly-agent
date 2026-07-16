@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/bounded-authority-input/trust-anchor.schema.json",
+  "title": "Bounded Authority Trust Anchor Draft 0.1",
+  "description": "Inactive, non-production draft shape for an externally supplied expected registry snapshot reference. Schema validity does not authenticate delivery or owner authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "authorized_tip_id", "expected_snapshot_artifact_sha256", "registry_id", "scope", "trust_source"],
+  "properties": {
+    "contract_version": {"const": "bounded-authority-trust-anchor/0.1.0-draft"},
+    "authorized_tip_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"},
+    "expected_snapshot_artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "registry_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "trust_source": {"enum": ["trusted-delivery-context", "external-authority-reference"]},
+    "authority_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority_id", "authority_artifact_sha256"],
+      "properties": {
+        "authority_id": {"type": "string", "minLength": 1},
+        "authority_artifact_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  },
+  "allOf": [{
+    "if": {"properties": {"trust_source": {"const": "external-authority-reference"}}, "required": ["trust_source"]},
+    "then": {"required": ["authority_reference"]},
+    "else": {"not": {"required": ["authority_reference"]}}
+  }],
+  "$defs": {
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "consumer_id", "programme_month", "registry_purpose"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "consumer_id": {"const": "calendar-renderer"},
+        "programme_month": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+        "registry_purpose": {"const": "calendar-authority-resolution"}
+      }
+    }
+  }
+}

@@ -147,3 +147,9 @@ Existing closed runs remain unchanged. In particular, R03 remains `partially_app
 These owner decisions accept architecture direction only. They do not accept or activate draft executable schemas, start implementation, issue authority, eligibility, or selection decisions, generate projections or manifests, migrate a consumer, or activate downstream use.
 
 `OD-CAL-ARCH-003` is accepted as contract clarification only. It requires typed, non-transferable purposes `calendar-eligibility`, `calendar-monthly-selection`, and `calendar-authority-revocation`; exact equality of expected, registry, and external-artifact purpose; and external binding to the digest of the exact canonical authorization subject. Selection and eligibility subjects exclude authority-reference metadata, while revocation binds the original authority identifier, digest, purpose, and exact scope. This does not accept an executable schema, verifier, implementation, or activation.
+
+## Gate 2 Owner Decisions: Bounded Authority Input
+
+`OD-BAI-ARCH-001` is accepted with owner changes. Production resolution must receive exactly one external trust anchor and one self-contained verified resolution bundle. The trust anchor binds the authorized `snapshot_id` and complete snapshot artifact digest for one logical `registry_id` and exact scope. A valid internal digest cannot prove that a snapshot is the currently authorized tip; stale-snapshot and rollback detection depend on the independently supplied anchor.
+
+`OD-BAI-CONTRACT-001` approves drafting the inactive Gate 2 contracts and draft `0.x` schemas. It does not accept executable schemas, implementation, real run metadata authority, real authority or decision issuance, registry publication, downstream activation, BR-006 activation, or D3 resolution.
