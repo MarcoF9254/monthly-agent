@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/calendar-only/external-authority-registry.schema.json",
+  "title": "External Authority Registry Draft 0.2",
+  "description": "Draft, non-active immutable index and content-binding snapshot for externally verified owner authority artifacts with typed, non-transferable purposes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "registry_id", "supersedes_registry_id", "entries"],
+  "properties": {
+    "contract_version": { "const": "external-authority-registry/0.2.0-draft" },
+    "registry_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$" },
+    "supersedes_registry_id": { "type": ["string", "null"], "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$" },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["authority_id", "authority_purpose", "artifact_path", "artifact_sha256", "authority_status", "accepted_decision_reference", "authorized_subject_type", "authorized_subject_sha256", "run_id", "consumer_id"],
+        "properties": {
+          "authority_id": { "type": "string", "minLength": 1 },
+          "authority_purpose": { "enum": ["calendar-eligibility", "calendar-monthly-selection", "calendar-authority-revocation"] },
+          "artifact_path": { "type": "string", "pattern": "^data/authority/(artifacts|revocations)/[A-Za-z0-9._-]+[.]json$" },
+          "artifact_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "authority_status": { "enum": ["accepted", "revoked"] },
+          "accepted_decision_reference": { "type": "string", "minLength": 1 },
+          "authorized_subject_type": { "enum": ["calendar-eligibility", "calendar-monthly-selection", "calendar-authority-revocation"] },
+          "authorized_subject_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "run_id": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-r[0-9]{2}$" },
+          "consumer_id": { "const": "calendar-renderer" },
+          "activity_id": { "type": "string", "minLength": 1 },
+          "programme_month": { "type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$" },
+          "original_authority_id": { "type": "string", "minLength": 1 },
+          "original_authority_artifact_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "original_authority_purpose": { "enum": ["calendar-eligibility", "calendar-monthly-selection"] },
+          "original_authority_scope": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["run_id", "consumer_id"],
+            "properties": {
+              "run_id": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-r[0-9]{2}$" },
+              "consumer_id": { "const": "calendar-renderer" },
+              "activity_id": { "type": "string", "minLength": 1 },
+              "programme_month": { "type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$" }
+            },
+            "oneOf": [
+              { "required": ["activity_id"], "not": { "required": ["programme_month"] } },
+              { "required": ["programme_month"], "not": { "required": ["activity_id"] } }
+            ]
+          },
+          "revocation_reference": { "type": "string", "minLength": 1 },
+          "revocation_artifact_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "revoked_at": { "type": "string", "format": "date-time" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "authority_purpose": { "const": "calendar-eligibility" } }, "required": ["authority_purpose"] },
+            "then": {
+              "required": ["activity_id"],
+              "properties": { "authorized_subject_type": { "const": "calendar-eligibility" } },
+              "not": { "anyOf": [{"required": ["programme_month"]}, {"required": ["original_authority_id"]}, {"required": ["original_authority_artifact_sha256"]}, {"required": ["original_authority_purpose"]}, {"required": ["original_authority_scope"]}] }
+            }
+          },
+          {
+            "if": { "properties": { "authority_purpose": { "const": "calendar-monthly-selection" } }, "required": ["authority_purpose"] },
+            "then": {
+              "required": ["programme_month"],
+              "properties": { "authorized_subject_type": { "const": "calendar-monthly-selection" } },
+              "not": { "anyOf": [{"required": ["activity_id"]}, {"required": ["original_authority_id"]}, {"required": ["original_authority_artifact_sha256"]}, {"required": ["original_authority_purpose"]}, {"required": ["original_authority_scope"]}] }
+            }
+          },
+          {
+            "if": { "properties": { "authority_purpose": { "const": "calendar-authority-revocation" } }, "required": ["authority_purpose"] },
+            "then": {
+              "required": ["original_authority_id", "original_authority_artifact_sha256", "original_authority_purpose", "original_authority_scope"],
+              "properties": { "authorized_subject_type": { "const": "calendar-authority-revocation" } },
+              "not": { "anyOf": [{"required": ["activity_id"]}, {"required": ["programme_month"]}] }
+            }
+          },
+          {
+            "if": { "properties": { "authority_status": { "const": "revoked" } }, "required": ["authority_status"] },
+            "then": { "required": ["revocation_reference", "revocation_artifact_sha256", "revoked_at"] }
+          }
+        ]
+      }
+    }
+  }
+}

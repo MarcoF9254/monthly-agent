@@ -62,11 +62,13 @@ Downstream use separates closed evidence, explicit owner authority, consumer pol
 
 Stage 1 establishes accepted architecture only. It does not activate a consumer, implement a builder or validator, or change the activity schema.
 
+For the calendar-only vertical slice, `OD-CAL-ARCH-001` approves per-activity canonical projections plus a monthly manifest. `OD-CAL-ARCH-002` adds a separately authorized monthly selection decision. `OD-CAL-ARCH-003` clarifies contracts only: authority purposes are typed and non-transferable, and external authority binds the digest of the exact canonical authorization subject. Eligibility grants exact-field permission, selection records publication intent, projections carry validated per-activity payloads, and the manifest binds the complete effective selection artifact to valid projections. Executable schemas remain draft `0.x` and unaccepted; no resolver, builder, renderer, validator, authority, eligibility, selection, projection, manifest, migration, or activation exists.
+
 ## Data Flow
 
 - Raw inputs belong under `data/input/`.
 - Generated extraction and validation outputs belong under `data/output/`.
-- Future consumer eligibility authority belongs under `data/consumer-eligibility/`; future generated projections and provenance belong under `data/projections/`.
+- Future authority registry and artifacts belong under `data/authority/`; consumer eligibility belongs under `data/consumer-eligibility/`; calendar selection belongs under `data/calendar-selections/`; generated projections, provenance, and manifests belong under `data/projections/`. All remain outside `data/runs/`.
 - Representative examples belong under `examples/`.
 - Contracts and project handoff docs belong under `docs/`.
 

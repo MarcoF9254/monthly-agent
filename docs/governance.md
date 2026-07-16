@@ -175,3 +175,17 @@ They never record:
 - proposals
 - pending decisions
 - discussion notes
+
+## Draft Executable Contract Lifecycle
+
+Accepted architecture may authorize contract drafting without activating an executable contract. Draft JSON Schemas must use a `0.x` version and remain outside runtime validator inputs.
+
+A draft executable contract cannot become runtime-active until:
+
+1. implementation validation is complete;
+2. independent review is complete; and
+3. the owner explicitly accepts activation.
+
+Architecture acceptance, schema validity, and fictional-fixture success do not themselves grant business authority or downstream activation.
+
+For calendar contract drafting, eligibility, monthly publication selection, and authority revocation are separate typed, non-transferable authority purposes. Every verification must match expected, registry, and externally verified artifact purposes and the exact canonical authorization-subject digest and scope. Registry metadata cannot authenticate a grant or revocation. `OD-CAL-ARCH-002` approves selection and binding revision; `OD-CAL-ARCH-003` accepts this contract clarification only, without accepting or activating any executable schema.
