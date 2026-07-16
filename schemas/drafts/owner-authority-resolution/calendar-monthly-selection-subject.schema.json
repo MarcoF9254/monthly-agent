@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/owner-authority-resolution/calendar-monthly-selection-subject.schema.json",
+  "title": "Calendar Monthly Selection Subject Draft 0.3",
+  "description": "Inactive subject-only publication-intent artifact; contains no authority metadata or embedded digest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "subject_id", "subject_version", "supersedes_subject_id", "supersedes_subject_sha256", "run_id", "consumer_id", "programme_month", "selected_activity_ids"],
+  "properties": {
+    "contract_version": {"const": "calendar-monthly-selection-subject/0.3.0-draft"},
+    "subject_id": {"type": "string", "minLength": 1},
+    "subject_version": {"type": "integer", "minimum": 1},
+    "supersedes_subject_id": {"type": ["string", "null"]},
+    "supersedes_subject_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "run_id": {"type": "string", "minLength": 1},
+    "consumer_id": {"const": "calendar-renderer"},
+    "programme_month": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+    "selected_activity_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+  },
+  "allOf": [{"if": {"properties": {"subject_version": {"const": 1}}}, "then": {"properties": {"supersedes_subject_id": {"const": null}, "supersedes_subject_sha256": {"const": null}}}, "else": {"properties": {"supersedes_subject_id": {"type": "string"}, "supersedes_subject_sha256": {"type": "string"}}}}]
+}

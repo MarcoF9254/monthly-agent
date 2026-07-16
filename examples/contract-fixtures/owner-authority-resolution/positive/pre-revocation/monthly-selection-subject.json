@@ -1,0 +1,13 @@
+{
+  "contract_version": "calendar-monthly-selection-subject/0.3.0-draft",
+  "subject_id": "example-selection-subject-001",
+  "subject_version": 1,
+  "supersedes_subject_id": null,
+  "supersedes_subject_sha256": null,
+  "run_id": "fictional-run-2099-01-oar",
+  "consumer_id": "calendar-renderer",
+  "programme_month": "2099-01",
+  "selected_activity_ids": [
+    "example-activity-2099-01-001"
+  ]
+}

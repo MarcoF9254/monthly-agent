@@ -1,0 +1,21 @@
+{
+  "contract_version": "calendar-eligibility-subject/0.3.0-draft",
+  "subject_id": "example-eligibility-subject-001",
+  "subject_version": 1,
+  "supersedes_subject_id": null,
+  "supersedes_subject_sha256": null,
+  "run_id": "fictional-run-2099-01-oar",
+  "activity_id": "example-activity-2099-01-001",
+  "consumer_id": "calendar-renderer",
+  "decision": "eligible",
+  "allowed_fields": [
+    "activity_id",
+    "activity_title",
+    "dates",
+    "time"
+  ],
+  "prohibited_uses": [
+    "newsletter-publication",
+    "infer-missing-values"
+  ]
+}

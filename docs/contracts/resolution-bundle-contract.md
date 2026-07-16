@@ -1,5 +1,9 @@
 # Self-Contained Verified Resolution Bundle Contract Draft
 
+## OAR Inventory
+
+OAR inventories declare every subject, envelope, snapshot, and lifecycle artifact needed by one scenario. The external trust anchor remains outside the bundle. Pre- and post-revocation fixture directories are independently complete.
+
 Status: `resolution-bundle-root/0.1.0-draft`; inactive, unimplemented, and not accepted as executable
 
 Schema: `schemas/drafts/bounded-authority-input/resolution-bundle-root.schema.json`

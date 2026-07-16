@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/owner-authority-resolution/authority-envelope.schema.json",
+  "title": "Generic Owner Authority Envelope Draft 0.1",
+  "description": "Inactive non-production draft. Integrity and exact binding only; Phase 1 authentication ultimately derives from the externally delivered trust anchor.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "authority_id", "authority_version", "supersedes_authority_id", "supersedes_authority_artifact_sha256", "authority_purpose", "subject_type", "subject_id", "subject_sha256", "scope", "authorized_at"],
+  "properties": {
+    "contract_version": {"const": "authority-envelope/0.1.0-draft"},
+    "authority_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"},
+    "authority_version": {"type": "integer", "minimum": 1},
+    "supersedes_authority_id": {"type": ["string", "null"], "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"},
+    "supersedes_authority_artifact_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "authority_purpose": {"enum": ["calendar-eligibility", "calendar-monthly-selection", "calendar-registry-publication", "run-metadata-binding", "calendar-authority-revocation"]},
+    "subject_type": {"enum": ["calendar-eligibility", "calendar-monthly-selection", "calendar-registry-publication", "run-metadata-binding", "calendar-authority-revocation"]},
+    "subject_id": {"type": "string", "minLength": 1},
+    "subject_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "authorized_at": {"type": "string", "format": "date-time"}
+  },
+  "allOf": [
+    {"if": {"properties": {"authority_version": {"const": 1}}, "required": ["authority_version"]}, "then": {"properties": {"supersedes_authority_id": {"const": null}, "supersedes_authority_artifact_sha256": {"const": null}}}, "else": {"properties": {"supersedes_authority_id": {"type": "string"}, "supersedes_authority_artifact_sha256": {"type": "string"}}}},
+    {"if": {"properties": {"authority_purpose": {"const": "calendar-eligibility"}}}, "then": {"properties": {"subject_type": {"const": "calendar-eligibility"}}}},
+    {"if": {"properties": {"authority_purpose": {"const": "calendar-monthly-selection"}}}, "then": {"properties": {"subject_type": {"const": "calendar-monthly-selection"}}}},
+    {"if": {"properties": {"authority_purpose": {"const": "calendar-registry-publication"}}}, "then": {"properties": {"subject_type": {"const": "calendar-registry-publication"}}}},
+    {"if": {"properties": {"authority_purpose": {"const": "run-metadata-binding"}}}, "then": {"properties": {"subject_type": {"const": "run-metadata-binding"}}}},
+    {"if": {"properties": {"authority_purpose": {"const": "calendar-authority-revocation"}}}, "then": {"properties": {"subject_type": {"const": "calendar-authority-revocation"}}}}
+  ],
+  "$defs": {
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "consumer_id"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "consumer_id": {"const": "calendar-renderer"},
+        "programme_month": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+        "activity_id": {"type": "string", "minLength": 1},
+        "registry_purpose": {"const": "calendar-authority-resolution"}
+      },
+      "oneOf": [
+        {"required": ["activity_id"], "not": {"required": ["programme_month"]}},
+        {"required": ["programme_month"], "not": {"required": ["activity_id"]}}
+      ]
+    }
+  }
+}

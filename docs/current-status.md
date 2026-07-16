@@ -1,5 +1,9 @@
 # Current Project Status
 
+## OAR drafting
+
+`OD-OAR-CONTRACT-AUTHOR-001` authorizes inactive Draft 0.x contracts and fictional fixtures only. No executable validator, resolver, builder, real authority artifact, or activation exists.
+
 Last Updated: 2026-07-16
 Repository: monthly-agent
 Default Branch: main

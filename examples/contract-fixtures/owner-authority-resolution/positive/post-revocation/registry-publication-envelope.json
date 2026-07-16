@@ -1,0 +1,18 @@
+{
+  "contract_version": "authority-envelope/0.1.0-draft",
+  "authority_id": "example-publication-authority-post",
+  "authority_version": 1,
+  "supersedes_authority_id": null,
+  "supersedes_authority_artifact_sha256": null,
+  "authority_purpose": "calendar-registry-publication",
+  "subject_type": "calendar-registry-publication",
+  "subject_id": "example-publication-subject-post",
+  "subject_sha256": "d7ec4db6c0e89cec15cd86cc602a237490e173e9ffdd71c20b828c29cdc2fdef",
+  "scope": {
+    "run_id": "fictional-run-2099-01-oar",
+    "consumer_id": "calendar-renderer",
+    "programme_month": "2099-01",
+    "registry_purpose": "calendar-authority-resolution"
+  },
+  "authorized_at": "2099-01-02T09:00:00Z"
+}

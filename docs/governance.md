@@ -1,5 +1,9 @@
 # Governance
 
+## OAR boundary
+
+OAR drafts confer no implementation or operational authority. Reason-code values require separate governance. Artifact integrity is not independent authentication. Real authority, revocation, publication, run metadata, activation, BR-006, and D3 remain unauthorized.
+
 ## Purpose
 
 This document defines the architecture governance for `monthly-agent`.

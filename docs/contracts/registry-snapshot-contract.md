@@ -1,5 +1,9 @@
 # Authorized Closed-World Registry Snapshot Contract Draft
 
+## OAR Membership and Bootstrap
+
+Ordinary entries bind separately hashed subjects and generic authority envelopes. Publication subject and envelope are bootstrap references, never ordinary membership in the snapshot they authorize. The external anchor pins the complete snapshot digest and breaks the cycle. The inactive calendar-only external registry remains unchanged and is not this anchored source.
+
 Status: `authority-registry-snapshot/0.1.0-draft`; inactive, unimplemented, and not accepted as executable
 
 Schema: `schemas/drafts/bounded-authority-input/authority-registry-snapshot.schema.json`

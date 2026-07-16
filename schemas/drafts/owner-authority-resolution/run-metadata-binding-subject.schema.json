@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/monthly-agent/schemas/drafts/owner-authority-resolution/run-metadata-binding-subject.schema.json",
+  "title": "Run Metadata Binding Subject Draft 0.2",
+  "description": "Inactive fictional subject-only binding. run_id is opaque and must not be parsed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "subject_id", "subject_version", "supersedes_subject_id", "supersedes_subject_sha256", "run_id", "programme_month", "consumer_id"],
+  "properties": {
+    "contract_version": {"const": "run-metadata-binding-subject/0.2.0-draft"},
+    "subject_id": {"type": "string", "minLength": 1},
+    "subject_version": {"type": "integer", "minimum": 1},
+    "supersedes_subject_id": {"type": ["string", "null"]},
+    "supersedes_subject_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "run_id": {"type": "string", "minLength": 1},
+    "programme_month": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+    "consumer_id": {"const": "calendar-renderer"}
+  },
+  "allOf": [{"if": {"properties": {"subject_version": {"const": 1}}}, "then": {"properties": {"supersedes_subject_id": {"const": null}, "supersedes_subject_sha256": {"const": null}}}, "else": {"properties": {"supersedes_subject_id": {"type": "string"}, "supersedes_subject_sha256": {"type": "string"}}}}]
+}

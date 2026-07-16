@@ -1,5 +1,9 @@
 # Bounded Authority Fictional-Fixture Test Matrix
 
+## OAR Scenarios
+
+The OAR migration uses two year-2099 self-contained scenarios. Pre-revocation yields one selected and one eligible-but-unselected activity. Post-revocation retains predecessor evidence but has one effective anchored tip and no effective monthly selection. These prove contract design only.
+
 Status: test design and fictional data only; no runtime harness or production artifacts
 
 Base: `examples/contract-fixtures/bounded-authority-input/positive/valid-resolution-chain/`

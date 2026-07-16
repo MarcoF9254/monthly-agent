@@ -1,5 +1,9 @@
 # Roadmap
 
+## OAR contract milestone
+
+Current work is limited to independent review of inactive owner-authority-resolution contracts. Implementation, executable acceptance, real trust-anchor publication, and downstream provenance migration require later owner gates.
+
 ## Current Focus
 
 Gate 2 bounded authority input inactive contract drafting under `OD-BAI-ARCH-001` and `OD-BAI-CONTRACT-001`; implementation not authorized

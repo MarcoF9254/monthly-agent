@@ -33,3 +33,29 @@ Each blocking rule has exactly one primary enforcing component.
 | BAI-RM-002 | `run_id` parsed to infer month | Run-metadata validator | Manifest validator | Run metadata | Reject inferred binding | Manifest readiness | matrix-only |
 | BAI-PB-001 | Projection requested before authoritative resolution | Projection builder | Bundle verifier | Projection admission | Reject build | Publishable projection | matrix-only |
 | BAI-MV-001 | Manifest scope differs from run metadata or selection | Manifest validator | Run-metadata validator | Manifest validation | Reject manifest | Manifest-ready status | matrix-only |
+
+## OAR rules
+
+| Rule ID | Failure condition | Primary enforcing component | Boundary | Result |
+| --- | --- | --- | --- | --- |
+| OAR-BS-001 | Publication envelope derives authority from the snapshot it authorizes | Registry publication bootstrap verifier | Snapshot bootstrap | Reject snapshot |
+| OAR-BS-002 | Bootstrap exception used for a non-publication purpose | Registry publication bootstrap verifier | Bootstrap admission | Reject envelope |
+| OAR-BS-003 | Publication subject or envelope evidence missing | Bundle verifier | Bundle inventory | Reject bundle |
+| OAR-BS-004 | Publication subject/envelope digest binding mismatch | Registry publication bootstrap verifier | Complete snapshot | Reject snapshot |
+| OAR-BS-005 | Publication envelope appears as ordinary membership | Registry snapshot validator | Snapshot entries | Reject snapshot |
+| OAR-BS-006 | Anchor does not pin the complete effective snapshot | Bundle verifier | Anchor and bundle | Reject resolution |
+| OAR-RV-001 | Revocation envelope is unauthorized | Revocation resolver | Ordinary membership | Ignore no revocation; reject claimed result |
+| OAR-RV-002 | Revocation target is missing | Revocation resolver | Closed-world snapshot | Reject lifecycle |
+| OAR-RV-003 | Target authority ID or artifact digest differs | Revocation resolver | Revocation target | Reject lifecycle |
+| OAR-RV-004 | Target purpose, subject, or scope differs | Revocation resolver | Revocation target | Reject lifecycle |
+| OAR-RV-005 | Revocation is resolved after supersession | Revocation resolver | Lifecycle pipeline | Reject lifecycle |
+| OAR-RV-006 | Revocation reason identifier is structurally invalid | Subject schema validator | Subject admission | Reject revocation subject |
+| OAR-SB-001 | Envelope subject type, ID, digest, purpose, or scope differs | Authority subject-binding verifier | Subject plus envelope | Reject authority |
+| OAR-SB-002 | Envelope reuses a binding after subject mutation | Authority subject-binding verifier | Subject plus envelope | Reject authority |
+| OAR-SB-003 | Ordinary envelope lacks exact anchored membership | Artifact authority verifier | Effective snapshot | Reject authority |
+| OAR-AL-001 | Multiple active authority tips exist | Authority lifecycle resolver | Authority lineage | Reject lifecycle |
+| OAR-AL-002 | Authority supersession is broken or cyclic | Authority lifecycle resolver | Authority lineage | Reject lifecycle |
+| OAR-AL-003 | Authority and business-subject supersession are conflated | Authority lifecycle resolver | Outcome resolution | Reject outcome |
+| OAR-AL-004 | Intrinsic expiry is inferred in Phase 1 | Authority lifecycle resolver | Lifecycle evaluation | Reject inferred expiry |
+
+Every row has exactly one named primary component. Secondary review does not transfer primary ownership.

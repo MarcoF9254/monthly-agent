@@ -1,0 +1,18 @@
+{
+  "contract_version": "authority-envelope/0.1.0-draft",
+  "authority_id": "example-revocation-authority-001",
+  "authority_version": 1,
+  "supersedes_authority_id": null,
+  "supersedes_authority_artifact_sha256": null,
+  "authority_purpose": "calendar-authority-revocation",
+  "subject_type": "calendar-authority-revocation",
+  "subject_id": "example-selection-revocation-subject-001",
+  "subject_sha256": "a0bd09e890da7a8a8e4fe47c707e1ea1dfaf7b133fc3bc2f940505366192433a",
+  "scope": {
+    "run_id": "fictional-run-2099-01-oar",
+    "consumer_id": "calendar-renderer",
+    "programme_month": "2099-01",
+    "registry_purpose": "calendar-authority-resolution"
+  },
+  "authorized_at": "2099-01-02T09:00:00Z"
+}

@@ -1,5 +1,9 @@
 # Architecture
 
+## Owner authority resolution
+
+OAR uses a generic authority envelope over separately hashed purpose-specific subjects. Ordinary authority derives from membership in one externally anchored closed-world snapshot. Registry publication is a non-self-authorizing bootstrap exception whose trust reduces to the owner-controlled trust-anchor delivery channel. Revocation precedes authority supersession; business-subject supersession is independent. This architecture is inactive.
+
 ## Purpose
 
 `monthly-agent` turns elderly centre monthly programme source documents into structured activity records that can be validated, reviewed, and reused for monthly newsletter generation.

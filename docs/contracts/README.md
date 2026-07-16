@@ -1,5 +1,11 @@
 # Contract Index
 
+## Owner authority resolution drafts
+
+The OAR package defines generic envelopes, explicit subject boundaries, purpose-specific subjects, non-self-authorizing publication bootstrap, lifecycle resolution, enforcement ownership, and two self-contained fictional scenarios. All are inactive Draft 0.x artifacts.
+
+The external authority registry and projection/manifest contracts remain unchanged. The OAR snapshot is the Gate 2 anchored closed-world source; it does not activate or replace the inactive calendar-only registry.
+
 ## Active Contracts
 
 - `docs/pipeline-run-contract.md` — D1 auditable run contract.
