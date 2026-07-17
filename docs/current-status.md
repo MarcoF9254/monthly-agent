@@ -84,7 +84,7 @@ This closure does not provide real trust-anchor delivery, real registry publicat
 - BR-006 runtime activation remains held pending vertical-slice evidence, indexed marker syntax validation, and owner approval.
 - P21-F01 is accepted non-blocking debt: `VerificationResult.classification` is the second positional dataclass field in a pre-stable interface. Phase 1B.2 may evaluate keyword-only construction and a versioned result interface if it becomes an external contract.
 - P21-F02 is accepted non-blocking debt: lifecycle depth 64 is a defensive secondary ceiling constrained by inventory and multi-artifact chain structure. Enforcement is independently tested at all three traversal locations; no accepted 64-link scenario is claimed.
-- Phase 1B.1 dependency and package foundation is Owner-approved and implemented by Draft PR #26, but remains an in-review implementation and is not repository-effective as completed work unless and until that PR merges.
+- Phase 1B.1 dependency and package foundation is Owner-approved and implemented by PR #26, but remains an in-review implementation and is not repository-effective as completed work unless and until that PR merges.
 - Phase 1B.2 remaining interface/public-contract stabilization and Phase 2 secure filesystem admission remain deferred, unauthorized, inactive, and subject to separate owner approval.
 
 ## Architecture Principles
@@ -107,7 +107,7 @@ Naming map:
 
 Next steps:
 
-1. Complete review of the currently approved Phase 1B.1 milestone through Draft PR #26; no later milestone is selected or authorized.
+1. Complete review of the currently approved Phase 1B.1 milestone through PR #26; no later milestone is selected or authorized.
 2. Keep D3 / indexed marker syntax validation pending clarification; do not begin implementation without separate approval.
 3. Plan real vertical-slice evidence only with separate owner approval.
 4. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
