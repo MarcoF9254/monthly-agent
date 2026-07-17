@@ -34,6 +34,45 @@ Adopt Option C, the Risk-Based Independent Review Policy:
 
 The policy is prospective and does not retroactively invalidate PR #22 or earlier PRs. Its repository-publication PR is Tier 2, and future policy amendments are Tier 2. CI, review, Owner approval, and merge verification remain separate controls.
 
+## OD-REVIEW-EVIDENCE-002: Review Evidence and Factual-Gate Procedures
+
+Status: Owner-ratified and fully Tier 2 reviewed; publication pending repository effectiveness.
+
+Version: Revised Candidate v3
+
+Ratified by: Marco
+
+Independent focused confirmations: Claude and Fable, each `RATIFICATION-READY` with zero blocking and zero major findings.
+
+### Decision
+
+Adopt the minimum procedures in `docs/governance.md` for:
+
+- complete base-to-head stale-state searches and author-external confirmation;
+- exact-base and exact-head current-head validation;
+- identity-bound live PR review-evidence submission through reviewer-attributed native, reviewer-controlled shared-credential, or Owner-authorized mechanical full-text transcription modes;
+- capability and credential-provenance disclosure;
+- evidence-insufficiency stop rules;
+- complete invalidation and renewed review after any new commit; and
+- audit and evidence retention.
+
+The decision preserves all controls in `OD-REVIEW-POLICY-001`, including author-external independence, dual review for Tier 2, exact-head binding, anti-self-certification, Owner approval separation, and true merge-commit proof.
+
+### Roles for publication
+
+- Work-product implementation author: Codex.
+- Substantive initiator and governance facilitator: ChatGPT.
+- Owner, final approval authority, and merge authority: Marco.
+- Required independent perspectives: Fable and Claude, covering the same exact head.
+
+ChatGPT is not a required independent-review perspective for the publication PR. Marco is a substantive initiator and cannot count as an independent perspective. Owner approval cannot replace Fable or Claude review.
+
+### Effect and boundaries
+
+Repository effectiveness begins only when the authorized publication PR merges. This decision is prospective and does not retroactively invalidate PR #23, which merged as `fb09d2ea547615a70299986608dba9f459c1e544` at GitHub `merged_at` `2026-07-17T01:40:28Z`, or any earlier merged PR. Once repository-effective, it applies to every then-unmerged and future Tier 1 and Tier 2 PR.
+
+This decision grants no production authority, security activation, destructive-operation authority, real-data activation, Phase 1B activation, Phase 2 activation, trust-anchor delivery, schema activation, projection or downstream activation, BR-006 activation, D3 resolution, manifest activation, deployment activation, or Greptile qualification.
+
 ## OAR owner decisions
 
 - `OD-OAR-ARCH-001`: approved with scope rulings.

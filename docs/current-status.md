@@ -1,10 +1,14 @@
 # Current Project Status
 
-## Review-policy publication
+## Governance publication
 
-`OD-REVIEW-POLICY-001` is ratified by Marco. Repository publication of Option C, the Risk-Based Independent Review Policy, is pending through Draft PR #23. This publication PR is automatically Tier 2 because it modifies `docs/governance.md` and publishes review, approval, merge, exception, and decision-authority rules.
+`OD-REVIEW-POLICY-001` became repository-effective when PR #23 merged as `fb09d2ea547615a70299986608dba9f459c1e544` at `2026-07-17T01:40:28Z`.
 
-The policy is not repository-effective until the exact reviewed head receives both required independent review perspectives, current-head validation passes, Marco grants merge approval, a true merge commit lands, and post-merge identity and scope verification completes. Phase 1B and Phase 2 remain deferred and inactive. The next implementation milestone remains undecided.
+`OD-REVIEW-EVIDENCE-002` — Review Evidence and Factual-Gate Procedures: `RATIFIED — PUBLICATION PENDING`. Marco ratified Revised Candidate v3 after exact-v3 focused confirmations from Fable and Claude. Repository effectiveness begins only when its authorized publication PR merges; the publication is automatically Tier 2 because it changes governance and review-evidence policy.
+
+Work-product implementation author: Codex. Substantive initiator and governance facilitator: ChatGPT. Owner, final approval authority, and merge authority: Marco. Required independent perspectives for the publication PR: Fable and Claude on the same exact head. ChatGPT is not a required independent perspective; Marco is a substantive initiator and cannot count as one; Owner approval cannot replace either required review.
+
+Phase 1B and Phase 2 remain deferred and inactive. Production authority, trust-anchor delivery, security or schema activation, destructive operations, real-data activation, projection, manifest, downstream or deployment activation, BR-006, D3, and Greptile qualification remain unauthorized. The next implementation milestone remains undecided.
 
 ## OAR Phase 1A closure
 
@@ -12,7 +16,7 @@ The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 merged th
 
 The final suite was 172 passed with one pre-existing unrelated skip. All four Ubuntu/Windows and Python 3.11/3.12 CI jobs passed. Independent review concluded `APPROVE WITH NON-BLOCKING NOTES`, with zero blocking and zero major findings; P1A-F01 was genuinely resolved.
 
-Last Updated: 2026-07-16
+Last Updated: 2026-07-17
 Repository: monthly-agent
 Default Branch: main
 

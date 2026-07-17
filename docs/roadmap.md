@@ -8,15 +8,19 @@ The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed
 
 No next implementation milestone is selected. OAR contract drafting, the fictional verifier prototype, and Phase 1A are complete; production authority resolution is not authorized.
 
-### OD-REVIEW-POLICY-001 publication
+### OD-REVIEW-EVIDENCE-002 publication
 
-Status: `RATIFIED — PUBLICATION IN REVIEW`
+Status: `RATIFIED — PUBLICATION PENDING`
 
-- Governance and decision documentation only.
-- Publication is pending through Draft PR #23.
-- Tier 2 dual independent review is required.
-- No runtime, authority, schema, Phase 1B, or Phase 2 implementation is included.
-- Completion requires both reviewers to cover the exact reviewed head, Owner merge approval, a true merge commit, and post-merge identity and landed-scope verification.
+- Active task: publish Revised Candidate v3 review-evidence and factual-gate procedures through a Draft Tier 2 governance PR.
+- Work-product implementation author: Codex; substantive initiator and governance facilitator: ChatGPT; Owner and merge authority: Marco.
+- Required independent perspectives: Fable and Claude on the same exact head. ChatGPT is not a required independent perspective, Marco cannot count because he is a substantive initiator, and Owner approval cannot replace either review.
+- `OD-REVIEW-POLICY-001` is already repository-effective through merged PR #23 at `fb09d2ea547615a70299986608dba9f459c1e544`.
+- This decision becomes repository-effective only when its publication PR merges and does not retroactively invalidate PR #23 or earlier merged PRs.
+- Completion requires both reviewers' exact-head records, current-head validation, Owner merge approval, a true merge commit, and post-merge parent and landed-scope proof.
+- No squash, rebase, force-push, or source-branch deletion is permitted for the publication.
+
+Phase 1B dependency locking and package metadata, Phase 2 TOCTOU remediation and secure filesystem admission, production authority, trust-anchor delivery, schema activation, projection or downstream activation, BR-006, D3, manifest activation, deployment activation, real-data activation, and Greptile installation or qualification remain deferred or unauthorized.
 
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
