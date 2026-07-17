@@ -29,6 +29,14 @@ def _verify_with_trace(
         verify_publication_bootstrap(scenario, snapshot)
         entries = verify_ordinary_membership(scenario, snapshot)
         outcome = resolve(scenario, entries, trace.append)
-        return VerificationResult(True, "success", None, None, None, "Fictional authority scenario verified.", outcome), tuple(trace)
+        return VerificationResult(
+            success=True,
+            classification="success",
+            rule_id=None,
+            primary_component=None,
+            rejection_stage=None,
+            message="Fictional authority scenario verified.",
+            outcome=outcome,
+        ), tuple(trace)
     except VerificationFailure as failure:
         return failure.result, tuple(trace)

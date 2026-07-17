@@ -23,15 +23,7 @@ def main(argv=None) -> int:
         Path(args.bundle_root),
         Path(args.trust_anchor),
     )
-    print(json.dumps({
-        "success": result.success,
-        "classification": result.classification,
-        "rule_id": result.rule_id,
-        "primary_component": result.primary_component,
-        "rejection_stage": result.rejection_stage,
-        "message": result.message,
-        "outcome": result.outcome,
-    }, ensure_ascii=False, sort_keys=True))
+    print(json.dumps(result.to_payload(), ensure_ascii=False, sort_keys=True))
     return 0 if result.success else 1
 
 

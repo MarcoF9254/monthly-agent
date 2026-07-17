@@ -10,7 +10,7 @@ The PR #24 publication roles were: Codex as work-product implementation author; 
 
 OAR Phase 1B.1 Dependency and Package Foundation is completed and repository-effective. PR #26 merged at `2026-07-17T13:52:58Z` through true merge commit `466ec18c0b232bfa99de1822124e35ae39495def`. Its first parent is `1375235a9e00df5a8e3835fe58a326dc16883874`, and merged head `5c9ffd88246a491eb9bf6043744428c4e2574a9a` is its second parent. The merged-head tree and merge tree are equal, and exactly the approved ten implementation paths landed.
 
-No later implementation milestone is selected or authorized. Phase 1B.2 interface stabilization and Phase 2 remain deferred, unauthorized, and inactive. Production authority, trust-anchor delivery, security or schema activation, destructive operations, real-data activation, projection, manifest, downstream or deployment activation, BR-006, D3, Greptile qualification, GOV-DEBT-001, and GOV-DEBT-002 remain unauthorized.
+Phase 1B.2 Versioned Verification Result Contract is selected and implemented in this branch, under review until merge. Its scope is result/interface contract stabilization only: `verification-result/v1`, keyword-only `VerificationResult` construction, and authoritative CLI JSON serialization through `to_payload()`. It provides no console entry point and does not relocate runtime resources. Phase 2 remains unauthorized and inactive. Production authority, trust-anchor delivery, security or schema activation, destructive operations, real-data activation, projection, manifest, downstream or deployment activation, BR-006, D3, Greptile qualification, GOV-DEBT-001, and GOV-DEBT-002 remain unauthorized.
 
 ## OAR Phase 1A closure
 
@@ -38,7 +38,7 @@ BR-001 through BR-005 are implemented, tested, and active in the runtime registr
 
 Scoped Downstream Eligibility Stage 1 architecture is accepted. The Architecture Owner explicitly accepted Option D and ADR-007. The fictional OAR verifier prototype and Phase 1A deterministic core hardening are complete, but production authority resolution, migration, eligibility issuance, projection generation, manifest generation, and downstream activation remain unimplemented and unauthorized.
 
-OAR Phase 1B.1 is completed and merged through PR #26. No current or later implementation milestone is selected or authorized.
+OAR Phase 1B.1 is completed and merged through PR #26. Phase 1B.2 Versioned Verification Result Contract is the selected implementation milestone and remains under review until merge.
 
 Milestone 3.9 / D2B — Machine-readable Validation Findings Emission (completed and merged in PR #10)
 
@@ -86,10 +86,10 @@ This closure does not provide real trust-anchor delivery, real registry publicat
 - Business rule specs and implementations must stay aligned before adding validators.
 - BR-005 must remain deterministic and avoid semantic, NLP, or fuzzy judgement.
 - BR-006 runtime activation remains held pending vertical-slice evidence, indexed marker syntax validation, and owner approval.
-- P21-F01 is accepted non-blocking debt: `VerificationResult.classification` is the second positional dataclass field in a pre-stable interface. Phase 1B.2 may evaluate keyword-only construction and a versioned result interface if it becomes an external contract.
+- P21-F01 is addressed in the Phase 1B.2 implementation under review: `VerificationResult` construction is keyword-only and serialization is versioned as `verification-result/v1`. This is not repository-effective until merge.
 - P21-F02 is accepted non-blocking debt: lifecycle depth 64 is a defensive secondary ceiling constrained by inventory and multi-artifact chain structure. Enforcement is independently tested at all three traversal locations; no accepted 64-link scenario is claimed.
 - Phase 1B.1 dependency and package foundation is completed and repository-effective through merged PR #26.
-- Phase 1B.2 remaining interface/public-contract stabilization and Phase 2 secure filesystem admission remain deferred, unauthorized, inactive, and subject to separate owner approval.
+- Phase 1B.2 is limited to the selected versioned result contract; remaining interface work and Phase 2 secure filesystem admission remain deferred, unauthorized, and inactive.
 
 ## Architecture Principles
 
@@ -111,8 +111,8 @@ Naming map:
 
 Next steps:
 
-1. Do not select or begin a post-Phase 1B.1 implementation milestone without separate owner approval.
+1. Complete Tier 2 review of the selected Phase 1B.2 Versioned Verification Result Contract; it is not repository-effective until merge.
 2. Keep D3 / indexed marker syntax validation pending clarification; do not begin implementation without separate approval.
 3. Plan real vertical-slice evidence only with separate owner approval.
 4. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
-5. Keep Phase 1B.2 and Phase 2 deferred, unauthorized, and inactive until separately approved; no post-1B.1 milestone or ordering is selected.
+5. Keep all scope beyond the selected Phase 1B.2 result contract and Phase 2 deferred, unauthorized, and inactive until separately approved.
