@@ -220,7 +220,7 @@ Tier 1 requires one qualified author-external independent reviewer, exact diff a
 
 Tier 2 requires two qualified independent review perspectives covering the same exact head, finding adjudication, applicable current-head CI, Owner final approval, a true merge commit, and post-merge verification.
 
-The default second independent model is Claude. If Claude is unavailable, the Owner designates another qualified independent model or reviewer and records the reason and replacement identity. The replacement cannot be the Owner when the Owner is a substantive initiator, the work-product author, or another substantive initiator, and the work-product author cannot approve the replacement.
+The default second independent model is Claude. If Claude is unavailable, the Owner designates another qualified independent model or reviewer and records the reason and replacement identity. A replacement reviewer cannot be the work-product author or any substantive initiator. If the Owner is a substantive initiator, the Owner also cannot serve as the replacement reviewer. The work-product author cannot approve the replacement reviewer.
 
 ### Automatic Tier 2 triggers
 
@@ -311,6 +311,132 @@ The Owner may periodically audit merged Tier 1 PRs for classification correctnes
 
 Audits do not retroactively invalidate a merged PR. They provide policy-health feedback, may trigger future issues, supplemental review, policy revision, or corrective milestones, and should retain a concise record.
 
+## Review Evidence and Factual-Gate Procedures
+
+Status: Accepted under `OD-REVIEW-EVIDENCE-002` (Revised Candidate v3).
+
+These procedures define the minimum stale-state search for factual reconciliation, exact-head current-head validation, and independent-review evidence submission, attribution, fallback, retention, and invalidation. They preserve every control in `OD-REVIEW-POLICY-001` and do not weaken anti-self-certification.
+
+### Stale-state search
+
+Any PR classified as Tier 1 factual reconciliation must run and record a stale-state search over the complete base-to-head artifact. The search must:
+
+- cover superseded states and known synonymous wording;
+- cover relevant old SHAs, PR states, test counts, milestone states, and deferred-versus-active descriptions;
+- inspect current status, roadmap, decisions, architecture, and relevant contract indexes for contradictions; and
+- prove for every replaced current-state claim that current documents retain only the new state, any retained old state is explicitly historical, and no unexplained contradiction remains.
+
+The work-product author or another executor may run the search. The classification record identifies the executor, search scope, principal terms, identifiers and synonyms, every hit, the disposition of every hit, and any unresolved hits with rationale. An author-external independent reviewer must confirm the final conclusion. The work-product author cannot self-confirm this gate. Recording only `search passed` is insufficient. No single fixed command is mandatory because the search terms depend on the reconciliation.
+
+### Current-head validation
+
+Current-head validation is bound to the exact base SHA and exact head SHA and includes at minimum:
+
+- repository and PR identity;
+- exact base and head identity;
+- commit count, order, and parent chain;
+- the complete changed-path list;
+- renewed tier, trigger, and classification determination;
+- required tests and checks bound to the exact head;
+- whitespace and diff integrity;
+- resolvable repository references;
+- protected, inactive, and deferred boundaries;
+- review evidence applicable to the same exact head;
+- absence of requested changes, a blocking review, blocking comment, or blocking thread;
+- mergeability; and
+- where applicable, local working-tree, index, and remote-tracking consistency.
+
+For a local executor, the remote-tracking ref must equal the live PR exact head, and the working tree and index must be clean unless an approved workflow explicitly permits otherwise. A remote-only reviewer may use live PR base/head, commits, diff, and checks instead of local working-tree inspection, but must state that local-environment validation was not performed.
+
+Any new commit invalidates previous validation and merge eligibility. Validation must be rerun completely for the new head. Recording only `validation passed` is insufficient.
+
+### Review-evidence submission modes
+
+Each independent perspective requires a separate, identity-bound, exact-head-bound live PR record using one of these modes.
+
+#### Reviewer-attributed native submission
+
+The reviewer uses a platform identity attributable to that reviewer and directly submits a GitHub review or PR comment. `APPROVE`, `REQUEST_CHANGES`, and `COMMENT` are all acceptable; the policy does not require formal platform approval support.
+
+#### Reviewer-controlled shared-credential submission
+
+The reviewer personally submits from the reviewer's own session while the platform displays the Owner, a shared service account, an application, or another shared credential. The record discloses:
+
+- platform credential identity;
+- actual reviewer identity;
+- that the reviewer personally submitted from the reviewer's own session;
+- reviewer independence;
+- that the shared credential does not mean the Owner authored, approved, or changed the conclusion;
+- exact base and exact head;
+- reviewed scope;
+- findings; and
+- verdict.
+
+Tier 2 perspectives may use the same shared credential only through separate records that clearly identify each actual reviewer. A stable, non-sensitive, sustainably referenceable producing-session identifier should be included when available. Otherwise the record states `producing-session provenance unavailable`. Credentials, access tokens, private session content, and non-public internal identifiers must never be recorded.
+
+#### Owner-authorized mechanical full-text transcription
+
+If the reviewer cannot personally submit, an authorized transcriber may mechanically place the external review artifact into the PR only under the full-text transcription controls below.
+
+### Capability declaration
+
+Before review, the reviewer states whether GitHub write capability exists, the credential identity displayed by the platform, whether reviewer-attributed native submission is possible, whether only shared-credential submission is available, and whether the reviewer cannot personally submit. A reviewer without write capability may still review but must deliver a complete identity-bound, exact-head-bound artifact.
+
+The merge gate must not mislabel shared-credential submission as reviewer-attributed native submission or transcription as reviewer-personal submission.
+
+### Owner-authorized mechanical full-text transcription
+
+Mechanical full-text transcription is permitted only when the reviewer cannot personally submit and requires:
+
+- explicit Owner authorization;
+- a separate PR comment for each perspective;
+- disclosure of actual reviewer, reviewer independence, external delivery, transcriber, Owner authorization, and non-native provenance;
+- complete reproduction of the review rather than a verdict summary;
+- ordered comments or a sustainably accessible complete artifact if one comment cannot hold it;
+- integrity evidence;
+- a transcriber fidelity statement;
+- no change or reclassification of verdict, severity, scope, or reviewer conclusion;
+- PR-body links to the evidence record; and
+- base/head revalidation after transcription.
+
+The transcriber performs no repository content changes. Transcription adds only evidence comments and PR-body links. The work-product author may perform mechanical transcription but cannot identify as reviewer, change review content, approve the fallback, or describe transcription as native reviewer submission.
+
+The preferred integrity record is SHA-256 of the byte-exact artifact delivered by the reviewer. The preserved or attached artifact records media type and, for text, encoding and observed line-ending convention. If stable original bytes are unavailable, the transcriber creates and preserves a canonical textual copy using UTF-8 without BOM, LF line endings, and exactly one trailing LF; discloses that canonicalization; and records the SHA-256 of the canonical bytes. A hash without the corresponding preserved artifact or canonical copy is insufficient. A hash does not replace full text, an accessible artifact, Owner authorization, or the fidelity statement.
+
+### Evidence-insufficiency stop rules
+
+Ready or merge stops when any of these conditions applies:
+
+- a required review or merge gate is actually incomplete;
+- the live PR record contradicts actual gate state, including a stale statement that a completed review is pending or that an incomplete gate is complete;
+- exact base or exact head is absent;
+- reviewer identity or reviewer independence is absent;
+- submission mode or credential provenance is unclear;
+- Tier 2 records cover different heads;
+- verdict, scope, or severity is unclear;
+- transcription lacks full text, an accessible artifact, or fidelity evidence;
+- the external artifact conflicts with the live PR record;
+- a new commit exists while old review is still relied upon; or
+- required evidence was deleted or is inaccessible.
+
+Owner approval cannot replace missing independent review or missing review evidence.
+
+### New-head evidence rule
+
+Any new commit preserves old records as history but marks them superseded or invalid for merge. It requires review of the complete base-to-new-head artifact rather than only the correction commit, complete current-head validation, and new records from both Tier 2 perspectives. No earlier `GREEN`, `APPROVE`, or Owner merge approval is inherited.
+
+### Audit and retention
+
+After merge, retain native reviews and comments, shared-credential disclosures, transcription comments, full review artifacts, artifact hashes, the exact-head classification record, Owner approval, CI and check identity, merge-parent proof, and landed-scope proof.
+
+Do not delete or rewrite old evidence to manufacture a clean record. If comment editing is possible, substantive correction requires an explicit correction note. Never silently change an original verdict or severity.
+
+### Scope and prospective effect
+
+PR #23 merged through `fb09d2ea547615a70299986608dba9f459c1e544` at GitHub `merged_at` `2026-07-17T01:40:28Z`. `OD-REVIEW-EVIDENCE-002` does not retroactively invalidate PR #23 or any earlier merged PR. It becomes repository-effective only when its publication PR merges and then applies to every then-unmerged and future Tier 1 and Tier 2 PR.
+
+This decision does not alter production authority or security boundaries; authorize destructive operations or real-data activation; or start Phase 1B or Phase 2. It does not authorize trust-anchor delivery, schema activation, projection or downstream activation, BR-006, D3, manifest activation, deployment activation, or Greptile qualification.
+
 ### Required PR classification record
 
 Each gated PR records:
@@ -327,7 +453,22 @@ Tier 2 rationale:
 Base SHA:
 Reviewed head SHA:
 Changed paths:
-Current-head validation:
+Stale-state search executor:
+Stale-state search scope:
+Search terms, identifiers, and synonyms:
+Search hits:
+Disposition of every hit:
+Unresolved hits and rationale:
+Author-external stale-state confirmation:
+Current-head validation checklist:
+Review-evidence submission mode:
+Platform credential identity:
+Actual reviewer identity:
+Transcription provenance, if applicable:
+Artifact hash, if applicable:
+Exact reviewed base:
+Exact reviewed head:
+Superseded records, if applicable:
 Owner approval:
 True merge commit:
 ~~~
