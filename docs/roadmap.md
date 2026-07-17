@@ -115,14 +115,15 @@ Status: contract package and fictional executable verification completed. Draft 
 - Define closed-world snapshot lifecycle, rollback detection, deterministic inventory, run/month equality, and single-primary enforcement ownership.
 - Keep real run metadata authority, real trust-anchor delivery, real authority/revocation issuance, registry publication, remaining production hardening, and owner activation acceptance blocked.
 
-### Deferred OAR hardening
+### OAR hardening sequence
 
-Phase 1B — Dependency and Interface Reproducibility: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes dependency locking, runtime/dev dependency separation, Python version declaration, reproducible installation, package metadata, a console entry point, safer keyword-only result construction, and a versioned result/interface contract.
+Phase 1B.1 — Dependency and Package Foundation: `OWNER-APPROVED — IMPLEMENTED IN PR #26 / IN REVIEW`. This approved milestone covers dependency locking, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, locked CI, package metadata, and development package build/install validation. Its implementation is not repository-effective as completed work unless and until PR #26 passes review and merges.
+
+Phase 1B.2 — Remaining Interface and Public-Contract Stabilization: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes a console entry point, safer keyword-only result construction, and a versioned result/interface contract.
 
 Phase 2 — Secure Filesystem Admission: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes TOCTOU remediation, immutable or staged input acquisition, descriptor-based safe reads where appropriate, symlink and intermediate-directory policy, secure trust-anchor filesystem custody, and filesystem race/mutation testing.
 
-Neither deferred phase is designed or active, and their ordering is not approved. The next implementation milestone remains undecided.
-
+The current approved implementation milestone is Phase 1B.1. No later milestone is selected or authorized; Phase 1B.2 and Phase 2 remain deferred, unauthorized, and inactive.
 ### BR-006 Per-Session Date Completeness
 
 Implemented, activation held. Requires vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before runtime activation.
