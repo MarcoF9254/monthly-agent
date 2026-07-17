@@ -168,6 +168,170 @@ Role separation exists to reduce authorship bias. It is not a ranking of model c
 
 No role should both author and independently review the same architecture artefact.
 
+## Risk-Based Independent Review Policy
+
+Status: Accepted under `OD-REVIEW-POLICY-001` (Option C).
+
+### Purpose and control separation
+
+No pull request is review-exempt. CI, independent review, Owner approval, and merge verification are separate controls:
+
+- CI cannot replace independent review.
+- Review approval cannot replace Owner merge authorization.
+- Review must bind the repository, PR, exact base SHA, exact head SHA, changed-path scope, tier, reviewer identity, and verdict.
+
+### Identities and substantive initiation
+
+Each review record distinguishes:
+
+- Git commit author;
+- work-product author;
+- substantive initiator;
+- independent reviewer;
+- second independent reviewer when Tier 2 requires one;
+- Owner / Final Approval Authority; and
+- Merge Authority.
+
+A substantive initiator is a person or agent who materially determines specific claims, decision content, authority direction, or a normative outcome, even when not the Git author. General milestone authorization, scope limits, factual sources, or acceptance criteria do not automatically make the Owner the work-product author. Predetermining a decision conclusion, policy text, authority rule, review verdict, or disputed final claim normally makes that person a substantive initiator.
+
+### Independence
+
+Every PR requires at least one qualified reviewer independent from its work-product author. Difference in Git authorship alone does not establish independence.
+
+The Owner may act as an independent reviewer only when the Owner did not materially initiate the reviewed claims or decision content. When the Owner is a substantive initiator, the Owner cannot serve as or count toward any required independent review perspective. Tier 1 therefore requires another qualified reviewer; Tier 2 requires two qualified reviewers who are not the Owner, the work-product author, or another substantive initiator. The Owner may still comment and retain final approval and merge authority, but those actions do not satisfy or replace an independent-review gate. The substantive-initiator determination and rationale must be recorded.
+
+### Classification ownership
+
+The work-product author may propose a tier but cannot make the final downgrade decision. An author-external independent reviewer records:
+
+- tier and triggered gates;
+- why Tier 2 is or is not required;
+- exact base SHA and reviewed head SHA;
+- changed paths;
+- Git author and work-product author;
+- substantive initiator and rationale; and
+- reviewer-independence conclusion.
+
+### Tier 1
+
+Tier 1 requires one qualified author-external independent reviewer, exact diff and scope review, applicable current-head validation and CI, Owner approval, a true merge commit, and post-merge identity and landed-scope verification. Tier 1 is neither review exemption nor reduced-quality review.
+
+### Tier 2
+
+Tier 2 requires two qualified independent review perspectives covering the same exact head, finding adjudication, applicable current-head CI, Owner final approval, a true merge commit, and post-merge verification.
+
+The default second independent model is Claude. If Claude is unavailable, the Owner designates another qualified independent model or reviewer and records the reason and replacement identity. The replacement cannot be the Owner when the Owner is a substantive initiator, the work-product author, or another substantive initiator, and the work-product author cannot approve the replacement.
+
+### Automatic Tier 2 triggers
+
+Tier 2 is automatic for:
+
+- modification of `docs/governance.md`;
+- review, approval, merge, or exception-policy changes;
+- evidence-hierarchy or decision-hierarchy changes;
+- semantic changes to an ADR or Owner Decision;
+- contract or schema semantic changes;
+- activation or deactivation of executable contracts;
+- authority, trust, revocation, authentication, identity, custody, access-control, signature, fail-open/fail-closed, filesystem-security, or production-threat changes;
+- production runtime, migration, real-data write, external publication, destructive action, or downstream activation;
+- a blocking or major review finding;
+- correction of a high-risk finding;
+- unresolved doubt about reviewer independence; or
+- Owner-requested Tier 2 review.
+
+Pure contract-index navigation changes are inspection signals, not automatic Tier 2 triggers by themselves.
+
+### Factual reconciliation gates
+
+A factual reconciliation may be Tier 1 only when all of these conditions hold:
+
+- exact path allowlist;
+- exact accepted source for every new current-state claim;
+- no proposal, option, recommendation, or unapproved policy;
+- no new authority, scope, or exception;
+- no contract, schema, runtime, or governance semantic change;
+- milestone or activation status records only an already-completed Owner decision;
+- historical and current states remain distinct;
+- stale-state search passes;
+- protected paths remain unchanged;
+- an independent reviewer confirms classification;
+- current-head validation and repository references pass; and
+- substantive-initiator and independence determinations are recorded.
+
+Claims of completed Owner decisions cite exact evidence such as an ADR ID, Owner Decision ID, exact `docs/decisions.md` entry, approved PR and reviewed head, dated Owner approval record, or merge commit and date.
+
+### Classification signals
+
+Changes to `docs/decisions.md` default to Tier 2. They may be Tier 1 only when recording an already-approved decision with exact source mapping and no change to decision semantics.
+
+Changes to `docs/contracts/README.md`, and terms including authority, scope, activation, milestone, trust, revocation, production, exception, and override, require explicit inspection. They do not determine the tier unless another automatic trigger applies.
+
+### New-head rule
+
+Any commit added after review invalidates prior merge eligibility. The new exact head requires re-review, current-head CI, and renewed path, scope, and tier verification. An earlier GREEN or APPROVE is not inherited. Both Tier 2 reviewers must cover the new head.
+
+### Merge method and post-merge proof
+
+Tier 1 and Tier 2 PRs require a true merge commit. Squash and rebase merges are prohibited.
+
+Post-merge verification requires:
+
+- exactly two merge parents;
+- first parent equal to the authorized base;
+- second parent equal to the authorized reviewed head; and
+- landed diff equal to reviewed scope.
+
+If repository merge methods change, an equivalent approved head-pinning proof must exist before squash or rebase may be used. Changing this merge-method rule is itself a Tier 2 governance change.
+
+### Non-waivable high-risk Tier 2 review
+
+Tier 2 requirements involving production authority, security, destructive operations, or real-data activation cannot be waived. If Claude is unavailable, another qualified independent reviewer must be designated. If none is available, the PR stops. The Owner, work-product author, or substantive initiator cannot replace real-time independent review with self-certification.
+
+Break-glass incident handling is outside this policy and requires a separate Tier 2-reviewed governance decision.
+
+### Exceptions for other categories
+
+Only the Owner may grant a permitted one-time exception outside the non-waivable categories. Work-product authors and substantive initiators cannot self-grant an exception. The exception record requires author-external independence review; if the exception changes this policy, it requires Tier 2 review. Non-waivable categories remain non-waivable, and no exception may replace required real-time independent review for production authority, security, destructive operations, or real-data activation.
+
+Each permitted exception records:
+
+- exact PR and head;
+- waived requirement;
+- reason and known risk;
+- compensating controls;
+- one-time scope or expiry;
+- independence record; and
+- an explicit statement that no general precedent is created.
+
+Exception-policy changes require Tier 2 review.
+
+### Tier 1 audits
+
+The Owner may periodically audit merged Tier 1 PRs for classification correctness, factual-gate evidence, source mapping, substantive-initiator determination, reviewer independence, exact-head review and CI evidence, and missed Tier 2 triggers.
+
+Audits do not retroactively invalidate a merged PR. They provide policy-health feedback, may trigger future issues, supplemental review, policy revision, or corrective milestones, and should retain a concise record.
+
+### Required PR classification record
+
+Each gated PR records:
+
+~~~text
+Tier:
+Git author:
+Work-product author:
+Substantive initiator and rationale:
+Independent reviewer:
+Second independent reviewer:
+Automatic triggers:
+Tier 2 rationale:
+Base SHA:
+Reviewed head SHA:
+Changed paths:
+Current-head validation:
+Owner approval:
+True merge commit:
+~~~
+
 ## ADR Policy
 
 ADRs are recorded in `docs/decisions.md`.

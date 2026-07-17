@@ -1,5 +1,11 @@
 # Current Project Status
 
+## Review-policy publication
+
+`OD-REVIEW-POLICY-001` is ratified by Marco. Repository publication of Option C, the Risk-Based Independent Review Policy, is pending through Draft PR #23. This publication PR is automatically Tier 2 because it modifies `docs/governance.md` and publishes review, approval, merge, exception, and decision-authority rules.
+
+The policy is not repository-effective until the exact reviewed head receives both required independent review perspectives, current-head validation passes, Marco grants merge approval, a true merge commit lands, and post-merge identity and scope verification completes. Phase 1B and Phase 2 remain deferred and inactive. The next implementation milestone remains undecided.
+
 ## OAR Phase 1A closure
 
 The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 merged the accepted OAR contracts, inactive Draft 0.x schemas, and fictional authority and revocation fixtures. PR #19 merged the independently reviewed fictional year-2099 offline verifier prototype. PR #21 merged Phase 1A deterministic verifier core hardening at `2026-07-16T12:29:34Z` as merge commit `bf5063c2cdcb8d3cf915c5405dfb7fed26648683`. Its first parent is `7ee1650ba099234b21c6c94025d0ba6fa8486fd8`, and reviewed head `77d6554ada8f432ecc743b9c8115cc9d31d1a416` is its second parent. Phase 1A is closed.
