@@ -68,17 +68,34 @@ Human review remains part of the architecture because source documents can be in
 
 ## Quick Start
 
-Install dependencies:
+Install the locked runtime and test dependencies with uv 0.11.28:
 
 ```powershell
-python -m pip install -r requirements.txt
+uv sync --locked --group test
 ```
 
 Run tests:
 
 ```powershell
-python -m pytest
+uv run --locked python -m pytest
 ```
+
+Verify that dependency declarations and the universal lock agree:
+
+```powershell
+uv lock --check
+```
+
+Build the development distribution artifacts:
+
+```powershell
+uv build
+```
+
+`pyproject.toml` declares direct dependencies and supported Python versions. `uv.lock` is
+the sole authoritative resolved dependency lock. The built distribution validates package
+metadata and source inclusion; it does not establish a stable public API, console entry
+point, production deployment artifact, or resource-independent installed CLI.
 
 Validate a sample extraction:
 

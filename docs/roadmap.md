@@ -6,7 +6,7 @@ The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed
 
 ## Current Focus
 
-No next implementation milestone is selected. OAR contract drafting, the fictional verifier prototype, and Phase 1A are complete; production authority resolution is not authorized.
+OAR Phase 1B.1 Dependency and Package Foundation is approved for implementation under an exact ten-path allowlist. It covers project metadata, one authoritative universal dependency lock, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, locked CI, and development package build/install validation. It must not change CLI semantics, stabilize a public interface, relocate runtime resources, or expand into Phase 1B.2 or Phase 2. OAR contract drafting, the fictional verifier prototype, and Phase 1A are complete; production authority resolution is not authorized.
 
 ### OD-REVIEW-EVIDENCE-002 publication
 
@@ -18,7 +18,7 @@ Status: `COMPLETED — REPOSITORY-EFFECTIVE`
 - The reviewed-head tree and merge tree were verified equal, and exactly four authorized documentation paths landed.
 - `OD-REVIEW-EVIDENCE-002` is prospective: it does not retroactively invalidate PR #23 or earlier merged PRs and applies to every PR that was unmerged when PR #24 merged and to every future Tier 1 and Tier 2 PR.
 
-Phase 1B dependency locking and package metadata, Phase 2 TOCTOU remediation and secure filesystem admission, production authority, trust-anchor delivery, schema activation, projection or downstream activation, BR-006, D3, manifest activation, deployment activation, real-data activation, and Greptile installation or qualification remain deferred or unauthorized.
+Phase 1B.1 is authorized only within its approved boundary. Phase 1B.2 interface stabilization, Phase 2 TOCTOU remediation and secure filesystem admission, production authority, trust-anchor delivery, schema activation, projection or downstream activation, BR-006, D3, manifest activation, deployment activation, real-data activation, Greptile installation or qualification, GOV-DEBT-001, and GOV-DEBT-002 remain deferred or unauthorized.
 
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
