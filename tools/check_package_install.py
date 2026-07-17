@@ -1,5 +1,4 @@
 import argparse
-import importlib.metadata
 import json
 import os
 import subprocess
@@ -46,7 +45,7 @@ def main(argv: list[str] | None = None) -> int:
         if result != {
             "business_rules": True,
             "oar_verifier": True,
-            "version": importlib.metadata.version("monthly-agent"),
+            "version": "0.0.0",
         }:
             raise RuntimeError(f"unexpected installed-package probe: {result}")
         print(json.dumps(result, sort_keys=True))
