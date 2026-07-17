@@ -8,7 +8,7 @@
 
 The PR #24 publication roles were: Codex as work-product implementation author; ChatGPT as substantive initiator and governance facilitator; Marco as Owner, final approval authority, and merge authority; and Fable and Claude as the two required independent perspectives on the same exact head. Both independent perspectives concluded `APPROVE WITH NON-BLOCKING NOTES` with zero blocking and zero major findings.
 
-Phase 1B and Phase 2 remain deferred and inactive. Production authority, trust-anchor delivery, security or schema activation, destructive operations, real-data activation, projection, manifest, downstream or deployment activation, BR-006, D3, and Greptile qualification remain unauthorized. The next implementation milestone remains undecided.
+OAR Phase 1B.1 Dependency and Package Foundation is the approved implementation milestone, limited to project metadata, one authoritative universal dependency lock, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, CI installation from the lock, and development package build/install validation. Phase 1B.2 interface stabilization and Phase 2 remain deferred, unauthorized, and inactive. Production authority, trust-anchor delivery, security or schema activation, destructive operations, real-data activation, projection, manifest, downstream or deployment activation, BR-006, D3, Greptile qualification, GOV-DEBT-001, and GOV-DEBT-002 remain unauthorized.
 
 ## OAR Phase 1A closure
 
@@ -70,7 +70,7 @@ BR-006 implementation and direct unit coverage are retained while runtime activa
 
 ## Current Task
 
-No next implementation milestone has been selected. The current factual baseline is the completed fictional OAR chain plus closed Phase 1A hardening: the offline verifier checks RFC 8785/SHA-256 bindings, a separately supplied trust anchor, the non-self-authorizing publication bootstrap, ordinary closed-world membership, exact subject/envelope binding, authorized revocation before authority supersession, independent business-subject supersession, and deterministic fictional run metadata, eligibility, and selection outcomes. It executes two positive scenarios and preserves all twenty negative first-failure expectations.
+OAR Phase 1B.1 is authorized for implementation under an exact ten-path allowlist. It must stop if truthful package validation requires runtime resource relocation, CLI changes, public-interface decisions, or any path outside that allowlist. The existing fictional OAR chain and closed Phase 1A behavior remain unchanged: the offline verifier checks RFC 8785/SHA-256 bindings, a separately supplied trust anchor, the non-self-authorizing publication bootstrap, ordinary closed-world membership, exact subject/envelope binding, authorized revocation before authority supersession, independent business-subject supersession, and deterministic fictional run metadata, eligibility, and selection outcomes. It executes two positive scenarios and preserves all twenty negative first-failure expectations.
 
 Module-global `_LAST_TRACE` was removed. Trace is invocation-local and available only through a private test helper; public verification and CLI output remain trace-free. Success, `semantic_rejection`, and `resource_rejection` are distinguishable. Multiple effective business-key candidates fail closed, and snapshot, authority, and business-subject lifecycle traversal has cycle and depth protection. Fixed artifact-nonconfigurable ceilings cover 64 inventory artifacts, 256 KiB per JSON file, 2 MiB total admitted JSON, 256 snapshot entries, and depth 64. The depth ceiling is defensive and does not evidence an accepted 64-link scenario; resource checks do not solve TOCTOU.
 
@@ -82,9 +82,10 @@ This closure does not provide real trust-anchor delivery, real registry publicat
 - Business rule specs and implementations must stay aligned before adding validators.
 - BR-005 must remain deterministic and avoid semantic, NLP, or fuzzy judgement.
 - BR-006 runtime activation remains held pending vertical-slice evidence, indexed marker syntax validation, and owner approval.
-- P21-F01 is accepted non-blocking debt: `VerificationResult.classification` is the second positional dataclass field in a pre-stable interface. Phase 1B may evaluate keyword-only construction and a versioned result interface if it becomes an external contract.
+- P21-F01 is accepted non-blocking debt: `VerificationResult.classification` is the second positional dataclass field in a pre-stable interface. Phase 1B.2 may evaluate keyword-only construction and a versioned result interface if it becomes an external contract.
 - P21-F02 is accepted non-blocking debt: lifecycle depth 64 is a defensive secondary ceiling constrained by inventory and multi-artifact chain structure. Enforcement is independently tested at all three traversal locations; no accepted 64-link scenario is claimed.
-- Phase 1B dependency/interface reproducibility and Phase 2 secure filesystem admission remain deferred, inactive, and subject to separate owner approval.
+- Phase 1B.1 dependency and package foundation is Owner-approved and implemented by PR #26, but remains an in-review implementation and is not repository-effective as completed work unless and until that PR merges.
+- Phase 1B.2 remaining interface/public-contract stabilization and Phase 2 secure filesystem admission remain deferred, unauthorized, inactive, and subject to separate owner approval.
 
 ## Architecture Principles
 
@@ -106,8 +107,8 @@ Naming map:
 
 Next steps:
 
-1. Keep the next milestone undecided until a separate owner decision.
+1. Complete review of the currently approved Phase 1B.1 milestone through PR #26; no later milestone is selected or authorized.
 2. Keep D3 / indexed marker syntax validation pending clarification; do not begin implementation without separate approval.
 3. Plan real vertical-slice evidence only with separate owner approval.
 4. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
-5. Keep Phase 1B and Phase 2 deferred and inactive until separately authorized; their ordering is not selected.
+5. Keep Phase 1B.2 and Phase 2 deferred, unauthorized, and inactive until separately approved; no post-1B.1 milestone or ordering is selected.

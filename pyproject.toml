@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools==80.10.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "monthly-agent"
+version = "0.0.0"
+description = "Structured extraction and validation workflow for elderly centre monthly programme documents."
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "jsonschema",
+    "referencing==0.37.0",
+    "rfc8785==0.1.4",
+]
+
+[dependency-groups]
+test = [
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tools*", "validators*"]
+namespaces = true
+
+[tool.uv]
+default-groups = ["test"]
+package = true
