@@ -2,7 +2,7 @@
 
 ## Review-policy publication
 
-`OD-REVIEW-POLICY-001` is ratified by Marco. Repository publication of Option C, the Risk-Based Independent Review Policy, is pending through the current Draft PR. This publication PR is automatically Tier 2 because it modifies `docs/governance.md` and publishes review, approval, merge, exception, and decision-authority rules.
+`OD-REVIEW-POLICY-001` is ratified by Marco. Repository publication of Option C, the Risk-Based Independent Review Policy, is pending through Draft PR #23. This publication PR is automatically Tier 2 because it modifies `docs/governance.md` and publishes review, approval, merge, exception, and decision-authority rules.
 
 The policy is not repository-effective until the exact reviewed head receives both required independent review perspectives, current-head validation passes, Marco grants merge approval, a true merge commit lands, and post-merge identity and scope verification completes. Phase 1B and Phase 2 remain deferred and inactive. The next implementation milestone remains undecided.
 

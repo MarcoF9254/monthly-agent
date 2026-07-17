@@ -198,11 +198,7 @@ A substantive initiator is a person or agent who materially determines specific 
 
 Every PR requires at least one qualified reviewer independent from its work-product author. Difference in Git authorship alone does not establish independence.
 
-The Owner may act as an independent reviewer only when the Owner did not materially initiate the reviewed claims or decision content. When the Owner is a substantive initiator:
-
-- the Owner cannot be the sole independent reviewer;
-- an additional qualified independent reviewer is required; and
-- the substantive-initiator determination and rationale must be recorded.
+The Owner may act as an independent reviewer only when the Owner did not materially initiate the reviewed claims or decision content. When the Owner is a substantive initiator, the Owner cannot serve as or count toward any required independent review perspective. Tier 1 therefore requires another qualified reviewer; Tier 2 requires two qualified reviewers who are not the Owner, the work-product author, or another substantive initiator. The Owner may still comment and retain final approval and merge authority, but those actions do not satisfy or replace an independent-review gate. The substantive-initiator determination and rationale must be recorded.
 
 ### Classification ownership
 
@@ -224,7 +220,7 @@ Tier 1 requires one qualified author-external independent reviewer, exact diff a
 
 Tier 2 requires two qualified independent review perspectives covering the same exact head, finding adjudication, applicable current-head CI, Owner final approval, a true merge commit, and post-merge verification.
 
-The default second independent model is Claude. If Claude is unavailable, the Owner designates another qualified independent model or reviewer and records the reason and replacement identity. The replacement cannot be the work-product author or substantive initiator, and the work-product author cannot approve the replacement.
+The default second independent model is Claude. If Claude is unavailable, the Owner designates another qualified independent model or reviewer and records the reason and replacement identity. The replacement cannot be the Owner when the Owner is a substantive initiator, the work-product author, or another substantive initiator, and the work-product author cannot approve the replacement.
 
 ### Automatic Tier 2 triggers
 
@@ -295,7 +291,9 @@ Break-glass incident handling is outside this policy and requires a separate Tie
 
 ### Exceptions for other categories
 
-Any permitted one-time exception outside the non-waivable categories records:
+Only the Owner may grant a permitted one-time exception outside the non-waivable categories. Work-product authors and substantive initiators cannot self-grant an exception. The exception record requires author-external independence review; if the exception changes this policy, it requires Tier 2 review. Non-waivable categories remain non-waivable, and no exception may replace required real-time independent review for production authority, security, destructive operations, or real-data activation.
+
+Each permitted exception records:
 
 - exact PR and head;
 - waived requirement;

@@ -13,6 +13,7 @@ No next implementation milestone is selected. OAR contract drafting, the fiction
 Status: `RATIFIED — PUBLICATION IN REVIEW`
 
 - Governance and decision documentation only.
+- Publication is pending through Draft PR #23.
 - Tier 2 dual independent review is required.
 - No runtime, authority, schema, Phase 1B, or Phase 2 implementation is included.
 - Completion requires both reviewers to cover the exact reviewed head, Owner merge approval, a true merge commit, and post-merge identity and landed-scope verification.

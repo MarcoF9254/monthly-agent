@@ -23,12 +23,12 @@ Adopt Option C, the Risk-Based Independent Review Policy:
 ### Review evidence
 
 - First architecture draft: ChatGPT.
-- First independent review: Claude — YELLOW, with two required corrections.
-- F1/F2 and F3–F5 were incorporated.
-- Second independent review: Claude — GREEN WITH NON-BLOCKING NOTES.
+- First independent policy review: Claude — YELLOW, identifying two required corrections concerning Owner-reviewer independence and merge-method head-pinning.
+- Those required corrections were incorporated, together with non-blocking recommendations concerning the default second reviewer, Tier 1 audits, and exact-source evidence.
+- Second independent policy review: Claude — GREEN WITH NON-BLOCKING NOTES.
 - Blocking findings: zero.
-- Major findings: zero.
-- The Owner selected the strict non-waivable Section 13 behavior.
+- Major findings at the pre-publication policy-review stage: zero.
+- The Owner selected the strict non-waivable high-risk Tier 2 rule.
 
 ### Consequences
 
