@@ -36,7 +36,7 @@ The policy is prospective and does not retroactively invalidate PR #22 or earlie
 
 ## OD-REVIEW-EVIDENCE-002: Review Evidence and Factual-Gate Procedures
 
-Status: Owner-ratified and fully Tier 2 reviewed; publication pending repository effectiveness.
+Status: Repository-effective through merged PR #24.
 
 Version: Revised Candidate v3
 
@@ -69,7 +69,7 @@ ChatGPT is not a required independent-review perspective for the publication PR.
 
 ### Effect and boundaries
 
-Repository effectiveness begins only when the authorized publication PR merges. This decision is prospective and does not retroactively invalidate PR #23, which merged as `fb09d2ea547615a70299986608dba9f459c1e544` at GitHub `merged_at` `2026-07-17T01:40:28Z`, or any earlier merged PR. Once repository-effective, it applies to every then-unmerged and future Tier 1 and Tier 2 PR.
+Repository effectiveness began when PR #24 merged at GitHub `merged_at` `2026-07-17T05:47:09Z` through true merge commit `cd30a42bde387b66df0f99e117d7c2fd57b16b88`. Its first parent is `fb09d2ea547615a70299986608dba9f459c1e544`, and exact reviewed head `9443dd0fc1624b3853cfc7ffbb3a941b4498bf11` is its second parent. The decision is prospective and does not retroactively invalidate PR #23 or any earlier merged PR. It applies to every PR that was unmerged when PR #24 merged and to every future Tier 1 and Tier 2 PR.
 
 This decision grants no production authority, security activation, destructive-operation authority, real-data activation, Phase 1B activation, Phase 2 activation, trust-anchor delivery, schema activation, projection or downstream activation, BR-006 activation, D3 resolution, manifest activation, deployment activation, or Greptile qualification.
 
