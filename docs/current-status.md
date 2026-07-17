@@ -4,9 +4,9 @@
 
 `OD-REVIEW-POLICY-001` became repository-effective when PR #23 merged as `fb09d2ea547615a70299986608dba9f459c1e544` at `2026-07-17T01:40:28Z`.
 
-`OD-REVIEW-EVIDENCE-002` — Review Evidence and Factual-Gate Procedures: `RATIFIED — PUBLICATION PENDING`. Marco ratified Revised Candidate v3 after exact-v3 focused confirmations from Fable and Claude. Repository effectiveness begins only when its authorized publication PR merges; the publication is automatically Tier 2 because it changes governance and review-evidence policy.
+`OD-REVIEW-EVIDENCE-002` — Review Evidence and Factual-Gate Procedures became repository-effective when PR #24 merged at `2026-07-17T05:47:09Z` through true merge commit `cd30a42bde387b66df0f99e117d7c2fd57b16b88`. Its first parent is `fb09d2ea547615a70299986608dba9f459c1e544`, and doubly reviewed head `9443dd0fc1624b3853cfc7ffbb3a941b4498bf11` is its second parent. The reviewed-head tree and merge tree were verified equal, and exactly `docs/current-status.md`, `docs/decisions.md`, `docs/governance.md`, and `docs/roadmap.md` landed.
 
-Work-product implementation author: Codex. Substantive initiator and governance facilitator: ChatGPT. Owner, final approval authority, and merge authority: Marco. Required independent perspectives for the publication PR: Fable and Claude on the same exact head. ChatGPT is not a required independent perspective; Marco is a substantive initiator and cannot count as one; Owner approval cannot replace either required review.
+The PR #24 publication roles were: Codex as work-product implementation author; ChatGPT as substantive initiator and governance facilitator; Marco as Owner, final approval authority, and merge authority; and Fable and Claude as the two required independent perspectives on the same exact head. Both independent perspectives concluded `APPROVE WITH NON-BLOCKING NOTES` with zero blocking and zero major findings.
 
 Phase 1B and Phase 2 remain deferred and inactive. Production authority, trust-anchor delivery, security or schema activation, destructive operations, real-data activation, projection, manifest, downstream or deployment activation, BR-006, D3, and Greptile qualification remain unauthorized. The next implementation milestone remains undecided.
 

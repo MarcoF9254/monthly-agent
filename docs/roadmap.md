@@ -10,15 +10,13 @@ No next implementation milestone is selected. OAR contract drafting, the fiction
 
 ### OD-REVIEW-EVIDENCE-002 publication
 
-Status: `RATIFIED — PUBLICATION PENDING`
+Status: `COMPLETED — REPOSITORY-EFFECTIVE`
 
-- Active task: publish Revised Candidate v3 review-evidence and factual-gate procedures through a Draft Tier 2 governance PR.
-- Work-product implementation author: Codex; substantive initiator and governance facilitator: ChatGPT; Owner and merge authority: Marco.
-- Required independent perspectives: Fable and Claude on the same exact head. ChatGPT is not a required independent perspective, Marco cannot count because he is a substantive initiator, and Owner approval cannot replace either review.
-- `OD-REVIEW-POLICY-001` is already repository-effective through merged PR #23 at `fb09d2ea547615a70299986608dba9f459c1e544`.
-- This decision becomes repository-effective only when its publication PR merges and does not retroactively invalidate PR #23 or earlier merged PRs.
-- Completion requires both reviewers' exact-head records, current-head validation, Owner merge approval, a true merge commit, and post-merge parent and landed-scope proof.
-- No squash, rebase, force-push, or source-branch deletion is permitted for the publication.
+- PR #24 merged at `2026-07-17T05:47:09Z` through true merge commit `cd30a42bde387b66df0f99e117d7c2fd57b16b88`.
+- Its first parent is `fb09d2ea547615a70299986608dba9f459c1e544`; exact doubly reviewed head `9443dd0fc1624b3853cfc7ffbb3a941b4498bf11` is its second parent.
+- Fable and Claude each reviewed the same exact head and concluded `APPROVE WITH NON-BLOCKING NOTES`, with zero blocking and zero major findings.
+- The reviewed-head tree and merge tree were verified equal, and exactly four authorized documentation paths landed.
+- `OD-REVIEW-EVIDENCE-002` is prospective: it does not retroactively invalidate PR #23 or earlier merged PRs and applies to every PR that was unmerged when PR #24 merged and to every future Tier 1 and Tier 2 PR.
 
 Phase 1B dependency locking and package metadata, Phase 2 TOCTOU remediation and secure filesystem admission, production authority, trust-anchor delivery, schema activation, projection or downstream activation, BR-006, D3, manifest activation, deployment activation, real-data activation, and Greptile installation or qualification remain deferred or unauthorized.
 
