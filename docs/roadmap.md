@@ -4,9 +4,9 @@
 
 The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed and merged the accepted OAR contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. PR #19 completed and merged the independently reviewed fictional year-2099 offline verifier prototype. PR #21 completed Phase 1A deterministic verifier core hardening. Production operation and activation remain outside all three merges.
 
-## Current Focus
+## Milestone State
 
-OAR Phase 1B.1 Dependency and Package Foundation is approved for implementation under an exact ten-path allowlist. It covers project metadata, one authoritative universal dependency lock, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, locked CI, and development package build/install validation. It must not change CLI semantics, stabilize a public interface, relocate runtime resources, or expand into Phase 1B.2 or Phase 2. OAR contract drafting, the fictional verifier prototype, and Phase 1A are complete; production authority resolution is not authorized.
+OAR Phase 1B.1 Dependency and Package Foundation completed and became repository-effective when PR #26 merged at `2026-07-17T13:52:58Z` through true merge commit `466ec18c0b232bfa99de1822124e35ae39495def`. Its first parent is `1375235a9e00df5a8e3835fe58a326dc16883874`, and merged head `5c9ffd88246a491eb9bf6043744428c4e2574a9a` is its second parent. The merged-head tree and merge tree are equal, and exactly the approved ten implementation paths landed. No later implementation milestone is selected or authorized; production authority resolution remains unauthorized.
 
 ### OD-REVIEW-EVIDENCE-002 publication
 
@@ -23,6 +23,13 @@ Phase 1B.1 is authorized only within its approved boundary. Phase 1B.2 interface
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
 ## Completed Milestones
+
+### OAR Phase 1B.1 - Dependency and Package Foundation
+
+- PR #26 completed and merged the approved dependency and package foundation through true merge commit `466ec18c0b232bfa99de1822124e35ae39495def`.
+- Added project metadata, one authoritative universal dependency lock, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, locked CI, and development package build/install validation.
+- Preserved CLI semantics, the pre-stable public interface, existing runtime resource locations, and all Phase 1A behavior.
+- Phase 1B.2 and Phase 2 remain deferred, unauthorized, and inactive.
 
 ### OAR Contracts and Fictional Authority Verifier
 
@@ -117,13 +124,13 @@ Status: contract package and fictional executable verification completed. Draft 
 
 ### OAR hardening sequence
 
-Phase 1B.1 — Dependency and Package Foundation: `OWNER-APPROVED — IMPLEMENTED IN PR #26 / IN REVIEW`. This approved milestone covers dependency locking, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, locked CI, package metadata, and development package build/install validation. Its implementation is not repository-effective as completed work unless and until PR #26 passes review and merges.
+Phase 1B.1 — Dependency and Package Foundation: `COMPLETED — MERGED IN PR #26 / REPOSITORY-EFFECTIVE`. This completed milestone covers dependency locking, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, locked CI, package metadata, and development package build/install validation.
 
 Phase 1B.2 — Remaining Interface and Public-Contract Stabilization: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes a console entry point, safer keyword-only result construction, and a versioned result/interface contract.
 
 Phase 2 — Secure Filesystem Admission: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes TOCTOU remediation, immutable or staged input acquisition, descriptor-based safe reads where appropriate, symlink and intermediate-directory policy, secure trust-anchor filesystem custody, and filesystem race/mutation testing.
 
-The current approved implementation milestone is Phase 1B.1. No later milestone is selected or authorized; Phase 1B.2 and Phase 2 remain deferred, unauthorized, and inactive.
+No current or later implementation milestone is selected or authorized. Phase 1B.2 and Phase 2 remain deferred, unauthorized, and inactive.
 ### BR-006 Per-Session Date Completeness
 
 Implemented, activation held. Requires vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before runtime activation.
