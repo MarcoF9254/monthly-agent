@@ -252,6 +252,14 @@ Rules that use `uncertain_fields` must explicitly declare whether they accept to
 
 Indexed uncertainty paths reuse a narrow deterministic path vocabulary already used by validation findings, but `uncertain_fields` must not be treated as full JSONPath or as a fuzzy or semantic path language.
 
+### PR #32 D3 syntax-only pilot closure
+
+PR #32 completed the syntax-only D3 pilot artifact and became repository-effective when it merged at `2026-07-18T12:55:52Z` through true merge commit `f2677698d0d0e7599e5e8e686c6eb38bf9bc3a35`. Its first parent is pre-merge main `9774c569fa3d631ee4ad56e0d865595b26c4f2d6`, and exact reviewed head `8b4c3e525cec7d9c0ee82437f39981ae25d7e01d` is its second parent. The merge tree equals the reviewed-head tree, and exactly `docs/current-status.md`, `docs/d3-indexed-marker-syntax-contract.md`, `docs/roadmap.md`, `rules/README.md`, `tests/test_d3_indexed_marker_validator.py`, and `validators/d3_indexed_marker_validator.py` landed.
+
+Exact-head CI run `29644480824` completed successfully. The final Tier 2 perspectives on the exact reviewed head were Claude / Anthropic Sonnet 5 class and Qwen3-Max via Nous/Hermes; both concluded `APPROVE WITH NON-BLOCKING NOTES`. Claude recorded blocking 0, major 0, minor 0. Qwen3-Max recorded blocking 0, major 0, and one non-blocking Minor. The Owner qualified Qwen3-Max via Nous/Hermes as Perspective 2, treated Hermes as an execution/orchestration shell, and explicitly accepted the shared operator context as non-disqualifying. D3-M01 was `ACCEPTED MAJOR`, corrected, and independently confirmed `FULLY RESOLVED`.
+
+The artifact validates attempted indexed-marker syntax only. Syntactic validity grants no schema, rule-specific, runtime, BR-006, production, downstream, or activation authority. Bare top-level markers remain outside D3 adjudication authority. D3 remains fictional/test-only, outside the active business-rule registry, and not runtime active. The merge does not authorize BR-006 activation, real-data processing, Phase 2, production authority, projection, manifest, downstream activation, trust-anchor delivery, or any other deferred boundary, and it selects or authorizes no next implementation milestone.
+
 ## ADR-007: Scoped Downstream Eligibility
 
 Status: Accepted

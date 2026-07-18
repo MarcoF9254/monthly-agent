@@ -147,7 +147,7 @@ Implemented, activation held. Requires vertical-slice evidence, indexed marker s
 - D1 = Milestone 3.7 — Pipeline Run Contract (completed and merged)
 - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
 - D2B = Milestone 3.9 — additive validator JSON artifact emission (completed and merged in PR #10)
-- D3 = Indexed Marker Syntax Validation (syntax-only bounded pilot in Draft PR #32 on branch `pilot/d3-indexed-marker-syntax`; automatic Tier 2 for new contract semantics, with both reviewer perspectives pending)
+- D3 = Indexed Marker Syntax Validation (`COMPLETED — MERGED IN PR #32 / REPOSITORY-EFFECTIVE` as a syntax-only pilot artifact). PR #32 merged at `2026-07-18T12:55:52Z` through true merge commit `f2677698d0d0e7599e5e8e686c6eb38bf9bc3a35`; its parents are pre-merge main `9774c569fa3d631ee4ad56e0d865595b26c4f2d6` and exact reviewed head `8b4c3e525cec7d9c0ee82437f39981ae25d7e01d`. Exactly the six authorized paths landed, and exact-head CI run `29644480824` completed successfully. Final Tier 2 review concluded `APPROVE WITH NON-BLOCKING NOTES` from Claude / Anthropic Sonnet 5 class and Owner-qualified Qwen3-Max via Nous/Hermes; D3-M01 was corrected and independently confirmed `FULLY RESOLVED`. D3 remains fictional/test-only, outside the active registry, and not runtime active. Syntax validity grants no schema, rule-specific, runtime, BR-006, production, downstream, or activation authority; bare top-level markers remain outside D3 adjudication authority. All deferred boundaries remain unauthorized, and no next implementation milestone is selected or authorized.
 
 ### Milestone 3.5B - BR-006 Specification Review
 
