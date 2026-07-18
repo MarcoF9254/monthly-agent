@@ -75,7 +75,7 @@ This decision grants no production authority, security activation, destructive-o
 
 ## OD-REVIEW-QUALIFICATION-001: Evidence-Based Reviewer Qualification
 
-Status: Owner-approved for Tier 2 publication; not repository-effective until the publication PR merges.
+Status: Repository-effective through merged PR #30.
 
 Version: Option D, Revised Candidate v2
 
@@ -96,14 +96,19 @@ The qualification-specific stop rules and expanded PR classification record in `
 - The review supported Option D but required four corrections: model-level diversity for AI-only non-waivable high-risk review, enumerated qualification stop rules, independent capability confirmation, and an expanded classification-record template.
 - Revised Candidate v2 incorporates all four corrections.
 - Owner approval: explicit approval of Option D, Revised Candidate v2, including capability confirmation, stop rules, expanded record, diversity, human substitution, bootstrap, and prospective non-retroactive effect.
+- Final Tier 2 perspectives: Fable and Claude, each `APPROVE WITH NON-BLOCKING NOTES` on exact reviewed head `ba5a24a6ea563fed8c0d8bc2067dd97f9a50f235`, with zero blocking and zero major findings.
+- Exact-head CI run `29626802862`: completed successfully.
+- P30-F01 remains carried as a non-gating Minor.
 
 ### Bootstrap and effect
 
-The publication PR is an automatic Tier 2 governance change and remains governed by the repository-effective pre-amendment policy. The pre-amendment default and fallback rules remain binding until this decision's publication PR merges. This decision cannot approve its own publication, Ready transition, or merge.
+As historical bootstrap process evidence, the publication PR was an automatic Tier 2 governance change governed by the then-repository-effective pre-amendment policy. The pre-amendment default and fallback rules remained binding until PR #30 merged. The decision did not approve its own publication, Ready transition, or merge.
 
-When the publication PR merges, this decision applies prospectively to every then-unmerged and future Tier 1 and Tier 2 PR. It does not reopen, reclassify, or invalidate earlier merged PRs. Historical references to Claude, Fable, Gemini, or other actual reviewers remain factual review evidence and are not rewritten. Only future-facing normative named-model requirements are replaced.
+Repository effectiveness began when PR #30 merged at GitHub `merged_at` `2026-07-18T10:47:04Z` through true merge commit `66eca55b18d44d9ed5a7044ecc878ce1677541c2`. Its first parent is `d21ea123091bf5159a3eb500602062157154d103`, and exact reviewed head `ba5a24a6ea563fed8c0d8bc2067dd97f9a50f235` is its second parent. The merge tree and reviewed-head tree are equal at `774631205803536b7fc76831c04f0919374e750f`, and exactly `docs/current-status.md`, `docs/decisions.md`, `docs/governance.md`, and `docs/roadmap.md` landed.
 
-This decision authorizes only its governance publication packet. It does not authorize implementation outside the governance documents, Ready transition, merge, Phase 2, runtime or production authority, security activation, destructive operations, real-data activation, trust-anchor delivery, schema activation, projection, manifest, downstream activation, BR-006, or D3.
+The decision applies prospectively to every PR that was unmerged when PR #30 merged and to every future Tier 1 and Tier 2 PR. It does not reopen, reclassify, or invalidate earlier merged PRs. Historical references to Claude, Fable, Gemini, or other actual reviewers remain factual review evidence and are not rewritten. Only future-facing normative named-model requirements are replaced.
+
+The decision authorized only its governance publication packet; it did not itself authorize implementation outside the governance documents, Ready transition, or merge. Its repository effectiveness grants no Phase 2, runtime or production authority, security activation, destructive operations, real-data activation, trust-anchor delivery, schema activation, projection, manifest, downstream activation, BR-006 activation, or D3 resolution.
 
 ## OAR owner decisions
 
@@ -119,7 +124,7 @@ The approved implementation became repository-effective when PR #28 merged at `2
 
 This decision does not authorize a console entry point, package-version change, installed-wheel standalone CLI, runtime resource relocation, repository-root argument, CLI argument redesign, filesystem admission, TOCTOU remediation, symlink policy, exception hierarchy redesign, production authority, real trust-anchor delivery, schema activation, Phase 2, projection, manifest, downstream activation, BR-006, D3, or general refactoring. The merge grants none of those excluded capabilities and selects or authorizes no later implementation milestone.
 
-`OD-REVIEW-QUALIFICATION-001` is Owner-approved for Tier 2 publication but is not repository-effective until its publication PR merges. No Ready transition or merge is authorized.
+`OD-REVIEW-QUALIFICATION-001` is repository-effective through merged PR #30. Its prospective, non-retroactive governance effect grants no Phase 2, production, runtime, schema, real-data, projection, manifest, downstream, BR-006, or D3 activation and selects or authorizes no later implementation milestone.
 
 - `OD-OAR-ARCH-001`: approved with scope rulings.
 - `OD-OAR-DESIGN-001`: approved.
