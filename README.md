@@ -97,6 +97,13 @@ the sole authoritative resolved dependency lock. The built distribution validate
 metadata and source inclusion; it does not establish a stable public API, console entry
 point, production deployment artifact, or resource-independent installed CLI.
 
+The fictional OAR verifier returns the versioned `verification-result/v1` contract.
+`VerificationResult` uses keyword-only construction and its `to_payload()` method is the
+authoritative JSON-compatible serialization used by the repository-root CLI. The stable
+payload keys are `contract_version`, `success`, `classification`, `rule_id`,
+`primary_component`, `rejection_stage`, `message`, and `outcome`. This stabilization does
+not provide a console entry point or relocate runtime resources.
+
 Validate a sample extraction:
 
 ```powershell

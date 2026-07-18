@@ -81,6 +81,10 @@ The approved implementation became repository-effective when PR #26 merged at `2
 
 The decision does not authorize Phase 1B.2 interface stabilization, `VerificationResult` redesign or public-contract stabilization, CLI semantic changes, resource relocation, Phase 2 secure filesystem admission, production authority, trust-anchor delivery, schema or real-data activation, projection, manifest, downstream or deployment activation, BR-006, D3, GOV-DEBT-001, or GOV-DEBT-002. A built distribution validates metadata and inclusion of existing Python sources only; it is not a production deployment artifact and does not establish an installed CLI, stable public API, or resource-independent runtime contract. Implementation must stop rather than expand scope if truthful validation requires any excluded change.
 
+`OD-OAR-PHASE-1B2-001` approves Phase 1B.2 Versioned Verification Result Contract. The exact contract version is `verification-result/v1`, with stable payload fields `contract_version`, `success`, `classification`, `rule_id`, `primary_component`, `rejection_stage`, `message`, and `outcome`. `VerificationResult` construction is keyword-only, and `to_payload()` is the authoritative JSON-compatible serializer used directly by the existing repository-root CLI. The only stabilized classification values are `success`, `semantic_rejection`, and `resource_rejection`; rejected outcomes remain null and successful outcomes retain the existing deterministic data.
+
+This decision does not authorize a console entry point, package-version change, installed-wheel standalone CLI, runtime resource relocation, repository-root argument, CLI argument redesign, filesystem admission, TOCTOU remediation, symlink policy, exception hierarchy redesign, production authority, real trust-anchor delivery, schema activation, Phase 2, projection, manifest, downstream activation, BR-006, D3, or general refactoring. The implementation is under review until merge and grants none of those excluded capabilities.
+
 - `OD-OAR-ARCH-001`: approved with scope rulings.
 - `OD-OAR-DESIGN-001`: approved.
 - `OD-OAR-CONTRACT-001`: approved.

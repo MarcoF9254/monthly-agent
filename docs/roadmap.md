@@ -6,7 +6,9 @@ The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed
 
 ## Milestone State
 
-OAR Phase 1B.1 Dependency and Package Foundation completed and became repository-effective when PR #26 merged at `2026-07-17T13:52:58Z` through true merge commit `466ec18c0b232bfa99de1822124e35ae39495def`. Its first parent is `1375235a9e00df5a8e3835fe58a326dc16883874`, and merged head `5c9ffd88246a491eb9bf6043744428c4e2574a9a` is its second parent. The merged-head tree and merge tree are equal, and exactly the approved ten implementation paths landed. No later implementation milestone is selected or authorized; production authority resolution remains unauthorized.
+OAR Phase 1B.1 Dependency and Package Foundation completed and became repository-effective when PR #26 merged at `2026-07-17T13:52:58Z` through true merge commit `466ec18c0b232bfa99de1822124e35ae39495def`. Its first parent is `1375235a9e00df5a8e3835fe58a326dc16883874`, and merged head `5c9ffd88246a491eb9bf6043744428c4e2574a9a` is its second parent. The merged-head tree and merge tree are equal, and exactly the approved ten implementation paths landed.
+
+Phase 1B.2 Versioned Verification Result Contract is selected and implemented in this branch, under review until merge. It stabilizes only `verification-result/v1`, keyword-only result construction, and authoritative CLI JSON serialization. It provides no console entry point and does not relocate runtime resources. Phase 2 and all production, schema, trust-anchor, projection, manifest, and downstream activation remain unauthorized and inactive.
 
 ### OD-REVIEW-EVIDENCE-002 publication
 
@@ -126,11 +128,11 @@ Status: contract package and fictional executable verification completed. Draft 
 
 Phase 1B.1 — Dependency and Package Foundation: `COMPLETED — MERGED IN PR #26 / REPOSITORY-EFFECTIVE`. This completed milestone covers dependency locking, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, locked CI, package metadata, and development package build/install validation.
 
-Phase 1B.2 — Remaining Interface and Public-Contract Stabilization: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes a console entry point, safer keyword-only result construction, and a versioned result/interface contract.
+Phase 1B.2 — Versioned Verification Result Contract: `OWNER-APPROVED — IMPLEMENTED / UNDER REVIEW UNTIL MERGE`. The selected scope stabilizes `verification-result/v1`, makes `VerificationResult` construction keyword-only, and makes `to_payload()` the authoritative serializer used by CLI JSON. A console entry point, runtime resource relocation, and all other interface work are excluded.
 
 Phase 2 — Secure Filesystem Admission: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes TOCTOU remediation, immutable or staged input acquisition, descriptor-based safe reads where appropriate, symlink and intermediate-directory policy, secure trust-anchor filesystem custody, and filesystem race/mutation testing.
 
-No current or later implementation milestone is selected or authorized. Phase 1B.2 and Phase 2 remain deferred, unauthorized, and inactive.
+Phase 1B.2 is the current selected implementation milestone and is not repository-effective until merge. No later milestone is selected or authorized; Phase 2 remains deferred, unauthorized, and inactive.
 ### BR-006 Per-Session Date Completeness
 
 Implemented, activation held. Requires vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before runtime activation.
