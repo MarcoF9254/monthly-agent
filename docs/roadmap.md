@@ -147,7 +147,7 @@ Implemented, activation held. Requires vertical-slice evidence, indexed marker s
 - D1 = Milestone 3.7 — Pipeline Run Contract (completed and merged)
 - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
 - D2B = Milestone 3.9 — additive validator JSON artifact emission (completed and merged in PR #10)
-- D3 = future Indexed Marker Syntax Validation (pending clarification)
+- D3 = Indexed Marker Syntax Validation (syntax-only bounded pilot in Draft PR #32 on branch `pilot/d3-indexed-marker-syntax`; automatic Tier 2 for new contract semantics, with both reviewer perspectives pending)
 
 ### Milestone 3.5B - BR-006 Specification Review
 

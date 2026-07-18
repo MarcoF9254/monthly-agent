@@ -55,6 +55,18 @@ Milestone 3.9 / D2B — Machine-readable Validation Findings Emission (completed
 | BR-005 Source Reference | Spec, implementation, tests, and review completed |
 | BR-006 Per-Session Date Completeness | Implemented with direct unit tests; activation held and not in the runtime registry |
 
+## D3 Pilot Status
+
+D3 — Indexed Marker Syntax Validation is under Owner-authorized bounded pilot in Draft PR #32 on branch `pilot/d3-indexed-marker-syntax`. PR #32 is automatic Tier 2 because it introduces contract semantics. The pilot scope is:
+
+- Indexed marker syntax validation contract defined (`docs/d3-indexed-marker-syntax-contract.md`). Matching `<field>[<zero-based-index>].<subfield>` establishes syntax only and grants no rule-specific, schema-level, runtime, or activation authority; rule-specific indexed-marker authorization remains a separate fail-closed semantic gate.
+- Validation logic implemented as a standalone module (`validators/d3_indexed_marker_validator.py`). Not registered in the active business-rule registry.
+- Automated test suite: 22 tests passing (positive paths for ADR-006 approved forms, rejection of wildcards, empty indices, ranges, JSONPath, unknown-index placeholders, fuzzy/semantic indices, missing subfields, leading/trailing delimiters).
+- Full locked suite: 202 tests pass, with 1 pre-existing unrelated skip; no regression.
+- No BR-006 activation, real-data processing, production activation, schema changes, or downstream activation.
+
+The D3 pilot contract and validator remain fictional/test-only and are not runtime active.
+
 ## Git State
 
 The latest commit hash is intentionally not tracked in this file because it can become stale after any local commit, push, or branch change.
@@ -118,7 +130,7 @@ Next steps:
 
 1. No later implementation milestone is selected or authorized.
 2. `OD-REVIEW-QUALIFICATION-001` Option D, Revised Candidate v2 is completed, merged in PR #30, and repository-effective. PR #30 merged at `2026-07-18T10:47:04Z` through true merge commit `66eca55b18d44d9ed5a7044ecc878ce1677541c2`; its first parent is `d21ea123091bf5159a3eb500602062157154d103`, and exact reviewed head `ba5a24a6ea563fed8c0d8bc2067dd97f9a50f235` is its second parent. The reviewed-head tree and merge tree are both `774631205803536b7fc76831c04f0919374e750f`, and exactly `docs/current-status.md`, `docs/decisions.md`, `docs/governance.md`, and `docs/roadmap.md` landed. Exact-head CI run `29626802862` completed successfully. Fable and Claude both concluded `APPROVE WITH NON-BLOCKING NOTES`, with zero blocking and zero major findings; P30-F01 remains carried as a non-gating Minor. The decision applies prospectively and non-retroactively and does not authorize Phase 2, any runtime or production activation, or any later implementation milestone.
-3. Keep D3 / indexed marker syntax validation pending clarification; do not begin implementation without separate approval.
+3. D3 / indexed marker syntax validation is under Owner-authorized bounded pilot in Draft PR #32 on branch `pilot/d3-indexed-marker-syntax`; the contract, standalone fictional/test-only validator, and 22-test focused suite are complete and pending two qualified Tier 2 reviewer perspectives on the same future exact head. No reviewer identity, qualification, separation, diversity, finding, or verdict is yet recorded.
 4. Plan real vertical-slice evidence only with separate owner approval.
 5. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
 6. Keep Phase 2 and all scope beyond the completed Phase 1B.2 result contract deferred, unauthorized, and inactive until separately approved.
