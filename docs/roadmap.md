@@ -134,7 +134,7 @@ Phase 2 — Secure Filesystem Admission: `DEFERRED — NOT AUTHORIZED / NOT ACTI
 
 Phase 1B.2 is completed and repository-effective through merged PR #28. No later implementation milestone is selected or authorized; Phase 2 remains deferred, unauthorized, and inactive.
 
-`OD-REVIEW-QUALIFICATION-001` Option D, Revised Candidate v2 is Owner-approved for a Tier 2 governance publication packet. It replaces future-facing named-model qualification locks with independently confirmed capability, evidence, separation, stop-rule, and high-risk diversity controls only when the publication PR merges. Preparation does not authorize Ready, merge, Phase 2, or any runtime or production activation.
+`OD-REVIEW-QUALIFICATION-001` Option D, Revised Candidate v2 is `COMPLETED — MERGED IN PR #30 / REPOSITORY-EFFECTIVE`. PR #30 merged at `2026-07-18T10:47:04Z` through true merge commit `66eca55b18d44d9ed5a7044ecc878ce1677541c2`; its parents are authoritative base `d21ea123091bf5159a3eb500602062157154d103` and exact reviewed head `ba5a24a6ea563fed8c0d8bc2067dd97f9a50f235`, whose tree equals the merge tree at `774631205803536b7fc76831c04f0919374e750f`. Exactly `docs/current-status.md`, `docs/decisions.md`, `docs/governance.md`, and `docs/roadmap.md` landed. Its effect is prospective and non-retroactive; P30-F01 remains carried as a non-gating Minor. It authorizes no Phase 2, production, runtime, schema, real-data, projection, manifest, downstream, BR-006, or D3 activation and selects or authorizes no later implementation milestone.
 
 ### BR-006 Per-Session Date Completeness
 
