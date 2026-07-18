@@ -8,9 +8,11 @@ Indexed markers extend the available `uncertain_fields` syntax so that per-eleme
 
 This contract answers syntax only. A marker that matches the approved shape is syntactically valid, but that result grants no rule-specific, schema-level, runtime, or activation authority for its field or subfield. Rule-specific indexed-marker authorization remains a separate, fail-closed semantic gate. This contract does not activate any business rule or change runtime validator behavior.
 
+Bare top-level markers are outside D3 adjudication authority. D3 does not maintain, derive, or consult a vocabulary or registry of valid top-level field names, and an empty D3 finding result for a bare marker conveys no field-name, schema, rule, runtime, or activation authority.
+
 ## Relationship to ADR-006
 
-ADR-006 approves a narrow deterministic indexed path shape. This contract defines only the validation logic that checks whether a given `uncertain_fields` entry conforms to that shape. It does not determine whether a business rule may use the syntactically valid marker.
+ADR-006 approves a narrow deterministic indexed path shape. This contract defines only the validation logic that checks whether an attempted indexed `uncertain_fields` entry conforms to that shape. It does not determine whether a business rule may use the syntactically valid marker.
 
 ## Approved Path Shape
 
@@ -22,9 +24,9 @@ An indexed marker must match this pattern:
 
 Where:
 
-- `<field>` is the array field name (e.g. `dates`, `fee`).
+- `<field>` is an identifier-shaped field name (e.g. `dates`, `fee`). D3 does not determine whether the named field is schema-valid or indexable.
 - `<zero-based-index>` is a non-negative integer (e.g. `0`, `1`, `17`).
-- `<subfield>` is a field within the array element (e.g. `date_text`, `amount_text`).
+- `<subfield>` is an identifier-shaped subfield name (e.g. `date_text`, `amount_text`). D3 does not determine whether the named subfield exists in any schema.
 
 ### Examples
 
@@ -35,9 +37,9 @@ Valid indexed markers:
 - `fee[0].amount_text`
 - `date_text[0].value` (syntactically valid only; not thereby authorized for BR-006 or runtime use)
 
-### Explicitly Invalid Forms
+### Explicitly Invalid Indexed Forms
 
-The following must be rejected:
+The following attempted indexed markers must be rejected:
 
 - Wildcards: `dates[*].date_text`
 - Empty index: `dates[].date_text`
@@ -55,16 +57,17 @@ The following must be rejected:
 
 ### In Scope
 
-- Syntax validation of `uncertain_fields` string entries against the approved ADR-006 shape.
+- Syntax validation of `uncertain_fields` string entries that attempt the approved ADR-006 indexed shape.
 - Acceptance of any identifier-shaped field and subfield that match the approved shape, including `date_text[0].value`, without conferring semantic authorization.
-- Rejection of wildcard, range, JSONPath, regex, fuzzy, semantic, and other unapproved forms.
+- Rejection of wildcard, range, JSONPath, regex, fuzzy, semantic, and other unapproved indexed forms.
 - Rejection of indexes that are not zero-based non-negative integers.
-- Rejection of missing subfield after indexed array path.
-- Preservation of valid top-level field markers (e.g. `fee`, `dates`).
+- Rejection of missing subfield after an attempted indexed path.
 - Fictional/test-only validation logic.
 
 ### Out of Scope
 
+- Recognition, validation, or authorization of bare top-level field names.
+- Any hardcoded, schema-derived, or semantic registry of allowed top-level field names.
 - BR-006 activation.
 - Real-data processing or validation.
 - Runtime or production activation.
@@ -82,9 +85,11 @@ The following must be rejected:
 
 Any consumer that requires a restricted set of indexed markers must apply its own rule-specific authorization after D3 syntax validation. That semantic gate must fail closed when authorization is absent. No such authorization registry or runtime gate is introduced by this contract or pilot.
 
+Bare markers such as `fee`, `venue`, `eligibility`, or any other identifier without indexed syntax are not judged valid or invalid by D3. They pass through D3 without field-name recognition and remain subject to whatever separate canonical schema or rule validation already governs them outside D3.
+
 ## Output
 
-When validation is invoked against a list of `uncertain_fields` entries, the validator returns findings under Finding Contract v1.
+When validation is invoked against a list of `uncertain_fields` entries, the validator returns findings under Finding Contract v1 only for attempted indexed markers that violate the approved indexed syntax.
 
 ### Finding Contract v1 Fields
 
@@ -101,11 +106,11 @@ Each finding uses these fields:
 
 ### Pass
 
-When every `uncertain_fields` entry conforms to the approved syntax (either an existing recognized top-level field marker or a syntactically valid indexed marker), the validator returns no findings. An empty D3 finding list is not evidence of rule-specific, schema-level, runtime, or activation authorization.
+A syntactically valid attempted indexed marker produces no D3 finding. Bare top-level markers also produce no D3 finding because they are outside D3 adjudication authority, not because D3 recognizes or authorizes them. An empty D3 finding list is not evidence of field-name, rule-specific, schema-level, runtime, or activation authorization.
 
 ### Fail
 
-When one or more `uncertain_fields` entries contain syntax not approved by ADR-006, the validator returns one finding per invalid entry.
+When one or more attempted indexed `uncertain_fields` entries contain syntax not approved by ADR-006, the validator returns one finding per invalid attempted indexed entry.
 
 ## Implementation Status
 

@@ -120,14 +120,14 @@ class TestCheckFunction:
         assert check("not a list") == []
         assert check(42) == []
 
-    def test_valid_markers_all_pass(self):
-        """All valid markers return no findings."""
+    def test_bare_markers_are_outside_d3_adjudication(self):
+        """D3 does not maintain or consult a vocabulary of bare field names."""
         fields = [
             "fee",
-            "dates[0].date_text",
-            "dates[1].date_text",
             "venue",
             "source_reference",
+            "eligibility",
+            "bogus_nonexistent_field",
         ]
         assert check(fields) == []
 
@@ -160,7 +160,7 @@ class TestCheckFunction:
         assert findings[1]["path"] == "dates[?].date_text"
 
     def test_invalid_between_valid_produces_only_invalid_findings(self):
-        """Valid markers are skipped; only invalid markers produce findings."""
+        """Bare markers pass through; only invalid attempted indexed markers produce findings."""
         fields = [
             "fee",
             "dates[0:2].date_text",

@@ -1,10 +1,10 @@
 """
 D3 — Indexed Marker Syntax Validator
 
-Validates only the syntax of uncertain_fields entries against the ADR-006 indexed
-path shape. A passing result grants no rule-specific, schema-level, runtime, or
-activation authority. Limited to fictional/test inputs and not registered in the
-active business-rule registry.
+Validates only the syntax of uncertain_fields entries that attempt the ADR-006 indexed
+path shape. Bare top-level markers are outside D3 adjudication authority. A passing
+result grants no rule-specific, schema-level, runtime, or activation authority.
+Limited to fictional/test inputs and not registered in the active business-rule registry.
 """
 
 import re
@@ -22,24 +22,6 @@ RECOMMENDATION = (
 
 INDEXED_MARKER_RE = re.compile(r"^([a-zA-Z_][a-zA-Z0-9_]*)\[(\d+)\]\.([a-zA-Z_][a-zA-Z0-9_]*)$")
 
-# Recognized top-level field names that may appear directly in uncertain_fields
-TOP_LEVEL_FIELDS = frozenset({
-    "activity_title",
-    "time",
-    "venue",
-    "fee",
-    "dates",
-    "category",
-    "registration_period",
-    "quota",
-    "eligibility",
-    "source_reference",
-})
-
-
-def _is_top_level_marker(marker: str) -> bool:
-    return marker.strip() in TOP_LEVEL_FIELDS
-
 
 def _validate_indexed_marker(marker: str) -> tuple[bool, str]:
     """Validate only whether an indexed marker matches the ADR-006 shape.
@@ -55,7 +37,7 @@ def _validate_indexed_marker(marker: str) -> tuple[bool, str]:
 
     # Must contain brackets — all indexed markers do
     if "[" not in stripped or "]" not in stripped:
-        return False, f"Marker '{stripped}' is not a recognized top-level field or valid indexed path."
+        return False, f"Marker '{stripped}' does not form an indexed path."
 
     # Check for leading dots/slashes
     if stripped.startswith(".") or stripped.startswith("/"):
@@ -125,7 +107,6 @@ def _validate_indexed_marker(marker: str) -> tuple[bool, str]:
     # Validate against the approved pattern
     match = INDEXED_MARKER_RE.match(stripped)
     if not match:
-        # It looks like an indexed path but doesn't match — likely missing subfield
         if "[" in stripped and "]" in stripped:
             return False, (
                 f"Marker '{stripped}' has an indexed field but is missing "
@@ -146,7 +127,10 @@ def check(
     index: int = 0,
     activity_id_override: str = "<unknown>",
 ) -> list[dict]:
-    """Validate uncertain_fields entries against ADR-006 indexed path shape.
+    """Validate attempted indexed markers against the ADR-006 indexed path shape.
+
+    Bare top-level markers are deliberately outside D3 adjudication authority and are
+    passed through without field-name recognition or authorization.
 
     Args:
         uncertain_fields: The uncertain_fields list to validate.
@@ -168,11 +152,10 @@ def check(
 
         stripped = item.strip()
 
-        # Accept recognized top-level markers
-        if stripped in TOP_LEVEL_FIELDS or _is_top_level_marker(stripped):
+        # D3 has no field vocabulary and does not adjudicate bare top-level markers.
+        if "[" not in stripped and "]" not in stripped:
             continue
 
-        # Validate indexed marker
         is_valid, message = _validate_indexed_marker(stripped)
         if not is_valid:
             findings.append(finding(
