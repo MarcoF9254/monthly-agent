@@ -8,7 +8,7 @@ The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed
 
 OAR Phase 1B.1 Dependency and Package Foundation completed and became repository-effective when PR #26 merged at `2026-07-17T13:52:58Z` through true merge commit `466ec18c0b232bfa99de1822124e35ae39495def`. Its first parent is `1375235a9e00df5a8e3835fe58a326dc16883874`, and merged head `5c9ffd88246a491eb9bf6043744428c4e2574a9a` is its second parent. The merged-head tree and merge tree are equal, and exactly the approved ten implementation paths landed.
 
-Phase 1B.2 Versioned Verification Result Contract is selected and implemented in this branch, under review until merge. It stabilizes only `verification-result/v1`, keyword-only result construction, and authoritative CLI JSON serialization. It provides no console entry point and does not relocate runtime resources. Phase 2 and all production, schema, trust-anchor, projection, manifest, and downstream activation remain unauthorized and inactive.
+Phase 1B.2 — Versioned Verification Result Contract is `COMPLETED — MERGED IN PR #28 / REPOSITORY-EFFECTIVE`. PR #28 merged at `2026-07-18T00:40:55Z` through true merge commit `b1f7c5ad67a3eb5900b7323f8756ab319e27294c`; its first parent is `3600f4f004ca46ed4392e3b0c4fdff6f3ad6c30a`, and reviewed head `a264d60d943fc9137120dc886eea16c9948bec51` is its second parent. It stabilizes only `verification-result/v1`, keyword-only `VerificationResult` construction, and `to_payload()` as authoritative CLI JSON serialization. It provides no console entry point, package-version change, installed-wheel standalone CLI, runtime resource relocation, repository-root argument, CLI argument redesign, filesystem admission, TOCTOU remediation, symlink policy, production authority, real trust-anchor delivery, schema activation, Phase 2, projection, manifest, downstream activation, BR-006, or D3.
 
 ### OD-REVIEW-EVIDENCE-002 publication
 
@@ -128,11 +128,14 @@ Status: contract package and fictional executable verification completed. Draft 
 
 Phase 1B.1 — Dependency and Package Foundation: `COMPLETED — MERGED IN PR #26 / REPOSITORY-EFFECTIVE`. This completed milestone covers dependency locking, runtime/test dependency separation, Python 3.11/3.12 support, reproducible installation, locked CI, package metadata, and development package build/install validation.
 
-Phase 1B.2 — Versioned Verification Result Contract: `OWNER-APPROVED — IMPLEMENTED / UNDER REVIEW UNTIL MERGE`. The selected scope stabilizes `verification-result/v1`, makes `VerificationResult` construction keyword-only, and makes `to_payload()` the authoritative serializer used by CLI JSON. A console entry point, runtime resource relocation, and all other interface work are excluded.
+Phase 1B.2 — Versioned Verification Result Contract: `COMPLETED — MERGED IN PR #28 / REPOSITORY-EFFECTIVE`. The completed scope stabilizes `verification-result/v1`, makes `VerificationResult` construction keyword-only, and makes `to_payload()` the authoritative serializer used by CLI JSON. Exactly `README.md`, `docs/current-status.md`, `docs/decisions.md`, `docs/roadmap.md`, `tests/test_oar_result_contract.py`, `tools/oar_verifier/errors.py`, `tools/oar_verifier/verifier.py`, and `tools/verify_fictional_authority.py` landed. A console entry point, package-version change, installed-wheel standalone CLI, runtime resource relocation, repository-root argument, CLI argument redesign, filesystem admission, TOCTOU remediation, symlink policy, production authority, real trust-anchor delivery, schema activation, Phase 2, projection, manifest, downstream activation, BR-006, and D3 are excluded.
 
 Phase 2 — Secure Filesystem Admission: `DEFERRED — NOT AUTHORIZED / NOT ACTIVE`. Potential future scope, subject to separate owner approval, includes TOCTOU remediation, immutable or staged input acquisition, descriptor-based safe reads where appropriate, symlink and intermediate-directory policy, secure trust-anchor filesystem custody, and filesystem race/mutation testing.
 
-Phase 1B.2 is the current selected implementation milestone and is not repository-effective until merge. No later milestone is selected or authorized; Phase 2 remains deferred, unauthorized, and inactive.
+Phase 1B.2 is completed and repository-effective through merged PR #28. No later implementation milestone is selected or authorized; Phase 2 remains deferred, unauthorized, and inactive.
+
+The next governance subject is reviewer qualification and independence without model-class-specific locks. No policy change or implementation is authorized by this reconciliation.
+
 ### BR-006 Per-Session Date Completeness
 
 Implemented, activation held. Requires vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before runtime activation.
