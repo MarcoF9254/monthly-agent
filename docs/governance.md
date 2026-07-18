@@ -245,7 +245,7 @@ Each perspective records the actual reviewer identity; model, provider, and vers
 
 #### Qualification confirmation
 
-A candidate reviewer's self-declaration is evidence input and cannot by itself qualify that reviewer. For Tier 1, the Owner confirms reviewer selection and the recorded capability and independence evidence. For Tier 2, each candidate supplies a separate disclosure, the Owner confirms both selections and their recorded capability and separation evidence, and an author-external classification reviewer confirms that both perspectives satisfy the Tier 2 gates. The work-product author cannot make the final qualification determination.
+A candidate reviewer's self-declaration is evidence input and cannot by itself qualify that reviewer. For Tier 1, the Owner confirms reviewer selection and the recorded capability and independence evidence. For Tier 2, each candidate supplies a separate disclosure, the Owner confirms both selections and their recorded capability and separation evidence, and an author-external classification reviewer who satisfies the full Independence gate confirms that both perspectives satisfy the Tier 2 gates. Neither the work-product author nor any substantive initiator may make the final qualification determination.
 
 If the classification reviewer is also one required perspective, that reviewer may provide only a self-disclosure for that reviewer's own qualification and may assess the other perspective; the Owner must still separately confirm both qualifications. The Owner may perform reviewer-selection and administrative qualification confirmation even when the Owner is a substantive initiator, but cannot count as a required perspective or alter a reviewer finding or verdict.
 
