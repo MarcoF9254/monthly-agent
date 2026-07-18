@@ -57,15 +57,17 @@ Milestone 3.9 / D2B — Machine-readable Validation Findings Emission (completed
 
 ## D3 Pilot Status
 
-D3 — Indexed Marker Syntax Validation is under Owner-authorized bounded pilot in Draft PR #32 on branch `pilot/d3-indexed-marker-syntax`. PR #32 is automatic Tier 2 because it introduces contract semantics. The pilot scope is:
+D3 — Indexed Marker Syntax Validation is completed, merged in PR #32, and repository-effective as a syntax-only pilot artifact. PR #32 merged at `2026-07-18T12:55:52Z` through true merge commit `f2677698d0d0e7599e5e8e686c6eb38bf9bc3a35`; its first parent is pre-merge main `9774c569fa3d631ee4ad56e0d865595b26c4f2d6`, and exact reviewed head `8b4c3e525cec7d9c0ee82437f39981ae25d7e01d` is its second parent. Exactly the six authorized PR #32 paths landed. The pilot scope is:
 
 - Indexed marker syntax validation contract defined (`docs/d3-indexed-marker-syntax-contract.md`). Matching `<field>[<zero-based-index>].<subfield>` establishes syntax only and grants no rule-specific, schema-level, runtime, or activation authority; rule-specific indexed-marker authorization remains a separate fail-closed semantic gate.
 - Validation logic implemented as a standalone module (`validators/d3_indexed_marker_validator.py`). Not registered in the active business-rule registry.
 - Automated test suite: 22 tests passing (positive paths for ADR-006 approved forms, rejection of wildcards, empty indices, ranges, JSONPath, unknown-index placeholders, fuzzy/semantic indices, missing subfields, leading/trailing delimiters).
 - Full locked suite: 202 tests pass, with 1 pre-existing unrelated skip; no regression.
 - No BR-006 activation, real-data processing, production activation, schema changes, or downstream activation.
+- Exact-head CI run `29644480824` completed successfully.
+- Final Tier 2 review on the exact head concluded `APPROVE WITH NON-BLOCKING NOTES` from Claude / Anthropic Sonnet 5 class (blocking 0, major 0, minor 0) and Qwen3-Max via Nous/Hermes (blocking 0, major 0, one non-blocking Minor). The Owner qualified Qwen3-Max via Nous/Hermes as Perspective 2, treating Hermes as an execution/orchestration shell and explicitly accepting the shared operator context as non-disqualifying. D3-M01 was `ACCEPTED MAJOR`, corrected, and independently confirmed `FULLY RESOLVED`.
 
-The D3 pilot contract and validator remain fictional/test-only and are not runtime active.
+The D3 pilot contract and validator remain fictional/test-only, outside the active business-rule registry, and not runtime active. D3 validates attempted indexed-marker syntax only. Syntax validity grants no schema, rule-specific, runtime, BR-006, production, downstream, or activation authority, and bare top-level markers remain outside D3 adjudication authority.
 
 ## Git State
 
@@ -124,13 +126,13 @@ Naming map:
 - D2 = Machine-readable Validation Findings delivery track
   - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
   - D2B = Milestone 3.9 — additive validator JSON artifact emission (completed and merged in PR #10)
-- D3 = future Indexed Marker Syntax Validation (pending clarification)
+- D3 = Indexed Marker Syntax Validation (syntax-only pilot artifact completed and repository-effective through merged PR #32)
 
 Next steps:
 
 1. No later implementation milestone is selected or authorized.
 2. `OD-REVIEW-QUALIFICATION-001` Option D, Revised Candidate v2 is completed, merged in PR #30, and repository-effective. PR #30 merged at `2026-07-18T10:47:04Z` through true merge commit `66eca55b18d44d9ed5a7044ecc878ce1677541c2`; its first parent is `d21ea123091bf5159a3eb500602062157154d103`, and exact reviewed head `ba5a24a6ea563fed8c0d8bc2067dd97f9a50f235` is its second parent. The reviewed-head tree and merge tree are both `774631205803536b7fc76831c04f0919374e750f`, and exactly `docs/current-status.md`, `docs/decisions.md`, `docs/governance.md`, and `docs/roadmap.md` landed. Exact-head CI run `29626802862` completed successfully. Fable and Claude both concluded `APPROVE WITH NON-BLOCKING NOTES`, with zero blocking and zero major findings; P30-F01 remains carried as a non-gating Minor. The decision applies prospectively and non-retroactively and does not authorize Phase 2, any runtime or production activation, or any later implementation milestone.
-3. D3 / indexed marker syntax validation is under Owner-authorized bounded pilot in Draft PR #32 on branch `pilot/d3-indexed-marker-syntax`; the contract, standalone fictional/test-only validator, and 22-test focused suite are complete and pending two qualified Tier 2 reviewer perspectives on the same future exact head. No reviewer identity, qualification, separation, diversity, finding, or verdict is yet recorded.
+3. D3 / indexed marker syntax validation is completed and repository-effective through merged PR #32. It remains a standalone fictional/test-only syntax validator outside the active registry and grants no schema, rule-specific, runtime, BR-006, production, downstream, or activation authority.
 4. Plan real vertical-slice evidence only with separate owner approval.
 5. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
 6. Keep Phase 2 and all scope beyond the completed Phase 1B.2 result contract deferred, unauthorized, and inactive until separately approved.

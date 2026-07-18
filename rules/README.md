@@ -17,7 +17,7 @@ The rules are intended for future use by:
 - `BR-004-qa-status.md` - QA status must reflect the current workflow stage.
 - `BR-005-source-reference.md` - extracted records must include traceable source references.
 - `BR-006-per-session-date-completeness.md` - implemented, activation held; the validator exists but is not registered or runtime active. Future activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
-- [`docs/d3-indexed-marker-syntax-contract.md`](../docs/d3-indexed-marker-syntax-contract.md) - the Draft PR #32 pilot defines indexed marker syntax only; the validator (`validators/d3_indexed_marker_validator.py`) exists as a standalone fictional/test-only module and is not registered or runtime active.
+- [`docs/d3-indexed-marker-syntax-contract.md`](../docs/d3-indexed-marker-syntax-contract.md) - the merged, repository-effective PR #32 pilot artifact defines indexed marker syntax only; the validator (`validators/d3_indexed_marker_validator.py`) exists as a standalone fictional/test-only module and is not registered or runtime active.
 
 ## Usage
 
