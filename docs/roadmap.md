@@ -134,7 +134,7 @@ Phase 2 — Secure Filesystem Admission: `DEFERRED — NOT AUTHORIZED / NOT ACTI
 
 Phase 1B.2 is completed and repository-effective through merged PR #28. No later implementation milestone is selected or authorized; Phase 2 remains deferred, unauthorized, and inactive.
 
-The next governance subject is reviewer qualification and independence without model-class-specific locks. No policy change or implementation is authorized by this reconciliation.
+`OD-REVIEW-QUALIFICATION-001` Option D, Revised Candidate v2 is Owner-approved for a Tier 2 governance publication packet. It replaces future-facing named-model qualification locks with independently confirmed capability, evidence, separation, stop-rule, and high-risk diversity controls only when the publication PR merges. Preparation does not authorize Ready, merge, Phase 2, or any runtime or production activation.
 
 ### BR-006 Per-Session Date Completeness
 

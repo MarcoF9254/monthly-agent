@@ -220,7 +220,40 @@ Tier 1 requires one qualified author-external independent reviewer, exact diff a
 
 Tier 2 requires two qualified independent review perspectives covering the same exact head, finding adjudication, applicable current-head CI, Owner final approval, a true merge commit, and post-merge verification.
 
-The default second independent model is Claude. If Claude is unavailable, the Owner designates another qualified independent model or reviewer and records the reason and replacement identity. A replacement reviewer cannot be the work-product author or any substantive initiator. If the Owner is a substantive initiator, the Owner also cannot serve as the replacement reviewer. The work-product author cannot approve the replacement reviewer.
+No named model, model family, provider, or permanent reviewer registry determines reviewer qualification. Each required perspective must separately pass the independence, capability, and evidence gates below for the exact PR scope and exact reviewed head.
+
+#### Independence gate
+
+A reviewer cannot be the work-product author, a substantive initiator, the person or agent that determined the reviewed conclusion or normative outcome, or an agent that merely relays or operates under another required perspective. Shared model, provider, operator, credential, platform, prompt context, or source material does not by itself prove either independence or non-independence. All material shared dependencies must be disclosed and assessed.
+
+#### Capability gate
+
+A qualified reviewer must be able to:
+
+- inspect the complete base-to-head artifact;
+- understand the technical, architecture, governance, or operational scope material to the PR;
+- verify claims, changed paths, tests, CI, and protected boundaries applicable to that scope;
+- challenge the proposed conclusion and identify contrary evidence;
+- classify findings under the repository severity and gating semantics; and
+- provide a reasoned verdict supported by inspected evidence.
+
+Summary generation, formatting-only inspection, or unexplained confirmation of an existing conclusion does not establish capability.
+
+#### Evidence gate
+
+Each perspective records the actual reviewer identity; model, provider, and version when available; operator and relevant execution-context separation; platform credential identity; submission mode; repository, PR, exact base, exact head, reviewed scope and paths; evidence inspected; independence rationale; capability evidence; material shared dependencies; findings, severity, gating impact, and verdict; and any unavailable provenance. Unknown information must be identified as unknown and must not be described as verified.
+
+#### Qualification confirmation
+
+A candidate reviewer's self-declaration is evidence input and cannot by itself qualify that reviewer. For Tier 1, the Owner confirms reviewer selection and the recorded capability and independence evidence. For Tier 2, each candidate supplies a separate disclosure, the Owner confirms both selections and their recorded capability and separation evidence, and an author-external classification reviewer confirms that both perspectives satisfy the Tier 2 gates. The work-product author cannot make the final qualification determination.
+
+If the classification reviewer is also one required perspective, that reviewer may provide only a self-disclosure for that reviewer's own qualification and may assess the other perspective; the Owner must still separately confirm both qualifications. The Owner may perform reviewer-selection and administrative qualification confirmation even when the Owner is a substantive initiator, but cannot count as a required perspective or alter a reviewer finding or verdict.
+
+Qualification is bound to the specified repository, PR, scope, base, and exact head. It does not create permanent reviewer certification. If a new commit changes the head, qualification and review must be renewed for the complete base-to-new-head artifact.
+
+#### Tier 2 perspective separation and correlated risk
+
+Tier 2 perspectives require separate review records, must each be free to reach a different conclusion, and must cover the same exact head. The record discloses shared operator, model, provider, prompt or context, session, credential, platform, and material source dependencies and includes a correlated-failure assessment. A second record that only confirms, summarizes, or transcribes the first perspective does not qualify as a second independent perspective.
 
 ### Automatic Tier 2 triggers
 
@@ -285,7 +318,9 @@ If repository merge methods change, an equivalent approved head-pinning proof mu
 
 ### Non-waivable high-risk Tier 2 review
 
-Tier 2 requirements involving production authority, security, destructive operations, or real-data activation cannot be waived. If Claude is unavailable, another qualified independent reviewer must be designated. If none is available, the PR stops. The Owner, work-product author, or substantive initiator cannot replace real-time independent review with self-certification.
+Tier 2 requirements involving production authority, security, destructive operations, or real-data activation cannot be waived. When both required perspectives are AI-generated, they must use different providers or different model families. Different human operators, sessions, prompts, contexts, or credentials are useful additional separation signals but cannot alone satisfy this model-level diversity requirement.
+
+At least one qualified human reviewer exercising substantive personal judgment may replace the model-level diversity requirement. Any other equivalent control requires a separate Tier 2-reviewed governance decision. If model provider or family cannot be reliably identified, model-level diversity cannot be claimed; the PR stops unless one required perspective is a qualified human reviewer. If no qualified replacement reviewer is available, the PR stops. The Owner, work-product author, or substantive initiator cannot replace real-time independent review with self-certification.
 
 Break-glass incident handling is outside this policy and requires a separate Tier 2-reviewed governance decision.
 
@@ -419,6 +454,27 @@ Ready or merge stops when any of these conditions applies:
 - a new commit exists while old review is still relied upon; or
 - required evidence was deleted or is inaccessible.
 
+Ready or merge also stops for reviewer-qualification insufficiency when:
+
+- any required reviewer has not completed the independence, capability, or evidence gate;
+- reviewer independence is unclear or has an unresolved conflict;
+- capability is supported only by the candidate's self-declaration and lacks the required confirmation;
+- capability evidence does not cover the PR's material risk and subject scope;
+- reviewer identity, execution context, or submission mode is unclear;
+- Tier 2 perspectives were not produced separately;
+- one Tier 2 perspective only confirms, summarizes, or relays the other;
+- the two Tier 2 records do not cover the same exact head;
+- material shared dependencies were not disclosed;
+- correlated-failure risk was not assessed;
+- non-waivable high-risk Tier 2 review lacks required model-level diversity or a qualified human perspective;
+- unknown model provider or family is treated as proof of diversity;
+- the work-product author made the final qualification determination;
+- required Owner reviewer-selection or qualification confirmation is absent;
+- qualification evidence contradicts the live PR record;
+- qualification evidence is stale after a new commit;
+- reviewer eligibility remains disputed; or
+- no qualified required or replacement perspective is available.
+
 Owner approval cannot replace missing independent review or missing review evidence.
 
 ### New-head evidence rule
@@ -443,16 +499,43 @@ Each gated PR records:
 
 ~~~text
 Tier:
+Automatic triggers:
+Tier rationale:
+Repository:
+PR:
+Exact base SHA:
+Exact reviewed head SHA:
+Changed paths:
 Git author:
 Work-product author:
 Substantive initiator and rationale:
-Independent reviewer:
-Second independent reviewer:
-Automatic triggers:
-Tier 2 rationale:
-Base SHA:
-Reviewed head SHA:
-Changed paths:
+Owner / Final Approval Authority:
+Merge Authority:
+Perspective 1 actual reviewer:
+Perspective 1 model/provider/version:
+Perspective 1 operator and execution context:
+Perspective 1 submission mode and platform credential:
+Perspective 1 independence disclosure:
+Perspective 1 capability evidence:
+Perspective 1 qualification confirmer and rationale:
+Perspective 1 reviewed evidence:
+Perspective 1 findings and verdict:
+Perspective 2 actual reviewer:
+Perspective 2 model/provider/version:
+Perspective 2 operator and execution context:
+Perspective 2 submission mode and platform credential:
+Perspective 2 independence disclosure:
+Perspective 2 capability evidence:
+Perspective 2 qualification confirmer and rationale:
+Perspective 2 reviewed evidence:
+Perspective 2 findings and verdict:
+Shared operator/model/provider/context/session/credential:
+Perspective-separation evidence:
+Correlated-failure assessment:
+Required diversity class:
+Diversity evidence:
+Human-reviewer substitution, if applicable:
+Unavailable provenance:
 Stale-state search executor:
 Stale-state search scope:
 Search terms, identifiers, and synonyms:
@@ -469,9 +552,14 @@ Artifact hash, if applicable:
 Exact reviewed base:
 Exact reviewed head:
 Superseded records, if applicable:
+Owner reviewer-selection confirmation:
 Owner approval:
 True merge commit:
+Merge-parent proof:
+Landed-scope proof:
 ~~~
+
+Tier 1 records mark Perspective 2 and Tier 2-only diversity fields as `not required`; they do not silently omit them.
 
 ## ADR Policy
 

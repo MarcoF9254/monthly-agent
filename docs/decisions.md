@@ -73,6 +73,38 @@ Repository effectiveness began when PR #24 merged at GitHub `merged_at` `2026-07
 
 This decision grants no production authority, security activation, destructive-operation authority, real-data activation, Phase 1B activation, Phase 2 activation, trust-anchor delivery, schema activation, projection or downstream activation, BR-006 activation, D3 resolution, manifest activation, deployment activation, or Greptile qualification.
 
+## OD-REVIEW-QUALIFICATION-001: Evidence-Based Reviewer Qualification
+
+Status: Owner-approved for Tier 2 publication; not repository-effective until the publication PR merges.
+
+Version: Option D, Revised Candidate v2
+
+Ratified by: Marco
+
+### Decision
+
+Adopt hybrid reviewer qualification without named-model, model-family, provider, or permanent-registry locks. Each required perspective must separately satisfy independence, capability, and evidence gates for the exact repository, PR, scope, base, and reviewed head. A candidate's self-declaration is evidence input only; the Owner confirms reviewer selection and recorded qualification evidence, an author-external classification reviewer confirms Tier 2 eligibility, and the work-product author cannot make the final qualification determination.
+
+Tier 2 requires separately produced perspectives covering the same exact head, disclosure of material shared dependencies, and correlated-failure assessment. For non-waivable high-risk Tier 2 review involving production authority, security, destructive operations, or real-data activation, two AI-generated perspectives require different providers or different model families. Operator, session, prompt, context, or credential separation alone is insufficient. A qualified human reviewer exercising substantive personal judgment may replace this model-level diversity requirement. Unknown model provenance cannot be treated as proof of diversity.
+
+The qualification-specific stop rules and expanded PR classification record in `docs/governance.md` are part of this decision. Reviewer qualification is PR-, scope-, base-, and exact-head-bound and does not create permanent reviewer certification.
+
+### Review evidence
+
+- Architecture and governance draft: ChatGPT.
+- Independent pre-ratification review: author-external reviewer artifact supplied by the Owner.
+- The review supported Option D but required four corrections: model-level diversity for AI-only non-waivable high-risk review, enumerated qualification stop rules, independent capability confirmation, and an expanded classification-record template.
+- Revised Candidate v2 incorporates all four corrections.
+- Owner approval: explicit approval of Option D, Revised Candidate v2, including capability confirmation, stop rules, expanded record, diversity, human substitution, bootstrap, and prospective non-retroactive effect.
+
+### Bootstrap and effect
+
+The publication PR is an automatic Tier 2 governance change and remains governed by the repository-effective pre-amendment policy. The pre-amendment default and fallback rules remain binding until this decision's publication PR merges. This decision cannot approve its own publication, Ready transition, or merge.
+
+When the publication PR merges, this decision applies prospectively to every then-unmerged and future Tier 1 and Tier 2 PR. It does not reopen, reclassify, or invalidate earlier merged PRs. Historical references to Claude, Fable, Gemini, or other actual reviewers remain factual review evidence and are not rewritten. Only future-facing normative named-model requirements are replaced.
+
+This decision authorizes only its governance publication packet. It does not authorize implementation outside the governance documents, Ready transition, merge, Phase 2, runtime or production authority, security activation, destructive operations, real-data activation, trust-anchor delivery, schema activation, projection, manifest, downstream activation, BR-006, or D3.
+
 ## OAR owner decisions
 
 `OD-OAR-PHASE-1B1-001` approves the narrow Option B implementation of OAR Phase 1B.1 Dependency and Package Foundation. The authorized scope is project metadata, one authoritative cross-platform dependency lock, runtime/test dependency separation, explicit Python 3.11 and 3.12 support, reproducible fresh-environment installation, CI installation from the lock, development package build/install validation, and strictly necessary documentation and validation tooling. The exact implementation allowlist is `.gitignore`, `.github/workflows/tests.yml`, `README.md`, `docs/current-status.md`, `docs/decisions.md`, `docs/roadmap.md`, `pyproject.toml`, `requirements.txt`, `tools/check_package_install.py`, and `uv.lock`.
@@ -87,7 +119,7 @@ The approved implementation became repository-effective when PR #28 merged at `2
 
 This decision does not authorize a console entry point, package-version change, installed-wheel standalone CLI, runtime resource relocation, repository-root argument, CLI argument redesign, filesystem admission, TOCTOU remediation, symlink policy, exception hierarchy redesign, production authority, real trust-anchor delivery, schema activation, Phase 2, projection, manifest, downstream activation, BR-006, D3, or general refactoring. The merge grants none of those excluded capabilities and selects or authorizes no later implementation milestone.
 
-The requested review-policy redesign concerning reviewer qualification and independence without model-class-specific locks remains a pending governance subject only. No policy change or implementation is authorized by this reconciliation.
+`OD-REVIEW-QUALIFICATION-001` is Owner-approved for Tier 2 publication but is not repository-effective until its publication PR merges. No Ready transition or merge is authorized.
 
 - `OD-OAR-ARCH-001`: approved with scope rulings.
 - `OD-OAR-DESIGN-001`: approved.
