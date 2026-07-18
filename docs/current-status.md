@@ -117,7 +117,7 @@ Naming map:
 Next steps:
 
 1. No later implementation milestone is selected or authorized.
-2. The next governance subject is reviewer qualification and independence without model-class-specific locks. No policy change or implementation is authorized by this reconciliation.
+2. `OD-REVIEW-QUALIFICATION-001` Option D, Revised Candidate v2 is Owner-approved for a Tier 2 governance publication packet. It is not repository-effective until that publication PR merges. Preparation does not authorize Ready, merge, Phase 2, or any runtime or production activation.
 3. Keep D3 / indexed marker syntax validation pending clarification; do not begin implementation without separate approval.
 4. Plan real vertical-slice evidence only with separate owner approval.
 5. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
