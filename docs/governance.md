@@ -468,7 +468,7 @@ Ready or merge also stops for reviewer-qualification insufficiency when:
 - correlated-failure risk was not assessed;
 - non-waivable high-risk Tier 2 review lacks required model-level diversity or a qualified human perspective;
 - unknown model provider or family is treated as proof of diversity;
-- the work-product author made the final qualification determination;
+- the work-product author or a substantive initiator made the final qualification determination;
 - required Owner reviewer-selection or qualification confirmation is absent;
 - qualification evidence contradicts the live PR record;
 - qualification evidence is stale after a new commit;
