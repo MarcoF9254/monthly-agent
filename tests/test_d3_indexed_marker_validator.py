@@ -96,12 +96,15 @@ class TestValidateIndexedMarker:
         assert not is_valid
         assert "trailing" in message.lower()
 
-    def test_indexed_on_non_array_field_rejected(self):
-        """Indexing on non-array fields should be flagged (structural mismatch)."""
+    def test_identifier_shaped_field_and_subfield_are_syntactically_valid(self):
+        """Shape validation does not infer field types or grant rule authority."""
         is_valid, message = _validate_indexed_marker("date_text[0].value")
-        # This is syntactically valid by pattern but semantically suspect;
-        # the validator should still allow it since we don't have a field-type registry.
         assert is_valid
+        assert message == ""
+
+        # Acceptance establishes syntax only. BR-006 and runtime authorization
+        # remain separate fail-closed semantic gates outside this validator.
+        assert check(["date_text[0].value"]) == []
 
 
 class TestCheckFunction:

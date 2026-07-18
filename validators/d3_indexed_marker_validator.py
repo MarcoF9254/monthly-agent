@@ -1,8 +1,10 @@
 """
 D3 — Indexed Marker Syntax Validator
 
-Validates uncertain_fields entries against the ADR-006 approved indexed path shape.
-Limited to fictional/test inputs. Not registered in the active business-rule registry.
+Validates only the syntax of uncertain_fields entries against the ADR-006 indexed
+path shape. A passing result grants no rule-specific, schema-level, runtime, or
+activation authority. Limited to fictional/test inputs and not registered in the
+active business-rule registry.
 """
 
 import re
@@ -40,7 +42,9 @@ def _is_top_level_marker(marker: str) -> bool:
 
 
 def _validate_indexed_marker(marker: str) -> tuple[bool, str]:
-    """Validate an indexed marker against the ADR-006 approved shape.
+    """Validate only whether an indexed marker matches the ADR-006 shape.
+
+    Field and subfield identifiers are not semantically authorized here.
 
     Returns (is_valid, message).
     """

@@ -4,13 +4,13 @@
 
 This contract defines the validation rules for indexed marker syntax used in `uncertain_fields` entries.
 
-Indexed markers extend the existing `uncertain_fields` vocabulary so that per-element uncertainty can be expressed for individual array entries without generalizing to the entire field.
+Indexed markers extend the available `uncertain_fields` syntax so that per-element uncertainty can be expressed for individual entries without generalizing to the entire field.
 
-This contract does not activate any business rule or change runtime validator behavior. It is a definition contract only.
+This contract answers syntax only. A marker that matches the approved shape is syntactically valid, but that result grants no rule-specific, schema-level, runtime, or activation authority for its field or subfield. Rule-specific indexed-marker authorization remains a separate, fail-closed semantic gate. This contract does not activate any business rule or change runtime validator behavior.
 
 ## Relationship to ADR-006
 
-ADR-006 approves a narrow deterministic indexed path shape for rules that explicitly require per-element uncertainty marking. This contract defines the validation logic that checks whether a given `uncertain_fields` entry conforms to that approved shape.
+ADR-006 approves a narrow deterministic indexed path shape. This contract defines only the validation logic that checks whether a given `uncertain_fields` entry conforms to that shape. It does not determine whether a business rule may use the syntactically valid marker.
 
 ## Approved Path Shape
 
@@ -33,6 +33,7 @@ Valid indexed markers:
 - `dates[0].date_text`
 - `dates[1].date_text`
 - `fee[0].amount_text`
+- `date_text[0].value` (syntactically valid only; not thereby authorized for BR-006 or runtime use)
 
 ### Explicitly Invalid Forms
 
@@ -47,7 +48,6 @@ The following must be rejected:
 - Fuzzy paths: `dates[approx].date_text`
 - Semantic paths: `dates[first].date_text`
 - Bare indexed fields without subfield: `dates[0]`
-- Indexed paths on non-indexable fields: `date_text[0].value`
 - Leading dots or slashes: `.dates[0].date_text`, `/dates[0].date_text`
 - Trailing dots or slashes: `dates[0].date_text.`
 
@@ -56,6 +56,7 @@ The following must be rejected:
 ### In Scope
 
 - Syntax validation of `uncertain_fields` string entries against the approved ADR-006 shape.
+- Acceptance of any identifier-shaped field and subfield that match the approved shape, including `date_text[0].value`, without conferring semantic authorization.
 - Rejection of wildcard, range, JSONPath, regex, fuzzy, semantic, and other unapproved forms.
 - Rejection of indexes that are not zero-based non-negative integers.
 - Rejection of missing subfield after indexed array path.
@@ -72,6 +73,14 @@ The following must be rejected:
 - Trust-anchor delivery.
 - Phase 2 secure filesystem admission.
 - Any business rule registration or activation.
+- Rule-specific authorization of any indexed field or subfield.
+- Schema-level determination that the named field is an array or that the named subfield exists.
+
+## Syntax and Semantic Authorization Boundary
+
+`date_text[0].value` matches `<field>[<zero-based-index>].<subfield>` and is therefore syntactically valid under D3. D3 does not thereby authorize that marker for BR-006 or any runtime use.
+
+Any consumer that requires a restricted set of indexed markers must apply its own rule-specific authorization after D3 syntax validation. That semantic gate must fail closed when authorization is absent. No such authorization registry or runtime gate is introduced by this contract or pilot.
 
 ## Output
 
@@ -92,7 +101,7 @@ Each finding uses these fields:
 
 ### Pass
 
-When every `uncertain_fields` entry conforms to the approved syntax (either a recognized top-level field name or a valid indexed marker), the validator returns no findings.
+When every `uncertain_fields` entry conforms to the approved syntax (either an existing recognized top-level field marker or a syntactically valid indexed marker), the validator returns no findings. An empty D3 finding list is not evidence of rule-specific, schema-level, runtime, or activation authorization.
 
 ### Fail
 
