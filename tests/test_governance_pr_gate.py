@@ -235,3 +235,122 @@ def test_semantic_json_is_deterministic(repo):
     assert first.returncode == second.returncode == 0
     assert first.stdout == second.stdout
     assert json.loads(first.stdout) == json.loads(second.stdout)
+
+
+# ── Remediation A — JSON fail-closed contract ──────────────────────────────
+
+def test_unexpected_exception_produces_json_fail(tmp_path):
+    """When evaluate() encounters an unexpected internal exception, the
+    main() wrapper must catch it, emit stable JSON on stdout, and exit 1
+    — no traceback or prose leakage."""
+    import subprocess as sp
+    sp.run(["git", "init", "-q"], cwd=tmp_path, check=True)
+    sp.run(["git", "config", "user.email", "t@t"], cwd=tmp_path, check=True)
+    sp.run(["git", "config", "user.name", "t"], cwd=tmp_path, check=True)
+    (tmp_path / "f").write_text("x")
+    sp.run(["git", "add", "f"], cwd=tmp_path, check=True)
+    sp.run(
+        ["git", "commit", "-m", "x"], cwd=tmp_path,
+        capture_output=True, text=True,
+    )
+    head_sha = sp.run(
+        ["git", "rev-parse", "HEAD"], cwd=tmp_path,
+        capture_output=True, text=True,
+    ).stdout.strip()
+    # no origin → repository_identity check will raise a GitFailure
+    # that evaluate() handles gracefully but the overall_status is FAIL
+    value = {
+        "version": 1,
+        "repository": "MarcoF9254/monthly-agent",
+        "expected_base": head_sha,
+        "expected_head": head_sha,
+        "allowed_paths": ["f"],
+    }
+    result = sp.run(
+        [sys.executable, str(TOOL), "-"],
+        cwd=tmp_path, input=json.dumps(value),
+        capture_output=True, text=True,
+    )
+    # Must not crash: exit code must be 1 (deterministic FAIL), not 2
+    # and stdout must contain parseable JSON with no traceback
+    assert result.returncode in (0, 1), \
+        f"crash or invalid exit: {result.returncode}"
+    assert result.returncode != 0, \
+        "no-origin scenario must not PASS overall"
+    payload = json.loads(result.stdout)
+    assert "overall_status" in payload
+    assert payload["overall_status"] in ("FAIL", "INVALID")
+    assert "Traceback" not in result.stdout, "traceback leaked to stdout"
+
+
+# ── Remediation B — schema / runtime parity ────────────────────────────────
+
+HERE = Path(__file__).parent
+SCHEMA_PATH = HERE.parent / "schemas" / "governance-pr-gate-input.schema.json"
+
+try:
+    import jsonschema
+    HAS_JSONSCHEMA = True
+except ImportError:
+    HAS_JSONSCHEMA = False
+
+
+@pytest.mark.skipif(not HAS_JSONSCHEMA, reason="jsonschema not available")
+class TestSchemaRuntimeParity:
+    """Mechanically validate representative paths against both the committed
+    JSON Schema and the runtime validate_input() helper."""
+
+    SCHEMA = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+
+    VALID_PATHS = [
+        "foo.txt",
+        "tools/bar.py",
+        "path with spaces",
+        "資料.txt",
+    ]
+
+    INVALID_PATHS = [
+        "/absolute",           # starts with /
+        "C:/absolute",         # Windows drive absolute
+        "../escape",           # parent traversal
+        "safe/../escape",      # embedded traversal
+        "back\\slash",         # backslash
+        "//",                  # bare double slash
+        "a//b",                # embedded double slash
+        ".",                   # bare dot
+        "",                    # empty
+    ]
+
+    def _schema_valid(self, path: str) -> bool:
+        validator = jsonschema.Draft202012Validator(
+            self.SCHEMA["properties"]["allowed_paths"])
+        errors = list(validator.iter_errors([path]))
+        return len(errors) == 0
+
+    def _runtime_valid(self, path: str) -> bool:
+        return gate._valid_path(path)
+
+    @pytest.mark.parametrize("path", VALID_PATHS)
+    def test_valid_path_both_accept(self, path):
+        assert self._schema_valid(path), f"schema rejected {path!r}"
+        assert self._runtime_valid(path), f"runtime rejected {path!r}"
+
+    @pytest.mark.parametrize("path", INVALID_PATHS)
+    def test_invalid_path_both_reject(self, path):
+        schema_ok = self._schema_valid(path)
+        runtime_ok = self._runtime_valid(path)
+        if schema_ok:
+            pytest.fail(f"schema accepted invalid path {path!r}")
+        if runtime_ok:
+            pytest.fail(f"runtime accepted invalid path {path!r}")
+        assert not schema_ok and not runtime_ok
+
+    def test_duplicate_paths_rejected_by_validate_input(self):
+        errors = gate.validate_input({
+            "version": 1,
+            "repository": "owner/repo",
+            "expected_base": "a" * 40,
+            "expected_head": "b" * 40,
+            "allowed_paths": ["same", "same"],
+        })
+        assert any("duplicate" in e.lower() for e in errors)

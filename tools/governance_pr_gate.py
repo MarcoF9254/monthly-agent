@@ -42,7 +42,7 @@ def _git(arguments: list[str], *, text: bool = True) -> str | bytes:
 
 
 def _valid_path(path: Any) -> bool:
-    if not isinstance(path, str) or not path or "\\" in path or "\x00" in path:
+    if not isinstance(path, str) or not path or "\\" in path or "\x00" in path or path == ".":
         return False
     if path.startswith("/") or re.match(r"^[A-Za-z]:", path):
         return False
@@ -212,7 +212,15 @@ def main(argv: list[str] | None = None) -> int:
     if errors:
         _emit({"version": 1, "overall_status": "INVALID", "errors": errors})
         return 2
-    result = evaluate(value)
+    try:
+        result = evaluate(value)
+    except Exception:
+        _emit({
+            "version": 1,
+            "overall_status": "FAIL",
+            "errors": ["internal_validation_failure"],
+        })
+        return 1
     _emit(result)
     return 0 if result["overall_status"] == "PASS" else 1
 
