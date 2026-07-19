@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MarcoF9254/monthly-agent/schemas/governance-pr-gate-input.schema.json",
+  "title": "Governance PR gate input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "repository",
+    "expected_base",
+    "expected_head",
+    "allowed_paths"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "expected_base": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{40}$"
+    },
+    "expected_head": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{40}$"
+    },
+    "allowed_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!/)(?![A-Za-z]:)(?!\\.$)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*//)(?!.*\\\\).+$"
+      }
+    }
+  }
+}
