@@ -1,5 +1,11 @@
 # Current Project Status
 
+## D4A bounded contract-drafting pilot
+
+D4A is an Owner-authorized bounded contract-drafting pilot for a proposed BR-006 shadow evidence contract. The work product is a Draft PR, is not independently reviewed, is not accepted, and is not repository-effective. Its conservative provisional classification is Tier 2 because it introduces a new evidence contract and semantic boundaries for possible future real-data shadow evaluation. Two separately qualified independent perspectives on the same exact head would be required, subject to Owner qualification under repository-effective governance.
+
+The pilot is contract-only and executes no shadow run or real-data processing. It grants no D4B, BR-006 registry or activation, record approval, consumer eligibility, projection, manifest, downstream, production, trust-anchor, Phase 2, review-request, Ready, or merge authority. D3 remains syntax-only: syntax validity or no finding is never BR-006 semantic authorization, and bare top-level markers remain outside D3 adjudication authority.
+
 ## Governance publication
 
 `OD-REVIEW-POLICY-001` became repository-effective when PR #23 merged as `fb09d2ea547615a70299986608dba9f459c1e544` at `2026-07-17T01:40:28Z`.

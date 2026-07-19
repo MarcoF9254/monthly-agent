@@ -1,5 +1,13 @@
 # Roadmap
 
+## D4A — BR-006 Shadow Evidence Contract
+
+Status: **PROPOSED / UNDER BOUNDED DRAFT PR PILOT / NOT REPOSITORY-EFFECTIVE**.
+
+D4A is an Owner-authorized bounded contract-drafting pilot only. Its Draft PR work product is not independently reviewed, accepted, or repository-effective, and drafting does not complete D4A. The provisional classification is Tier 2 because the proposal introduces an evidence contract and semantic boundaries for future real-data shadow evaluation. Future review requires two separately qualified independent perspectives on the same exact head, subject to Owner qualification under repository-effective governance.
+
+No D4B execution, real-data processing, BR-006 registry change or activation, validator or pipeline implementation, R03 artifact action, record approval, consumer eligibility, projection, manifest, downstream or production authority, trust-anchor delivery, Phase 2, review request, Ready transition, or merge is authorized. D3 syntax validity and D3 no-finding remain non-authorizing; bare top-level markers remain outside D3 adjudication authority.
+
 ## OAR closure
 
 The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 completed and merged the accepted OAR contracts, inactive Draft 0.x schemas, and fictional authority/revocation fixtures. PR #19 completed and merged the independently reviewed fictional year-2099 offline verifier prototype. PR #21 completed Phase 1A deterministic verifier core hardening. Production operation and activation remain outside all three merges.
