@@ -4,7 +4,7 @@
 
 Status: **COMPLETED — MERGED IN PR #34 / REPOSITORY-EFFECTIVE**.
 
-D4A completed the contract-only evidence boundary for a possible future, separately authorized BR-006 real-data shadow vertical slice. PR #34 merged through true merge commit `505962f463dad7f7cdfee67de996947b218a33e7`; the exact reviewed head was `83065cc577787d81861288671d01c6c478105b86`. Claude Sonnet 5 and Qwen3-Max were Owner-qualified as the two independent Tier 2 perspectives on that exact head; both final targeted reviews concluded `APPROVE` with zero blocking and zero major findings, and D4A-F01 was independently confirmed resolved.
+D4A completed the contract-only evidence boundary for a possible future, separately authorized BR-006 real-data shadow vertical slice. PR #34 merged through true merge commit `505962f463dad7f7cdfee67de996947b218a33e7`; the exact reviewed head was `83065cc577787d81861288671d01c6c478105b86`. PR #34 completed its separately governed Tier 2 review and Owner authorization path before Ready and merge. D4A-F01 was corrected before merge. The external identity-bound review and qualification evidence is not represented as GitHub-native PR review submissions. This reconciliation does not recreate, upgrade, or replace that evidence.
 
 D4A is non-activating. It does not execute a shadow run, authorize real-data processing, activate BR-006, modify the active registry, alter R03, grant record approval or downstream authority, or authorize Phase 2. D4B — Bounded Shadow Execution is `PAUSED / BACKLOG / NOT AUTHORIZED`; re-entry requires a fresh separate Owner milestone selection and authorization. D3 syntax validity and D3 no-finding remain non-authorizing; bare top-level markers remain outside D3 adjudication authority.
 
@@ -38,8 +38,7 @@ D2B is completed and merged in PR #10. Validation Findings JSON emission is impl
 
 - Completed and merged through PR #34 as true merge commit `505962f463dad7f7cdfee67de996947b218a33e7`.
 - Exact reviewed head: `83065cc577787d81861288671d01c6c478105b86`.
-- Final Tier 2 targeted reviews: Claude Sonnet 5 `APPROVE`; Qwen3-Max `APPROVE`; zero blocking and zero major findings.
-- D4A-F01 was corrected and independently confirmed resolved.
+- Completed its separately governed Tier 2 review and Owner authorization path before Ready and merge. D4A-F01 was corrected before merge. The external identity-bound review and qualification evidence is not represented as GitHub-native PR review submissions.
 - The landed contract is evidence-boundary only and grants no D4B execution, real-data processing, BR-006 activation, active-registry change, R03 mutation, downstream authority, or Phase 2 authority.
 
 ### OAR Phase 1B.1 - Dependency and Package Foundation
