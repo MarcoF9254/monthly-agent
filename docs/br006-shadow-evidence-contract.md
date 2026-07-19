@@ -48,7 +48,7 @@ A complete evidence package records all of the following without altering author
 8. Overlap and duplicate-finding analysis that identifies every related finding and assigns ownership without deleting or rewriting evidence.
 9. Expected-versus-observed analysis, the source of every expectation, and every unexplained deviation.
 10. Human Review or separately governed adjudication handoff for source-dependent questions.
-11. Complete unresolved-disagreement list, including D3/BR-006 contradictions and ownership disputes.
+11. Complete unresolved-disagreement list, including finding-level disagreements between D3 and BR-006 evidence and ownership disputes.
 12. One activation-readiness conclusion from the vocabulary below, with reasons and confirmation that it does not activate BR-006.
 
 Missing evidence cannot be inferred, reconstructed from altered artifacts, or waived because results appear favorable.
@@ -66,6 +66,10 @@ Deterministic validators must not open or interpret the original PDF or other or
 Validators and comparison tooling must not infer, repair, normalize, translate, copy, propagate, or auto-fill dates. Shadow evaluation observes the frozen input; it does not correct it.
 
 ## Outcome vocabulary
+
+For outcome classification, a semantic-authorization contradiction is distinct from a finding-level disagreement. A semantic-authorization contradiction exists when the BR-006-specific semantic authorization gate establishes that authorization is absent, ambiguous, or contradictory. This is a fail-closed condition and results in `invalid_shadow_run`.
+
+A finding-level disagreement exists when validly produced and complete D3, BR-006, comparison, ownership, expected-versus-observed, Human Review, or adjudication evidence remains materially unresolved while the evidence chain and all mandatory gates remain valid. Such a disagreement is evaluated under `blocked_by_disagreement`. A finding-level disagreement must not be treated as a semantic-authorization contradiction unless it independently establishes absent, ambiguous, or contradictory BR-006 semantic authorization.
 
 Record exactly one non-authorizing outcome:
 
@@ -92,7 +96,7 @@ The result must be `invalid_shadow_run` and unusable as activation evidence upon
 - input digest mismatch or unequal pre-run and post-run digests;
 - post-run mutation or mutation of input, code, evidence, or a closed run;
 - missing, incomplete, altered, or unauthenticated baseline evidence;
-- a D3/BR-006 contradiction that establishes absent, ambiguous, or contradictory semantic authorization;
+- a semantic-authorization contradiction established by the BR-006-specific semantic authorization gate;
 - any changed artifact outside the future authorization's exact allowlist;
 - incomplete comparison, expected-versus-observed analysis, or disagreement list;
 - missing or incomplete duplicate or overlap analysis, ownership assignment, or recording of an unresolved ownership disagreement;
