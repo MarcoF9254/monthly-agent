@@ -1,16 +1,16 @@
 # Current Project Status
 
-## D4A bounded contract-drafting pilot
+## D4A — BR-006 Shadow Evidence Contract
 
-D4A is an Owner-authorized bounded contract-drafting pilot for a proposed BR-006 shadow evidence contract. The work product is a Draft PR, is not independently reviewed, is not accepted, and is not repository-effective. Its conservative provisional classification is Tier 2 because it introduces a new evidence contract and semantic boundaries for possible future real-data shadow evaluation. Two separately qualified independent perspectives on the same exact head would be required, subject to Owner qualification under repository-effective governance.
+D4A is completed, merged in PR #34, and repository-effective as a contract-only evidence boundary for a possible future separately authorized BR-006 real-data shadow vertical slice. PR #34 merged through true merge commit `505962f463dad7f7cdfee67de996947b218a33e7`; the exact reviewed head was `83065cc577787d81861288671d01c6c478105b86`. The Owner qualified Claude Sonnet 5 and Qwen3-Max as the two independent Tier 2 perspectives on that exact head; both final targeted reviews concluded `APPROVE` with zero blocking and zero major findings, and D4A-F01 was independently confirmed resolved.
 
-The pilot is contract-only and executes no shadow run or real-data processing. It grants no D4B, BR-006 registry or activation, record approval, consumer eligibility, projection, manifest, downstream, production, trust-anchor, Phase 2, review-request, Ready, or merge authority. D3 remains syntax-only: syntax validity or no finding is never BR-006 semantic authorization, and bare top-level markers remain outside D3 adjudication authority.
+D4A remains non-activating: it does not execute a shadow run, authorize real-data processing, activate BR-006, modify the active registry, alter R03, grant approval or downstream authority, or authorize Phase 2. D4B — Bounded Shadow Execution is explicitly `PAUSED / BACKLOG / NOT AUTHORIZED` and requires a fresh separate Owner milestone selection and authorization before any execution or real-data access. D3 remains syntax-only: syntax validity or no finding is never BR-006 semantic authorization, and bare top-level markers remain outside D3 adjudication authority.
 
 ## Governance publication
 
 `OD-REVIEW-POLICY-001` became repository-effective when PR #23 merged as `fb09d2ea547615a70299986608dba9f459c1e544` at `2026-07-17T01:40:28Z`.
 
-`OD-REVIEW-EVIDENCE-002` — Review Evidence and Factual-Gate Procedures became repository-effective when PR #24 merged at `2026-07-17T05:47:09Z` through true merge commit `cd30a42bde387b66df0f99e117d7c2fd57b16b88`. Its first parent is `fb09d2ea547615a70299986608dba9f459c1e544`, and doubly reviewed head `9443dd0fc1624b3853cfc7ffbb3a941b4498bf11` is its second parent. The reviewed-head tree and merge tree were verified equal, and exactly `docs/current-status.md`, `docs/decisions.md`, `docs/governance.md`, and `docs/roadmap.md` landed.
+`OD-REVIEW-EVIDENCE-002` — Review Evidence and Factual-Gate Procedures became repository-effective when PR #24 merged at `2026-07-17T05:47:09Z` through true merge commit `cd30a42bde387b66df0f99e117d7c2fd57b16b88`. Its first parent is `fb09d2ea547615a70299986608dba9f459c1e544`; exact doubly reviewed head `9443dd0fc1624b3853cfc7ffbb3a941b4498bf11` is its second parent. The reviewed-head tree and merge tree were verified equal, and exactly `docs/current-status.md`, `docs/decisions.md`, `docs/governance.md`, and `docs/roadmap.md` landed.
 
 The PR #24 publication roles were: Codex as work-product implementation author; ChatGPT as substantive initiator and governance facilitator; Marco as Owner, final approval authority, and merge authority; and Fable and Claude as the two required independent perspectives on the same exact head. Both independent perspectives concluded `APPROVE WITH NON-BLOCKING NOTES` with zero blocking and zero major findings.
 
@@ -26,7 +26,7 @@ The Bounded Calendar Authority Chain v0 architecture is frozen. PR #18 merged th
 
 The final suite was 172 passed with one pre-existing unrelated skip. All four Ubuntu/Windows and Python 3.11/3.12 CI jobs passed. Independent review concluded `APPROVE WITH NON-BLOCKING NOTES`, with zero blocking and zero major findings; P1A-F01 was genuinely resolved.
 
-Last Updated: 2026-07-18
+Last Updated: 2026-07-19
 Repository: monthly-agent
 Default Branch: main
 
@@ -46,7 +46,7 @@ BR-001 through BR-005 are implemented, tested, and active in the runtime registr
 
 Scoped Downstream Eligibility Stage 1 architecture is accepted. The Architecture Owner explicitly accepted Option D and ADR-007. The fictional OAR verifier prototype and Phase 1A deterministic core hardening are complete, but production authority resolution, migration, eligibility issuance, projection generation, manifest generation, and downstream activation remain unimplemented and unauthorized.
 
-OAR Phase 1B.1 is completed and merged through PR #26. Phase 1B.2 Versioned Verification Result Contract is completed, merged through PR #28, and repository-effective. No later implementation milestone is selected or authorized.
+OAR Phase 1B.1 is completed and merged through PR #26. Phase 1B.2 Versioned Verification Result Contract is completed, merged through PR #28, and repository-effective. D4A is completed and repository-effective through PR #34; D4B is paused/backlog and not authorized. No later implementation milestone is selected or authorized.
 
 Milestone 3.9 / D2B — Machine-readable Validation Findings Emission (completed and merged in PR #10)
 
@@ -92,7 +92,7 @@ Closed R03 baseline: 45 records total; 32 approved; 13 `needs_review`; final D1 
 
 Milestone 3.7 / D1 Pipeline Run Contract, D2A, and D2B are completed and merged. D2B implements Validation Findings JSON emission while preserving existing `PASS` / `FAIL` text structure, validation ordering, and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
-BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. Future BR-006 activation requires real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval.
+BR-006 implementation and direct unit coverage are retained while runtime activation remains held. Active runtime rules are BR-001 through BR-005. D4A now defines the repository-effective evidence contract for a possible future shadow evaluation, but D4B execution is paused and not authorized. Future BR-006 activation still requires separately authorized real vertical-slice evidence, D3 syntax validation in place, an independent semantic authorization gate, and explicit Owner approval.
 
 ## OAR Phase 1B.1 closure
 
@@ -107,7 +107,7 @@ This closure does not provide real trust-anchor delivery, real registry publicat
 - Some existing files include encoding-sensitive Chinese text; use UTF-8 aware reads and writes.
 - Business rule specs and implementations must stay aligned before adding validators.
 - BR-005 must remain deterministic and avoid semantic, NLP, or fuzzy judgement.
-- BR-006 runtime activation remains held pending vertical-slice evidence, indexed marker syntax validation, and owner approval.
+- BR-006 runtime activation remains held; D4B shadow execution is paused/backlog and requires fresh separate Owner authorization before any real-data access or execution.
 - P21-F01 is addressed by the repository-effective Phase 1B.2 contract: `VerificationResult` construction is keyword-only and serialization is versioned as `verification-result/v1`.
 - P28-F01 remains accepted non-blocking debt: `VerificationResult` classification and cross-field invariants are not runtime-enforced. This is separately authorized future hardening, not completed work.
 - P28-N01 remains optional future test hardening: explicit automated tests for contract-version non-overridability and frozen immutability.
@@ -133,12 +133,14 @@ Naming map:
   - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
   - D2B = Milestone 3.9 — additive validator JSON artifact emission (completed and merged in PR #10)
 - D3 = Indexed Marker Syntax Validation (syntax-only pilot artifact completed and repository-effective through merged PR #32)
+- D4A = BR-006 Shadow Evidence Contract (completed and repository-effective through merged PR #34)
+- D4B = Bounded Shadow Execution (`PAUSED / BACKLOG / NOT AUTHORIZED`)
 
 Next steps:
 
-1. No later implementation milestone is selected or authorized.
+1. No later implementation milestone is selected or authorized; D4B remains paused/backlog and is not the active milestone.
 2. `OD-REVIEW-QUALIFICATION-001` Option D, Revised Candidate v2 is completed, merged in PR #30, and repository-effective. PR #30 merged at `2026-07-18T10:47:04Z` through true merge commit `66eca55b18d44d9ed5a7044ecc878ce1677541c2`; its first parent is `d21ea123091bf5159a3eb500602062157154d103`, and exact reviewed head `ba5a24a6ea563fed8c0d8bc2067dd97f9a50f235` is its second parent. The reviewed-head tree and merge tree are both `774631205803536b7fc76831c04f0919374e750f`, and exactly `docs/current-status.md`, `docs/decisions.md`, `docs/governance.md`, and `docs/roadmap.md` landed. Exact-head CI run `29626802862` completed successfully. Fable and Claude both concluded `APPROVE WITH NON-BLOCKING NOTES`, with zero blocking and zero major findings; P30-F01 remains carried as a non-gating Minor. The decision applies prospectively and non-retroactively and does not authorize Phase 2, any runtime or production activation, or any later implementation milestone.
 3. D3 / indexed marker syntax validation is completed and repository-effective through merged PR #32. It remains a standalone fictional/test-only syntax validator outside the active registry and grants no schema, rule-specific, runtime, BR-006, production, downstream, or activation authority.
-4. Plan real vertical-slice evidence only with separate owner approval.
-5. Require real vertical-slice evidence, indexed marker syntax validation in place before or together with activation, and explicit owner approval before BR-006 runtime activation.
+4. D4A / BR-006 Shadow Evidence Contract is completed and repository-effective through merged PR #34. D4B execution remains paused/backlog and requires fresh separate Owner authorization before re-entry.
+5. Plan any future real vertical-slice evidence only under a separately selected and authorized D4B milestone.
 6. Keep Phase 2 and all scope beyond the completed Phase 1B.2 result contract deferred, unauthorized, and inactive until separately approved.
