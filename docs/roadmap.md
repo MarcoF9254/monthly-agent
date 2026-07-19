@@ -2,11 +2,11 @@
 
 ## D4A — BR-006 Shadow Evidence Contract
 
-Status: **PROPOSED / UNDER BOUNDED DRAFT PR PILOT / NOT REPOSITORY-EFFECTIVE**.
+Status: **COMPLETED — MERGED IN PR #34 / REPOSITORY-EFFECTIVE**.
 
-D4A is an Owner-authorized bounded contract-drafting pilot only. Its Draft PR work product is not independently reviewed, accepted, or repository-effective, and drafting does not complete D4A. The provisional classification is Tier 2 because the proposal introduces an evidence contract and semantic boundaries for future real-data shadow evaluation. Future review requires two separately qualified independent perspectives on the same exact head, subject to Owner qualification under repository-effective governance.
+D4A completed the contract-only evidence boundary for a possible future, separately authorized BR-006 real-data shadow vertical slice. PR #34 merged through true merge commit `505962f463dad7f7cdfee67de996947b218a33e7`; the exact reviewed head was `83065cc577787d81861288671d01c6c478105b86`. PR #34 completed its separately governed Tier 2 review and Owner authorization path before Ready and merge. D4A-F01 was corrected before merge. The external identity-bound review and qualification evidence is not represented as GitHub-native PR review submissions. This reconciliation does not recreate, upgrade, or replace that evidence.
 
-No D4B execution, real-data processing, BR-006 registry change or activation, validator or pipeline implementation, R03 artifact action, record approval, consumer eligibility, projection, manifest, downstream or production authority, trust-anchor delivery, Phase 2, review request, Ready transition, or merge is authorized. D3 syntax validity and D3 no-finding remain non-authorizing; bare top-level markers remain outside D3 adjudication authority.
+D4A is non-activating. It does not execute a shadow run, authorize real-data processing, activate BR-006, modify the active registry, alter R03, grant record approval or downstream authority, or authorize Phase 2. D4B — Bounded Shadow Execution is `PAUSED / BACKLOG / NOT AUTHORIZED`; re-entry requires a fresh separate Owner milestone selection and authorization. D3 syntax validity and D3 no-finding remain non-authorizing; bare top-level markers remain outside D3 adjudication authority.
 
 ## OAR closure
 
@@ -28,11 +28,18 @@ Status: `COMPLETED — REPOSITORY-EFFECTIVE`
 - The reviewed-head tree and merge tree were verified equal, and exactly four authorized documentation paths landed.
 - `OD-REVIEW-EVIDENCE-002` is prospective: it does not retroactively invalidate PR #23 or earlier merged PRs and applies to every PR that was unmerged when PR #24 merged and to every future Tier 1 and Tier 2 PR.
 
-Phase 1B.1 is authorized only within its approved boundary. Phase 1B.2 interface stabilization, Phase 2 TOCTOU remediation and secure filesystem admission, production authority, trust-anchor delivery, schema activation, projection or downstream activation, BR-006, D3, manifest activation, deployment activation, real-data activation, Greptile installation or qualification, GOV-DEBT-001, and GOV-DEBT-002 remain deferred or unauthorized.
+Phase 1B.1 is authorized only within its approved boundary. Phase 1B.2 interface stabilization is completed. Phase 2 TOCTOU remediation and secure filesystem admission, production authority, trust-anchor delivery, schema activation, projection or downstream activation, D4B shadow execution, BR-006 activation, manifest activation, deployment activation, real-data activation, Greptile installation or qualification, GOV-DEBT-001, and GOV-DEBT-002 remain deferred or unauthorized. D4A is repository-effective as a non-activating evidence contract only.
 
 D2B is completed and merged in PR #10. Validation Findings JSON emission is implemented while preserving existing `PASS` / `FAIL` text structure and exit code semantics. Missing, `None`, or empty `activity_id` values are consistently rendered as `"<missing>"` under Finding Contract v1. D1 JSON artifact requirements are prospective and non-retroactive. No pipeline runner exists.
 
 ## Completed Milestones
+
+### D4A — BR-006 Shadow Evidence Contract
+
+- Completed and merged through PR #34 as true merge commit `505962f463dad7f7cdfee67de996947b218a33e7`.
+- Exact reviewed head: `83065cc577787d81861288671d01c6c478105b86`.
+- Completed its separately governed Tier 2 review and Owner authorization path before Ready and merge. D4A-F01 was corrected before merge. The external identity-bound review and qualification evidence is not represented as GitHub-native PR review submissions.
+- The landed contract is evidence-boundary only and grants no D4B execution, real-data processing, BR-006 activation, active-registry change, R03 mutation, downstream authority, or Phase 2 authority.
 
 ### OAR Phase 1B.1 - Dependency and Package Foundation
 
@@ -106,6 +113,15 @@ Status: Completed and merged in PR #10.
 
 ## Paused / Backlog
 
+### D4B — Bounded Shadow Execution
+
+Status: **PAUSED / BACKLOG / NOT AUTHORIZED**.
+
+- No shadow execution or real-data access is authorized.
+- No BR-006 activation or active-registry change is authorized.
+- Re-entry requires a fresh separate Owner milestone selection, exact live gate, and explicit authorization.
+- The repository-effective D4A evidence contract remains the governing prerequisite if D4B is selected later.
+
 ### Scoped Downstream Eligibility Implementation
 
 Option D and ADR-007 are accepted architecture. Builder and consumer-validator implementation, runtime artifacts, migration, and activation remain pending separate authorization.
@@ -146,7 +162,7 @@ Phase 1B.2 is completed and repository-effective through merged PR #28. No later
 
 ### BR-006 Per-Session Date Completeness
 
-Implemented, activation held. Requires vertical-slice evidence, indexed marker syntax validation, and explicit owner approval before runtime activation.
+Implemented, activation held. D4A evidence contract is repository-effective, but D4B shadow execution is paused/backlog and not authorized. Runtime activation still requires separately authorized real vertical-slice evidence, D3 indexed marker syntax validation, semantic authorization, and explicit Owner approval.
 
 ## Planned Milestones
 
@@ -156,6 +172,8 @@ Implemented, activation held. Requires vertical-slice evidence, indexed marker s
 - D2A = Milestone 3.8 — Machine-readable Validation Findings Contract
 - D2B = Milestone 3.9 — additive validator JSON artifact emission (completed and merged in PR #10)
 - D3 = Indexed Marker Syntax Validation (`COMPLETED — MERGED IN PR #32 / REPOSITORY-EFFECTIVE` as a syntax-only pilot artifact). PR #32 merged at `2026-07-18T12:55:52Z` through true merge commit `f2677698d0d0e7599e5e8e686c6eb38bf9bc3a35`; its parents are pre-merge main `9774c569fa3d631ee4ad56e0d865595b26c4f2d6` and exact reviewed head `8b4c3e525cec7d9c0ee82437f39981ae25d7e01d`. Exactly the six authorized paths landed, and exact-head CI run `29644480824` completed successfully. Final Tier 2 review concluded `APPROVE WITH NON-BLOCKING NOTES` from Claude / Anthropic Sonnet 5 class and Owner-qualified Qwen3-Max via Nous/Hermes; D3-M01 was corrected and independently confirmed `FULLY RESOLVED`. D3 remains fictional/test-only, outside the active registry, and not runtime active. Syntax validity grants no schema, rule-specific, runtime, BR-006, production, downstream, or activation authority; bare top-level markers remain outside D3 adjudication authority. All deferred boundaries remain unauthorized, and no next implementation milestone is selected or authorized.
+- D4A = BR-006 Shadow Evidence Contract (`COMPLETED — MERGED IN PR #34 / REPOSITORY-EFFECTIVE`).
+- D4B = Bounded Shadow Execution (`PAUSED / BACKLOG / NOT AUTHORIZED`).
 
 ### Milestone 3.5B - BR-006 Specification Review
 
@@ -178,7 +196,7 @@ Status: Completed — BR-006 was implemented with focused direct unit coverage.
 Status: Completed — BR-006 remains implemented with direct unit coverage but is not included in the active runtime registry.
 
 - Runtime activation remains held.
-- Activation still requires real vertical-slice evidence, D3 indexed marker syntax validation in place before or together with activation, and explicit owner approval.
+- Activation still requires separately authorized real vertical-slice evidence, D3 indexed marker syntax validation in place before or together with activation, semantic authorization, and explicit owner approval.
 
 ### Milestone 4 - QA Engine
 
