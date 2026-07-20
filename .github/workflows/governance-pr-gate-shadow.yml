@@ -1,0 +1,85 @@
+name: Governance PR Gate Shadow
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: governance-pr-gate-shadow-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-shadow:
+    name: Exact-head mechanical shadow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check same-repository eligibility
+        id: eligibility
+        env:
+          BASE_REPOSITORY: ${{ github.event.pull_request.base.repo.full_name }}
+          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          if [ "$BASE_REPOSITORY" = "$HEAD_REPOSITORY" ]; then
+            echo "eligible=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "eligible=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out trusted base validator
+        if: steps.eligibility.outputs.eligible == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 1
+          path: trusted
+
+      - name: Check out exact candidate head
+        if: steps.eligibility.outputs.eligible == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          path: candidate
+
+      - name: Produce exact-head evidence
+        id: gate
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set +e
+          if [ "${{ steps.eligibility.outputs.eligible }}" = "true" ]; then
+            python trusted/tools/governance_pr_gate_ci.py candidate > evidence.json
+            gate_exit=$?
+          else
+            python - <<'PY' > evidence.json
+          import json, os
+          event = json.load(open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8"))
+          pr = event["pull_request"]
+          print(json.dumps({"version":1,"repository":event["repository"]["full_name"],"pr_number":pr["number"],"expected_base":pr["base"]["sha"],"expected_head":pr["head"]["sha"],"observed_candidate_head":None,"workflow_run_id":os.environ["GITHUB_RUN_ID"],"workflow_run_attempt":os.environ["GITHUB_RUN_ATTEMPT"],"base_repository":pr["base"]["repo"]["full_name"],"head_repository":pr["head"]["repo"]["full_name"],"eligibility":"fork_unsupported","validator_exit_code":1,"mechanical_result":"NO_MECHANICAL_PASS","validator_result":{"version":1,"overall_status":"INVALID","errors":["fork_pr_unsupported"]}},sort_keys=True,separators=(",",":")))
+          PY
+            gate_exit=1
+          fi
+          echo "exit_code=$gate_exit" >> "$GITHUB_OUTPUT"
+          echo '### Governance PR Gate Shadow' >> "$GITHUB_STEP_SUMMARY"
+          echo '' >> "$GITHUB_STEP_SUMMARY"
+          echo "Exact head: \`$EXPECTED_HEAD\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Validator exit code: \`$gate_exit\`" >> "$GITHUB_STEP_SUMMARY"
+          echo '\`\`\`json' >> "$GITHUB_STEP_SUMMARY"
+          cat evidence.json >> "$GITHUB_STEP_SUMMARY"
+          echo '\`\`\`' >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+
+      - name: Upload exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-pr-gate-shadow-${{ github.event.pull_request.head.sha }}
+          path: evidence.json
+          if-no-files-found: error
+
+      - name: Preserve mechanical outcome
+        if: steps.gate.outputs.exit_code != '0'
+        run: exit 1
