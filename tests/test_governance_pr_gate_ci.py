@@ -153,18 +153,20 @@ def test_main_passes_explicit_trusted_validator_to_run(monkeypatch, tmp_path):
     assert captured["validator_path"] == trusted_validator.resolve()
 
 
-def test_candidate_validator_cannot_self_attest(monkeypatch, tmp_path):
+def test_adapter_cannot_self_attest_from_candidate_location(monkeypatch, tmp_path):
     _, _, calls = run_adapter(monkeypatch, tmp_path)
     command = calls[1][0]
     assert str(tmp_path) not in command[1]
     assert command[-1] == "-"
 
 
-def test_fixed_allowlist_is_not_candidate_controlled(monkeypatch, tmp_path):
+def test_adapter_uses_static_allowlist(monkeypatch, tmp_path):
     _, _, calls = run_adapter(monkeypatch, tmp_path)
     assert json.loads(calls[1][1]["input"])["allowed_paths"] == ci.ALLOWED_PATHS
     assert calls[0][0] == ["git", "rev-parse", "HEAD"]
     assert len(calls) == 2  # no changed-path discovery subprocess
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert "ci.ALLOWED_PATHS" not in workflow
 
 
 def test_missing_history_validator_failure_is_fail_closed(monkeypatch, tmp_path):
@@ -184,13 +186,72 @@ def test_workflow_is_shadow_only_and_has_no_merge_authority():
     assert "exit 1" in workflow  # mechanical failure remains visible
 
 
-def test_workflow_runs_candidate_adapter_with_trusted_base_validator():
+def test_workflow_invokes_trusted_g0_1_directly_for_bootstrap():
     workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
-    assert (
-        "python candidate/tools/governance_pr_gate_ci.py candidate "
-        "--trusted-validator trusted/tools/governance_pr_gate.py"
-    ) in workflow
-    assert "python trusted/tools/governance_pr_gate_ci.py" not in workflow
+    assert "cd candidate && python ../trusted/tools/governance_pr_gate.py" in workflow
+    assert "python candidate/tools/governance_pr_gate_ci.py" not in workflow
+    assert '"allowed_paths": [' in workflow
+    assert "EXPECTED_BASE: ${{ github.event.pull_request.base.sha }}" in workflow
+    assert "EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}" in workflow
+    assert '"bootstrap": True' in workflow
     assert workflow.count("persist-credentials: false") == 2
     assert "ref: ${{ github.event.pull_request.head.sha }}" in workflow
     assert "ref: ${{ github.event.pull_request.base.sha }}" in workflow
+    assert "github.sha" not in workflow
+
+
+def test_bootstrap_workflow_does_not_use_candidate_adapter_for_pass():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert "cd candidate && python ../trusted/tools/governance_pr_gate.py" in workflow
+    assert "governance_pr_gate_ci.py candidate" not in workflow
+
+
+def test_bootstrap_allowed_paths_are_in_workflow_not_adapter():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    for allowed_path in ci.ALLOWED_PATHS:
+        assert f'    \"{allowed_path}\"' in workflow
+
+
+def test_candidate_changes_to_allowed_paths_cannot_influence_bootstrap():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert "ALLOWED_PATHS" not in workflow
+    assert "allowed_paths" in workflow
+    assert "governance_pr_gate_ci.py candidate" not in workflow
+
+
+def test_bootstrap_evidence_has_bootstrap_flag():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert '"bootstrap": True' in workflow
+    assert '"bootstrap":True' in workflow
+
+
+def test_bootstrap_trusted_validator_is_invoked_directly():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert "cd candidate && python ../trusted/tools/governance_pr_gate.py" in workflow
+
+
+@pytest.mark.parametrize("exit_code", [0, 1, 2])
+def test_bootstrap_validator_raw_exit_code_preserved(exit_code):
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert "raw_exit=$?" in workflow
+    assert "gate_exit = raw_exit" in workflow
+    assert "validator_exit_code\": gate_exit" in workflow
+
+
+def test_bootstrap_evidence_contains_exact_head_identity():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert '"expected_base": os.environ["EXPECTED_BASE"]' in workflow
+    assert '"expected_head": os.environ["EXPECTED_HEAD"]' in workflow
+
+
+def test_bootstrap_missing_validator_output_fails_closed():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert "validator_output_missing_or_invalid" in workflow
+    assert "gate_exit = 1" in workflow
+
+
+def test_fork_bootstrap_does_not_execute_candidate_code():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    fork_path = workflow.split("else", 1)[1]
+    assert "python - <<'PY'" in fork_path
+    assert "candidate/tools" not in fork_path
