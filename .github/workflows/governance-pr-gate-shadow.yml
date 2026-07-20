@@ -35,6 +35,7 @@ jobs:
           ref: ${{ github.event.pull_request.base.sha }}
           fetch-depth: 1
           path: trusted
+          persist-credentials: false
 
       - name: Check out exact candidate head
         if: steps.eligibility.outputs.eligible == 'true'
@@ -43,6 +44,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
           path: candidate
+          persist-credentials: false
 
       - name: Produce exact-head evidence
         id: gate
@@ -51,7 +53,7 @@ jobs:
         run: |
           set +e
           if [ "${{ steps.eligibility.outputs.eligible }}" = "true" ]; then
-            python trusted/tools/governance_pr_gate_ci.py candidate > evidence.json
+            python candidate/tools/governance_pr_gate_ci.py candidate --trusted-validator trusted/tools/governance_pr_gate.py > evidence.json
             gate_exit=$?
           else
             python - <<'PY' > evidence.json

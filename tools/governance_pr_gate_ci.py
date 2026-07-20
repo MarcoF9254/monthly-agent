@@ -136,6 +136,7 @@ def run(event: Any, env: Mapping[str, str], candidate_dir: Path,
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("candidate_repo_dir", type=Path)
+    parser.add_argument("--trusted-validator", type=Path, required=True)
     parser.add_argument("--event-path", type=Path, default=None)
     args = parser.parse_args(argv)
     event_path = args.event_path or (Path(os.environ["GITHUB_EVENT_PATH"]) if os.environ.get("GITHUB_EVENT_PATH") else None)
@@ -143,7 +144,12 @@ def main(argv: list[str] | None = None) -> int:
         if event_path is None:
             raise InputError("GITHUB_EVENT_PATH is required")
         event = json.loads(event_path.read_text(encoding="utf-8"))
-        code, evidence = run(event, os.environ, args.candidate_repo_dir.resolve(), Path(__file__).with_name("governance_pr_gate.py").resolve())
+        code, evidence = run(
+            event,
+            os.environ,
+            args.candidate_repo_dir.resolve(),
+            args.trusted_validator.resolve(),
+        )
     except (InputError, OSError, UnicodeError, json.JSONDecodeError) as exc:
         code = 2
         evidence = {

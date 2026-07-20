@@ -125,6 +125,34 @@ def test_trusted_validator_runs_in_candidate_workspace(monkeypatch, tmp_path):
     assert kwargs["cwd"] == tmp_path
 
 
+def test_main_requires_explicit_trusted_validator():
+    with pytest.raises(SystemExit) as exc_info:
+        ci.main(["candidate"])
+    assert exc_info.value.code == 2
+
+
+def test_main_passes_explicit_trusted_validator_to_run(monkeypatch, tmp_path):
+    candidate = tmp_path / "candidate"
+    trusted_validator = tmp_path / "trusted" / "tools" / "governance_pr_gate.py"
+    event_path = tmp_path / "event.json"
+    event_path.write_text(json.dumps(event()), encoding="utf-8")
+    captured = {}
+
+    def invoke(event_value, env, candidate_dir, validator_path):
+        captured["candidate_dir"] = candidate_dir
+        captured["validator_path"] = validator_path
+        return 0, {"version": 1}
+
+    monkeypatch.setattr(ci, "run", invoke)
+    assert ci.main([
+        str(candidate),
+        "--trusted-validator", str(trusted_validator),
+        "--event-path", str(event_path),
+    ]) == 0
+    assert captured["candidate_dir"] == candidate.resolve()
+    assert captured["validator_path"] == trusted_validator.resolve()
+
+
 def test_candidate_validator_cannot_self_attest(monkeypatch, tmp_path):
     _, _, calls = run_adapter(monkeypatch, tmp_path)
     command = calls[1][0]
@@ -135,6 +163,8 @@ def test_candidate_validator_cannot_self_attest(monkeypatch, tmp_path):
 def test_fixed_allowlist_is_not_candidate_controlled(monkeypatch, tmp_path):
     _, _, calls = run_adapter(monkeypatch, tmp_path)
     assert json.loads(calls[1][1]["input"])["allowed_paths"] == ci.ALLOWED_PATHS
+    assert calls[0][0] == ["git", "rev-parse", "HEAD"]
+    assert len(calls) == 2  # no changed-path discovery subprocess
 
 
 def test_missing_history_validator_failure_is_fail_closed(monkeypatch, tmp_path):
@@ -152,3 +182,15 @@ def test_workflow_is_shadow_only_and_has_no_merge_authority():
     assert "Ready" not in workflow
     assert "merge" not in workflow.lower()
     assert "exit 1" in workflow  # mechanical failure remains visible
+
+
+def test_workflow_runs_candidate_adapter_with_trusted_base_validator():
+    workflow = Path(".github/workflows/governance-pr-gate-shadow.yml").read_text(encoding="utf-8")
+    assert (
+        "python candidate/tools/governance_pr_gate_ci.py candidate "
+        "--trusted-validator trusted/tools/governance_pr_gate.py"
+    ) in workflow
+    assert "python trusted/tools/governance_pr_gate_ci.py" not in workflow
+    assert workflow.count("persist-credentials: false") == 2
+    assert "ref: ${{ github.event.pull_request.head.sha }}" in workflow
+    assert "ref: ${{ github.event.pull_request.base.sha }}" in workflow
